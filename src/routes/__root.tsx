@@ -15,6 +15,7 @@ import { Nav } from "../components/site/Nav";
 import { Footer } from "../components/site/Footer";
 import { Cursor } from "../components/site/Cursor";
 import { PageTransition } from "../components/site/PageTransition";
+import { Loader } from "../components/site/Loader";
 import { Toaster } from "../components/ui/sonner";
 
 function NotFoundComponent() {
@@ -86,6 +87,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
+      <Loader />
       <Cursor />
       <Nav />
       <PageTransition>
