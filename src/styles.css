@@ -1,7 +1,8 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import "@fontsource-variable/geist";
+@import "@fontsource-variable/familjen-grotesk";
+@import "@fontsource-variable/inter-tight";
 @import "@fontsource-variable/geist-mono";
 @import "@fontsource-variable/fraunces";
 
@@ -40,9 +41,9 @@
   /* legacy aliases used by older code */
   --color-violet: var(--ember);
   --color-azure: var(--amber-soft);
-  --font-serif: "Geist Variable", system-ui, sans-serif;
-  --font-sans: "Geist Variable", system-ui, sans-serif;
-  --font-display: "Geist Variable", system-ui, sans-serif;
+  --font-serif: "Inter Tight Variable", system-ui, sans-serif;
+  --font-sans: "Inter Tight Variable", system-ui, sans-serif;
+  --font-display: "Familjen Grotesk Variable", system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, monospace;
   --font-editorial: "Fraunces Variable", serif;
 }
@@ -97,9 +98,9 @@
   font-optical-sizing: auto;
 }
 @utility display {
-  font-family: var(--font-sans);
-  font-weight: 500;
-  letter-spacing: -0.04em;
+  font-family: var(--font-display);
+  font-weight: 450;
+  letter-spacing: -0.035em;
   line-height: 0.92;
 }
 @utility mono { font-family: var(--font-mono); letter-spacing: 0.02em; }
