@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { SectionLabel } from "@/components/site/SectionLabel";
-import { RevealText } from "@/components/site/Reveal";
 import { ProjectArt } from "@/components/site/ProjectArt";
 import { projects } from "@/lib/projects";
 
@@ -17,59 +17,163 @@ export const Route = createFileRoute("/work")({
   component: Work,
 });
 
-const filters = ["All", "Web", "Mobile", "3D", "Brand", "Automation", "AI"];
-
 function Work() {
-  const [active, setActive] = useState("All");
-  const [hover, setHover] = useState<number | null>(null);
-  const list = active === "All" ? projects : projects.filter((p) => p.tags.includes(active));
+  return (
+    <main className="bg-ink">
+      {/* Intro */}
+      <section className="relative flex min-h-[90vh] flex-col justify-end px-6 pb-20 pt-40 md:px-12 md:pb-28">
+        <SectionLabel index="02" label="work / archive" />
+        <h1
+          className="display mt-10 text-bone"
+          style={{ fontSize: "clamp(4rem, 16vw, 18rem)", lineHeight: 0.85 }}
+        >
+          Selected<br />
+          <span className="text-ember italic" style={{ fontFamily: "var(--font-editorial)", fontWeight: 300 }}>
+            work.
+          </span>
+        </h1>
+        <div className="mt-10 flex items-end justify-between border-t border-bone/10 pt-6">
+          <p className="mono text-[10px] uppercase tracking-[0.28em] text-bone/50">
+            {String(projects.length).padStart(2, "0")} cases · 2024 — 2026
+          </p>
+          <p className="mono text-[10px] uppercase tracking-[0.28em] text-bone/40">
+            scroll ↓
+          </p>
+        </div>
+      </section>
+
+      {/* Stacked sticky cards — Trionn-style reveal from bottom */}
+      <section className="relative">
+        {projects.map((p, i) => (
+          <StickyCase key={p.slug} project={p} index={i} total={projects.length} />
+        ))}
+      </section>
+
+      {/* Tail */}
+      <section className="relative z-[5] flex min-h-[60vh] items-center justify-center bg-ink px-6 text-center">
+        <div>
+          <p className="mono text-[10px] uppercase tracking-[0.28em] text-ember">[ end of archive ]</p>
+          <Link
+            to="/contact"
+            className="display mt-8 inline-block text-bone hover:text-ember"
+            style={{ fontSize: "clamp(3rem, 9vw, 9rem)", letterSpacing: "-0.04em" }}
+            data-cursor="view"
+          >
+            Start a project →
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function StickyCase({
+  project,
+  index,
+  total,
+}: {
+  project: (typeof projects)[number];
+  index: number;
+  total: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  // The card enters from bottom (translateY 100% → 0) over the first half,
+  // then sits, then content scales down slightly as the next one comes in.
+  const y = useTransform(scrollYProgress, [0, 0.45], ["12%", "0%"]);
+  const scale = useTransform(scrollYProgress, [0.55, 1], [1, 0.92]);
+  const opacity = useTransform(scrollYProgress, [0.7, 1], [1, 0.4]);
 
   return (
-    <main className="px-6 pb-24 pt-40 md:px-10">
-      <div className="mx-auto max-w-7xl">
-        <SectionLabel index="02" label="work.html" />
-        <h1 className="serif mt-10 text-6xl leading-[0.95] text-bone md:text-[10rem]">
-          <RevealText text="Selected" />
-          <br />
-          <span className="serif italic text-gradient"><RevealText text="cases." /></span>
-        </h1>
+    <div ref={ref} className="relative h-[140vh]">
+      <motion.article
+        style={{ y, scale, opacity, zIndex: 10 + index }}
+        className="sticky top-0 flex h-screen w-full items-stretch overflow-hidden rounded-t-[2.5rem] bg-ink shadow-[0_-40px_80px_-40px_rgba(0,0,0,0.6)]"
+      >
+        <Link
+          to="/work/$slug"
+          params={{ slug: project.slug }}
+          data-cursor="view"
+          className="group relative grid h-full w-full grid-cols-1 md:grid-cols-12"
+        >
+          {/* Left meta */}
+          <div className="relative z-10 flex flex-col justify-between p-8 md:col-span-5 md:p-14">
+            <div className="flex items-center justify-between">
+              <span className="mono text-[10px] uppercase tracking-[0.3em] text-bone/50">
+                {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+              </span>
+              <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">
+                {project.year}
+              </span>
+            </div>
 
-        <div className="mt-16 flex flex-wrap gap-2">
-          {filters.map((f) => (
-            <button
-              key={f}
-              onClick={() => setActive(f)}
-              className={`mono border px-4 py-2 text-[10px] uppercase tracking-widest transition-colors ${active === f ? "border-violet bg-violet text-bone" : "border-bone/20 text-bone hover:border-bone"}`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
+            <div>
+              <p className="mono text-[10px] uppercase tracking-[0.28em] text-bone/40">
+                {project.client}
+              </p>
+              <h2
+                className="display mt-4 text-bone transition-colors group-hover:text-ember"
+                style={{ fontSize: "clamp(3rem, 7vw, 7rem)", lineHeight: 0.9 }}
+              >
+                {project.title}
+              </h2>
+              <p className="mt-6 max-w-md text-bone/70 md:text-lg">
+                {project.brief}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-2">
+                {project.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="mono border border-bone/20 px-3 py-1 text-[10px] uppercase tracking-widest text-bone/70"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-        <ul className="mt-12">
-          {list.map((p, i) => (
-            <li
-              key={p.slug}
-              className="hairline relative"
-              onMouseEnter={() => setHover(i)}
-              onMouseLeave={() => setHover(null)}
-            >
-              <Link to="/work/$slug" params={{ slug: p.slug }} data-cursor="view" className="group grid items-baseline gap-6 py-8 md:grid-cols-12">
-                <span className="mono col-span-1 text-[10px] uppercase tracking-widest text-bone/40">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="serif col-span-5 text-4xl text-bone transition-colors group-hover:text-gradient md:text-6xl">{p.title}</h3>
-                <span className="mono col-span-3 text-xs text-bone/60">{p.client}</span>
-                <span className="mono col-span-2 text-xs text-bone/60">{p.tags.join(" · ")}</span>
-                <span className="mono col-span-1 text-right text-xs text-bone/60">{p.year}</span>
-              </Link>
-              {hover === i && (
-                <div className="pointer-events-none fixed right-10 top-1/2 z-30 hidden h-72 w-96 -translate-y-1/2 shadow-2xl md:block animate-fade-in">
-                  <ProjectArt index={i} title={p.title} palette={p.palette} className="h-full w-full" />
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </main>
+            <div className="flex items-center justify-between">
+              <span className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
+                ◉ case_{String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="mono inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-bone/70 transition-colors group-hover:text-ember">
+                View case <span aria-hidden>↗</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Right art */}
+          <div className="relative md:col-span-7">
+            <ProjectArt
+              index={index}
+              title={project.title}
+              palette={project.palette}
+              className="h-full w-full"
+            />
+            <ParallaxBadge progress={useScroll({ target: ref, offset: ["start end", "end start"] }).scrollYProgress} index={index} />
+          </div>
+        </Link>
+      </motion.article>
+    </div>
+  );
+}
+
+function ParallaxBadge({ progress, index }: { progress: MotionValue<number>; index: number }) {
+  const y = useTransform(progress, [0, 1], ["20%", "-20%"]);
+  return (
+    <motion.div
+      style={{ y }}
+      className="pointer-events-none absolute bottom-10 right-10 hidden md:block"
+    >
+      <span
+        className="serif italic text-bone/30"
+        style={{ fontSize: "10rem", lineHeight: 0.85 }}
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
+    </motion.div>
   );
 }
