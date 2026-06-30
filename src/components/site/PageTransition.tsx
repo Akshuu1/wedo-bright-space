@@ -3,10 +3,10 @@ import { useRouterState } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 /**
- * Trionn-style route transition:
- *  - A black panel sweeps up across the viewport (in from bottom, out the top),
- *  - The incoming page fades + lifts in beneath it,
- *  - Scroll resets to top on route change.
+ * Horizontal sweep transition:
+ *  - Two stacked panels (ember + ink) sweep across left → right,
+ *  - Incoming page slides in from the right with a slight scale,
+ *  - Outgoing page eases left.
  */
 export function PageTransition({ children }: { children: ReactNode }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
@@ -15,50 +15,68 @@ export function PageTransition({ children }: { children: ReactNode }) {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [path]);
 
+  const label =
+    path === "/" ? "Index" : path.replace(/^\//, "").replace(/\//g, " · ");
+
   return (
     <>
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={path}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
+          initial={{ opacity: 0, x: 60, scale: 0.99 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          exit={{ opacity: 0, x: -40, scale: 0.99 }}
           transition={{
-            duration: 0.6,
+            duration: 0.7,
             ease: [0.22, 1, 0.36, 1],
-            delay: 0.35,
+            delay: 0.55,
           }}
         >
           {children}
         </motion.div>
       </AnimatePresence>
 
+      {/* Curtain pair — sweep left → right */}
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
-          key={path + "-curtain"}
-          className="pointer-events-none fixed inset-0 z-[95] bg-ink"
-          initial={{ y: "100%" }}
-          animate={{ y: "-100%" }}
+          key={path + "-curtain-ember"}
+          className="pointer-events-none fixed inset-0 z-[94]"
+          style={{ background: "var(--ember)" }}
+          initial={{ x: "-100%" }}
+          animate={{ x: "100%" }}
           transition={{
-            duration: 1.1,
+            duration: 1.05,
             ease: [0.85, 0, 0.15, 1],
-            times: [0, 1],
+            delay: 0.05,
+          }}
+        />
+        <motion.div
+          key={path + "-curtain-ink"}
+          className="pointer-events-none fixed inset-0 z-[95] flex items-center justify-center bg-ink"
+          initial={{ x: "-100%" }}
+          animate={{ x: "100%" }}
+          transition={{
+            duration: 1.05,
+            ease: [0.85, 0, 0.15, 1],
           }}
         >
-          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 px-6 text-center">
+          <div className="flex items-baseline gap-6 px-6 text-center">
+            <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">
+              ◉ Loading
+            </span>
             <p
-              className="display text-bone/90"
+              className="display text-bone"
               style={{
-                fontSize: "clamp(3rem, 9vw, 8rem)",
+                fontSize: "clamp(2.5rem, 8vw, 7rem)",
                 letterSpacing: "-0.05em",
                 lineHeight: 0.9,
               }}
             >
-              WeDo
+              {label}
             </p>
-            <p className="mono mt-3 text-[10px] uppercase tracking-[0.3em] text-ember">
-              {path === "/" ? "Home" : path.replace("/", "").replace(/\//g, " · ")}
-            </p>
+            <span className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
+              → WeDo
+            </span>
           </div>
         </motion.div>
       </AnimatePresence>
