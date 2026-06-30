@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { Reveal } from "@/components/site/Reveal";
+import { ProjectArt } from "@/components/site/ProjectArt";
 import { projects } from "@/lib/projects";
 
 export const Route = createFileRoute("/work/$slug")({
@@ -15,15 +16,13 @@ export const Route = createFileRoute("/work/$slug")({
       { name: "description", content: loaderData.project.brief },
       { property: "og:title", content: `${loaderData.project.title} — WeDo` },
       { property: "og:description", content: loaderData.project.brief },
-      { property: "og:image", content: loaderData.project.image },
-      { name: "twitter:image", content: loaderData.project.image },
     ] : [],
   }),
   component: Case,
   notFoundComponent: () => (
     <div className="grid min-h-screen place-items-center px-6 text-center">
       <div>
-        <p className="mono text-[10px] uppercase tracking-widest text-ember">[ Case not found ]</p>
+        <p className="mono text-[10px] uppercase tracking-widest text-violet">[ Case not found ]</p>
         <h1 className="serif mt-4 text-6xl text-bone">No such project.</h1>
         <Link to="/work" className="mono mt-8 inline-block border border-bone/30 px-6 py-3 text-xs uppercase tracking-widest hover:bg-bone hover:text-ink">All work</Link>
       </div>
@@ -59,14 +58,14 @@ function Case() {
       <div className="mt-16 px-6 md:px-10">
         <div className="mx-auto max-w-7xl">
           <Reveal>
-            <img src={project.image} alt={project.title} width={1280} height={960} className="aspect-video w-full object-cover" />
+            <ProjectArt index={idx} title={project.title} palette={project.palette} className="aspect-video w-full" />
           </Reveal>
         </div>
       </div>
 
       <section className="mx-auto mt-24 grid max-w-7xl gap-16 px-6 md:grid-cols-12 md:px-10">
         <div className="md:col-span-4">
-          <p className="mono text-[10px] uppercase tracking-widest text-ember">[ Brief ]</p>
+          <p className="mono text-[10px] uppercase tracking-widest text-violet">[ Brief ]</p>
         </div>
         <div className="md:col-span-8">
           <p className="serif text-3xl leading-[1.2] text-bone md:text-5xl">{project.brief}</p>
@@ -74,9 +73,14 @@ function Case() {
       </section>
 
       <section className="mx-auto mt-24 grid max-w-7xl gap-6 px-6 md:grid-cols-2 md:px-10">
-        {[project.image, project.image].map((src, i) => (
+        {[0, 1].map((i) => (
           <Reveal key={i} delay={i * 0.1}>
-            <img src={src} alt="" loading="lazy" className="aspect-[4/3] w-full object-cover" />
+            <ProjectArt
+              index={idx + i}
+              title={project.title}
+              palette={i === 0 ? project.palette : [project.palette[1], project.palette[0]]}
+              className="aspect-[4/3] w-full"
+            />
           </Reveal>
         ))}
       </section>
@@ -89,7 +93,7 @@ function Case() {
           className="group block border-t border-bone/10 pt-10"
         >
           <p className="mono text-[10px] uppercase tracking-widest text-bone/40">Next case →</p>
-          <h2 className="serif mt-4 text-5xl text-bone transition-colors group-hover:text-ember md:text-8xl">{next.title}</h2>
+          <h2 className="serif mt-4 text-5xl text-bone transition-colors group-hover:text-gradient md:text-8xl">{next.title}</h2>
         </Link>
       </section>
     </main>

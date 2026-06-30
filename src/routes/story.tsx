@@ -2,10 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { SectionLabel } from "@/components/site/SectionLabel";
-import work1 from "@/assets/work-1.jpg";
-import work2 from "@/assets/work-2.jpg";
-import work3 from "@/assets/work-3.jpg";
-import work4 from "@/assets/work-4.jpg";
+import { ProjectArt } from "@/components/site/ProjectArt";
+import { projects } from "@/lib/projects";
 
 export const Route = createFileRoute("/story")({
   head: () => ({
@@ -159,14 +157,13 @@ function CraftAct() {
 }
 
 function WorkStack() {
-  const stills = [work1, work2, work3, work4];
   return (
     <section className="mx-auto max-w-7xl px-6 py-32 md:px-10">
       <SectionLabel index="IV" label="The Work" />
       <div className="mt-12 space-y-[-12vh]">
-        {stills.map((src, i) => (
+        {projects.map((p, i) => (
           <motion.div
-            key={i}
+            key={p.slug}
             initial={{ y: 80, opacity: 0, scale: 0.95 }}
             whileInView={{ y: 0, opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-20% 0px" }}
@@ -174,7 +171,7 @@ function WorkStack() {
             style={{ marginLeft: `${i * 6}%`, width: `${100 - i * 12}%` }}
             className="sticky top-32 overflow-hidden border border-bone/10"
           >
-            <img src={src} alt="" loading="lazy" className="aspect-video w-full object-cover" />
+            <ProjectArt index={i} title={p.title} palette={p.palette} className="aspect-video w-full" />
           </motion.div>
         ))}
       </div>
