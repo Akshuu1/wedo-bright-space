@@ -98,9 +98,9 @@
   font-optical-sizing: auto;
 }
 @utility display {
-  font-family: var(--font-sans);
-  font-weight: 500;
-  letter-spacing: -0.04em;
+  font-family: var(--font-display);
+  font-weight: 450;
+  letter-spacing: -0.035em;
   line-height: 0.92;
 }
 @utility mono { font-family: var(--font-mono); letter-spacing: 0.02em; }
