@@ -340,11 +340,11 @@ function CasesScroll() {
 
 function LightInversion() {
   return (
-    <section className="relative overflow-hidden bg-chalk px-6 py-32 text-ink md:px-10 md:py-40">
+    <section className="relative overflow-hidden bg-chalk px-6 py-32 text-bone md:px-10 md:py-40">
       <div className="mx-auto max-w-7xl">
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-ink/50">[ 05 ] Capabilities</p>
+        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/50">[ 05 ] Capabilities</p>
         <h2
-          className="display mt-8 max-w-[16ch] text-5xl text-ink md:text-[6rem]"
+          className="display mt-8 max-w-[16ch] text-5xl text-bone md:text-[6rem]"
           style={{ letterSpacing: "-0.05em", lineHeight: "1" }}
         >
           One studio.<br />
@@ -354,7 +354,7 @@ function LightInversion() {
           }}>Four disciplines.</span>
         </h2>
 
-        <ul className="mt-16 divide-y divide-ink/10 border-y border-ink/10">
+        <ul className="mt-16 divide-y divide-bone/10 border-y border-bone/10">
           {[
             { n: "01", k: "Web design & development", v: "Editorial sites, e-commerce, headless CMS, WebGL." },
             { n: "02", k: "Mobile applications", v: "iOS, Android, React Native — built around a single gesture." },
@@ -362,19 +362,19 @@ function LightInversion() {
             { n: "04", k: "Brand & motion", v: "Identity systems, motion direction, type & art direction." },
           ].map((s, i) => (
             <li key={s.n} className="group/row grid grid-cols-12 items-center gap-4 py-7 transition-colors hover:bg-ink/[0.04]">
-              <span className="mono col-span-2 text-[10px] uppercase tracking-[0.25em] text-ink/50 md:col-span-1">
+              <span className="mono col-span-2 text-[10px] uppercase tracking-[0.25em] text-bone/50 md:col-span-1">
                 {s.n}
               </span>
               <h3
-                className="display col-span-10 text-3xl text-ink md:col-span-6 md:text-5xl"
+                className="display col-span-10 text-3xl text-bone md:col-span-6 md:text-5xl"
                 style={{ letterSpacing: "-0.04em" }}
               >
                 {s.k}
               </h3>
-              <p className="col-span-12 text-sm text-ink/60 md:col-span-4 md:text-right">
+              <p className="col-span-12 text-sm text-bone/60 md:col-span-4 md:text-right">
                 {s.v}
               </p>
-              <span className="mono col-span-12 text-[10px] uppercase tracking-[0.25em] text-ink/40 md:col-span-1 md:text-right">
+              <span className="mono col-span-12 text-[10px] uppercase tracking-[0.25em] text-bone/40 md:col-span-1 md:text-right">
                 →
               </span>
               {/* unused index to silence lint */}

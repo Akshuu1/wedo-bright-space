@@ -47,11 +47,11 @@ export function Cursor() {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[100] hidden md:block" style={{ mixBlendMode: "difference" }}>
-      <div ref={dot} className="fixed left-0 top-0 h-1.5 w-1.5 rounded-full bg-bone" />
+      <div ref={dot} className="fixed left-0 top-0 h-1.5 w-1.5 rounded-full bg-chalk" />
       <div
         ref={ring}
         data-state="idle"
-        className="fixed left-0 top-0 flex h-9 w-9 items-center justify-center rounded-full border border-bone/70 mono text-[9px] uppercase tracking-widest text-bone transition-[width,height,background,color] duration-300 data-[state=hover]:h-14 data-[state=hover]:w-14 data-[state=view]:h-20 data-[state=view]:w-20 data-[state=view]:bg-bone data-[state=view]:text-ink"
+        className="fixed left-0 top-0 flex h-9 w-9 items-center justify-center rounded-full border border-bone/70 mono text-[9px] uppercase tracking-widest text-bone transition-[width,height,background,color] duration-300 data-[state=hover]:h-14 data-[state=hover]:w-14 data-[state=view]:h-20 data-[state=view]:w-20 data-[state=view]:bg-chalk data-[state=view]:text-bone"
       >
         <span className="opacity-0 data-[show=true]:opacity-100" data-show={false} />
         <span className="hidden [[data-state=view]_&]:inline">View</span>
