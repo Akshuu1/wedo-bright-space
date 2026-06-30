@@ -41,9 +41,9 @@
   /* legacy aliases used by older code */
   --color-violet: var(--ember);
   --color-azure: var(--amber-soft);
-  --font-serif: "Geist Variable", system-ui, sans-serif;
-  --font-sans: "Geist Variable", system-ui, sans-serif;
-  --font-display: "Geist Variable", system-ui, sans-serif;
+  --font-serif: "Inter Tight Variable", system-ui, sans-serif;
+  --font-sans: "Inter Tight Variable", system-ui, sans-serif;
+  --font-display: "Familjen Grotesk Variable", system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, monospace;
   --font-editorial: "Fraunces Variable", serif;
 }
