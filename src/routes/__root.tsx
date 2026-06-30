@@ -15,6 +15,7 @@ import { Nav } from "../components/site/Nav";
 import { Footer } from "../components/site/Footer";
 import { Cursor } from "../components/site/Cursor";
 import { PageTransition } from "../components/site/PageTransition";
+import { Toaster } from "../components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -91,6 +92,7 @@ function RootComponent() {
         <Outlet />
       </PageTransition>
       <Footer />
+      <Toaster theme="dark" position="bottom-right" />
     </QueryClientProvider>
   );
 }
