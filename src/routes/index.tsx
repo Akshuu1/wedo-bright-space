@@ -218,6 +218,7 @@ function HorizontalCases() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const x = useTransform(scrollYProgress, [0, 1], ["5%", "-75%"]);
   const rotate = useTransform(scrollYProgress, [0, 1], [0, -8]);
+  const rotateNeg = useTransform(rotate, (v) => -v);
 
   return (
     <section ref={ref} className="relative h-[400vh]">

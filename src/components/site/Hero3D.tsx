@@ -23,7 +23,7 @@ function MorphBlob() {
   });
   return (
     <Sphere ref={ref} args={[1.6, 128, 128]}>
-      {/* @ts-expect-error drei material */}
+      
       <MeshDistortMaterial
         color="#8b5cf6"
         emissive="#4f8cff"
