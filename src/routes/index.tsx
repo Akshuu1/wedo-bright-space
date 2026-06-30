@@ -239,7 +239,7 @@ function HorizontalCases() {
           {projects.map((p, i) => (
             <motion.article
               key={p.slug}
-              style={{ rotate: i % 2 ? rotate : useTransform(rotate, (v) => -v) }}
+              style={{ rotate: i % 2 ? rotate : rotateNeg }}
               className="relative h-[58vh] w-[78vw] shrink-0 overflow-hidden rounded-3xl border border-bone/10 md:w-[48vw]"
             >
               <Link to="/work/$slug" params={{ slug: p.slug }} data-cursor="view" className="block h-full">
