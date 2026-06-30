@@ -32,14 +32,16 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brutalist Pop tokens */
-  --color-ink: #0a0a0a;
-  --color-bone: #ffffff;
+  /* Brutalist Pop tokens — light-mode flip.
+     bg-ink is now WHITE (page background), text-bone is now BLACK (text).
+     This flips every legacy `bg-ink` / `text-bone` usage into a white/black brutalist canvas. */
+  --color-ink: #ffffff;
+  --color-bone: #0a0a0a;
   --color-ember: #ff5722;        /* orange — primary accent */
   --color-zap: #ffeb3b;          /* yellow — secondary accent */
   --color-amber-soft: #ffeb3b;
-  --color-gunmetal: #141414;
-  --color-chalk: #f2f2f2;
+  --color-gunmetal: #0a0a0a;     /* now used for dark blocks */
+  --color-chalk: #ffeb3b;        /* inversion blocks become yellow */
   /* legacy aliases */
   --color-violet: #ff5722;
   --color-azure: #ffeb3b;
