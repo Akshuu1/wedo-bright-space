@@ -17,6 +17,7 @@ import { Footer } from "../components/site/Footer";
 import { Cursor } from "../components/site/Cursor";
 import { PageTransition } from "../components/site/PageTransition";
 import { Loader, RouteProgress } from "../components/site/Loader";
+import { SmoothScroll } from "../components/site/SmoothScroll";
 import { Toaster } from "../components/ui/sonner";
 
 function NotFoundComponent() {
@@ -90,6 +91,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Loader />
+      <SmoothScroll />
       <RouteProgress active={isLoading} />
       <Cursor />
       <Nav />
