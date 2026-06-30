@@ -123,7 +123,7 @@ function About() {
       {/* Principles — light invert */}
       <section className="bg-bone px-6 py-32 text-ink md:px-12">
         <div className="mx-auto max-w-7xl">
-          <SectionLabel index="03" label="principles" tone="dark" />
+          <SectionLabel index="03" label="principles" />
           <ul className="mt-12">
             {principles.map(([t, d], i) => (
               <li key={t} className="border-t border-ink/15">
