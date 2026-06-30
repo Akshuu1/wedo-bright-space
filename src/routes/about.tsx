@@ -121,24 +121,24 @@ function About() {
       />
 
       {/* Principles — light invert */}
-      <section className="bg-bone px-6 py-32 text-ink md:px-12">
+      <section className="bg-chalk px-6 py-32 text-bone md:px-12">
         <div className="mx-auto max-w-7xl">
           <SectionLabel index="03" label="principles" />
           <ul className="mt-12">
             {principles.map(([t, d], i) => (
-              <li key={t} className="border-t border-ink/15">
+              <li key={t} className="border-t border-bone/15">
                 <Reveal delay={i * 0.05}>
                   <div className="grid items-baseline gap-6 py-10 md:grid-cols-12">
                     <span className="mono col-span-1 text-[10px] uppercase tracking-widest text-ember">
                       [ {String(i).padStart(2, "0")} ]
                     </span>
                     <h3
-                      className="display col-span-5 text-ink"
+                      className="display col-span-5 text-bone"
                       style={{ fontSize: "clamp(2rem, 4vw, 4rem)", lineHeight: 0.95 }}
                     >
                       {t}
                     </h3>
-                    <p className="col-span-6 text-ink/60 md:text-lg">{d}</p>
+                    <p className="col-span-6 text-bone/60 md:text-lg">{d}</p>
                   </div>
                 </Reveal>
               </li>

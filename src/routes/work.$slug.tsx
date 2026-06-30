@@ -24,7 +24,7 @@ export const Route = createFileRoute("/work/$slug")({
       <div>
         <p className="mono text-[10px] uppercase tracking-widest text-violet">[ Case not found ]</p>
         <h1 className="serif mt-4 text-6xl text-bone">No such project.</h1>
-        <Link to="/work" className="mono mt-8 inline-block border border-bone/30 px-6 py-3 text-xs uppercase tracking-widest hover:bg-bone hover:text-ink">All work</Link>
+        <Link to="/work" className="mono mt-8 inline-block border border-bone/30 px-6 py-3 text-xs uppercase tracking-widest hover:bg-chalk hover:text-bone">All work</Link>
       </div>
     </div>
   ),

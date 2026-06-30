@@ -74,7 +74,7 @@ function Contact() {
             <button
               type="submit"
               disabled={sending}
-              className="mono group flex w-full items-center justify-between border border-bone/30 px-6 py-5 text-xs uppercase tracking-widest text-bone hover:bg-ember hover:border-ember hover:text-ink disabled:opacity-50"
+              className="mono group flex w-full items-center justify-between border border-bone/30 px-6 py-5 text-xs uppercase tracking-widest text-bone hover:bg-ember hover:border-ember hover:text-bone disabled:opacity-50"
             >
               <span>{sending ? "Sending…" : "Send the brief"}</span>
               <span className="transition-transform group-hover:translate-x-1">→</span>
