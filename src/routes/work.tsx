@@ -153,7 +153,8 @@ function StickyCase({
               palette={project.palette}
               className="h-full w-full"
             />
-            <ParallaxBadge progress={useScroll({ target: ref, offset: ["start end", "end start"] }).scrollYProgress} index={index} />
+            <ParallaxBadge progress={scrollYProgress} index={index} />
+
           </div>
         </Link>
       </motion.article>
