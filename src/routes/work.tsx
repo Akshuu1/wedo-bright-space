@@ -77,22 +77,32 @@ function StickyCase({
   total: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  // Track this card's wrapper. As its top approaches the viewport top,
+  // the card slides up from 100% (fully below the fold) to 0% (covering).
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset: ["start end", "start start"],
   });
-  // The card enters from bottom (translateY 100% → 0) over the first half,
-  // then sits, then content scales down slightly as the next one comes in.
-  const y = useTransform(scrollYProgress, [0, 0.45], ["12%", "0%"]);
-  const scale = useTransform(scrollYProgress, [0.55, 1], [1, 0.92]);
-  const opacity = useTransform(scrollYProgress, [0.7, 1], [1, 0.4]);
+  // Track scroll-out so we can subtly scale + dim the card as the next
+  // one rises over it (creates the depth-stack feel).
+  const { scrollYProgress: outProgress } = useScroll({
+    target: ref,
+    offset: ["end end", "end start"],
+  });
+
+  // First card is already on-screen; later cards slide up from the bottom.
+  const yFrom = index === 0 ? "0%" : "100%";
+  const y = useTransform(scrollYProgress, [0, 1], [yFrom, "0%"]);
+  const scale = useTransform(outProgress, [0, 1], [1, 0.92]);
+  const opacity = useTransform(outProgress, [0, 1], [1, 0.55]);
 
   return (
-    <div ref={ref} className="relative h-[140vh]">
+    <div ref={ref} className="relative h-[200vh]">
       <motion.article
         style={{ y, scale, opacity, zIndex: 10 + index }}
-        className="sticky top-0 flex h-screen w-full items-stretch overflow-hidden rounded-t-[2.5rem] bg-ink shadow-[0_-40px_80px_-40px_rgba(0,0,0,0.6)]"
+        className="sticky top-0 flex h-screen w-full items-stretch overflow-hidden rounded-t-[2.5rem] bg-ink shadow-[0_-40px_120px_-40px_rgba(0,0,0,0.7)] will-change-transform"
       >
+
         <Link
           to="/work/$slug"
           params={{ slug: project.slug }}
