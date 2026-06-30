@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { RevealText } from "@/components/site/Reveal";
+import { ProjectArt } from "@/components/site/ProjectArt";
 import { projects } from "@/lib/projects";
 
 export const Route = createFileRoute("/work")({
@@ -30,7 +31,7 @@ function Work() {
         <h1 className="serif mt-10 text-6xl leading-[0.95] text-bone md:text-[10rem]">
           <RevealText text="Selected" />
           <br />
-          <span className="text-ember"><RevealText text="cases." /></span>
+          <span className="serif italic text-gradient"><RevealText text="cases." /></span>
         </h1>
 
         <div className="mt-16 flex flex-wrap gap-2">
@@ -38,7 +39,7 @@ function Work() {
             <button
               key={f}
               onClick={() => setActive(f)}
-              className={`mono border px-4 py-2 text-[10px] uppercase tracking-widest transition-colors ${active === f ? "border-ember bg-ember text-ink" : "border-bone/20 text-bone hover:border-bone"}`}
+              className={`mono border px-4 py-2 text-[10px] uppercase tracking-widest transition-colors ${active === f ? "border-violet bg-violet text-bone" : "border-bone/20 text-bone hover:border-bone"}`}
             >
               {f}
             </button>
@@ -55,18 +56,15 @@ function Work() {
             >
               <Link to="/work/$slug" params={{ slug: p.slug }} data-cursor="view" className="group grid items-baseline gap-6 py-8 md:grid-cols-12">
                 <span className="mono col-span-1 text-[10px] uppercase tracking-widest text-bone/40">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="serif col-span-5 text-4xl text-bone transition-colors group-hover:text-ember md:text-6xl">{p.title}</h3>
+                <h3 className="serif col-span-5 text-4xl text-bone transition-colors group-hover:text-gradient md:text-6xl">{p.title}</h3>
                 <span className="mono col-span-3 text-xs text-bone/60">{p.client}</span>
                 <span className="mono col-span-2 text-xs text-bone/60">{p.tags.join(" · ")}</span>
                 <span className="mono col-span-1 text-right text-xs text-bone/60">{p.year}</span>
               </Link>
               {hover === i && (
-                <img
-                  src={p.image}
-                  alt=""
-                  loading="lazy"
-                  className="pointer-events-none fixed right-10 top-1/2 z-30 hidden h-72 w-96 -translate-y-1/2 object-cover shadow-2xl md:block animate-fade-in"
-                />
+                <div className="pointer-events-none fixed right-10 top-1/2 z-30 hidden h-72 w-96 -translate-y-1/2 shadow-2xl md:block animate-fade-in">
+                  <ProjectArt index={i} title={p.title} palette={p.palette} className="h-full w-full" />
+                </div>
               )}
             </li>
           ))}

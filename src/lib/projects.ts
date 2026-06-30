@@ -5,13 +5,8 @@ export type Project = {
   year: string;
   tags: string[];
   brief: string;
-  image: string;
+  palette: [string, string];
 };
-
-import work1 from "@/assets/work-1.jpg";
-import work2 from "@/assets/work-2.jpg";
-import work3 from "@/assets/work-3.jpg";
-import work4 from "@/assets/work-4.jpg";
 
 export const projects: Project[] = [
   {
@@ -20,8 +15,9 @@ export const projects: Project[] = [
     client: "Aurum Goods",
     year: "2026",
     tags: ["Web", "Brand", "3D"],
-    brief: "A storefront that feels like a film opening — molten chrome scenes, scroll-driven product reveals, sub-second checkout.",
-    image: work1,
+    brief:
+      "A storefront that feels like a film opening — kinetic product reveals, scroll choreography, sub-second checkout.",
+    palette: ["#8b5cf6", "#4f8cff"],
   },
   {
     slug: "obsidian-pocket",
@@ -29,8 +25,9 @@ export const projects: Project[] = [
     client: "Lumen Mobile",
     year: "2025",
     tags: ["Mobile", "Product"],
-    brief: "A finance app rebuilt around a single gesture. Native iOS + Android, shared design system, 4-week ship.",
-    image: work2,
+    brief:
+      "A finance app rebuilt around a single gesture. Native iOS + Android, shared design system, 4-week ship.",
+    palette: ["#4f8cff", "#22d3ee"],
   },
   {
     slug: "ribbon-protocol",
@@ -38,8 +35,9 @@ export const projects: Project[] = [
     client: "Knotwork DAO",
     year: "2025",
     tags: ["Web", "3D"],
-    brief: "Brand identity and marketing site for a coordination protocol. WebGL ribbon-knot logo, editorial type system.",
-    image: work3,
+    brief:
+      "Brand identity and marketing site for a coordination protocol. WebGL ribbon-knot logo, editorial type system.",
+    palette: ["#a855f7", "#ec4899"],
   },
   {
     slug: "atlas-automations",
@@ -47,7 +45,8 @@ export const projects: Project[] = [
     client: "Field & Co.",
     year: "2024",
     tags: ["Automation", "AI"],
-    brief: "Replaced eleven manual workflows with one intelligent pipeline. Saved 142 hours per month within the first quarter.",
-    image: work4,
+    brief:
+      "Replaced eleven manual workflows with one intelligent pipeline. Saved 142 hours per month in the first quarter.",
+    palette: ["#6366f1", "#8b5cf6"],
   },
 ];

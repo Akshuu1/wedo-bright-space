@@ -1,5 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
+import logo from "@/assets/wedo-logo.png.asset.json";
 
 const items = [
   { to: "/", label: "Home", zh: "首頁" },
@@ -15,12 +16,21 @@ export function Nav() {
   const path = useRouterState({ select: (s) => s.location.pathname });
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 md:px-10">
-      <Link to="/" className="mono text-[11px] uppercase tracking-[0.25em] text-bone">
-        <span className="text-ember">[ </span>WE&nbsp;·&nbsp;DO<span className="text-ember"> ]</span>
+    <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-4 md:px-10">
+      <Link to="/" className="group flex items-center gap-3">
+        <span
+          className="block h-8 w-8 rounded-full ring-1 ring-bone/20 transition-transform group-hover:rotate-180"
+          style={{
+            background:
+              "conic-gradient(from 180deg, #8b5cf6, #4f8cff, #ec4899, #8b5cf6)",
+          }}
+        />
+        <span className="mono text-[11px] uppercase tracking-[0.3em] text-bone">
+          We<span className="text-violet">·</span>Do
+        </span>
       </Link>
-      <div className="mono hidden text-[10px] uppercase tracking-[0.3em] text-bone/60 md:block">
-        Design / Develop / Automate · 2026
+      <div className="mono hidden text-[10px] uppercase tracking-[0.3em] text-bone/50 md:block">
+        Design / Develop / Automate · MMXXVI
       </div>
       <button
         onClick={() => setOpen((o) => !o)}
@@ -54,7 +64,7 @@ export function Nav() {
                       <span className="mono text-[10px] uppercase tracking-widest text-bone/40">
                         ( {String(i).padStart(2, "0")} )
                       </span>
-                      <span className={`serif text-5xl leading-none transition-colors md:text-7xl lg:text-8xl ${active ? "text-ember" : "text-bone group-hover/it:text-ember"}`}>
+                      <span className={`serif italic text-5xl leading-none transition-colors md:text-7xl lg:text-8xl ${active ? "text-gradient" : "text-bone group-hover/it:text-gradient"}`}>
                         {it.label}
                       </span>
                     </span>
@@ -65,8 +75,8 @@ export function Nav() {
             })}
           </ul>
           <div className="mt-12 flex flex-wrap items-end justify-between gap-6 border-t border-bone/10 pt-6">
-            <a href="mailto:hello@wedo.studio" className="serif text-2xl text-bone hover:text-ember md:text-4xl">hello@wedo.studio</a>
-            <span className="mono text-[10px] uppercase tracking-widest text-bone/40">WeDo Studio · 2026 ©</span>
+            <a href="mailto:hello@wedo.studio" className="serif italic text-2xl text-bone hover:text-gradient md:text-4xl">hello@wedo.studio</a>
+            <img src={logo.url} alt="WeDo" className="h-12 w-auto opacity-70" />
           </div>
         </nav>
       </div>
