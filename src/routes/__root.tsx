@@ -15,7 +15,7 @@ import { Nav } from "../components/site/Nav";
 import { Footer } from "../components/site/Footer";
 import { Cursor } from "../components/site/Cursor";
 import { PageTransition } from "../components/site/PageTransition";
-import { Loader } from "../components/site/Loader";
+import { Loader, RouteProgress } from "../components/site/Loader";
 import { Toaster } from "../components/ui/sonner";
 
 function NotFoundComponent() {
@@ -85,9 +85,11 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const isLoading = useRouterState({ select: (s) => s.isLoading || s.isTransitioning });
   return (
     <QueryClientProvider client={queryClient}>
       <Loader />
+      <RouteProgress active={isLoading} />
       <Cursor />
       <Nav />
       <PageTransition>
