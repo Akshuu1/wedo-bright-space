@@ -11,17 +11,17 @@ import { projects } from "@/lib/projects";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "WeDo — We don't build websites.We build businesses that people remember." },
+      { title: "WeDo — We don't build websites. We build businesses people remember." },
       {
         name: "description",
         content:
-          "WeDo is an independent digital studio building websites, mobile apps and intelligent automations for teams that ship.",
+          "WeDo is a creative digital studio designing high-performance websites, AI-powered products and digital experiences that help ambitious brands grow faster.",
       },
-      { property: "og:title", content: "WeDo Studio — Designed to ship, built to last." },
-      { property: "og:description", content: "Websites, products and automations designed to mean something." },
+      { property: "og:title", content: "WeDo — Digital experiences that grow businesses." },
+      { property: "og:description", content: "Websites, AI products and digital experiences for ambitious brands." },
       { property: "og:url", content: "/" },
       { name: "twitter:title", content: "WeDo Studio" },
-      { name: "twitter:description", content: "Websites, products and automations designed to mean something." },
+      { name: "twitter:description", content: "Websites, AI products and digital experiences for ambitious brands." },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
@@ -121,11 +121,11 @@ function Hero() {
           className="display max-w-[14ch] text-[14vw] md:text-[9.2vw] lg:text-[8.2rem]"
           style={{ letterSpacing: "-0.055em", lineHeight: "0.9", color: "#f4f1ea" }}
         >
-          Designed
+          We don&rsquo;t build
           <br />
-          <span style={{ color: "#f4f1ea", opacity: 0.95 }}>to ship —</span>
+          <span style={{ color: "#f4f1ea", opacity: 0.95 }}>websites —</span>
           <br />
-          <span className="text-gradient">built to last.</span>
+          <span className="text-gradient">we build memory.</span>
         </h1>
 
         <div className="mt-10 flex flex-col items-start gap-8 md:mt-14 md:flex-row md:items-end md:justify-between">
@@ -141,8 +141,8 @@ function Hero() {
           </Magnetic>
 
           <p className="max-w-sm text-sm leading-relaxed text-[#f4f1ea]/55 md:text-right">
-            Websites, mobile apps, AI &amp; automations built for teams that need to move — lean, sensibly priced,
-            shipped on time.
+            A creative digital studio building high-performance websites, AI-powered products and
+            experiences that turn visitors into customers.
           </p>
         </div>
       </motion.div>
@@ -224,10 +224,10 @@ function Wireframes() {
 
 function KeyFacts() {
   const stats = [
-    { k: "48", suffix: "", l: "Products shipped", note: "since 2019" },
-    { k: "12", suffix: "", l: "Countries served", note: "4 continents" },
-    { k: "7", suffix: "yr", l: "Median client tenure", note: "we stick around" },
-    { k: "100", suffix: "%", l: "Founder-owned", note: "independent" },
+    { k: "20", suffix: "+", l: "Projects delivered", note: "and counting" },
+    { k: "100", suffix: "%", l: "Fully responsive", note: "every breakpoint" },
+    { k: "A+", suffix: "", l: "Performance", note: "Lighthouse tuned" },
+    { k: "∞", suffix: "", l: "Creative range", note: "no template feel" },
   ];
   return (
     <section className="relative border-y border-bone/10 bg-ink px-6 py-24 md:px-10 md:py-32">
@@ -285,21 +285,19 @@ function Manifest() {
           className="display mt-10 max-w-[20ch] text-5xl text-bone md:text-[5.5rem]"
           style={{ letterSpacing: "-0.045em", lineHeight: "1.02" }}
         >
-          We treat software like a&nbsp;
-          <span className="text-gradient">measured craft</span>
-          &nbsp;— focused vision, calm execution, no theatre.
+          Designed with purpose.&nbsp;
+          <span className="text-gradient">Built for growth.</span>
         </p>
       </Reveal>
 
       <div className="mt-16 grid gap-8 border-t border-bone/10 pt-10 md:grid-cols-3">
         {[
-          { k: "Clarity first", v: "Tight scopes. Plain language. No deck-ware.", icon: "◐" },
+          { k: "Strategy first", v: "Every decision starts with a real business problem.", icon: "◐" },
           { k: "Craft always", v: "Type, motion and code held to the same bar.", icon: "✦" },
-          { k: "Built to scale", v: "Lean stacks that survive the second team.", icon: "◆" },
+          { k: "Built for growth", v: "Performance, clarity and results — not just pretty screens.", icon: "◆" },
         ].map((b, i) => (
           <Reveal key={b.k} delay={i * 0.08}>
             <div className="group/tenet relative overflow-hidden rounded-2xl border border-bone/10 bg-bone/[0.02] p-7 transition-all duration-500 hover:-translate-y-1 hover:border-ember/40 hover:bg-bone/[0.04]">
-              {/* hover glow */}
               <div
                 className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover/tenet:opacity-100"
                 style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.5), transparent 70%)" }}
@@ -387,27 +385,27 @@ function LightInversion() {
   const disciplines = [
     {
       n: "01",
-      k: "Web design & development",
-      v: "Editorial sites, e-commerce, headless CMS, WebGL.",
-      tags: ["Next", "TanStack", "Sanity"],
+      k: "Website design & development",
+      v: "Beautiful, responsive, scalable — built with modern stacks for performance and reliability.",
+      tags: ["Design", "Build", "Next"],
     },
     {
       n: "02",
-      k: "Mobile applications",
-      v: "iOS, Android, React Native — built around a single gesture.",
-      tags: ["Swift", "Kotlin", "RN"],
+      k: "Branding & identity",
+      v: "Logos, colour, typography and visual systems that make brands instantly recognisable.",
+      tags: ["Identity", "Type", "System"],
     },
     {
       n: "03",
-      k: "AI & automation",
-      v: "Agents, internal tooling, pipelines that retire manual work.",
-      tags: ["LLM", "n8n", "Zap"],
+      k: "AI solutions & automation",
+      v: "Chatbots, workflow automation and intelligent systems that quietly retire manual work.",
+      tags: ["LLM", "Ops", "Agents"],
     },
     {
       n: "04",
-      k: "Brand & motion",
-      v: "Identity systems, motion direction, type & art direction.",
-      tags: ["Figma", "After FX", "R3F"],
+      k: "UI/UX & digital growth",
+      v: "Interfaces people enjoy — with SEO, analytics and optimisation that keep growing.",
+      tags: ["UX", "SEO", "Analytics"],
     },
   ];
 
@@ -528,11 +526,11 @@ function ContactStrip() {
           className="display text-bone"
           style={{ fontSize: "clamp(3rem, 12vw, 12rem)", letterSpacing: "-0.06em", lineHeight: 0.88 }}
         >
-          Let&rsquo;s build
+          Ready to build
           <br />
-          <span className="text-bone/35">something</span>
+          <span className="text-bone/35">something people</span>
           <br />
-          <span className="text-gradient">unforgettable.</span>
+          <span className="text-gradient">won&rsquo;t forget?</span>
         </h2>
 
         <div className="mt-10 grid gap-8 border-t border-bone/10 pt-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">

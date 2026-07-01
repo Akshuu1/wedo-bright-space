@@ -73,18 +73,18 @@ function Work() {
         </div>
 
         <motion.div style={{ y: titleY, opacity: titleO }} className="relative z-10">
-          <span className="pill mb-6 border-ember bg-ember/10 text-ember">◐ Selected commercial + self-initiated</span>
+          <span className="pill mb-6 border-ember bg-ember/10 text-ember">◐ Selected projects · 2024 — 2026</span>
           <h1
             className="display leading-[0.8] tracking-[-0.06em]"
             style={{ fontSize: "clamp(3rem, 13vw, 16rem)" }}
           >
-            Work
+            Selected
             <span className="align-super text-ember" style={{ fontSize: "0.18em" }}>®</span>
             <br />
-            <span className="text-outline">Archive.</span>
+            <span className="text-outline">Projects.</span>
           </h1>
           <p className="mono mt-6 max-w-md text-[11px] uppercase tracking-[0.24em] text-bone/60">
-            Interfaces, motion systems, quiet automations —
+            Not another website. Every project solves a business problem —
             <span className="text-bone"> hover to preview, click to read.</span>
           </p>
         </motion.div>
@@ -159,16 +159,16 @@ function Work() {
           style={{ background: "radial-gradient(closest-side, #ff4a1c, transparent 70%)" }}
         />
         <div className="relative">
-          <span className="pill mb-6">[ end of archive · roll credits ]</span>
+          <span className="pill mb-6">[ end of archive ]</span>
           <Link
             to="/contact"
             className="display mt-6 block hover:text-ember"
             style={{ fontSize: "clamp(3rem, 10vw, 10rem)", letterSpacing: "-0.05em", lineHeight: 0.9 }}
             data-cursor="view"
           >
-            Have a brief?
+            Have an idea?
             <br />
-            <span className="text-gradient">Let&rsquo;s talk →</span>
+            <span className="text-gradient">Let&rsquo;s build it →</span>
           </Link>
         </div>
       </section>

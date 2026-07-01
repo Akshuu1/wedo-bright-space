@@ -84,11 +84,15 @@ function Hero() {
       <motion.div style={{ y }} className="relative z-10">
         <span className="pill mb-6 border-ember bg-ember/10 text-ember">✦ Now booking · Q3 — Q4 2026</span>
         <h1 className="display leading-[0.82] tracking-[-0.055em]" style={{ fontSize: "clamp(3rem, 11vw, 12rem)" }}>
-          Let&rsquo;s make
+          Let&rsquo;s create
           <br />
           <span className="text-outline">something </span>
-          <span className="text-gradient">unforgettable.</span>
+          <span className="text-gradient">extraordinary.</span>
         </h1>
+        <p className="mono mt-6 max-w-md text-[11px] uppercase tracking-[0.24em] text-bone/55">
+          Launching a startup, growing a business or reimagining your digital presence —
+          <span className="text-bone"> we&rsquo;re ready to build your next experience.</span>
+        </p>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           <ContactLine label="Email" href="mailto:hello@wedo.studio" value="hello@wedo.studio" accent />

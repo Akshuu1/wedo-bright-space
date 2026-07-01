@@ -24,24 +24,24 @@ export const Route = createFileRoute("/about")({
 });
 
 const capabilities = [
-  { n: "01", t: "Websites", d: "Editorial, kinetic, performance-first. From founder pages to full commerce systems.", tags: ["Design", "Build", "Motion"], accent: "ember" },
-  { n: "02", t: "Mobile Apps", d: "Native iOS + Android and cross-platform. Shipped in weeks, not quarters.", tags: ["iOS", "Android", "React Native"], accent: "zap" },
-  { n: "03", t: "Automation", d: "AI-powered internal tools that quietly remove hours from the week.", tags: ["AI", "Ops", "Integrations"], accent: "ember" },
-  { n: "04", t: "Product", d: "From napkin to launch. Strategy, prototype, MVP — always with a working demo first.", tags: ["Strategy", "MVP", "Design"], accent: "zap" },
+  { n: "01", t: "Purpose First", d: "Every decision begins with solving a real business problem — not chasing a trend.", tags: ["Strategy", "Clarity", "Intent"], accent: "ember" },
+  { n: "02", t: "Craftsmanship", d: "Attention to detail is what separates ordinary work from unforgettable experiences.", tags: ["Type", "Motion", "Code"], accent: "zap" },
+  { n: "03", t: "Innovation", d: "We embrace AI, modern tooling and creative thinking to stay ahead of the curve.", tags: ["AI", "3D", "Modern"], accent: "ember" },
+  { n: "04", t: "Partnership", d: "Transparent timelines, honest scopes, no surprises. Your success becomes ours.", tags: ["Trust", "Long-term", "Care"], accent: "zap" },
 ];
 
 const principles = [
-  ["Ship the demo.", "Working software beats the deck."],
-  ["Subtract first.", "Every feature has a tax. Most fail the audit."],
-  ["Move in weeks.", "Quarters kill momentum. We work in two-week scenes."],
-  ["Outlive the brief.", "Build for the team that takes it over."],
+  ["Strategy before design.", "Understand the business first, then draw a single pixel."],
+  ["Performance before animation.", "Beautiful is worthless if it doesn't load."],
+  ["Business goals before trends.", "We build timeless experiences, not seasonal ones."],
+  ["Partnership over projects.", "Long-term relationships over one-time deliveries."],
 ];
 
 const stats = [
-  { k: "48", u: "projects shipped" },
-  { k: "12", u: "countries served" },
-  { k: "14d", u: "median first release" },
-  { k: "96%", u: "founder retention" },
+  { k: "20+", u: "projects delivered" },
+  { k: "100%", u: "fully responsive" },
+  { k: "A+", u: "performance grade" },
+  { k: "∞", u: "creative range" },
 ];
 
 function About() {
@@ -148,20 +148,21 @@ function Hero() {
 
       {/* headline */}
       <motion.div style={{ y, opacity: o }} className="relative z-10">
-        <span className="pill mb-6 border-ember bg-ember/10 text-ember">✦ We build things that ship</span>
+        <span className="pill mb-6 border-ember bg-ember/10 text-ember">✦ Independent digital studio</span>
         <h1 className="display leading-[0.82] tracking-[-0.055em]" style={{ fontSize: "clamp(3rem, 12vw, 14rem)" }}>
-          A small studio
+          Strategy, design
           <br />
-          <span className="text-outline">with a </span>
-          <span className="text-gradient">long memory.</span>
+          <span className="text-outline">and code —</span>
+          <br />
+          <span className="text-gradient">one seamless studio.</span>
         </h1>
         <p className="mono mt-6 max-w-md text-[11px] uppercase tracking-[0.24em] text-bone/55">
-          We design, build and automate for founders who care about the details —
-          <span className="text-bone"> and the shipping date.</span>
+          No unnecessary complexity. No bloated solutions.
+          <span className="text-bone"> Thoughtful digital products built for real people.</span>
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          {["✧ design", "✦ build", "◐ motion", "◇ automate"].map((t) => (
+          {["✧ design", "✦ build", "◐ automate", "◇ grow"].map((t) => (
             <span key={t} className="pill">{t}</span>
           ))}
         </div>
@@ -196,7 +197,7 @@ function TickerStrip() {
 
 /* --------------------------- MANIFESTO ---------------------------- */
 function Manifesto() {
-  const words = "We help ambitious teams turn ideas into working software — websites that feel like film openings, mobile apps that respect the thumb, and quiet automations that give hours back.".split(" ");
+  const words = "Our mission is to help businesses grow through meaningful digital experiences that inspire trust, increase conversions and create lasting impressions — combining strategy, design and technology into one seamless process.".split(" ");
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.4"] });
 
@@ -239,13 +240,13 @@ function Capabilities() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex items-end justify-between">
           <div>
-            <span className="pill mb-4">[ 02 / capabilities ]</span>
+            <span className="pill mb-4">[ 02 / our values ]</span>
             <h2 className="display mt-4" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>
-              What we <span className="text-outline">do.</span>
+              What we <span className="text-outline">stand for.</span>
             </h2>
           </div>
           <p className="mono hidden max-w-[22ch] text-right text-[10px] uppercase tracking-[0.28em] text-bone/55 md:block">
-            four disciplines · one standard of craft
+            four values · one standard of craft
           </p>
         </div>
 
@@ -342,9 +343,9 @@ function Principles() {
   return (
     <section className="relative px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-7xl">
-        <span className="pill mb-4">[ 04 / principles ]</span>
+        <span className="pill mb-4">[ 04 / what makes us different ]</span>
         <h2 className="display mt-4" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>
-          How we <span className="text-outline">work.</span>
+          We don&rsquo;t chase <span className="text-outline">trends.</span>
         </h2>
 
         <ul className="mt-14 border-t-2 border-bone">
@@ -392,7 +393,7 @@ function TailCTA() {
           style={{ fontSize: "clamp(2.5rem, 9vw, 9rem)", letterSpacing: "-0.05em", lineHeight: 0.9 }}
           data-cursor="view"
         >
-          See the <span className="text-gradient">work →</span>
+          Let&rsquo;s create something <span className="text-gradient">extraordinary →</span>
         </Link>
       </div>
     </section>
