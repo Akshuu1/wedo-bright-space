@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SectionLabel } from "@/components/site/SectionLabel";
-import { Reveal, RevealText } from "@/components/site/Reveal";
+import { Reveal } from "@/components/site/Reveal";
 import { SplitPin } from "@/components/site/SplitPin";
+import wedoLogo from "@/assets/wedo-logo.png.asset.json";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
