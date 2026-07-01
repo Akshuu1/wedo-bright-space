@@ -87,12 +87,23 @@ export function Loader() {
   const [done, setDone] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [lowPower, setLowPower] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     if (typeof window === "undefined") return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const mobile = window.matchMedia("(max-width: 768px)").matches;
+    setIsMobile(mobile);
+
+    // Low-power heuristic: few cores, low memory, or save-data
+    const nav = navigator as Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
+    const weak =
+      (nav.hardwareConcurrency ?? 8) <= 4 ||
+      (nav.deviceMemory ?? 8) <= 4 ||
+      nav.connection?.saveData === true;
+    setLowPower(weak);
 
     if (reduced) {
       setPct(100);
@@ -103,7 +114,7 @@ export function Loader() {
 
     let raf = 0;
     const start = performance.now();
-    const DURATION = isMobile ? 2200 : 2600;
+    const DURATION = mobile ? 2200 : 2600;
     const ease = (p: number) => (p === 1 ? 1 : 1 - Math.pow(2, -10 * p));
 
     const tick = (t: number) => {
@@ -155,20 +166,27 @@ export function Loader() {
           {mounted && (
             <div className="absolute inset-0">
               <Canvas
-                dpr={[1, 2]}
+                dpr={isMobile ? [1, 1.5] : [1, 2]}
                 camera={{ position: [0, 0, 4.2], fov: 42 }}
-                gl={{ antialias: true, alpha: true }}
+                gl={{
+                  antialias: !isMobile,
+                  alpha: true,
+                  powerPreference: "high-performance",
+                }}
+                performance={{ min: 0.5 }}
               >
-                <ambientLight intensity={0.35} />
+                <ambientLight intensity={0.5} />
                 <pointLight position={[4, 3, 3]} intensity={2.2} color="#ff8a3c" />
                 <pointLight position={[-4, -2, 2]} intensity={1.4} color="#4f8cff" />
                 <Suspense fallback={null}>
-                  <LoaderScene progress={progress} />
-                  <Environment preset="night" />
+                  <LoaderScene progress={progress} isMobile={isMobile} />
+                  {/* Skip HDR environment on mobile / low-power — biggest win */}
+                  {!isMobile && !lowPower && <Environment preset="night" />}
                 </Suspense>
               </Canvas>
             </div>
           )}
+
 
           {/* Vignette on top of canvas */}
           <div
