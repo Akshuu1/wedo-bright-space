@@ -114,7 +114,7 @@ export function Loader() {
 
     let raf = 0;
     const start = performance.now();
-    const DURATION = mobile ? 2200 : 2600;
+    const DURATION = mobile ? 1200 : 1400;
     const ease = (p: number) => (p === 1 ? 1 : 1 - Math.pow(2, -10 * p));
 
     const tick = (t: number) => {
@@ -122,8 +122,8 @@ export function Loader() {
       setPct(ease(p) * 100);
       if (p < 1) raf = requestAnimationFrame(tick);
       else {
-        window.setTimeout(() => setDone(true), 320);
-        window.setTimeout(() => setHidden(true), 1800);
+        window.setTimeout(() => setDone(true), 180);
+        window.setTimeout(() => setHidden(true), 1100);
       }
     };
     raf = requestAnimationFrame(tick);
