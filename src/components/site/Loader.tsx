@@ -35,73 +35,63 @@ export function Loader() {
       {!done && (
         <motion.div
           key="loader"
-          className="pointer-events-none fixed inset-0 z-[120] overflow-hidden"
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4 }}
+          className="fixed inset-0 z-[120] overflow-hidden bg-ink text-bone"
+          exit={{ y: "-100%" }}
+          transition={{ duration: 1.0, ease: [0.85, 0, 0.15, 1] }}
         >
-          {/* Top half — slides up on exit */}
-          <motion.div
-            className="absolute inset-x-0 top-0 h-1/2 overflow-hidden bg-ink"
-            initial={{ y: 0 }}
-            exit={{ y: "-100%" }}
-            transition={{ duration: 1.1, ease: [0.85, 0, 0.15, 1] }}
-          >
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between px-6 pb-6 md:px-12 md:pb-10">
-              <div className="mono text-[10px] uppercase tracking-[0.3em] text-bone/55">
-                <p>WeDo® Studio</p>
-                <p className="mt-1 text-bone/30">Index · MMXXVI</p>
-              </div>
-              <div className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
-                <span className="text-ember">{String(pct).padStart(3, "0")}</span> / 100
-              </div>
-            </div>
-          </motion.div>
+          {/* Top meta row */}
+          <div className="absolute inset-x-0 top-0 flex items-start justify-between px-6 pt-6 md:px-10 md:pt-8">
+            <span className="mono text-[10px] uppercase tracking-[0.32em] text-bone/50">
+              <span className="mr-2 inline-block h-1.5 w-1.5 translate-y-[-1px] rounded-full bg-ember align-middle" />
+              WeDo® — Index MMXXVI
+            </span>
+            <span className="mono text-[10px] uppercase tracking-[0.32em] text-bone/40">
+              {pct < 33 ? "Resolving" : pct < 66 ? "Composing" : pct < 99 ? "Rendering" : "Ready"}
+            </span>
+          </div>
 
-          {/* Bottom half — slides down on exit */}
-          <motion.div
-            className="absolute inset-x-0 bottom-0 h-1/2 overflow-hidden bg-ink"
-            initial={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ duration: 1.1, ease: [0.85, 0, 0.15, 1] }}
-          >
-            <div className="absolute inset-x-0 top-0 flex items-start justify-between px-6 pt-6 md:px-12 md:pt-10">
-              <span className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
-                ◉ Booting · v2.6
-              </span>
-              <span className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
-                {pct < 33 ? "Resolving" : pct < 66 ? "Composing" : pct < 99 ? "Rendering" : "Ready"}
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Center seam / wordmark */}
-          <div className="absolute inset-0 z-10 flex items-center justify-center">
-            <motion.div
-              initial={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 1.15, opacity: 0 }}
-              transition={{ duration: 0.6, ease: [0.85, 0, 0.15, 1] }}
-              className="relative"
-            >
+          {/* Center — giant ticking counter */}
+          <div className="absolute inset-0 flex items-center justify-center px-6">
+            <div className="flex flex-col items-center">
               <p
-                className="display text-bone"
+                className="display tabular-nums text-bone"
                 style={{
-                  fontSize: "clamp(5rem, 18vw, 18rem)",
-                  letterSpacing: "-0.06em",
+                  fontSize: "clamp(6rem, 22vw, 22rem)",
+                  letterSpacing: "-0.07em",
                   lineHeight: 0.85,
                 }}
               >
+                {String(pct).padStart(2, "0")}
+                <span className="text-ember">.</span>
+              </p>
+              <span className="mono mt-4 text-[10px] uppercase tracking-[0.4em] text-bone/45">
+                Loading experience
+              </span>
+            </div>
+          </div>
+
+          {/* Bottom row — hairline progress + wordmark */}
+          <div className="absolute inset-x-0 bottom-0 px-6 pb-6 md:px-10 md:pb-8">
+            <div className="flex items-end justify-between">
+              <p className="display text-bone" style={{ fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)", letterSpacing: "-0.03em", lineHeight: 1 }}>
                 W<span className="text-ember">e</span>Do
               </p>
-              <div className="mt-2 h-px w-full overflow-hidden bg-bone/15">
-                <div
-                  className="h-full origin-left bg-ember"
-                  style={{
-                    transform: `scaleX(${pct / 100})`,
-                    transition: "transform 90ms linear",
-                  }}
-                />
-              </div>
-            </motion.div>
+              <p className="mono text-[10px] uppercase tracking-[0.32em] text-bone/40">
+                <span className="text-bone">{String(pct).padStart(3, "0")}</span>
+                <span className="mx-1 text-bone/30">/</span>
+                <span>100</span>
+              </p>
+            </div>
+            <div className="mt-4 h-px w-full overflow-hidden bg-bone/12">
+              <div
+                className="h-full origin-left bg-ember"
+                style={{
+                  transform: `scaleX(${pct / 100})`,
+                  transition: "transform 90ms linear",
+                  boxShadow: "0 0 12px rgba(255,140,60,0.55)",
+                }}
+              />
+            </div>
           </div>
         </motion.div>
       )}
