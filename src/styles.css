@@ -85,7 +85,8 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  ::selection { background: #f6ea3a; color: #0a0a0a; }
+  ::selection { background-color: #ff5722 !important; color: #f4f1ea !important; text-shadow: none !important; -webkit-text-fill-color: #f4f1ea !important; }
+  ::-moz-selection { background-color: #ff5722 !important; color: #f4f1ea !important; text-shadow: none !important; }
 }
 
 @utility serif { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.03em; line-height: 0.88; text-transform: uppercase; }
