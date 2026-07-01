@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SectionLabel } from "@/components/site/SectionLabel";
-import { Reveal, RevealText } from "@/components/site/Reveal";
+import { Reveal } from "@/components/site/Reveal";
 import { SplitPin } from "@/components/site/SplitPin";
+import wedoLogo from "@/assets/wedo-logo.png.asset.json";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -33,12 +35,11 @@ function About() {
             className="display mt-10 text-bone"
             style={{ fontSize: "clamp(3.5rem, 12vw, 14rem)", lineHeight: 0.88 }}
           >
-            <RevealText text="A small studio" />
+            A small studio
             <br />
-            <span className="text-bone/40">
-              <RevealText text="with a long memory." />
-            </span>
+            <span className="text-bone/40">with a long memory.</span>
           </h1>
+
 
           <div className="mt-24 grid gap-16 md:grid-cols-12">
             <div className="md:col-span-5">
@@ -71,27 +72,35 @@ function About() {
         label="◆ OUR CAPABILITIES"
         caption="✦ DIFFERENT DISCIPLINES. ONE STANDARD OF CRAFT."
         centerpiece={
-          <div className="relative h-[70vh] w-[70vh] max-w-[80vw] max-h-[80vw]">
+          <div className="relative flex h-[70vh] w-[70vh] max-h-[80vw] max-w-[80vw] items-center justify-center">
+            {/* aurora glow */}
             <div
-              className="absolute inset-0 rounded-[3rem] opacity-90"
+              className="absolute inset-0"
               style={{
                 background:
-                  "radial-gradient(circle at 30% 30%, rgba(255,170,90,0.35), transparent 55%), radial-gradient(circle at 70% 70%, rgba(255,120,60,0.25), transparent 60%), #111",
-                filter: "blur(0.5px)",
+                  "radial-gradient(closest-side, rgba(255,74,28,0.45), transparent 60%), radial-gradient(closest-side at 70% 30%, rgba(246,234,58,0.35), transparent 65%)",
+                filter: "blur(40px)",
               }}
             />
-            <div className="absolute inset-8 rounded-[2.5rem] border border-bone/10" />
-            <div className="absolute inset-16 rounded-[2rem] border border-bone/5" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span
-                className="display text-bone/15"
-                style={{ fontSize: "clamp(8rem, 22vw, 22rem)" }}
-              >
-                ◯
-              </span>
-            </div>
+            {/* orbiting ring */}
+            <div
+              className="absolute inset-8 rounded-full border border-bone/30"
+              style={{ animation: "drift 14s ease-in-out infinite" }}
+            />
+            <div
+              className="absolute inset-24 rounded-full border border-bone/15"
+              style={{ animation: "drift 18s ease-in-out infinite reverse" }}
+            />
+            {/* logo */}
+            <img
+              src={wedoLogo.url}
+              alt="WeDo mark"
+              className="relative w-[55%] max-w-[420px] drop-shadow-[0_10px_40px_rgba(255,74,28,0.35)]"
+              style={{ animation: "orb-float 9s ease-in-out infinite" }}
+            />
           </div>
         }
+
         panels={[
           {
             side: "left",

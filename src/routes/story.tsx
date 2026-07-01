@@ -52,13 +52,9 @@ function Story() {
 }
 
 function Letterbox() {
-  return (
-    <>
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-[48] h-[8vh] bg-bone" />
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[48] h-[8vh] bg-bone" />
-    </>
-  );
+  return null;
 }
+
 
 function TimecodeHUD({ progress }: { progress: MotionValue<number> }) {
   const min = useTransform(progress, (v: number) => String(Math.floor(v * 8)).padStart(2, "0"));
@@ -310,10 +306,11 @@ function ActIV() {
           viewport={{ once: true }}
           transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
           className="display mt-8 text-bone"
-          style={{ fontSize: "clamp(4rem, 18vw, 20rem)", lineHeight: 0.85 }}
+          style={{ fontSize: "clamp(3rem, 10vw, 9rem)", lineHeight: 0.9 }}
         >
           END OF <br />ACT III.
         </motion.h2>
+
         <p className="mono mt-10 text-[10px] uppercase tracking-[0.3em] text-bone/70">
           Reload your popcorn. The picture continues below.
         </p>
