@@ -100,17 +100,7 @@ function Hero() {
       {/* lens cursor light */}
       <motion.div className="pointer-events-none absolute inset-0 z-[1]" style={{ background: lensBg }} />
 
-      {/* HUD top markers */}
-      <div className="pointer-events-none absolute inset-x-0 top-24 z-[2] mx-auto flex max-w-7xl items-center justify-between px-6 md:top-28 md:px-10">
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/50">[ 01 / Index ]</p>
-        <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/50 md:flex md:items-center md:gap-2">
-          <span
-            className="block h-1.5 w-1.5 rounded-full bg-ember"
-            style={{ animation: "blink 2s ease-in-out infinite" }}
-          />
-          Studio · Online
-        </p>
-      </div>
+      {/* HUD removed for a cleaner hero */}
 
       {/* central content */}
       <motion.div
@@ -125,7 +115,7 @@ function Hero() {
           <br />
           <span style={{ color: "#f4f1ea", opacity: 0.95 }}>websites —</span>
           <br />
-          <span className="text-gradient">we build memory.</span>
+          <span className="text-gradient">we build memory</span>
         </h1>
 
         <div className="mt-10 flex flex-col items-start gap-8 md:mt-14 md:flex-row md:items-end md:justify-between">
@@ -147,16 +137,10 @@ function Hero() {
         </div>
       </motion.div>
 
-      {/* bottom microcopy */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-[2] mx-auto flex max-w-7xl items-end justify-between px-6 md:bottom-8 md:px-10">
-        <div className="mono text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/40">
-          <p>Scroll to enter</p>
-          <p className="mt-1 text-[#f4f1ea]/30">↓ ↓ ↓</p>
-        </div>
-        <div className="mono text-right text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/40">
-          <p>Move cursor</p>
-          <p className="mt-1 text-[#f4f1ea]/30">to reveal the lens</p>
-        </div>
+      {/* centered scroll cue */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-[2] flex flex-col items-center gap-2 md:bottom-8">
+        <span className="mono text-[10px] uppercase tracking-[0.4em] text-[#f4f1ea]/50">Scroll</span>
+        <span className="text-[#f4f1ea]/40" style={{ animation: "blink 1.8s ease-in-out infinite" }}>↓</span>
       </div>
     </section>
   );
@@ -285,8 +269,8 @@ function Manifest() {
           className="display mt-10 max-w-[20ch] text-5xl text-bone md:text-[5.5rem]"
           style={{ letterSpacing: "-0.045em", lineHeight: "1.02" }}
         >
-          Designed with purpose.&nbsp;
-          <span className="text-gradient">Built for growth.</span>
+          Designed with purpose&nbsp;
+          <span className="text-gradient">built for growth</span>
         </p>
       </Reveal>
 
@@ -341,7 +325,7 @@ function CasesScroll() {
             </Link>
           </div>
           <h2 className="display mt-6 text-5xl text-bone md:text-[6rem]" style={{ letterSpacing: "-0.05em" }}>
-            A selection, <span className="text-gradient">in motion.</span>
+            A selection <span className="text-gradient">in motion</span>
           </h2>
         </div>
 
