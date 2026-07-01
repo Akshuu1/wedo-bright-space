@@ -11,8 +11,12 @@ import { projects } from "@/lib/projects";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "WeDo Studio — Designed to ship, built to last." },
-      { name: "description", content: "WeDo is an independent digital studio building websites, mobile apps and intelligent automations for teams that ship." },
+      { title: "WeDo — We don't build websites.We build businesses that people remember." },
+      {
+        name: "description",
+        content:
+          "WeDo is an independent digital studio building websites, mobile apps and intelligent automations for teams that ship.",
+      },
       { property: "og:title", content: "WeDo Studio — Designed to ship, built to last." },
       { property: "og:description", content: "Websites, products and automations designed to mean something." },
       { property: "og:url", content: "/" },
@@ -34,7 +38,11 @@ function Home() {
       <Marquee items={["Web", "Mobile", "AI", "Automation", "Brand", "Motion"]} variant="outline" speed={0.85} />
       <CasesScroll />
       <LightInversion />
-      <Marquee items={["Available Q3 · 2026", "Booking Q4 · 2026", "Remote first", "GMT ± 6"]} variant="mono" speed={1.2} />
+      <Marquee
+        items={["Available Q3 · 2026", "Booking Q4 · 2026", "Remote first", "GMT ± 6"]}
+        variant="mono"
+        speed={1.2}
+      />
       <ContactStrip />
     </main>
   );
@@ -58,8 +66,10 @@ function Hero() {
     return () => window.removeEventListener("pointermove", onMove);
   }, [lensX, lensY]);
 
-  const lensBg = useTransform([sx, sy], ([x, y]) =>
-    `radial-gradient(160px 160px at ${(x as number) * 100}% ${(y as number) * 100}%, oklch(1 0 0 / 0.18), transparent 70%)`
+  const lensBg = useTransform(
+    [sx, sy],
+    ([x, y]) =>
+      `radial-gradient(160px 160px at ${(x as number) * 100}% ${(y as number) * 100}%, oklch(1 0 0 / 0.18), transparent 70%)`,
   );
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -94,7 +104,10 @@ function Hero() {
       <div className="pointer-events-none absolute inset-x-0 top-24 z-[2] mx-auto flex max-w-7xl items-center justify-between px-6 md:top-28 md:px-10">
         <p className="mono text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/50">[ 01 / Index ]</p>
         <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/50 md:flex md:items-center md:gap-2">
-          <span className="block h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 2s ease-in-out infinite" }} />
+          <span
+            className="block h-1.5 w-1.5 rounded-full bg-ember"
+            style={{ animation: "blink 2s ease-in-out infinite" }}
+          />
           Studio · Online
         </p>
       </div>
@@ -128,8 +141,8 @@ function Hero() {
           </Magnetic>
 
           <p className="max-w-sm text-sm leading-relaxed text-[#f4f1ea]/55 md:text-right">
-            Websites, mobile apps, AI &amp; automations built for teams that need
-            to move — lean, sensibly priced, shipped on time.
+            Websites, mobile apps, AI &amp; automations built for teams that need to move — lean, sensibly priced,
+            shipped on time.
           </p>
         </div>
       </motion.div>
@@ -148,7 +161,6 @@ function Hero() {
     </section>
   );
 }
-
 
 function LensWord({ text }: { text: string }) {
   return (
@@ -228,7 +240,10 @@ function KeyFacts() {
         <div className="flex items-end justify-between gap-6">
           <SectionLabel index="02" label="Key facts" />
           <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-bone/40 md:flex md:items-center md:gap-2">
-            <span className="block h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 2s ease-in-out infinite" }} />
+            <span
+              className="block h-1.5 w-1.5 rounded-full bg-ember"
+              style={{ animation: "blink 2s ease-in-out infinite" }}
+            />
             Live · updated {new Date().getFullYear()}
           </p>
         </div>
@@ -244,20 +259,12 @@ function KeyFacts() {
                   className="display mt-3 flex items-baseline text-6xl text-bone md:text-7xl lg:text-8xl"
                   style={{ letterSpacing: "-0.06em" }}
                 >
-                  <span className="transition-transform duration-500 group-hover/stat:-translate-y-1">
-                    {s.k}
-                  </span>
-                  {s.suffix && (
-                    <span className="ml-0.5 text-3xl text-ember md:text-4xl">{s.suffix}</span>
-                  )}
+                  <span className="transition-transform duration-500 group-hover/stat:-translate-y-1">{s.k}</span>
+                  {s.suffix && <span className="ml-0.5 text-3xl text-ember md:text-4xl">{s.suffix}</span>}
                 </p>
                 <div className="mt-4 h-px w-10 bg-bone/25 transition-all duration-500 group-hover/stat:w-24 group-hover/stat:bg-ember" />
-                <p className="mono mt-3 text-[10px] uppercase tracking-[0.25em] text-bone/60">
-                  {s.l}
-                </p>
-                <p className="mono mt-1 text-[10px] uppercase tracking-[0.25em] text-bone/30">
-                  ({s.note})
-                </p>
+                <p className="mono mt-3 text-[10px] uppercase tracking-[0.25em] text-bone/60">{s.l}</p>
+                <p className="mono mt-1 text-[10px] uppercase tracking-[0.25em] text-bone/30">({s.note})</p>
               </div>
             </Reveal>
           ))}
@@ -298,9 +305,7 @@ function Manifest() {
                 style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.5), transparent 70%)" }}
               />
               <div className="flex items-center justify-between">
-                <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">
-                  0{i + 1} / Tenet
-                </p>
+                <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">0{i + 1} / Tenet</p>
                 <span className="text-ember/60 transition-transform duration-700 group-hover/tenet:rotate-180">
                   {b.icon}
                 </span>
@@ -337,10 +342,7 @@ function CasesScroll() {
               All cases →
             </Link>
           </div>
-          <h2
-            className="display mt-6 text-5xl text-bone md:text-[6rem]"
-            style={{ letterSpacing: "-0.05em" }}
-          >
+          <h2 className="display mt-6 text-5xl text-bone md:text-[6rem]" style={{ letterSpacing: "-0.05em" }}>
             A selection, <span className="text-gradient">in motion.</span>
           </h2>
         </div>
@@ -363,19 +365,12 @@ function CasesScroll() {
                 </div>
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6">
                   <div>
-                    <p className="mono text-[10px] uppercase tracking-[0.25em] text-bone/70">
-                      {p.client}
-                    </p>
-                    <h3
-                      className="display mt-2 text-4xl text-bone md:text-5xl"
-                      style={{ letterSpacing: "-0.04em" }}
-                    >
+                    <p className="mono text-[10px] uppercase tracking-[0.25em] text-bone/70">{p.client}</p>
+                    <h3 className="display mt-2 text-4xl text-bone md:text-5xl" style={{ letterSpacing: "-0.04em" }}>
                       {p.title}.
                     </h3>
                   </div>
-                  <span className="mono text-[10px] uppercase tracking-[0.25em] text-bone/60">
-                    View →
-                  </span>
+                  <span className="mono text-[10px] uppercase tracking-[0.25em] text-bone/60">View →</span>
                 </div>
               </Link>
             </article>
@@ -390,10 +385,30 @@ function CasesScroll() {
 
 function LightInversion() {
   const disciplines = [
-    { n: "01", k: "Web design & development", v: "Editorial sites, e-commerce, headless CMS, WebGL.", tags: ["Next", "TanStack", "Sanity"] },
-    { n: "02", k: "Mobile applications", v: "iOS, Android, React Native — built around a single gesture.", tags: ["Swift", "Kotlin", "RN"] },
-    { n: "03", k: "AI & automation", v: "Agents, internal tooling, pipelines that retire manual work.", tags: ["LLM", "n8n", "Zap"] },
-    { n: "04", k: "Brand & motion", v: "Identity systems, motion direction, type & art direction.", tags: ["Figma", "After FX", "R3F"] },
+    {
+      n: "01",
+      k: "Web design & development",
+      v: "Editorial sites, e-commerce, headless CMS, WebGL.",
+      tags: ["Next", "TanStack", "Sanity"],
+    },
+    {
+      n: "02",
+      k: "Mobile applications",
+      v: "iOS, Android, React Native — built around a single gesture.",
+      tags: ["Swift", "Kotlin", "RN"],
+    },
+    {
+      n: "03",
+      k: "AI & automation",
+      v: "Agents, internal tooling, pipelines that retire manual work.",
+      tags: ["LLM", "n8n", "Zap"],
+    },
+    {
+      n: "04",
+      k: "Brand & motion",
+      v: "Identity systems, motion direction, type & art direction.",
+      tags: ["Figma", "After FX", "R3F"],
+    },
   ];
 
   return (
@@ -420,7 +435,8 @@ function LightInversion() {
           className="display mt-8 max-w-[16ch] text-5xl text-bone md:text-[6rem]"
           style={{ letterSpacing: "-0.05em", lineHeight: "1" }}
         >
-          One studio.<br />
+          One studio.
+          <br />
           <span
             style={{
               background: "linear-gradient(95deg, oklch(0.55 0.18 35), oklch(0.74 0.17 55))",
@@ -534,16 +550,11 @@ function ContactStrip() {
           </Magnetic>
 
           <div className="flex flex-col gap-1 text-right">
-            <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
-              New projects · Q3 — Q4 2026
-            </p>
-            <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
-              Remote first · GMT ± 6
-            </p>
+            <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">New projects · Q3 — Q4 2026</p>
+            <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">Remote first · GMT ± 6</p>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
