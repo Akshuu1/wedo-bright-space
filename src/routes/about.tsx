@@ -333,9 +333,9 @@ function Principles() {
   return (
     <section className="relative px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-7xl">
-        <span className="pill mb-4">[ 04 / what makes us different ]</span>
+        <span className="pill mb-4">What makes us different</span>
         <h2 className="display mt-4" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>
-          We don&rsquo;t chase <span className="text-outline">trends.</span>
+          We don&rsquo;t chase <span className="text-outline">trends</span>
         </h2>
 
         <ul className="mt-14 border-t-2 border-bone">
@@ -349,7 +349,7 @@ function Principles() {
                 className="group grid items-baseline gap-6 py-8 transition-colors hover:bg-ember/5 md:grid-cols-12 md:py-12"
               >
                 <span className="mono col-span-2 text-[10px] uppercase tracking-widest text-ember">
-                  [ {String(i).padStart(2, "0")} ]
+                  · {String(i).padStart(2, "0")}
                 </span>
                 <h3
                   className="display col-span-5 transition-transform group-hover:translate-x-3"
@@ -376,7 +376,7 @@ function TailCTA() {
         style={{ background: "radial-gradient(closest-side, #ff4a1c, transparent 70%)" }}
       />
       <div className="relative">
-        <span className="pill mb-6">[ next chapter ]</span>
+        <span className="pill mb-6">Next chapter</span>
         <Link
           to="/work"
           className="display mt-6 block hover:text-ember"
