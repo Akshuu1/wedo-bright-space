@@ -52,13 +52,9 @@ function Story() {
 }
 
 function Letterbox() {
-  return (
-    <>
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-[48] h-[8vh] bg-bone" />
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[48] h-[8vh] bg-bone" />
-    </>
-  );
+  return null;
 }
+
 
 function TimecodeHUD({ progress }: { progress: MotionValue<number> }) {
   const min = useTransform(progress, (v: number) => String(Math.floor(v * 8)).padStart(2, "0"));
