@@ -13,13 +13,21 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const path = useRouterState({ select: (s) => s.location.pathname });
 
-  useEffect(() => { setOpen(false); }, [path]);
+  useEffect(() => {
+    setOpen(false);
+  }, [path]);
 
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-[80] flex items-center justify-between px-5 pt-5 md:px-8 md:pt-6">
         <Link to="/" className="group flex items-center gap-2">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="transition-transform duration-500 group-hover:rotate-180">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="transition-transform duration-500 group-hover:rotate-180"
+          >
             <path d="M3 18 L12 4 L21 18 L17 18 L12 10 L7 18 Z" fill="currentColor" className="text-bone" />
             <path d="M9 18 L12 13 L15 18 Z" fill="currentColor" className="text-ember" />
           </svg>
@@ -49,12 +57,17 @@ export function Nav() {
       >
         <span>{open ? "Close" : "Menu"}</span>
         <span className="relative block h-2.5 w-4">
-          <span className={`absolute left-0 top-0 block h-px w-4 bg-current transition-transform ${open ? "translate-y-[5px] rotate-45" : ""}`} />
-          <span className={`absolute left-0 top-[5px] block h-px w-4 bg-current transition-opacity ${open ? "opacity-0" : ""}`} />
-          <span className={`absolute left-0 top-[10px] block h-px w-4 bg-current transition-transform ${open ? "-translate-y-[5px] -rotate-45" : ""}`} />
+          <span
+            className={`absolute left-0 top-0 block h-px w-4 bg-current transition-transform ${open ? "translate-y-[5px] rotate-45" : ""}`}
+          />
+          <span
+            className={`absolute left-0 top-[5px] block h-px w-4 bg-current transition-opacity ${open ? "opacity-0" : ""}`}
+          />
+          <span
+            className={`absolute left-0 top-[10px] block h-px w-4 bg-current transition-transform ${open ? "-translate-y-[5px] -rotate-45" : ""}`}
+          />
         </span>
       </button>
-
 
       {/* Fullscreen menu — sibling of header so it's a top-level stacking context */}
       <div
@@ -80,7 +93,7 @@ export function Nav() {
                       <span
                         className={`display text-5xl leading-[0.9] transition-colors md:text-7xl lg:text-8xl ${active ? "text-gradient" : "text-[#f4f1ea] group-hover/it:text-gradient"}`}
                       >
-                        {it.label}.
+                        {it.label}
                       </span>
                     </span>
                     <span className="mono text-xs text-[#f4f1ea]/40">{it.zh}</span>
@@ -90,8 +103,11 @@ export function Nav() {
             })}
           </ul>
           <div className="mt-12 flex flex-wrap items-end justify-between gap-6 border-t border-[#f4f1ea]/10 pt-6">
-            <a href="mailto:hello@wedo.studio" className="display text-2xl text-[#f4f1ea] hover:text-gradient md:text-4xl">
-              hello@wedo.studio →
+            <a
+              href="mailto:team.wedo06@gmail.com"
+              className="display text-2xl text-[#f4f1ea] hover:text-gradient md:text-4xl"
+            >
+              team.wedo06@gmail.com →
             </a>
             <p className="mono text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/40">
               MMXXVI · We design, develop &amp; automate
@@ -102,4 +118,3 @@ export function Nav() {
     </>
   );
 }
-
