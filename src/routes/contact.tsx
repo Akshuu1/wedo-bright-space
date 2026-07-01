@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { toast } from "sonner";
 
@@ -30,6 +30,7 @@ function Contact() {
   return (
     <main className="bg-ink text-bone">
       <Hero />
+      <TickerStrip />
       <FormSection />
       <FooterBand />
     </main>
@@ -41,59 +42,100 @@ function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]);
+  const [clock, setClock] = useState("");
+
+  useEffect(() => {
+    const tick = () => {
+      const d = new Date();
+      setClock(`${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}:${String(d.getSeconds()).padStart(2, "0")}`);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <section ref={ref} className="relative flex min-h-screen flex-col justify-between overflow-hidden px-6 pb-10 pt-32 md:px-12 md:pt-40">
       <div
         className="pointer-events-none absolute -top-40 left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.55), transparent 70%)" }}
+        style={{ background: "radial-gradient(closest-side, #ff4a1c, transparent 70%)" }}
+      />
+      <div
+        className="pointer-events-none absolute bottom-0 right-[-10%] h-[520px] w-[520px] rounded-full opacity-25 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, #f6ea3a, transparent 70%)" }}
       />
 
-      <div className="flex items-start justify-between">
-        <p className="mono text-[10px] uppercase tracking-[0.32em] text-ember">[ 05 / contact ]</p>
-        <p className="mono max-w-[16ch] text-right text-[10px] uppercase tracking-[0.28em] text-bone/45">
-          replies within 24h · mon–fri
-        </p>
+      {/* HUD top */}
+      <div className="relative z-10 flex items-start justify-between">
+        <div className="flex items-center gap-3">
+          <span className="pill">
+            <span className="h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.6s infinite" }} />
+            Chapter 05 · Contact
+          </span>
+          <span className="mono hidden text-[10px] uppercase tracking-[0.28em] text-bone/50 md:inline">
+            ⏵ inbox open · replies &lt; 24h
+          </span>
+        </div>
+        <span className="mono tabular-nums text-[10px] uppercase tracking-[0.28em] text-bone/60">
+          local · {clock}
+        </span>
       </div>
 
-      <motion.div style={{ y }}>
-        <h1 className="display leading-[0.85] tracking-[-0.05em]" style={{ fontSize: "clamp(3rem, 11vw, 12rem)" }}>
+      <motion.div style={{ y }} className="relative z-10">
+        <span className="pill mb-6 border-ember bg-ember/10 text-ember">✦ Now booking · Q3 — Q4 2026</span>
+        <h1 className="display leading-[0.82] tracking-[-0.055em]" style={{ fontSize: "clamp(3rem, 11vw, 12rem)" }}>
           Let&rsquo;s make
           <br />
-          <span className="text-gradient">something.</span>
-
+          <span className="text-outline">something </span>
+          <span className="text-gradient">unforgettable.</span>
         </h1>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3 md:gap-10">
-          <ContactLine label="Email" href="mailto:hello@wedo.studio" value="hello@wedo.studio" />
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <ContactLine label="Email" href="mailto:hello@wedo.studio" value="hello@wedo.studio" accent />
           <ContactLine label="Phone" href="tel:+10000000000" value="+1 000 000 0000" />
           <ContactLine label="Studio" value="Remote · Worldwide" sub="Mon — Fri · 9 to 7 GMT" />
         </div>
       </motion.div>
 
-      <div className="flex items-end justify-between border-t border-bone/10 pt-5">
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">scroll ↓ the brief</p>
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">wedo · studio ® 2026</p>
+      <div className="relative z-10 flex items-end justify-between border-t-2 border-bone pt-5">
+        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/60">↓ scroll · the brief</p>
+        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/60">wedo · studio ® 2026</p>
       </div>
     </section>
   );
 }
 
-function ContactLine({ label, href, value, sub }: { label: string; href?: string; value: string; sub?: string }) {
+function ContactLine({ label, href, value, sub, accent }: { label: string; href?: string; value: string; sub?: string; accent?: boolean }) {
   const inner = (
     <>
-      <p className="mono text-[10px] uppercase tracking-[0.32em] text-bone/40">[ {label} ]</p>
-      <p className="display mt-2 text-2xl transition-colors group-hover:text-ember md:text-3xl">{value}</p>
-      {sub && <p className="mono mt-1 text-[10px] uppercase tracking-[0.28em] text-bone/40">{sub}</p>}
+      <div className="mono flex items-center justify-between text-[10px] uppercase tracking-[0.32em] text-bone/60">
+        <span>[ {label} ]</span>
+        <span className={accent ? "text-ember" : "text-bone/40"}>◐</span>
+      </div>
+      <p className="display mt-3 text-xl transition-colors group-hover:text-ember md:text-2xl">{value}</p>
+      {sub && <p className="mono mt-1 text-[10px] uppercase tracking-[0.28em] text-bone/50">{sub}</p>}
     </>
   );
-  return href ? (
-    <a href={href} className="group block rounded-2xl border border-bone/10 bg-bone/[0.02] p-6 backdrop-blur transition hover:border-ember/50">
-      {inner}
-    </a>
-  ) : (
-    <div className="group rounded-2xl border border-bone/10 bg-bone/[0.02] p-6 backdrop-blur">
-      {inner}
+  const cls = `group block border-2 border-bone bg-ink p-5 transition hover:-translate-y-1 md:p-6 ${
+    accent ? "hover:shadow-[8px_8px_0_0_#ff4a1c]" : "hover:shadow-[8px_8px_0_0_#f6ea3a]"
+  }`;
+  return href ? <a href={href} className={cls}>{inner}</a> : <div className={cls}>{inner}</div>;
+}
+
+/* ------------------------------ TICKER ------------------------------ */
+function TickerStrip() {
+  const items = ["◐ Replies within 24h", "✦ NDA on request", "✧ Kickoff · avg 8 days", "★ Founder-first", "✦ Remote-native", "◇ Fair, honest scopes"];
+  const doubled = [...items, ...items];
+  return (
+    <div className="ticker-strip">
+      <div className="marquee-track py-4">
+        {doubled.map((s, i) => (
+          <span key={i} className="mono flex items-center gap-8 px-8 text-[13px] font-bold uppercase tracking-[0.22em]">
+            {s}
+            <span className="opacity-40">/</span>
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -105,20 +147,28 @@ function FormSection() {
   const [bud, setBud] = useState<string | null>(null);
 
   return (
-    <section className="relative border-t border-bone/10 px-6 py-24 md:px-12 md:py-32">
+    <section className="relative border-y-2 border-bone bg-chalk px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-12">
         <aside className="md:col-span-4">
-          <p className="mono text-[10px] uppercase tracking-[0.32em] text-ember">[ the brief ]</p>
+          <span className="pill-solid mb-6">✎ The brief</span>
           <h2 className="display mt-4" style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", letterSpacing: "-0.03em", lineHeight: 0.95 }}>
-            Tell us about the project.
+            Tell us about
+            <br />
+            <span className="text-gradient">the project.</span>
           </h2>
-          <p className="mt-6 text-bone/60">
+          <p className="mt-6 text-bone/70">
             The more you share, the sharper our first reply. We read every brief personally — usually the same day.
           </p>
-          <div className="mono mt-10 space-y-3 border-t border-bone/10 pt-6 text-[10px] uppercase tracking-[0.28em] text-bone/50">
-            <p>✦ new projects · Q3 — Q4 2026</p>
-            <p>✦ average kickoff · 8 days</p>
-            <p>✦ NDA on request</p>
+          <ul className="mono mt-10 space-y-3 border-t-2 border-bone pt-6 text-[10px] uppercase tracking-[0.28em] text-bone/60">
+            <li className="flex items-center gap-3"><span className="text-ember">✦</span> new projects · Q3 — Q4 2026</li>
+            <li className="flex items-center gap-3"><span className="text-ember">✦</span> average kickoff · 8 days</li>
+            <li className="flex items-center gap-3"><span className="text-ember">✦</span> NDA on request</li>
+          </ul>
+
+          <div className="mt-10 hidden h-32 w-32 rotate-[-6deg] md:block">
+            <div className="brut-box-zap flex h-full w-full items-center justify-center">
+              <span className="display text-6xl">05</span>
+            </div>
           </div>
         </aside>
 
@@ -144,8 +194,8 @@ function FormSection() {
                 type="button"
                 key={s}
                 onClick={() => setSvc(s)}
-                className={`mono rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition ${
-                  svc === s ? "border-ember bg-ember text-ink" : "border-bone/20 text-bone/70 hover:border-bone/60 hover:text-bone"
+                className={`mono border-2 border-bone px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition ${
+                  svc === s ? "bg-ember text-ink shadow-[4px_4px_0_0_#0a0a0a]" : "bg-ink text-bone hover:bg-zap"
                 }`}
               >
                 {s}
@@ -161,8 +211,8 @@ function FormSection() {
                 type="button"
                 key={b}
                 onClick={() => setBud(b)}
-                className={`mono rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition ${
-                  bud === b ? "border-ember bg-ember text-ink" : "border-bone/20 text-bone/70 hover:border-bone/60 hover:text-bone"
+                className={`mono border-2 border-bone px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition ${
+                  bud === b ? "bg-ember text-ink shadow-[4px_4px_0_0_#0a0a0a]" : "bg-ink text-bone hover:bg-zap"
                 }`}
               >
                 {b}
@@ -184,7 +234,7 @@ function FormSection() {
             name="message"
             rows={5}
             placeholder="What are we building — and why now?"
-            className="mt-4 w-full resize-none border-b border-bone/20 bg-transparent pb-4 text-xl text-bone outline-none transition placeholder:text-bone/25 focus:border-ember md:text-2xl"
+            className="mt-4 w-full resize-none border-2 border-bone bg-ink p-4 text-lg text-bone outline-none transition placeholder:text-bone/30 focus:shadow-[6px_6px_0_0_#ff4a1c] md:text-xl"
           />
 
           <input type="hidden" name="service" value={svc ?? ""} />
@@ -193,10 +243,10 @@ function FormSection() {
           <button
             type="submit"
             disabled={sending}
-            className="group mt-12 flex w-full items-center justify-between rounded-full border border-bone/25 bg-bone/[0.03] px-6 py-5 text-bone transition hover:border-ember hover:bg-ember hover:text-ink disabled:opacity-50 md:px-10 md:py-7"
+            className="group mt-12 flex w-full items-center justify-between border-2 border-bone bg-bone px-6 py-5 text-ink transition hover:-translate-y-1 hover:bg-ember hover:shadow-[8px_8px_0_0_#0a0a0a] disabled:opacity-50 md:px-10 md:py-7"
           >
             <span className="mono text-[11px] uppercase tracking-[0.3em]">
-              {sending ? "Sending…" : "Send the brief"}
+              {sending ? "Sending…" : "✦ Send the brief"}
             </span>
             <span className="display text-2xl transition-transform group-hover:translate-x-2 md:text-4xl">
               →
@@ -212,7 +262,7 @@ function FieldLabel({ n, t, className = "" }: { n: string; t: string; className?
   return (
     <div className={`flex items-baseline gap-4 ${className}`}>
       <span className="mono text-[10px] uppercase tracking-[0.32em] text-ember">[ {n} ]</span>
-      <span className="mono text-[11px] uppercase tracking-[0.28em] text-bone/70">{t}</span>
+      <span className="mono text-[11px] uppercase tracking-[0.28em] text-bone">{t}</span>
     </div>
   );
 }
@@ -226,7 +276,7 @@ function TextField({ n, name, label, placeholder, type = "text" }: { n: string; 
         name={name}
         type={type}
         placeholder={placeholder}
-        className="mt-3 w-full border-b border-bone/20 bg-transparent pb-3 text-lg text-bone outline-none transition placeholder:text-bone/25 focus:border-ember md:text-xl"
+        className="mt-3 w-full border-2 border-bone bg-ink px-4 py-3 text-lg text-bone outline-none transition placeholder:text-bone/30 focus:shadow-[6px_6px_0_0_#ff4a1c] md:text-xl"
       />
     </label>
   );
@@ -235,10 +285,14 @@ function TextField({ n, name, label, placeholder, type = "text" }: { n: string; 
 /* ------------------------------ FOOTER BAND ------------------------------ */
 function FooterBand() {
   return (
-    <section className="relative overflow-hidden border-t border-bone/10 py-14">
-      <div className="flex gap-16 whitespace-nowrap [animation:marquee_45s_linear_infinite]">
+    <section className="relative overflow-hidden bg-bone py-14 text-ink">
+      <div className="marquee-track">
         {Array.from({ length: 6 }).map((_, i) => (
-          <span key={i} className="display flex items-center gap-16 text-bone/25" style={{ fontSize: "clamp(3rem, 8vw, 7rem)", letterSpacing: "-0.05em", lineHeight: 1 }}>
+          <span
+            key={i}
+            className="display flex items-center gap-16 pr-16 text-ink"
+            style={{ fontSize: "clamp(3rem, 8vw, 7rem)", letterSpacing: "-0.05em", lineHeight: 1 }}
+          >
             Let&rsquo;s make something <span className="text-ember">✦</span>
           </span>
         ))}
