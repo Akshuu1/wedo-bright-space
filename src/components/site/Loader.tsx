@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 /**
- * WeDo boot loader — horizontal split-curtain reveal.
- * Two panels (top + bottom) slide apart while a wordmark scales through.
+ * WeDo boot loader — editorial counter with a soft curtain lift.
+ * Timings tuned for both mobile and desktop; respects reduced-motion.
  */
 export function Loader() {
   const [pct, setPct] = useState(0);
@@ -11,17 +11,30 @@ export function Loader() {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    if (reduced) {
+      setPct(100);
+      setDone(true);
+      const id = window.setTimeout(() => setHidden(true), 300);
+      return () => window.clearTimeout(id);
+    }
+
     let raf = 0;
     const start = performance.now();
-    const DURATION = 1800;
+    const DURATION = isMobile ? 1600 : 2000;
+    // expo-out — slow finish, elegant settle
     const ease = (p: number) => (p === 1 ? 1 : 1 - Math.pow(2, -10 * p));
+
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / DURATION);
-      setPct(Math.round(ease(p) * 100));
+      setPct(ease(p) * 100);
       if (p < 1) raf = requestAnimationFrame(tick);
       else {
-        setTimeout(() => setDone(true), 200);
-        setTimeout(() => setHidden(true), 1500);
+        window.setTimeout(() => setDone(true), 260);
+        window.setTimeout(() => setHidden(true), 1600);
       }
     };
     raf = requestAnimationFrame(tick);
@@ -29,6 +42,7 @@ export function Loader() {
   }, []);
 
   if (hidden) return null;
+  const shown = Math.min(100, Math.floor(pct));
 
   return (
     <AnimatePresence>
@@ -36,49 +50,106 @@ export function Loader() {
         <motion.div
           key="loader"
           className="fixed inset-0 z-[120] overflow-hidden bg-ink text-bone"
-          exit={{ y: "-100%" }}
-          transition={{ duration: 1.0, ease: [0.85, 0, 0.15, 1] }}
+          initial={{ y: 0 }}
+          exit={{ y: "-101%" }}
+          transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1] }}
+          aria-hidden
         >
-          {/* Top meta row */}
-          <div className="absolute inset-x-0 top-0 flex items-start justify-between px-6 pt-6 md:px-10 md:pt-8">
-            <span className="mono text-[10px] uppercase tracking-[0.32em] text-bone/50">
-              <span className="mr-2 inline-block h-1.5 w-1.5 translate-y-[-1px] rounded-full bg-ember align-middle" />
+          {/* Ambient ember glow — subtle depth */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-70"
+            style={{
+              background:
+                "radial-gradient(60% 45% at 50% 55%, rgba(255,140,60,0.10), transparent 70%)",
+            }}
+          />
+          {/* Soft noise for texture */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.7'/></svg>\")",
+            }}
+          />
+
+          {/* Top meta */}
+          <motion.div
+            className="absolute inset-x-0 top-0 flex items-start justify-between px-6 pt-6 md:px-10 md:pt-8"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+          >
+            <span className="mono flex items-center gap-2 text-[10px] uppercase tracking-[0.34em] text-bone/55">
+              <span className="relative inline-flex h-1.5 w-1.5">
+                <span className="absolute inset-0 animate-ping rounded-full bg-ember/70" />
+                <span className="relative h-1.5 w-1.5 rounded-full bg-ember" />
+              </span>
               WeDo® — Index MMXXVI
             </span>
-            <span className="mono text-[10px] uppercase tracking-[0.32em] text-bone/40">
-              {pct < 33 ? "Resolving" : pct < 66 ? "Composing" : pct < 99 ? "Rendering" : "Ready"}
+            <span className="mono text-[10px] uppercase tracking-[0.34em] text-bone/40">
+              {shown < 33
+                ? "Resolving"
+                : shown < 66
+                  ? "Composing"
+                  : shown < 99
+                    ? "Rendering"
+                    : "Ready"}
             </span>
-          </div>
+          </motion.div>
 
-          {/* Center — giant ticking counter */}
+          {/* Center — giant tabular counter */}
           <div className="absolute inset-0 flex items-center justify-center px-6">
             <div className="flex flex-col items-center">
-              <p
+              <motion.p
                 className="display tabular-nums text-bone"
                 style={{
                   fontSize: "clamp(6rem, 22vw, 22rem)",
                   letterSpacing: "-0.07em",
                   lineHeight: 0.85,
                 }}
+                initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               >
-                {String(pct).padStart(2, "0")}
+                {String(shown).padStart(2, "0")}
                 <span className="text-ember">.</span>
-              </p>
-              <span className="mono mt-4 text-[10px] uppercase tracking-[0.4em] text-bone/45">
+              </motion.p>
+              <motion.span
+                className="mono mt-5 text-[10px] uppercase tracking-[0.42em] text-bone/45"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, delay: 0.25 }}
+              >
                 Loading experience
-              </span>
+              </motion.span>
             </div>
           </div>
 
-          {/* Bottom row — hairline progress + wordmark */}
-          <div className="absolute inset-x-0 bottom-0 px-6 pb-6 md:px-10 md:pb-8">
+          {/* Bottom — wordmark + hairline progress */}
+          <motion.div
+            className="absolute inset-x-0 bottom-0 px-6 pb-6 md:px-10 md:pb-8"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          >
             <div className="flex items-end justify-between">
-              <p className="display text-bone" style={{ fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)", letterSpacing: "-0.03em", lineHeight: 1 }}>
+              <p
+                className="display text-bone"
+                style={{
+                  fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1,
+                }}
+              >
                 W<span className="text-ember">e</span>Do
               </p>
-              <p className="mono text-[10px] uppercase tracking-[0.32em] text-bone/40">
-                <span className="text-bone">{String(pct).padStart(3, "0")}</span>
-                <span className="mx-1 text-bone/30">/</span>
+              <p className="mono tabular-nums text-[10px] uppercase tracking-[0.32em] text-bone/50">
+                <span className="text-bone">{String(shown).padStart(3, "0")}</span>
+                <span className="mx-1 text-bone/25">/</span>
                 <span>100</span>
               </p>
             </div>
@@ -87,12 +158,12 @@ export function Loader() {
                 className="h-full origin-left bg-ember"
                 style={{
                   transform: `scaleX(${pct / 100})`,
-                  transition: "transform 90ms linear",
-                  boxShadow: "0 0 12px rgba(255,140,60,0.55)",
+                  transition: "transform 120ms cubic-bezier(0.22,1,0.36,1)",
+                  boxShadow: "0 0 14px rgba(255,140,60,0.55)",
                 }}
               />
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
