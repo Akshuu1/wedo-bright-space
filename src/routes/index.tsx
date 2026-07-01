@@ -407,7 +407,7 @@ function LightInversion() {
 
       <div className="relative mx-auto max-w-7xl">
         <div className="flex items-end justify-between gap-6">
-          <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/50">[ 05 ] Capabilities</p>
+          <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/50">Capabilities</p>
           <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-bone/40 md:block">
             04 disciplines · 01 studio
           </p>
@@ -417,7 +417,7 @@ function LightInversion() {
           className="display mt-8 max-w-[16ch] text-5xl text-bone md:text-[6rem]"
           style={{ letterSpacing: "-0.05em", lineHeight: "1" }}
         >
-          One studio.
+          One studio
           <br />
           <span
             style={{
@@ -427,7 +427,7 @@ function LightInversion() {
               color: "transparent",
             }}
           >
-            Four disciplines.
+            Four disciplines
           </span>
         </h2>
 
@@ -498,7 +498,7 @@ function ContactStrip() {
       />
       {/* index line */}
       <div className="relative mx-auto flex max-w-7xl items-center justify-between">
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">[ 06 ] Start a project</p>
+        <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">Start a project</p>
         <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-bone/40 md:block">
           ✦ available · booking Q3 — Q4 2026
         </p>

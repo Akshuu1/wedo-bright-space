@@ -61,14 +61,11 @@ function Work() {
           <div className="flex items-center gap-3">
             <span className="pill">
               <span className="h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.6s infinite" }} />
-              Archive 02
-            </span>
-            <span className="mono hidden text-[10px] uppercase tracking-[0.28em] text-bone/50 md:inline">
-              ⏵ 2024 — 2026 selects
+              Selected work
             </span>
           </div>
           <span className="mono text-right text-[10px] uppercase tracking-[0.28em] text-bone/50">
-            {String(projects.length).padStart(2, "0")} projects on file
+            {String(projects.length).padStart(2, "0")} projects
           </span>
         </div>
 
@@ -81,17 +78,17 @@ function Work() {
             Selected
             <span className="align-super text-ember" style={{ fontSize: "0.18em" }}>®</span>
             <br />
-            <span className="text-outline">Projects.</span>
+            <span className="text-outline">Projects</span>
           </h1>
           <p className="mono mt-6 max-w-md text-[11px] uppercase tracking-[0.24em] text-bone/60">
-            Not another website. Every project solves a business problem —
-            <span className="text-bone"> hover to preview, click to read.</span>
+            Not another website — every project solves a real business problem
+            <span className="text-bone"> · hover to preview, click to read</span>
           </p>
         </motion.div>
 
-        <div className="relative z-10 flex items-end justify-between border-t-2 border-bone pt-5">
-          <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/60">↓ scroll to index</p>
-          <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/60">wedo · studio ® 2026</p>
+        <div className="relative z-10 flex flex-col items-center gap-2 border-t-2 border-bone pt-5">
+          <p className="mono text-[10px] uppercase tracking-[0.4em] text-bone/60">Scroll</p>
+          <span className="text-bone/40" style={{ animation: "blink 1.8s ease-in-out infinite" }}>↓</span>
         </div>
       </section>
 
