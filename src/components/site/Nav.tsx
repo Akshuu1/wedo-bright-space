@@ -28,20 +28,19 @@ export function Nav() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-2">
-          <button
-            aria-label="Mute"
-            className="hidden h-9 w-9 items-center justify-center rounded-full border border-bone/20 bg-ink/40 text-bone/70 backdrop-blur md:flex"
-          >
-            <span className="mono text-[10px]">♪</span>
-          </button>
-          <Link to="/contact" className="pill-solid hidden md:inline-flex hover:opacity-80">
-            Let&apos;s talk
-          </Link>
+        {/* status pill — visible desktop only, sits far from menu */}
+        <div className="pointer-events-none absolute left-1/2 top-5 hidden -translate-x-1/2 md:top-6 md:block">
+          <span className="mono inline-flex items-center gap-2 rounded-full border border-bone/15 bg-ink/40 px-3 py-1.5 text-[10px] uppercase tracking-[0.28em] text-bone/60 backdrop-blur">
+            <span className="relative inline-flex h-1.5 w-1.5">
+              <span className="absolute inset-0 animate-ping rounded-full bg-ember/70" />
+              <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-ember" />
+            </span>
+            available · 2026
+          </span>
         </div>
       </header>
 
-      {/* Menu toggle — always above overlay */}
+      {/* Menu toggle — alone on the right, above overlay */}
       <button
         onClick={() => setOpen((o) => !o)}
         className="pill fixed right-5 top-5 z-[110] md:right-8 md:top-6"
@@ -55,6 +54,7 @@ export function Nav() {
           <span className={`absolute left-0 top-[10px] block h-px w-4 bg-current transition-transform ${open ? "-translate-y-[5px] -rotate-45" : ""}`} />
         </span>
       </button>
+
 
       {/* Fullscreen menu — sibling of header so it's a top-level stacking context */}
       <div
