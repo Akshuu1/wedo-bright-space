@@ -29,10 +29,12 @@ function Home() {
     <main className="relative bg-ink">
       <Hero />
       <KeyFacts />
-      <Marquee items={["Impact", "Inspire", "Innovate", "Iterate"]} />
+      <Marquee items={["Impact", "Inspire", "Innovate", "Iterate"]} variant="ember" />
       <Manifest />
+      <Marquee items={["Web", "Mobile", "AI", "Automation", "Brand", "Motion"]} variant="outline" speed={0.85} />
       <CasesScroll />
       <LightInversion />
+      <Marquee items={["Available Q3 · 2026", "Booking Q4 · 2026", "Remote first", "GMT ± 6"]} variant="mono" speed={1.2} />
       <ContactStrip />
     </main>
   );
@@ -210,28 +212,53 @@ function Wireframes() {
 
 function KeyFacts() {
   const stats = [
-    { k: "48", l: "Products shipped" },
-    { k: "12", l: "Countries served" },
-    { k: "7yr", l: "Median client tenure" },
-    { k: "100%", l: "Independent &amp; founder-owned" },
+    { k: "48", suffix: "", l: "Products shipped", note: "since 2019" },
+    { k: "12", suffix: "", l: "Countries served", note: "4 continents" },
+    { k: "7", suffix: "yr", l: "Median client tenure", note: "we stick around" },
+    { k: "100", suffix: "%", l: "Founder-owned", note: "independent" },
   ];
   return (
-    <section className="border-y border-bone/10 px-6 py-20 md:px-10 md:py-28">
-      <div className="mx-auto max-w-7xl">
-        <SectionLabel index="02" label="Key facts" />
-        <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
+    <section className="relative border-y border-bone/10 bg-ink px-6 py-24 md:px-10 md:py-32">
+      {/* ambient ember wash */}
+      <div
+        className="pointer-events-none absolute -top-32 right-[-10%] h-[420px] w-[420px] rounded-full opacity-30 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.5), transparent 70%)" }}
+      />
+      <div className="relative mx-auto max-w-7xl">
+        <div className="flex items-end justify-between gap-6">
+          <SectionLabel index="02" label="Key facts" />
+          <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-bone/40 md:flex md:items-center md:gap-2">
+            <span className="block h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 2s ease-in-out infinite" }} />
+            Live · updated {new Date().getFullYear()}
+          </p>
+        </div>
+
+        <div className="mt-14 grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-4 md:gap-x-10">
           {stats.map((s, i) => (
-            <Reveal key={s.k} delay={i * 0.06}>
-              <p
-                className="display text-6xl text-bone md:text-7xl"
-                style={{ letterSpacing: "-0.05em" }}
-              >
-                {s.k}
-              </p>
-              <p
-                className="mono mt-3 text-[10px] uppercase tracking-[0.25em] text-bone/50"
-                dangerouslySetInnerHTML={{ __html: s.l }}
-              />
+            <Reveal key={s.l} delay={i * 0.08}>
+              <div className="group/stat relative">
+                <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember/80">
+                  {String(i + 1).padStart(2, "0")} /
+                </p>
+                <p
+                  className="display mt-3 flex items-baseline text-6xl text-bone md:text-7xl lg:text-8xl"
+                  style={{ letterSpacing: "-0.06em" }}
+                >
+                  <span className="transition-transform duration-500 group-hover/stat:-translate-y-1">
+                    {s.k}
+                  </span>
+                  {s.suffix && (
+                    <span className="ml-0.5 text-3xl text-ember md:text-4xl">{s.suffix}</span>
+                  )}
+                </p>
+                <div className="mt-4 h-px w-10 bg-bone/25 transition-all duration-500 group-hover/stat:w-24 group-hover/stat:bg-ember" />
+                <p className="mono mt-3 text-[10px] uppercase tracking-[0.25em] text-bone/60">
+                  {s.l}
+                </p>
+                <p className="mono mt-1 text-[10px] uppercase tracking-[0.25em] text-bone/30">
+                  ({s.note})
+                </p>
+              </div>
             </Reveal>
           ))}
         </div>
@@ -259,16 +286,30 @@ function Manifest() {
 
       <div className="mt-16 grid gap-8 border-t border-bone/10 pt-10 md:grid-cols-3">
         {[
-          { k: "Clarity first", v: "Tight scopes. Plain language. No deck-ware." },
-          { k: "Craft always", v: "Type, motion and code held to the same bar." },
-          { k: "Built to scale", v: "Lean stacks that survive the second team." },
+          { k: "Clarity first", v: "Tight scopes. Plain language. No deck-ware.", icon: "◐" },
+          { k: "Craft always", v: "Type, motion and code held to the same bar.", icon: "✦" },
+          { k: "Built to scale", v: "Lean stacks that survive the second team.", icon: "◆" },
         ].map((b, i) => (
           <Reveal key={b.k} delay={i * 0.08}>
-            <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">
-              0{i + 1}
-            </p>
-            <h3 className="mt-3 text-xl text-bone">{b.k}.</h3>
-            <p className="mt-2 max-w-xs text-sm leading-relaxed text-bone/55">{b.v}</p>
+            <div className="group/tenet relative overflow-hidden rounded-2xl border border-bone/10 bg-bone/[0.02] p-7 transition-all duration-500 hover:-translate-y-1 hover:border-ember/40 hover:bg-bone/[0.04]">
+              {/* hover glow */}
+              <div
+                className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover/tenet:opacity-100"
+                style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.5), transparent 70%)" }}
+              />
+              <div className="flex items-center justify-between">
+                <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">
+                  0{i + 1} / Tenet
+                </p>
+                <span className="text-ember/60 transition-transform duration-700 group-hover/tenet:rotate-180">
+                  {b.icon}
+                </span>
+              </div>
+              <h3 className="display mt-6 text-2xl text-bone md:text-3xl" style={{ letterSpacing: "-0.035em" }}>
+                {b.k}.
+              </h3>
+              <p className="mt-3 max-w-xs text-sm leading-relaxed text-bone/55">{b.v}</p>
+            </div>
           </Reveal>
         ))}
       </div>
@@ -348,47 +389,98 @@ function CasesScroll() {
 /* --------------------------- LIGHT INVERSION --------------------------- */
 
 function LightInversion() {
+  const disciplines = [
+    { n: "01", k: "Web design & development", v: "Editorial sites, e-commerce, headless CMS, WebGL.", tags: ["Next", "TanStack", "Sanity"] },
+    { n: "02", k: "Mobile applications", v: "iOS, Android, React Native — built around a single gesture.", tags: ["Swift", "Kotlin", "RN"] },
+    { n: "03", k: "AI & automation", v: "Agents, internal tooling, pipelines that retire manual work.", tags: ["LLM", "n8n", "Zap"] },
+    { n: "04", k: "Brand & motion", v: "Identity systems, motion direction, type & art direction.", tags: ["Figma", "After FX", "R3F"] },
+  ];
+
   return (
     <section className="relative overflow-hidden bg-chalk px-6 py-32 text-bone md:px-10 md:py-40">
-      <div className="mx-auto max-w-7xl">
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/50">[ 05 ] Capabilities</p>
+      {/* aurora blobs */}
+      <div
+        className="pointer-events-none absolute -left-40 top-40 h-[520px] w-[520px] rounded-full opacity-20 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.7), transparent 70%)" }}
+      />
+      <div
+        className="pointer-events-none absolute -right-40 bottom-20 h-[420px] w-[420px] rounded-full opacity-15 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, oklch(0.95 0.12 85 / 0.6), transparent 70%)" }}
+      />
+
+      <div className="relative mx-auto max-w-7xl">
+        <div className="flex items-end justify-between gap-6">
+          <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/50">[ 05 ] Capabilities</p>
+          <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-bone/40 md:block">
+            04 disciplines · 01 studio
+          </p>
+        </div>
+
         <h2
           className="display mt-8 max-w-[16ch] text-5xl text-bone md:text-[6rem]"
           style={{ letterSpacing: "-0.05em", lineHeight: "1" }}
         >
           One studio.<br />
-          <span style={{
-            background: "linear-gradient(95deg, oklch(0.55 0.18 35), oklch(0.74 0.17 55))",
-            WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent",
-          }}>Four disciplines.</span>
+          <span
+            style={{
+              background: "linear-gradient(95deg, oklch(0.55 0.18 35), oklch(0.74 0.17 55))",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            Four disciplines.
+          </span>
         </h2>
 
-        <ul className="mt-16 divide-y divide-bone/10 border-y border-bone/10">
-          {[
-            { n: "01", k: "Web design & development", v: "Editorial sites, e-commerce, headless CMS, WebGL." },
-            { n: "02", k: "Mobile applications", v: "iOS, Android, React Native — built around a single gesture." },
-            { n: "03", k: "AI & automation", v: "Agents, internal tooling, pipelines that retire manual work." },
-            { n: "04", k: "Brand & motion", v: "Identity systems, motion direction, type & art direction." },
-          ].map((s, i) => (
-            <li key={s.n} className="group/row grid grid-cols-12 items-center gap-4 py-7 transition-colors hover:bg-ink/[0.04]">
-              <span className="mono col-span-2 text-[10px] uppercase tracking-[0.25em] text-bone/50 md:col-span-1">
+        <ul className="mt-16 border-y border-bone/10">
+          {disciplines.map((s, i) => (
+            <motion.li
+              key={s.n}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -60 : 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.9, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="group/row relative grid grid-cols-12 items-center gap-4 border-b border-bone/10 py-8 last:border-b-0 md:py-10"
+            >
+              {/* ember wash on hover */}
+              <div
+                className="pointer-events-none absolute inset-0 origin-left scale-x-0 bg-ink transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/row:scale-x-100"
+                aria-hidden
+              />
+              <span className="mono relative col-span-2 text-[10px] uppercase tracking-[0.25em] text-bone/50 transition-colors duration-500 group-hover/row:text-ember md:col-span-1">
                 {s.n}
               </span>
               <h3
-                className="display col-span-10 text-3xl text-bone md:col-span-6 md:text-5xl"
-                style={{ letterSpacing: "-0.04em" }}
+                className="display relative col-span-10 text-3xl text-bone transition-colors duration-500 group-hover/row:text-chalk md:col-span-6 md:text-5xl lg:text-6xl"
+                style={{ letterSpacing: "-0.045em" }}
               >
-                {s.k}
+                <span className="inline-block transition-transform duration-500 group-hover/row:translate-x-2">
+                  {s.k}
+                </span>
               </h3>
-              <p className="col-span-12 text-sm text-bone/60 md:col-span-4 md:text-right">
-                {s.v}
-              </p>
-              <span className="mono col-span-12 text-[10px] uppercase tracking-[0.25em] text-bone/40 md:col-span-1 md:text-right">
-                →
+              <div className="relative col-span-12 flex flex-wrap gap-2 md:col-span-4 md:justify-end">
+                {s.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="mono rounded-full border border-bone/15 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-bone/55 transition-colors duration-500 group-hover/row:border-chalk/25 group-hover/row:text-chalk/70"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <span className="mono relative col-span-12 flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-bone/40 transition-colors duration-500 group-hover/row:text-ember md:col-span-1 md:justify-end">
+                <span className="inline-block transition-transform duration-500 group-hover/row:translate-x-1">→</span>
               </span>
-              {/* unused index to silence lint */}
-              <span className="hidden" aria-hidden>{i}</span>
-            </li>
+
+              {/* corner index sticker (2026 filmstrip vibe) */}
+              <span
+                className="mono pointer-events-none absolute right-0 top-2 hidden text-[9px] uppercase tracking-[0.3em] text-bone/25 transition-colors duration-500 group-hover/row:text-chalk/40 md:block"
+                aria-hidden
+              >
+                · {String(i + 1).padStart(2, "0")} of 04
+              </span>
+            </motion.li>
           ))}
         </ul>
       </div>
