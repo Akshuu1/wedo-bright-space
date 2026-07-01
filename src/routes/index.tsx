@@ -29,7 +29,7 @@ function Home() {
     <main className="relative bg-ink">
       <Hero />
       <KeyFacts />
-      <Marquee items={["Impact", "Inspire", "Innovate", "Iterate"]} />
+      <Marquee items={["Impact", "Inspire", "Innovate", "Iterate"]} variant="ember" />
       <Manifest />
       <CasesScroll />
       <LightInversion />
