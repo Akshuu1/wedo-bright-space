@@ -1,9 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { SectionLabel } from "@/components/site/SectionLabel";
-import { Reveal } from "@/components/site/Reveal";
-import { SplitPin } from "@/components/site/SplitPin";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import wedoLogo from "@/assets/wedo-logo.png.asset.json";
-
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -17,6 +15,13 @@ export const Route = createFileRoute("/about")({
   component: About,
 });
 
+const capabilities = [
+  { n: "01", t: "Websites", d: "Editorial, kinetic, performance-first. From founder pages to full commerce systems.", tags: ["Design", "Build", "Motion"] },
+  { n: "02", t: "Mobile Apps", d: "Native iOS + Android and cross-platform. Shipped in weeks, not quarters.", tags: ["iOS", "Android", "React Native"] },
+  { n: "03", t: "Automation", d: "AI-powered internal tools that quietly remove hours from the week.", tags: ["AI", "Ops", "Integrations"] },
+  { n: "04", t: "Product", d: "From napkin to launch. Strategy, prototype, MVP — always with a working demo first.", tags: ["Strategy", "MVP", "Design"] },
+];
+
 const principles = [
   ["Ship the demo.", "Working software beats the deck."],
   ["Subtract first.", "Every feature has a tax. Most fail the audit."],
@@ -24,137 +29,241 @@ const principles = [
   ["Outlive the brief.", "Build for the team that takes it over."],
 ];
 
+const stats = [
+  { k: "48", u: "projects shipped" },
+  { k: "12", u: "countries served" },
+  { k: "14d", u: "median first release" },
+  { k: "96%", u: "founder retention" },
+];
+
 function About() {
   return (
-    <main className="bg-ink">
-      {/* Intro */}
-      <section className="px-6 pb-20 pt-40 md:px-12">
-        <div className="mx-auto max-w-7xl">
-          <SectionLabel index="01" label="about / studio" />
-          <h1
-            className="display mt-10 text-bone"
-            style={{ fontSize: "clamp(3.5rem, 12vw, 14rem)", lineHeight: 0.88 }}
-          >
-            A small studio
-            <br />
-            <span className="text-bone/40">with a long memory.</span>
-          </h1>
+    <main className="bg-ink text-bone">
+      <Hero />
+      <Manifesto />
+      <Capabilities />
+      <StatsStrip />
+      <Principles />
+      <TailCTA />
+    </main>
+  );
+}
 
+/* ------------------------------ HERO ------------------------------ */
+function Hero() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const o = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
+  const logoRot = useTransform(scrollYProgress, [0, 1], [0, 90]);
 
-          <div className="mt-24 grid gap-16 md:grid-cols-12">
-            <div className="md:col-span-5">
-              <Reveal>
-                <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">
-                  [ Manifesto ]
-                </p>
-              </Reveal>
-            </div>
-            <div className="md:col-span-7 space-y-6 text-lg text-bone/80 md:text-2xl">
-              <Reveal>
-                <p>
-                  WeDo helps businesses grow through technology — websites, mobile applications,
-                  and intelligent automations that simplify operations.
-                </p>
-              </Reveal>
-              <Reveal delay={0.1}>
-                <p>
-                  We're not a generalist agency and we're not freelancers. We're a tight crew
-                  that scopes ruthlessly, designs with conviction, and ships in two-week scenes.
-                </p>
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Capabilities — Trionn split-pin */}
-      <SplitPin
-        label="◆ OUR CAPABILITIES"
-        caption="✦ DIFFERENT DISCIPLINES. ONE STANDARD OF CRAFT."
-        centerpiece={
-          <div className="relative flex h-[70vh] w-[70vh] max-h-[80vw] max-w-[80vw] items-center justify-center">
-            {/* aurora glow */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(closest-side, rgba(255,74,28,0.45), transparent 60%), radial-gradient(closest-side at 70% 30%, rgba(246,234,58,0.35), transparent 65%)",
-                filter: "blur(40px)",
-              }}
-            />
-            {/* orbiting ring */}
-            <div
-              className="absolute inset-8 rounded-full border border-bone/30"
-              style={{ animation: "drift 14s ease-in-out infinite" }}
-            />
-            <div
-              className="absolute inset-24 rounded-full border border-bone/15"
-              style={{ animation: "drift 18s ease-in-out infinite reverse" }}
-            />
-            {/* logo */}
-            <img
-              src={wedoLogo.url}
-              alt="WeDo mark"
-              className="relative w-[55%] max-w-[420px] drop-shadow-[0_10px_40px_rgba(255,74,28,0.35)]"
-              style={{ animation: "orb-float 9s ease-in-out infinite" }}
-            />
-          </div>
-        }
-
-        panels={[
-          {
-            side: "left",
-            eyebrow: "[ 01 ] AI & Automation",
-            title: "Intelligent\nAutomation",
-            body: "AI-powered pipelines that enhance products, automate workflows, and unlock smarter digital experiences.",
-          },
-          {
-            side: "right",
-            eyebrow: "[ 02 ] Web Design",
-            title: "Website &\nMobile Design",
-            body: "High-quality web and app experiences designed to attract users and keep them coming back.",
-          },
-          {
-            side: "left",
-            eyebrow: "[ 03 ] Engineering",
-            title: "Web\nDevelopment",
-            body: "Custom web development delivered with a product-focused, design-conscious approach.",
-          },
-          {
-            side: "right",
-            eyebrow: "[ 04 ] CMS",
-            title: "WordPress\n& Headless",
-            body: "Performance-first builds focused on clarity and experiences that convert visitors into loyal users.",
-          },
-        ]}
+  return (
+    <section ref={ref} className="relative flex min-h-screen flex-col justify-between overflow-hidden px-6 pb-10 pt-32 md:px-12 md:pt-40">
+      {/* aurora */}
+      <div
+        className="pointer-events-none absolute -top-40 left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.55), transparent 70%)" }}
+      />
+      {/* orbiting logo */}
+      <motion.img
+        src={wedoLogo.url}
+        alt=""
+        aria-hidden
+        style={{ rotate: logoRot }}
+        className="pointer-events-none absolute right-[-6rem] top-24 hidden h-[420px] w-[420px] opacity-[0.08] md:block"
       />
 
-      {/* Principles — light invert */}
-      <section className="bg-chalk px-6 py-32 text-bone md:px-12">
-        <div className="mx-auto max-w-7xl">
-          <SectionLabel index="03" label="principles" />
-          <ul className="mt-12">
-            {principles.map(([t, d], i) => (
-              <li key={t} className="border-t border-bone/15">
-                <Reveal delay={i * 0.05}>
-                  <div className="grid items-baseline gap-6 py-10 md:grid-cols-12">
-                    <span className="mono col-span-1 text-[10px] uppercase tracking-widest text-ember">
-                      [ {String(i).padStart(2, "0")} ]
-                    </span>
-                    <h3
-                      className="display col-span-5 text-bone"
-                      style={{ fontSize: "clamp(2rem, 4vw, 4rem)", lineHeight: 0.95 }}
-                    >
-                      {t}
-                    </h3>
-                    <p className="col-span-6 text-bone/60 md:text-lg">{d}</p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
+      <div className="flex items-start justify-between">
+        <p className="mono text-[10px] uppercase tracking-[0.32em] text-ember">[ 01 / studio ]</p>
+        <p className="mono max-w-[16ch] text-right text-[10px] uppercase tracking-[0.28em] text-bone/45">
+          founded 2022 · remote · GMT ± 6
+        </p>
+      </div>
+
+      <motion.div style={{ y, opacity: o }}>
+        <h1 className="display leading-[0.82] tracking-[-0.06em]" style={{ fontSize: "clamp(4rem, 16vw, 20rem)" }}>
+          A small studio<br />
+          <span className="text-bone/40">with a </span>
+          <span className="text-gradient">long memory.</span>
+        </h1>
+        <p className="mono mt-6 max-w-md text-[11px] uppercase tracking-[0.24em] text-bone/55">
+          We design, build and automate for founders who care about the details —
+          <span className="text-bone"> and the shipping date.</span>
+        </p>
+      </motion.div>
+
+      <div className="flex items-end justify-between border-t border-bone/10 pt-5">
+        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">scroll ↓ manifesto</p>
+        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">wedo · studio ® mmxxvi</p>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------- MANIFESTO ---------------------------- */
+function Manifesto() {
+  const words = "We help ambitious teams turn ideas into working software — websites that feel like film openings, mobile apps that respect the thumb, and quiet automations that give hours back.".split(" ");
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.4"] });
+
+  return (
+    <section ref={ref} className="relative border-t border-bone/10 px-6 py-32 md:px-12 md:py-48">
+      <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-12">
+        <div className="md:col-span-3">
+          <p className="mono text-[10px] uppercase tracking-[0.32em] text-ember">[ manifesto ]</p>
+          <p className="mono mt-3 text-[10px] uppercase tracking-[0.28em] text-bone/40">— read slowly.</p>
         </div>
-      </section>
-    </main>
+        <p className="display md:col-span-9" style={{ fontSize: "clamp(1.8rem, 4vw, 3.6rem)", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+          {words.map((w, i) => {
+            const start = i / words.length;
+            const end = start + 1 / words.length;
+            const Word = () => {
+              const opacity = useTransform(scrollYProgress, [start, end], [0.15, 1]);
+              return (
+                <motion.span style={{ opacity }} className="mr-[0.25em] inline-block">
+                  {w}
+                </motion.span>
+              );
+            };
+            return <Word key={i} />;
+          })}
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------- CAPABILITIES -------------------------- */
+function Capabilities() {
+  return (
+    <section className="relative border-t border-bone/10 px-6 py-24 md:px-12 md:py-32">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-12 flex items-end justify-between">
+          <div>
+            <p className="mono text-[10px] uppercase tracking-[0.32em] text-ember">[ 02 / capabilities ]</p>
+            <h2 className="display mt-4" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>
+              What we <span className="text-bone/40">do.</span>
+            </h2>
+          </div>
+          <p className="mono hidden max-w-[22ch] text-right text-[10px] uppercase tracking-[0.28em] text-bone/45 md:block">
+            four disciplines · one standard of craft
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {capabilities.map((c, i) => (
+            <motion.div
+              key={c.n}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative overflow-hidden rounded-3xl border border-bone/10 bg-bone/[0.02] p-8 transition hover:border-ember/60 md:p-10"
+            >
+              <div
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                style={{ background: "radial-gradient(600px circle at var(--x,50%) var(--y,50%), oklch(0.74 0.17 55 / 0.18), transparent 60%)" }}
+              />
+              <div className="mono flex items-baseline justify-between text-[10px] uppercase tracking-[0.32em] text-bone/50">
+                <span>[ {c.n} ]</span>
+                <span className="text-ember">→</span>
+              </div>
+              <h3 className="display mt-6 transition-colors group-hover:text-ember" style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}>
+                {c.t}
+              </h3>
+              <p className="mt-4 max-w-md text-bone/70">{c.d}</p>
+              <div className="mono mt-8 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.24em] text-bone/50">
+                {c.tags.map((t) => (
+                  <span key={t} className="rounded-full border border-bone/15 px-3 py-1">{t}</span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------------------- STATS ------------------------------ */
+function StatsStrip() {
+  return (
+    <section className="border-y border-bone/10 bg-ink px-6 py-16 md:px-12 md:py-20">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 md:grid-cols-4">
+        {stats.map((s, i) => (
+          <motion.div
+            key={s.k}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="display text-gradient" style={{ fontSize: "clamp(3rem, 7vw, 6rem)", letterSpacing: "-0.05em", lineHeight: 1 }}>
+              {s.k}
+            </p>
+            <p className="mono mt-2 text-[10px] uppercase tracking-[0.28em] text-bone/50">{s.u}</p>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------- PRINCIPLES --------------------------- */
+function Principles() {
+  return (
+    <section className="relative px-6 py-24 md:px-12 md:py-32">
+      <div className="mx-auto max-w-7xl">
+        <p className="mono text-[10px] uppercase tracking-[0.32em] text-ember">[ 03 / principles ]</p>
+        <h2 className="display mt-4" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>
+          How we <span className="text-bone/40">work.</span>
+        </h2>
+
+        <ul className="mt-14 border-t border-bone/15">
+          {principles.map(([t, d], i) => (
+            <li key={t} className="border-b border-bone/15">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                className="group grid items-baseline gap-6 py-8 md:grid-cols-12 md:py-12"
+              >
+                <span className="mono col-span-2 text-[10px] uppercase tracking-widest text-ember">
+                  [ {String(i).padStart(2, "0")} ]
+                </span>
+                <h3 className="display col-span-5 transition-transform group-hover:translate-x-2" style={{ fontSize: "clamp(1.8rem, 4vw, 3.5rem)", lineHeight: 0.95, letterSpacing: "-0.03em" }}>
+                  {t}
+                </h3>
+                <p className="col-span-5 text-bone/60 md:text-lg">{d}</p>
+              </motion.div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------------------- TAIL CTA ---------------------------- */
+function TailCTA() {
+  return (
+    <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden px-6 py-24 text-center">
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.6), transparent 70%)" }}
+      />
+      <div className="relative">
+        <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">[ next ]</p>
+        <Link
+          to="/work"
+          className="display mt-6 block hover:text-ember"
+          style={{ fontSize: "clamp(2.5rem, 9vw, 9rem)", letterSpacing: "-0.05em", lineHeight: 0.9 }}
+          data-cursor="view"
+        >
+          See the <span className="text-gradient">work →</span>
+        </Link>
+      </div>
+    </section>
   );
 }
