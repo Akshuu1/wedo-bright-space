@@ -114,7 +114,7 @@ export function Loader() {
 
     let raf = 0;
     const start = performance.now();
-    const DURATION = mobile ? 2200 : 2600;
+    const DURATION = mobile ? 1200 : 1400;
     const ease = (p: number) => (p === 1 ? 1 : 1 - Math.pow(2, -10 * p));
 
     const tick = (t: number) => {
