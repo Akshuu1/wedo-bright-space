@@ -396,30 +396,58 @@ function LightInversion() {
 
 function ContactStrip() {
   return (
-    <section className="relative overflow-hidden border-t border-bone/10 bg-ink px-6 py-32 md:px-10 md:py-40">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[120%] w-[200%] -translate-x-1/2 -translate-y-1/2 opacity-30"
-        style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.4), transparent 65%)" }}
+    <section className="relative overflow-hidden border-t border-bone/10 bg-ink px-6 py-24 md:px-10 md:py-36">
+      {/* soft ember glow */}
+      <div
+        className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.55), transparent 70%)" }}
       />
-      <div className="relative mx-auto max-w-7xl">
+      {/* index line */}
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between">
         <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">[ 06 ] Start a project</p>
-        <Magnetic strength={0.12}>
-          <Link
-            to="/contact"
-            className="display mt-8 block text-5xl text-bone transition-opacity hover:opacity-90 md:text-[9rem]"
-            style={{ letterSpacing: "-0.06em", lineHeight: "0.95" }}
-          >
-            hello@<span className="text-gradient">wedo</span>.studio →
-          </Link>
-        </Magnetic>
-        <div className="mt-12 flex flex-wrap items-end justify-between gap-6 border-t border-bone/10 pt-6">
-          <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
-            New projects · Q3 — Q4 2026
-          </p>
-          <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
-            Remote first · GMT ± 6
-          </p>
+        <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-bone/40 md:block">
+          ✦ available · booking Q3 — Q4 2026
+        </p>
+      </div>
+
+      {/* headline block — mobile safe */}
+      <div className="relative mx-auto mt-10 max-w-7xl">
+        <h2
+          className="display text-bone"
+          style={{ fontSize: "clamp(3rem, 12vw, 12rem)", letterSpacing: "-0.06em", lineHeight: 0.88 }}
+        >
+          Let&rsquo;s build
+          <br />
+          <span className="text-bone/35">something</span>
+          <br />
+          <span className="text-gradient">unforgettable.</span>
+        </h2>
+
+        <div className="mt-10 grid gap-8 border-t border-bone/10 pt-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+          <Magnetic strength={0.1}>
+            <Link
+              to="/contact"
+              className="group inline-flex items-center gap-4 rounded-full border border-bone/25 bg-bone/[0.03] px-6 py-4 text-bone backdrop-blur transition hover:border-ember hover:bg-ember hover:text-ink md:px-8 md:py-5"
+              data-cursor="view"
+            >
+              <span className="mono text-[10px] uppercase tracking-[0.3em]">hello@wedo.studio</span>
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-current transition group-hover:rotate-45">
+                →
+              </span>
+            </Link>
+          </Magnetic>
+
+          <div className="flex flex-col gap-1 text-right">
+            <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
+              New projects · Q3 — Q4 2026
+            </p>
+            <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
+              Remote first · GMT ± 6
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
