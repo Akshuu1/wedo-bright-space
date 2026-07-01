@@ -19,7 +19,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-bone/90">
             {[
               ["/", "Home"], ["/about", "About"], ["/work", "Work"],
-              ["/labs", "Labs"], ["/story", "Story"], ["/contact", "Contact"],
+              ["/story", "Story"], ["/contact", "Contact"],
             ].map(([to, label]) => (
               <li key={to}><Link to={to} className="hover:text-ember">{label}</Link></li>
             ))}

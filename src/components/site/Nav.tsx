@@ -5,7 +5,6 @@ const items = [
   { to: "/", label: "Home", zh: "首頁" },
   { to: "/about", label: "About", zh: "關於" },
   { to: "/work", label: "Work", zh: "作品" },
-  { to: "/labs", label: "Labs", zh: "實驗" },
   { to: "/story", label: "Story", zh: "故事" },
   { to: "/contact", label: "Contact", zh: "聯繫" },
 ] as const;
