@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { Reveal } from "@/components/site/Reveal";
 import { ProjectArt } from "@/components/site/ProjectArt";
-import { projects } from "@/lib/projects";
+import { projects, type Gallery, type Metric } from "@/lib/projects";
 
 export const Route = createFileRoute("/work/$slug")({
   loader: ({ params }) => {
@@ -163,7 +163,7 @@ function Case() {
               What we built
             </p>
             <div className="mt-8 flex flex-wrap gap-2">
-              {project.stack.map((s) => (
+              {project.stack.map((s: string) => (
                 <span key={s} className="mono border-2 border-bone bg-ink px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-bone">
                   {s}
                 </span>
@@ -199,7 +199,7 @@ function Case() {
             </p>
           </div>
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            {project.metrics.map((m, i) => (
+            {project.metrics.map((m: Metric, i: number) => (
               <motion.div
                 key={m.l}
                 initial={{ opacity: 0, y: 30 }}
@@ -240,7 +240,7 @@ function Case() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-6">
-            {project.gallery.map((g, i) => (
+            {project.gallery.map((g: Gallery, i: number) => (
               <Reveal
                 key={i}
                 delay={i * 0.08}
