@@ -1,152 +1,308 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import { useRef } from "react";
-import { SectionLabel } from "@/components/site/SectionLabel";
-import { ProjectArt } from "@/components/site/ProjectArt";
-import { projects } from "@/lib/projects";
 
 export const Route = createFileRoute("/story")({
   head: () => ({
     meta: [
-      { title: "Story — WeDo Studio" },
-      { name: "description", content: "WeDo's origin, told in five acts. Scroll for the picture." },
-      { property: "og:title", content: "The Story of WeDo" },
-      { property: "og:description", content: "Five acts. Scroll for the picture." },
+      { title: "Story — A WeDo Feature" },
+      { name: "description", content: "The WeDo story, told as a five-act feature. Scroll to play." },
+      { property: "og:title", content: "Story — A WeDo Feature" },
+      { property: "og:description", content: "Five acts. One studio. Scroll to play." },
     ],
   }),
   component: Story,
 });
 
-const scenes = [
-  { n: "01", k: "Discover", d: "Listen, audit, scope. Cut what won't ship." },
-  { n: "02", k: "Design", d: "Type, motion, surface. A single visual thesis." },
-  { n: "03", k: "Develop", d: "Real code from day one. No throwaway demos." },
-  { n: "04", k: "Automate", d: "Wire the boring parts to themselves." },
-  { n: "05", k: "Ship", d: "Soft launch, measure, sharpen. Then go loud." },
-];
-
-const credits = [
-  ["Strategy", "Roadmaps, audits, scope sculpting"],
-  ["Brand", "Identity, type, motion language"],
-  ["Web", "Marketing sites, commerce, headless CMS"],
-  ["Mobile", "iOS, Android, React Native"],
-  ["3D & WebGL", "Real-time scenes, scroll choreography"],
-  ["Automation", "Workflows, AI pipelines, internal tools"],
-  ["Payments", "Stripe, Adyen, regional gateways"],
-  ["Maintenance", "SLA support, performance, security"],
-];
+/* -----------------------------------------------------------------------
+   STORY — cinematic feature film treatment.
+   Letterbox bars, projector flicker, scanline, timecode HUD, filmstrip
+   horizontal scrub, and a rolling credits finale.
+------------------------------------------------------------------------ */
 
 function Story() {
+  const rootRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: rootRef, offset: ["start start", "end end"] });
+  const tc = useSpring(scrollYProgress, { stiffness: 90, damping: 20 });
+
   return (
-    <main className="pt-32">
-      {/* Act I — Cold Open */}
-      <section className="mx-auto flex min-h-[80vh] max-w-7xl flex-col justify-center px-6 md:px-10">
-        <SectionLabel index="I" label="Cold Open" />
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-          className="serif mt-12 max-w-5xl text-4xl leading-[1.1] text-bone md:text-7xl"
-        >
-          In 2024, a small team asked: <span className="text-bone/40">what if shipping software felt like making a film?</span>
-        </motion.h1>
-      </section>
+    <main ref={rootRef} className="relative bg-bone text-ink">
+      {/* Letterbox bars — always on top */}
+      <Letterbox />
+      {/* Projector flicker glow */}
+      <div
+        className="pointer-events-none fixed inset-0 z-[45] mix-blend-screen"
+        style={{
+          background: "radial-gradient(60% 40% at 50% 30%, rgba(255,74,28,0.14), transparent 70%)",
+          animation: "projector-flicker 4s infinite",
+        }}
+      />
+      {/* Scan line */}
+      <div
+        className="pointer-events-none fixed left-0 right-0 z-[46] h-[2px] bg-ember/60 blur-[1px]"
+        style={{ animation: "scan-line 6s linear infinite" }}
+      />
+      {/* Timecode HUD */}
+      <TimecodeHUD progress={tc} />
 
-      {/* Act II — The Crew */}
-      <CrewAct />
-
-      {/* Act III — The Craft (horizontal scroll) */}
-      <CraftAct />
-
-      {/* Act IV — The Work (parallax stack) */}
-      <WorkStack />
-
-      {/* Act V — The Promise (credits roll) */}
-      <section className="px-6 py-32 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <SectionLabel index="V" label="The Promise" />
-          <p className="serif mt-12 max-w-4xl text-4xl leading-[1.1] text-bone md:text-7xl">
-            We make products that ship on time and <span className="text-ember">outlive the brief.</span>
-          </p>
-
-          <div className="mt-24 grid gap-px bg-bone/10 md:grid-cols-2">
-            {credits.map(([k, v], i) => (
-              <motion.div
-                key={k}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.04 }}
-                className="flex items-baseline justify-between bg-ink p-6"
-              >
-                <span className="mono text-xs uppercase tracking-widest text-bone/40">{k}</span>
-                <span className="serif text-xl text-bone md:text-2xl">{v}</span>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-24 border-t border-bone/10 pt-12 text-center">
-            <p className="mono text-[10px] uppercase tracking-widest text-bone/40">[ End card ]</p>
-            <Link to="/contact" className="serif mt-6 inline-block text-5xl text-bone hover:text-ember md:text-9xl">
-              Roll credits →
-            </Link>
-          </div>
-        </div>
-      </section>
+      <ColdOpen />
+      <TickerBar />
+      <ActI />
+      <ActII />
+      <ActIII />
+      <ActIV />
+      <Credits />
     </main>
   );
 }
 
-function CrewAct() {
+/* ---------------- Letterbox ---------------- */
+function Letterbox() {
   return (
-    <section className="mx-auto grid max-w-7xl gap-12 px-6 py-32 md:grid-cols-2 md:px-10">
-      <SectionLabel index="II" label="The Crew" />
-      <div />
-      {[
-        { name: "Design Lead", line: "Type, color, restraint." },
-        { name: "Engineering Lead", line: "Performance budget, always." },
-        { name: "Motion Director", line: "Choreography between sections." },
-        { name: "Automations Lead", line: "Glue between every tool." },
-      ].map((p, i) => (
-        <motion.div
-          key={p.name}
-          initial={{ x: i % 2 ? 60 : -60, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          viewport={{ once: true, margin: "-15% 0px" }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="border-t border-bone/10 pt-6"
+    <>
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-[48] h-[8vh] bg-ink" />
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[48] h-[8vh] bg-ink" />
+    </>
+  );
+}
+
+/* ---------------- Timecode HUD ---------------- */
+function TimecodeHUD({ progress }: { progress: any }) {
+  const min = useTransform(progress, (v: number) => String(Math.floor(v * 8)).padStart(2, "0"));
+  const sec = useTransform(progress, (v: number) => String(Math.floor((v * 480) % 60)).padStart(2, "0"));
+  const fr = useTransform(progress, (v: number) => String(Math.floor((v * 12000) % 24)).padStart(2, "0"));
+
+  return (
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-[49] flex items-center justify-between px-6 pt-3 md:px-10">
+      <div className="mono flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-bone">
+        <span className="block h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.4s ease-in-out infinite" }} />
+        REC · WeDo/Feature/01
+      </div>
+      <div className="mono flex items-baseline gap-1 text-[10px] uppercase tracking-[0.3em] text-bone">
+        <span>TC</span>
+        <motion.span>{min}</motion.span>:<motion.span>{sec}</motion.span>:<motion.span>{fr}</motion.span>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- Cold Open ---------------- */
+function ColdOpen() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
+
+  return (
+    <section ref={ref} className="relative flex min-h-[110svh] w-full items-center justify-center overflow-hidden bg-ink text-bone">
+      {/* aurora backdrop */}
+      <div className="aurora absolute inset-0" />
+      {/* grid */}
+      <svg className="absolute inset-0 h-full w-full opacity-[0.08]" viewBox="0 0 100 100" preserveAspectRatio="none">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <line key={i} x1={i * 5} y1="0" x2={i * 5} y2="100" stroke="#f4f1ea" strokeWidth="0.05" />
+        ))}
+      </svg>
+
+      <motion.div style={{ y, scale, opacity }} className="relative z-10 mx-auto max-w-[1600px] px-6 text-center md:px-10">
+        <p className="mono text-[10px] uppercase tracking-[0.4em] text-ember">◉ A WeDo Studio Feature — MMXXVI</p>
+        <h1
+          className="display mt-8 text-bone"
+          style={{ fontSize: "clamp(3.5rem, 15vw, 15rem)", lineHeight: 0.82, letterSpacing: "-0.06em" }}
         >
-          <p className="mono text-[10px] uppercase tracking-widest text-ember">[ Cast {String(i + 1).padStart(2, "0")} ]</p>
-          <h3 className="serif mt-4 text-5xl text-bone md:text-7xl">{p.name}</h3>
-          <p className="mt-3 text-bone/60">{p.line}</p>
-        </motion.div>
-      ))}
+          THE <span className="text-outline" style={{ WebkitTextStrokeColor: "#f4f1ea" }}>MAKING</span>
+          <br />
+          OF <span className="text-gradient">WEDO</span>
+        </h1>
+        <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-bone/60 md:text-base">
+          Five acts. One small studio. Scroll to play the picture.
+        </p>
+      </motion.div>
+
+      {/* clapperboard corner */}
+      <div className="absolute bottom-16 left-6 z-10 md:left-10">
+        <div className="brut-box-accent bg-ink p-3 text-bone">
+          <p className="mono text-[9px] uppercase tracking-[0.3em] text-bone/50">SCENE 01 · TAKE 01</p>
+          <p className="mono text-[9px] uppercase tracking-[0.3em] text-ember">ROLL A · DIR. WEDO</p>
+        </div>
+      </div>
+      <div className="absolute bottom-16 right-6 z-10 mono text-right text-[9px] uppercase tracking-[0.3em] text-bone/50 md:right-10">
+        <p>Aspect · 2.39:1</p>
+        <p>Format · WEB/WEBGL</p>
+      </div>
     </section>
   );
 }
 
-function CraftAct() {
+/* ---------------- Ticker between scenes ---------------- */
+function TickerBar() {
+  const items = ["The Making of WeDo", "◉", "Directed by the studio", "◉", "Original score by the ship log", "◉", "Cast: designers, engineers, automators", "◉"];
+  return (
+    <div className="ticker-strip relative py-4">
+      <div className="marquee-track">
+        {[0, 1].map((k) => (
+          <div key={k} className="flex shrink-0 items-center gap-8 px-8">
+            {items.map((t, i) => (
+              <span key={i} className="display whitespace-nowrap text-2xl uppercase text-ink md:text-4xl">{t}</span>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- ACT I — The Question ---------------- */
+function ActI() {
+  return (
+    <section className="relative bg-bone px-6 py-40 text-ink md:px-10 md:py-56">
+      <div className="mx-auto max-w-[1500px]">
+        <SceneSlate act="I" title="The Question" runtime="00:14" />
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-20% 0px" }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="display mt-16 max-w-[18ch] text-ink"
+          style={{ fontSize: "clamp(2.5rem, 8vw, 8rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
+        >
+          In 2024 we asked: <span className="text-gradient">what if shipping software felt like making a film?</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="mt-16 max-w-xl border-l-2 border-ink pl-6 text-lg leading-relaxed text-ink/70"
+        >
+          Not the meetings. The <em>craft.</em> Storyboards. Rehearsals. A first act that
+          earns the second. A closing credit for every hand on set.
+        </motion.p>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- ACT II — The Crew (parallax portraits) ---------------- */
+function ActII() {
+  const crew = [
+    { role: "Direction", name: "Design Lead", line: "Type, colour, restraint.", accent: "#ff4a1c" },
+    { role: "Cinematography", name: "Motion Director", line: "Choreography between sections.", accent: "#f6ea3a" },
+    { role: "Sound", name: "Engineering Lead", line: "Performance budget, always.", accent: "#ff4a1c" },
+    { role: "Editing", name: "Automations Lead", line: "Glue between every tool.", accent: "#f6ea3a" },
+  ];
+  return (
+    <section className="relative overflow-hidden bg-ink px-6 py-40 text-bone md:px-10 md:py-56">
+      <div className="aurora absolute inset-0 opacity-40" />
+      <div className="relative mx-auto max-w-[1500px]">
+        <SceneSlate act="II" title="The Crew" runtime="02:41" dark />
+        <div className="mt-20 grid gap-6 md:grid-cols-2">
+          {crew.map((c, i) => (
+            <motion.article
+              key={c.name}
+              initial={{ opacity: 0, y: 80, rotate: i % 2 ? 1 : -1 }}
+              whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+              viewport={{ once: true, margin: "-15% 0px" }}
+              transition={{ duration: 1, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative overflow-hidden border-2 border-bone bg-ink p-8 md:p-10"
+              style={{ boxShadow: `10px 10px 0 0 ${c.accent}` }}
+            >
+              <div className="flex items-start justify-between">
+                <p className="mono text-[10px] uppercase tracking-[0.3em]" style={{ color: c.accent }}>
+                  [ Cast · {String(i + 1).padStart(2, "0")} ]
+                </p>
+                <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">{c.role}</p>
+              </div>
+              <h3
+                className="display mt-10 text-bone"
+                style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", lineHeight: 0.9, letterSpacing: "-0.04em" }}
+              >
+                {c.name}
+              </h3>
+              <p className="mt-4 text-bone/60">{c.line}</p>
+              {/* silhouette */}
+              <div
+                className="pointer-events-none absolute -bottom-6 -right-6 h-32 w-32 rounded-full opacity-80"
+                style={{ background: `radial-gradient(circle, ${c.accent}, transparent 70%)`, filter: "blur(20px)" }}
+              />
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- ACT III — Filmstrip (horizontal scrub) ---------------- */
+function ActIII() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["5%", "-82%"]);
+
+  const scenes = [
+    { n: "01", k: "Discover", d: "Listen, audit, scope. Cut what won't ship." },
+    { n: "02", k: "Design", d: "Type, motion, surface. A single visual thesis." },
+    { n: "03", k: "Develop", d: "Real code from day one. No throwaway demos." },
+    { n: "04", k: "Automate", d: "Wire the boring parts to themselves." },
+    { n: "05", k: "Ship", d: "Soft launch, measure, sharpen. Then go loud." },
+  ];
 
   return (
-    <section ref={ref} className="relative h-[400vh]">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <div className="absolute left-6 top-32 z-10 md:left-10">
-          <SectionLabel index="III" label="The Craft" />
+    <section ref={ref} className="relative h-[420vh] bg-bone text-ink">
+      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+        <div className="absolute left-6 top-[16vh] z-10 md:left-10">
+          <SceneSlate act="III" title="The Craft" runtime="07:12" />
         </div>
-        <motion.div style={{ x }} className="flex gap-8 pl-[10vw] pr-[10vw]">
-          {scenes.map((s) => (
-            <article key={s.n} className="flex h-[60vh] w-[80vw] flex-col justify-between border border-bone/10 bg-muted/30 p-10 md:w-[55vw]">
-              <div className="flex items-baseline justify-between">
-                <span className="mono text-xs uppercase tracking-widest text-ember">SCENE {s.n}</span>
-                <span className="mono text-xs uppercase tracking-widest text-bone/40">TAKE 01</span>
+
+        {/* film sprocket holes */}
+        <div className="pointer-events-none absolute inset-x-0 top-[24vh] flex justify-between px-6 md:px-10">
+          {Array.from({ length: 24 }).map((_, i) => (
+            <span key={i} className="block h-3 w-3 rounded-sm border border-ink/60 bg-ink/10" />
+          ))}
+        </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-[24vh] flex justify-between px-6 md:px-10">
+          {Array.from({ length: 24 }).map((_, i) => (
+            <span key={i} className="block h-3 w-3 rounded-sm border border-ink/60 bg-ink/10" />
+          ))}
+        </div>
+
+        <motion.div style={{ x }} className="flex gap-6 pl-[8vw] pr-[8vw]">
+          {scenes.map((s, i) => (
+            <article
+              key={s.n}
+              className="relative flex h-[58vh] w-[80vw] shrink-0 flex-col justify-between overflow-hidden border-2 border-ink bg-ink text-bone md:w-[55vw]"
+              style={{ boxShadow: "12px 12px 0 0 #ff4a1c" }}
+            >
+              {/* photo frame */}
+              <div className="absolute inset-0 opacity-90">
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: i % 2
+                      ? "linear-gradient(135deg, #050505 0%, #1a0a05 60%, #ff4a1c 130%)"
+                      : "linear-gradient(135deg, #050505 0%, #201a05 60%, #f6ea3a 140%)",
+                  }}
+                />
+                <div
+                  className="absolute inset-0 opacity-30 mix-blend-overlay"
+                  style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }}
+                />
               </div>
-              <div>
-                <h3 className="serif text-7xl leading-none text-bone md:text-[10rem]">{s.k}</h3>
-                <p className="mt-6 max-w-md text-bone/60">{s.d}</p>
+
+              <div className="relative flex items-baseline justify-between p-6">
+                <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">SCENE {s.n}</span>
+                <span className="mono text-[10px] uppercase tracking-[0.3em] text-bone/50">TAKE 0{i + 1}</span>
+              </div>
+
+              <div className="relative p-8 md:p-12">
+                <h3
+                  className="display text-bone"
+                  style={{ fontSize: "clamp(3rem, 10vw, 10rem)", lineHeight: 0.85, letterSpacing: "-0.05em" }}
+                >
+                  {s.k}.
+                </h3>
+                <p className="mt-6 max-w-md text-bone/70">{s.d}</p>
               </div>
             </article>
           ))}
@@ -156,25 +312,101 @@ function CraftAct() {
   );
 }
 
-function WorkStack() {
+/* ---------------- ACT IV — Intermission ---------------- */
+function ActIV() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-32 md:px-10">
-      <SectionLabel index="IV" label="The Work" />
-      <div className="mt-12 space-y-[-12vh]">
-        {projects.map((p, i) => (
-          <motion.div
-            key={p.slug}
-            initial={{ y: 80, opacity: 0, scale: 0.95 }}
-            whileInView={{ y: 0, opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-20% 0px" }}
-            transition={{ duration: 1, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-            style={{ marginLeft: `${i * 6}%`, width: `${100 - i * 12}%` }}
-            className="sticky top-32 overflow-hidden border border-bone/10"
-          >
-            <ProjectArt index={i} title={p.title} palette={p.palette} className="aspect-video w-full" />
-          </motion.div>
-        ))}
+    <section className="relative overflow-hidden bg-ember px-6 py-40 text-ink md:px-10 md:py-56">
+      <div className="mx-auto max-w-[1500px] text-center">
+        <p className="mono text-[10px] uppercase tracking-[0.4em] text-ink/70">◉ Intermission</p>
+        <motion.h2
+          initial={{ opacity: 0, letterSpacing: "0.2em" }}
+          whileInView={{ opacity: 1, letterSpacing: "-0.05em" }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+          className="display mt-8 text-ink"
+          style={{ fontSize: "clamp(4rem, 18vw, 20rem)", lineHeight: 0.85 }}
+        >
+          END OF <br />ACT III.
+        </motion.h2>
+        <p className="mono mt-10 text-[10px] uppercase tracking-[0.3em] text-ink/70">
+          Reload your popcorn. The picture continues below.
+        </p>
       </div>
     </section>
+  );
+}
+
+/* ---------------- Rolling Credits ---------------- */
+function Credits() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["25%", "-45%"]);
+
+  const roles = [
+    ["Directed by", "The WeDo Studio"],
+    ["Written by", "Clients who ship"],
+    ["Design", "Type · Colour · Motion"],
+    ["Engineering", "Web · Mobile · Edge"],
+    ["AI & Automation", "Agents · Pipelines · Tooling"],
+    ["Brand & Identity", "Systems that outlast briefs"],
+    ["3D & WebGL", "Real-time scenes"],
+    ["Payments", "Stripe · Adyen · Regional"],
+    ["Maintenance", "SLA · Perf · Security"],
+    ["Craft services", "Coffee, mostly"],
+    ["Original score", "The hum of the ship log"],
+    ["Made in", "MMXXVI · Remote · GMT ± 6"],
+  ];
+
+  return (
+    <section ref={ref} className="relative min-h-[140vh] overflow-hidden bg-ink text-bone">
+      <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
+        <p className="mono absolute top-24 text-[10px] uppercase tracking-[0.4em] text-ember">
+          ◉ ACT V · Roll credits
+        </p>
+
+        <motion.div style={{ y }} className="w-full max-w-3xl px-6 text-center">
+          <h2
+            className="display text-bone"
+            style={{ fontSize: "clamp(3rem, 10vw, 10rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
+          >
+            The Making <br />of <span className="text-gradient">WeDo</span>
+          </h2>
+          <p className="mono mt-8 text-[10px] uppercase tracking-[0.3em] text-bone/50">
+            A picture in perpetual production
+          </p>
+          <div className="mt-16 space-y-8">
+            {roles.map(([k, v]) => (
+              <div key={k} className="grid grid-cols-2 items-baseline gap-6">
+                <p className="mono text-right text-[11px] uppercase tracking-[0.25em] text-bone/50">{k}</p>
+                <p className="text-left text-lg text-bone md:text-2xl">{v}</p>
+              </div>
+            ))}
+            <div className="pt-12">
+              <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">[ End card ]</p>
+              <Link
+                to="/contact"
+                className="display mt-6 inline-block text-bone hover:text-gradient"
+                style={{ fontSize: "clamp(2.5rem, 8vw, 7rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
+              >
+                Roll credits →
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Scene Slate ---------------- */
+function SceneSlate({ act, title, runtime, dark = false }: { act: string; title: string; runtime: string; dark?: boolean }) {
+  return (
+    <div className={`inline-flex items-center gap-3 border-2 px-4 py-2 ${dark ? "border-bone text-bone" : "border-ink text-ink"}`}>
+      <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">ACT {act}</span>
+      <span className={`h-3 w-px ${dark ? "bg-bone/40" : "bg-ink/40"}`} />
+      <span className="mono text-[10px] uppercase tracking-[0.3em]">{title}</span>
+      <span className={`h-3 w-px ${dark ? "bg-bone/40" : "bg-ink/40"}`} />
+      <span className="mono text-[10px] uppercase tracking-[0.3em] opacity-60">RT {runtime}</span>
+    </div>
   );
 }
