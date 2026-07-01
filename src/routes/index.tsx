@@ -131,8 +131,8 @@ function Hero() {
           </Magnetic>
 
           <p className="max-w-sm text-sm leading-relaxed text-[#f4f1ea]/55 md:text-right">
-            A creative digital studio building high-performance websites, AI-powered products and
-            experiences that turn visitors into customers.
+            A creative digital studio building high-performance websites, AI-powered products and experiences that turn
+            visitors into customers.
           </p>
         </div>
       </motion.div>
@@ -140,7 +140,9 @@ function Hero() {
       {/* centered scroll cue */}
       <div className="pointer-events-none absolute inset-x-0 bottom-6 z-[2] flex flex-col items-center gap-2 md:bottom-8">
         <span className="mono text-[10px] uppercase tracking-[0.4em] text-[#f4f1ea]/50">Scroll</span>
-        <span className="text-[#f4f1ea]/40" style={{ animation: "blink 1.8s ease-in-out infinite" }}>↓</span>
+        <span className="text-[#f4f1ea]/40" style={{ animation: "blink 1.8s ease-in-out infinite" }}>
+          ↓
+        </span>
       </div>
     </section>
   );
@@ -524,7 +526,7 @@ function ContactStrip() {
               className="group inline-flex items-center gap-4 rounded-full border border-bone/25 bg-bone/[0.03] px-6 py-4 text-bone backdrop-blur transition hover:border-ember hover:bg-ember hover:text-ink md:px-8 md:py-5"
               data-cursor="view"
             >
-              <span className="mono text-[10px] uppercase tracking-[0.3em]">hello@wedo.studio</span>
+              <span className="mono text-[10px] uppercase tracking-[0.3em]">team.wedo06@gmail.com"</span>
               <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-current transition group-hover:rotate-45">
                 →
               </span>

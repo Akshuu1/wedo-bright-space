@@ -7,7 +7,10 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — WeDo Studio" },
-      { name: "description", content: "Start a project with WeDo. Tell us about your idea and we'll reply within one working day." },
+      {
+        name: "description",
+        content: "Start a project with WeDo. Tell us about your idea and we'll reply within one working day.",
+      },
       { property: "og:title", content: "Contact — WeDo Studio" },
       { property: "og:description", content: "Start a project with WeDo." },
       { property: "og:url", content: "/contact" },
@@ -16,7 +19,12 @@ export const Route = createFileRoute("/contact")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({ "@context": "https://schema.org", "@type": "ContactPage", name: "Contact — WeDo Studio", url: "/contact" }),
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          name: "Contact — WeDo Studio",
+          url: "/contact",
+        }),
       },
     ],
   }),
@@ -47,7 +55,9 @@ function Hero() {
   useEffect(() => {
     const tick = () => {
       const d = new Date();
-      setClock(`${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}:${String(d.getSeconds()).padStart(2, "0")}`);
+      setClock(
+        `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}:${String(d.getSeconds()).padStart(2, "0")}`,
+      );
     };
     tick();
     const id = setInterval(tick, 1000);
@@ -55,7 +65,10 @@ function Hero() {
   }, []);
 
   return (
-    <section ref={ref} className="relative flex min-h-screen flex-col justify-between overflow-hidden px-6 pb-10 pt-32 md:px-12 md:pt-40">
+    <section
+      ref={ref}
+      className="relative flex min-h-screen flex-col justify-between overflow-hidden px-6 pb-10 pt-32 md:px-12 md:pt-40"
+    >
       <div
         className="pointer-events-none absolute -top-40 left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
         style={{ background: "radial-gradient(closest-side, #ff4a1c, transparent 70%)" }}
@@ -76,9 +89,7 @@ function Hero() {
             ⏵ inbox open · replies &lt; 24h
           </span>
         </div>
-        <span className="mono tabular-nums text-[10px] uppercase tracking-[0.28em] text-bone/60">
-          local · {clock}
-        </span>
+        <span className="mono tabular-nums text-[10px] uppercase tracking-[0.28em] text-bone/60">local · {clock}</span>
       </div>
 
       <motion.div style={{ y }} className="relative z-10">
@@ -95,7 +106,7 @@ function Hero() {
         </p>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
-          <ContactLine label="Email" href="mailto:hello@wedo.studio" value="hello@wedo.studio" accent />
+          <ContactLine label="Email" href="mailto:team.wedo06@gmail.com" value="team.wedo06@gmail.com" accent />
           <ContactLine label="Phone" href="tel:+10000000000" value="+1 000 000 0000" />
           <ContactLine label="Studio" value="Remote · Worldwide" sub="Mon — Fri · 9 to 7 GMT" />
         </div>
@@ -109,7 +120,19 @@ function Hero() {
   );
 }
 
-function ContactLine({ label, href, value, sub, accent }: { label: string; href?: string; value: string; sub?: string; accent?: boolean }) {
+function ContactLine({
+  label,
+  href,
+  value,
+  sub,
+  accent,
+}: {
+  label: string;
+  href?: string;
+  value: string;
+  sub?: string;
+  accent?: boolean;
+}) {
   const inner = (
     <>
       <div className="mono flex items-center justify-between text-[10px] uppercase tracking-[0.32em] text-bone/60">
@@ -123,12 +146,25 @@ function ContactLine({ label, href, value, sub, accent }: { label: string; href?
   const cls = `group block border-2 border-bone bg-ink p-5 transition hover:-translate-y-1 md:p-6 ${
     accent ? "hover:shadow-[8px_8px_0_0_#ff4a1c]" : "hover:shadow-[8px_8px_0_0_#f6ea3a]"
   }`;
-  return href ? <a href={href} className={cls}>{inner}</a> : <div className={cls}>{inner}</div>;
+  return href ? (
+    <a href={href} className={cls}>
+      {inner}
+    </a>
+  ) : (
+    <div className={cls}>{inner}</div>
+  );
 }
 
 /* ------------------------------ TICKER ------------------------------ */
 function TickerStrip() {
-  const items = ["◐ Replies within 24h", "✦ NDA on request", "✧ Kickoff · avg 8 days", "★ Founder-first", "✦ Remote-native", "◇ Fair, honest scopes"];
+  const items = [
+    "◐ Replies within 24h",
+    "✦ NDA on request",
+    "✧ Kickoff · avg 8 days",
+    "★ Founder-first",
+    "✦ Remote-native",
+    "◇ Fair, honest scopes",
+  ];
   const doubled = [...items, ...items];
   return (
     <div className="ticker-strip">
@@ -155,7 +191,10 @@ function FormSection() {
       <div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-12">
         <aside className="md:col-span-4">
           <span className="pill-solid mb-6">✎ The brief</span>
-          <h2 className="display mt-4" style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", letterSpacing: "-0.03em", lineHeight: 0.95 }}>
+          <h2
+            className="display mt-4"
+            style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", letterSpacing: "-0.03em", lineHeight: 0.95 }}
+          >
             Tell us about
             <br />
             <span className="text-gradient">the project.</span>
@@ -164,9 +203,15 @@ function FormSection() {
             The more you share, the sharper our first reply. We read every brief personally — usually the same day.
           </p>
           <ul className="mono mt-10 space-y-3 border-t-2 border-bone pt-6 text-[10px] uppercase tracking-[0.28em] text-bone/60">
-            <li className="flex items-center gap-3"><span className="text-ember">✦</span> new projects · Q3 — Q4 2026</li>
-            <li className="flex items-center gap-3"><span className="text-ember">✦</span> average kickoff · 8 days</li>
-            <li className="flex items-center gap-3"><span className="text-ember">✦</span> NDA on request</li>
+            <li className="flex items-center gap-3">
+              <span className="text-ember">✦</span> new projects · Q3 — Q4 2026
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="text-ember">✦</span> average kickoff · 8 days
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="text-ember">✦</span> NDA on request
+            </li>
           </ul>
 
           <div className="mt-10 hidden h-32 w-32 rotate-[-6deg] md:block">
@@ -252,9 +297,7 @@ function FormSection() {
             <span className="mono text-[11px] uppercase tracking-[0.3em]">
               {sending ? "Sending…" : "✦ Send the brief"}
             </span>
-            <span className="display text-2xl transition-transform group-hover:translate-x-2 md:text-4xl">
-              →
-            </span>
+            <span className="display text-2xl transition-transform group-hover:translate-x-2 md:text-4xl">→</span>
           </button>
         </form>
       </div>
@@ -271,7 +314,19 @@ function FieldLabel({ n, t, className = "" }: { n: string; t: string; className?
   );
 }
 
-function TextField({ n, name, label, placeholder, type = "text" }: { n: string; name: string; label: string; placeholder: string; type?: string }) {
+function TextField({
+  n,
+  name,
+  label,
+  placeholder,
+  type = "text",
+}: {
+  n: string;
+  name: string;
+  label: string;
+  placeholder: string;
+  type?: string;
+}) {
   return (
     <label className="block">
       <FieldLabel n={n} t={label} />
