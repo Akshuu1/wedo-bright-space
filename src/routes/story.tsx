@@ -101,12 +101,13 @@ function ColdOpen() {
           className="display mt-8 text-ink"
           style={{ fontSize: "clamp(2.75rem, 12vw, 12rem)", lineHeight: 0.85, letterSpacing: "-0.05em" }}
         >
-          THE <span className="text-outline" style={{ WebkitTextStrokeColor: "#f4f1ea" }}>MAKING</span>
+          EVERY GREAT <span className="text-outline" style={{ WebkitTextStrokeColor: "#f4f1ea" }}>PRODUCT</span>
           <br />
-          OF <span className="text-gradient">WEDO</span>
+          STARTS WITH A <span className="text-gradient">CONVERSATION</span>
         </h1>
         <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-ink/60 md:text-base">
-          Five acts. One small studio. Scroll to play the picture.
+          WeDo wasn&rsquo;t created to become another web agency. It started with one belief —
+          businesses deserve digital experiences that actually help them grow. Scroll to play.
         </p>
       </motion.div>
 
@@ -146,7 +147,7 @@ function ActI() {
   return (
     <section className="relative bg-ink px-6 py-40 text-bone md:px-10 md:py-56">
       <div className="mx-auto max-w-[1500px]">
-        <SceneSlate act="I" title="The Question" runtime="00:14" dark={false} />
+        <SceneSlate act="I" title="The Belief" runtime="00:14" dark={false} />
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -155,7 +156,7 @@ function ActI() {
           className="display mt-16 max-w-[18ch] text-bone"
           style={{ fontSize: "clamp(2.5rem, 8vw, 8rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
         >
-          In 2024 we asked: <span className="text-gradient">what if shipping software felt like making a film?</span>
+          Too many websites looked identical. <span className="text-gradient">So we decided to do things differently.</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -164,8 +165,9 @@ function ActI() {
           transition={{ duration: 1, delay: 0.4 }}
           className="mt-16 max-w-xl border-l-2 border-bone pl-6 text-lg leading-relaxed text-bone/70"
         >
-          Not the meetings. The <em>craft.</em> Storyboards. Rehearsals. A first act that
-          earns the second. A closing credit for every hand on set.
+          Too many brands were invisible. Too many businesses invested money without seeing results.
+          Every project starts by understanding people <em>before</em> writing code — because
+          technology alone doesn&rsquo;t create impact. Understanding does.
         </motion.p>
       </div>
     </section>
@@ -175,16 +177,16 @@ function ActI() {
 /* ---------------- ACT II — Dark cast ---------------- */
 function ActII() {
   const crew = [
-    { role: "Direction", name: "Design Lead", line: "Type, colour, restraint.", accent: "#ff4a1c" },
-    { role: "Cinematography", name: "Motion Director", line: "Choreography between sections.", accent: "#f6ea3a" },
-    { role: "Sound", name: "Engineering Lead", line: "Performance budget, always.", accent: "#ff4a1c" },
-    { role: "Editing", name: "Automations Lead", line: "Glue between every tool.", accent: "#f6ea3a" },
+    { role: "Attention", name: "Good design attracts.", line: "First impressions decide whether people stay.", accent: "#ff4a1c" },
+    { role: "Trust", name: "Great design builds.", line: "Trust is earned in typography, motion and pace.", accent: "#f6ea3a" },
+    { role: "Growth", name: "Experiences convert.", line: "Exceptional experiences turn visitors into customers.", accent: "#ff4a1c" },
+    { role: "Legacy", name: "Businesses remember.", line: "The best work outlasts the launch date.", accent: "#f6ea3a" },
   ];
   return (
     <section className="relative overflow-hidden bg-bone px-6 py-40 text-ink md:px-10 md:py-56">
       <div className="aurora absolute inset-0 opacity-40" />
       <div className="relative mx-auto max-w-[1500px]">
-        <SceneSlate act="II" title="The Crew" runtime="02:41" dark />
+        <SceneSlate act="II" title="What We Believe" runtime="02:41" dark />
         <div className="mt-20 grid gap-6 md:grid-cols-2">
           {crew.map((c, i) => (
             <motion.article
@@ -228,18 +230,18 @@ function ActIII() {
   const x = useTransform(scrollYProgress, [0, 1], ["5%", "-82%"]);
 
   const scenes = [
-    { n: "01", k: "Discover", d: "Listen, audit, scope. Cut what won't ship." },
-    { n: "02", k: "Design", d: "Type, motion, surface. A single visual thesis." },
-    { n: "03", k: "Develop", d: "Real code from day one. No throwaway demos." },
-    { n: "04", k: "Automate", d: "Wire the boring parts to themselves." },
-    { n: "05", k: "Ship", d: "Soft launch, measure, sharpen. Then go loud." },
+    { n: "01", k: "Discover", d: "Understanding your business, audience and goals." },
+    { n: "02", k: "Design", d: "Wireframes, visual identity and user experience." },
+    { n: "03", k: "Develop", d: "Responsive, scalable and optimised products." },
+    { n: "04", k: "Launch", d: "Testing, deploying and helping the business grow." },
+    { n: "05", k: "Evolve", d: "Measure, sharpen, iterate — long after go-live." },
   ];
 
   return (
     <section ref={ref} className="relative h-[420vh] bg-ink text-bone">
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
         <div className="absolute left-6 top-[16vh] z-10 md:left-10">
-          <SceneSlate act="III" title="The Craft" runtime="07:12" />
+          <SceneSlate act="III" title="The Process" runtime="07:12" />
         </div>
 
         <div className="pointer-events-none absolute inset-x-0 top-[22vh] flex justify-between px-6 md:px-10">
@@ -302,7 +304,7 @@ function ActIV() {
   return (
     <section className="relative overflow-hidden bg-ember px-6 py-40 text-bone md:px-10 md:py-56">
       <div className="mx-auto max-w-[1500px] text-center">
-        <p className="mono text-[10px] uppercase tracking-[0.4em] text-bone/70">◉ Intermission</p>
+        <p className="mono text-[10px] uppercase tracking-[0.4em] text-bone/70">◉ The Future</p>
         <motion.h2
           initial={{ opacity: 0, letterSpacing: "0.2em" }}
           whileInView={{ opacity: 1, letterSpacing: "-0.05em" }}
@@ -311,11 +313,11 @@ function ActIV() {
           className="display mt-8 text-bone"
           style={{ fontSize: "clamp(3rem, 10vw, 9rem)", lineHeight: 0.9 }}
         >
-          END OF <br />ACT III.
+          MORE THAN <br />WEBSITES.
         </motion.h2>
 
-        <p className="mono mt-10 text-[10px] uppercase tracking-[0.3em] text-bone/70">
-          Reload your popcorn. The picture continues below.
+        <p className="mono mt-10 max-w-xl mx-auto text-[10px] uppercase tracking-[0.3em] text-bone/70">
+          We&rsquo;re building intelligent digital products powered by AI, automation and thoughtful design. The future belongs to businesses that move fast — we&rsquo;re here to help them get there.
         </p>
       </div>
     </section>
