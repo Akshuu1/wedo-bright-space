@@ -127,23 +127,13 @@ function Hero() {
         className="pointer-events-none absolute right-[-6rem] top-24 hidden h-[420px] w-[420px] opacity-[0.08] md:block"
       />
 
-      {/* top HUD */}
+      {/* top HUD — minimal */}
       <div className="relative z-10 flex items-start justify-between">
-        <div className="flex items-center gap-3">
-          <span className="pill">
-            <span className="h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.6s infinite" }} />
-            Studio 01 · Live
-          </span>
-          <span className="mono hidden text-[10px] uppercase tracking-[0.28em] text-bone/45 md:inline">
-            ⏵ chapter · about
-          </span>
-        </div>
-        <div className="flex flex-col items-end gap-2">
-          <Timecode />
-          <span className="mono text-[10px] uppercase tracking-[0.28em] text-bone/45">
-            EST 2022 · Remote · GMT ± 6
-          </span>
-        </div>
+        <span className="pill">
+          <span className="h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.6s infinite" }} />
+          Studio · Live
+        </span>
+        <Timecode />
       </div>
 
       {/* headline */}
@@ -154,11 +144,11 @@ function Hero() {
           <br />
           <span className="text-outline">and code —</span>
           <br />
-          <span className="text-gradient">one seamless studio.</span>
+          <span className="text-gradient">one seamless studio</span>
         </h1>
         <p className="mono mt-6 max-w-md text-[11px] uppercase tracking-[0.24em] text-bone/55">
-          No unnecessary complexity. No bloated solutions.
-          <span className="text-bone"> Thoughtful digital products built for real people.</span>
+          No unnecessary complexity — no bloated solutions
+          <span className="text-bone"> · thoughtful digital products built for real people</span>
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2">
@@ -168,10 +158,10 @@ function Hero() {
         </div>
       </motion.div>
 
-      {/* bottom rail */}
-      <div className="relative z-10 flex items-end justify-between border-t-2 border-bone pt-5">
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/60">↓ scroll · manifesto</p>
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/60">wedo · studio ® mmxxvi</p>
+      {/* centered scroll cue */}
+      <div className="relative z-10 flex flex-col items-center gap-2 border-t-2 border-bone pt-5">
+        <p className="mono text-[10px] uppercase tracking-[0.4em] text-bone/60">Scroll</p>
+        <span className="text-bone/40" style={{ animation: "blink 1.8s ease-in-out infinite" }}>↓</span>
       </div>
     </section>
   );
@@ -240,9 +230,9 @@ function Capabilities() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex items-end justify-between">
           <div>
-            <span className="pill mb-4">[ 02 / our values ]</span>
+            <span className="pill mb-4">Our values</span>
             <h2 className="display mt-4" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>
-              What we <span className="text-outline">stand for.</span>
+              What we <span className="text-outline">stand for</span>
             </h2>
           </div>
           <p className="mono hidden max-w-[22ch] text-right text-[10px] uppercase tracking-[0.28em] text-bone/55 md:block">
@@ -280,7 +270,7 @@ function CapCard({ c, i }: { c: (typeof capabilities)[number]; i: number }) {
       }`}
     >
       <div className="mono flex items-baseline justify-between text-[10px] uppercase tracking-[0.32em] text-bone/60">
-        <span>[ {c.n} / 04 ]</span>
+        <span>· {c.n} / 04</span>
         <span className={isAccent ? "text-ember" : ""}>◐ discipline</span>
       </div>
       <h3
@@ -313,7 +303,7 @@ function StatsStrip() {
     <section className="border-b-2 border-bone bg-bone px-6 py-16 text-ink md:px-12 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 flex items-center justify-between">
-          <span className="mono text-[10px] uppercase tracking-[0.32em] text-ember">[ 03 / receipts ]</span>
+          <span className="mono text-[10px] uppercase tracking-[0.32em] text-ember">Receipts</span>
           <span className="mono text-[10px] uppercase tracking-[0.28em] text-ink/45">2022 → today</span>
         </div>
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
