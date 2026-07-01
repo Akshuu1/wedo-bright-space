@@ -35,12 +35,11 @@ function About() {
             className="display mt-10 text-bone"
             style={{ fontSize: "clamp(3.5rem, 12vw, 14rem)", lineHeight: 0.88 }}
           >
-            <RevealText text="A small studio" />
+            A small studio
             <br />
-            <span className="text-bone/40">
-              <RevealText text="with a long memory." />
-            </span>
+            <span className="text-bone/40">with a long memory.</span>
           </h1>
+
 
           <div className="mt-24 grid gap-16 md:grid-cols-12">
             <div className="md:col-span-5">
