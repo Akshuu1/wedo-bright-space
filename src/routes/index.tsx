@@ -61,7 +61,11 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
 
   return (
-    <section ref={ref} className="relative min-h-[100svh] w-full overflow-hidden bg-ink pt-24 md:pt-28">
+    <section
+      ref={ref}
+      className="relative min-h-[100svh] w-full overflow-hidden pt-24 md:pt-28"
+      style={{ background: "#0a0a0a", color: "#f4f1ea" }}
+    >
       {/* faint geometric wireframes */}
       <Wireframes />
 
@@ -82,8 +86,8 @@ function Hero() {
 
       {/* HUD top markers */}
       <div className="pointer-events-none absolute inset-x-0 top-24 z-[2] mx-auto flex max-w-7xl items-center justify-between px-6 md:top-28 md:px-10">
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/50">[ 01 / Index ]</p>
-        <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-bone/50 md:flex md:items-center md:gap-2">
+        <p className="mono text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/50">[ 01 / Index ]</p>
+        <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/50 md:flex md:items-center md:gap-2">
           <span className="block h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 2s ease-in-out infinite" }} />
           Studio · Online
         </p>
@@ -95,12 +99,12 @@ function Hero() {
         className="relative z-[2] mx-auto flex max-w-[1500px] flex-col px-6 pt-[18vh] md:px-10"
       >
         <h1
-          className="display max-w-[14ch] text-[14vw] text-bone md:text-[9.2vw] lg:text-[8.2rem]"
-          style={{ letterSpacing: "-0.055em", lineHeight: "0.9" }}
+          className="display max-w-[14ch] text-[14vw] md:text-[9.2vw] lg:text-[8.2rem]"
+          style={{ letterSpacing: "-0.055em", lineHeight: "0.9", color: "#f4f1ea" }}
         >
-          <LensWord text="Designed" />
+          Designed
           <br />
-          <span className="text-bone/95">to ship —</span>
+          <span style={{ color: "#f4f1ea", opacity: 0.95 }}>to ship —</span>
           <br />
           <span className="text-gradient">built to last.</span>
         </h1>
@@ -109,7 +113,7 @@ function Hero() {
           <Magnetic strength={0.25}>
             <Link
               to="/contact"
-              className="mono group inline-flex items-center gap-3 border-b border-bone/40 pb-2 text-[11px] uppercase tracking-[0.3em] text-bone hover:border-ember"
+              className="mono group inline-flex items-center gap-3 border-b border-[#f4f1ea]/40 pb-2 text-[11px] uppercase tracking-[0.3em] text-[#f4f1ea] hover:border-ember"
             >
               <span className="block h-1.5 w-1.5 rounded-full bg-ember transition-transform group-hover:scale-150" />
               Start a project
@@ -117,7 +121,7 @@ function Hero() {
             </Link>
           </Magnetic>
 
-          <p className="max-w-sm text-sm leading-relaxed text-bone/55 md:text-right">
+          <p className="max-w-sm text-sm leading-relaxed text-[#f4f1ea]/55 md:text-right">
             Websites, mobile apps, AI &amp; automations built for teams that need
             to move — lean, sensibly priced, shipped on time.
           </p>
@@ -126,18 +130,19 @@ function Hero() {
 
       {/* bottom microcopy */}
       <div className="pointer-events-none absolute inset-x-0 bottom-6 z-[2] mx-auto flex max-w-7xl items-end justify-between px-6 md:bottom-8 md:px-10">
-        <div className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
+        <div className="mono text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/40">
           <p>Scroll to enter</p>
-          <p className="mt-1 text-bone/30">↓ ↓ ↓</p>
+          <p className="mt-1 text-[#f4f1ea]/30">↓ ↓ ↓</p>
         </div>
-        <div className="mono text-right text-[10px] uppercase tracking-[0.3em] text-bone/40">
+        <div className="mono text-right text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/40">
           <p>Move cursor</p>
-          <p className="mt-1 text-bone/30">to reveal the lens</p>
+          <p className="mt-1 text-[#f4f1ea]/30">to reveal the lens</p>
         </div>
       </div>
     </section>
   );
 }
+
 
 function LensWord({ text }: { text: string }) {
   return (
