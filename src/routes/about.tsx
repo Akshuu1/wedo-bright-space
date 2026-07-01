@@ -51,6 +51,7 @@ function About() {
       <TickerStrip />
       <Manifesto />
       <Capabilities />
+      <Founders />
       <StatsStrip />
       <Principles />
       <TailCTA />

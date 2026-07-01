@@ -139,7 +139,7 @@ function Case() {
       {/* ================= PROBLEM ================= */}
       <section className="mx-auto mt-32 grid max-w-7xl gap-10 px-6 md:grid-cols-12 md:px-12">
         <div className="md:col-span-4">
-          <span className="pill">[ 01 / Problem ]</span>
+          <span className="pill">01 · Problem</span>
           <p className="mono mt-6 text-[10px] uppercase tracking-[0.3em] text-bone/45">
             Where we started
           </p>
@@ -158,7 +158,7 @@ function Case() {
       <section className="mt-32 border-y-2 border-bone bg-chalk px-6 py-24 md:px-12 md:py-32">
         <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-12">
           <div className="md:col-span-4">
-            <span className="pill-solid">[ 02 / Solution ]</span>
+            <span className="pill-solid">02 · Solution</span>
             <p className="mono mt-6 text-[10px] uppercase tracking-[0.3em] text-bone/50">
               What we built
             </p>
@@ -186,7 +186,7 @@ function Case() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex items-end justify-between">
             <div>
-              <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">[ 03 / Metrics ]</span>
+              <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">03 · Metrics</span>
               <h2
                 className="display mt-4"
                 style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
@@ -226,7 +226,7 @@ function Case() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex items-end justify-between">
             <div>
-              <span className="pill">[ 04 / Gallery ]</span>
+              <span className="pill">04 · Gallery</span>
               <h2
                 className="display mt-4"
                 style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
