@@ -31,8 +31,10 @@ function Home() {
       <KeyFacts />
       <Marquee items={["Impact", "Inspire", "Innovate", "Iterate"]} variant="ember" />
       <Manifest />
+      <Marquee items={["Web", "Mobile", "AI", "Automation", "Brand", "Motion"]} variant="outline" speed={0.85} />
       <CasesScroll />
       <LightInversion />
+      <Marquee items={["Available Q3 · 2026", "Booking Q4 · 2026", "Remote first", "GMT ± 6"]} variant="mono" speed={1.2} />
       <ContactStrip />
     </main>
   );
