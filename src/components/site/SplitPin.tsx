@@ -97,17 +97,22 @@ function Panel({
   const outStart = end - (end - start) * 0.25;
   const outEnd = end;
 
-  const y = useTransform(progress, [inStart, inEnd, outStart, outEnd], ["60%", "0%", "0%", "-30%"]);
+  const fromX = panel.side === "left" ? "-80%" : "80%";
+  const toX = "0%";
+  const x = useTransform(progress, [inStart, inEnd, outStart, outEnd], [fromX, toX, toX, panel.side === "left" ? "-40%" : "40%"]);
+  const y = useTransform(progress, [inStart, inEnd, outStart, outEnd], ["30%", "0%", "0%", "-15%"]);
   const opacity = useTransform(progress, [inStart, inEnd, outStart, outEnd], [0, 1, 1, 0]);
+  const rotate = useTransform(progress, [inStart, inEnd, outStart, outEnd], [panel.side === "left" ? -6 : 6, 0, 0, panel.side === "left" ? 4 : -4]);
 
   const align = panel.side === "left" ? "left-0 md:left-12" : "right-0 md:right-12";
   const textAlign = panel.side === "left" ? "text-left" : "text-right md:text-right";
 
   return (
     <motion.div
-      style={{ y, opacity }}
+      style={{ x, y, opacity, rotate }}
       className={`absolute bottom-16 ${align} max-w-[44%] md:max-w-[34%] ${textAlign} will-change-transform`}
     >
+
       {panel.eyebrow && (
         <p className="mono mb-3 text-[10px] uppercase tracking-[0.32em] text-ember">
           {panel.eyebrow}
