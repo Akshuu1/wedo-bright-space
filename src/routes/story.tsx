@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion, useScroll, useTransform, useSpring } from "motion/react";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "motion/react";
 import { useRef } from "react";
 
 export const Route = createFileRoute("/story")({
@@ -14,11 +14,10 @@ export const Route = createFileRoute("/story")({
   component: Story,
 });
 
-/* -----------------------------------------------------------------------
-   STORY — cinematic feature film treatment.
-   Letterbox bars, projector flicker, scanline, timecode HUD, filmstrip
-   horizontal scrub, and a rolling credits finale.
------------------------------------------------------------------------- */
+/* Palette reminder for this page:
+   bg-bone = #0a0a0a (dark)  |  text-ink  = #f4f1ea (light)
+   bg-ink  = #f4f1ea (light) |  text-bone = #0a0a0a (dark)
+*/
 
 function Story() {
   const rootRef = useRef<HTMLElement>(null);
@@ -27,9 +26,7 @@ function Story() {
 
   return (
     <main ref={rootRef} className="relative bg-bone text-ink">
-      {/* Letterbox bars — always on top */}
       <Letterbox />
-      {/* Projector flicker glow */}
       <div
         className="pointer-events-none fixed inset-0 z-[45] mix-blend-screen"
         style={{
@@ -37,12 +34,10 @@ function Story() {
           animation: "projector-flicker 4s infinite",
         }}
       />
-      {/* Scan line */}
       <div
         className="pointer-events-none fixed left-0 right-0 z-[46] h-[2px] bg-ember/60 blur-[1px]"
         style={{ animation: "scan-line 6s linear infinite" }}
       />
-      {/* Timecode HUD */}
       <TimecodeHUD progress={tc} />
 
       <ColdOpen />
@@ -56,29 +51,27 @@ function Story() {
   );
 }
 
-/* ---------------- Letterbox ---------------- */
 function Letterbox() {
   return (
     <>
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-[48] h-[8vh] bg-ink" />
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[48] h-[8vh] bg-ink" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-[48] h-[8vh] bg-bone" />
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[48] h-[8vh] bg-bone" />
     </>
   );
 }
 
-/* ---------------- Timecode HUD ---------------- */
-function TimecodeHUD({ progress }: { progress: any }) {
+function TimecodeHUD({ progress }: { progress: MotionValue<number> }) {
   const min = useTransform(progress, (v: number) => String(Math.floor(v * 8)).padStart(2, "0"));
   const sec = useTransform(progress, (v: number) => String(Math.floor((v * 480) % 60)).padStart(2, "0"));
   const fr = useTransform(progress, (v: number) => String(Math.floor((v * 12000) % 24)).padStart(2, "0"));
 
   return (
     <div className="pointer-events-none fixed inset-x-0 top-0 z-[49] flex items-center justify-between px-6 pt-3 md:px-10">
-      <div className="mono flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-bone">
+      <div className="mono flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-ink">
         <span className="block h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.4s ease-in-out infinite" }} />
         REC · WeDo/Feature/01
       </div>
-      <div className="mono flex items-baseline gap-1 text-[10px] uppercase tracking-[0.3em] text-bone">
+      <div className="mono flex items-baseline gap-1 text-[10px] uppercase tracking-[0.3em] text-ink">
         <span>TC</span>
         <motion.span>{min}</motion.span>:<motion.span>{sec}</motion.span>:<motion.span>{fr}</motion.span>
       </div>
@@ -86,7 +79,7 @@ function TimecodeHUD({ progress }: { progress: any }) {
   );
 }
 
-/* ---------------- Cold Open ---------------- */
+/* ---------------- Cold Open (dark) ---------------- */
 function ColdOpen() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -95,10 +88,8 @@ function ColdOpen() {
   const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
 
   return (
-    <section ref={ref} className="relative flex min-h-[110svh] w-full items-center justify-center overflow-hidden bg-ink text-bone">
-      {/* aurora backdrop */}
+    <section ref={ref} className="relative flex min-h-[110svh] w-full items-center justify-center overflow-hidden bg-bone text-ink">
       <div className="aurora absolute inset-0" />
-      {/* grid */}
       <svg className="absolute inset-0 h-full w-full opacity-[0.08]" viewBox="0 0 100 100" preserveAspectRatio="none">
         {Array.from({ length: 20 }).map((_, i) => (
           <line key={i} x1={i * 5} y1="0" x2={i * 5} y2="100" stroke="#f4f1ea" strokeWidth="0.05" />
@@ -108,26 +99,25 @@ function ColdOpen() {
       <motion.div style={{ y, scale, opacity }} className="relative z-10 mx-auto max-w-[1600px] px-6 text-center md:px-10">
         <p className="mono text-[10px] uppercase tracking-[0.4em] text-ember">◉ A WeDo Studio Feature — MMXXVI</p>
         <h1
-          className="display mt-8 text-bone"
+          className="display mt-8 text-ink"
           style={{ fontSize: "clamp(3.5rem, 15vw, 15rem)", lineHeight: 0.82, letterSpacing: "-0.06em" }}
         >
           THE <span className="text-outline" style={{ WebkitTextStrokeColor: "#f4f1ea" }}>MAKING</span>
           <br />
           OF <span className="text-gradient">WEDO</span>
         </h1>
-        <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-bone/60 md:text-base">
+        <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-ink/60 md:text-base">
           Five acts. One small studio. Scroll to play the picture.
         </p>
       </motion.div>
 
-      {/* clapperboard corner */}
-      <div className="absolute bottom-16 left-6 z-10 md:left-10">
-        <div className="brut-box-accent bg-ink p-3 text-bone">
-          <p className="mono text-[9px] uppercase tracking-[0.3em] text-bone/50">SCENE 01 · TAKE 01</p>
+      <div className="absolute bottom-[10vh] left-6 z-10 md:left-10">
+        <div className="border-2 border-ink bg-bone p-3 text-ink" style={{ boxShadow: "8px 8px 0 0 #ff4a1c" }}>
+          <p className="mono text-[9px] uppercase tracking-[0.3em] text-ink/60">SCENE 01 · TAKE 01</p>
           <p className="mono text-[9px] uppercase tracking-[0.3em] text-ember">ROLL A · DIR. WEDO</p>
         </div>
       </div>
-      <div className="absolute bottom-16 right-6 z-10 mono text-right text-[9px] uppercase tracking-[0.3em] text-bone/50 md:right-10">
+      <div className="mono absolute bottom-[10vh] right-6 z-10 text-right text-[9px] uppercase tracking-[0.3em] text-ink/60 md:right-10">
         <p>Aspect · 2.39:1</p>
         <p>Format · WEB/WEBGL</p>
       </div>
@@ -135,7 +125,6 @@ function ColdOpen() {
   );
 }
 
-/* ---------------- Ticker between scenes ---------------- */
 function TickerBar() {
   const items = ["The Making of WeDo", "◉", "Directed by the studio", "◉", "Original score by the ship log", "◉", "Cast: designers, engineers, automators", "◉"];
   return (
@@ -144,7 +133,7 @@ function TickerBar() {
         {[0, 1].map((k) => (
           <div key={k} className="flex shrink-0 items-center gap-8 px-8">
             {items.map((t, i) => (
-              <span key={i} className="display whitespace-nowrap text-2xl uppercase text-ink md:text-4xl">{t}</span>
+              <span key={i} className="display whitespace-nowrap text-2xl uppercase text-bone md:text-4xl">{t}</span>
             ))}
           </div>
         ))}
@@ -153,18 +142,18 @@ function TickerBar() {
   );
 }
 
-/* ---------------- ACT I — The Question ---------------- */
+/* ---------------- ACT I — Light interlude ---------------- */
 function ActI() {
   return (
-    <section className="relative bg-bone px-6 py-40 text-ink md:px-10 md:py-56">
+    <section className="relative bg-ink px-6 py-40 text-bone md:px-10 md:py-56">
       <div className="mx-auto max-w-[1500px]">
-        <SceneSlate act="I" title="The Question" runtime="00:14" />
+        <SceneSlate act="I" title="The Question" runtime="00:14" dark={false} />
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-20% 0px" }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="display mt-16 max-w-[18ch] text-ink"
+          className="display mt-16 max-w-[18ch] text-bone"
           style={{ fontSize: "clamp(2.5rem, 8vw, 8rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
         >
           In 2024 we asked: <span className="text-gradient">what if shipping software felt like making a film?</span>
@@ -174,7 +163,7 @@ function ActI() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="mt-16 max-w-xl border-l-2 border-ink pl-6 text-lg leading-relaxed text-ink/70"
+          className="mt-16 max-w-xl border-l-2 border-bone pl-6 text-lg leading-relaxed text-bone/70"
         >
           Not the meetings. The <em>craft.</em> Storyboards. Rehearsals. A first act that
           earns the second. A closing credit for every hand on set.
@@ -184,7 +173,7 @@ function ActI() {
   );
 }
 
-/* ---------------- ACT II — The Crew (parallax portraits) ---------------- */
+/* ---------------- ACT II — Dark cast ---------------- */
 function ActII() {
   const crew = [
     { role: "Direction", name: "Design Lead", line: "Type, colour, restraint.", accent: "#ff4a1c" },
@@ -193,7 +182,7 @@ function ActII() {
     { role: "Editing", name: "Automations Lead", line: "Glue between every tool.", accent: "#f6ea3a" },
   ];
   return (
-    <section className="relative overflow-hidden bg-ink px-6 py-40 text-bone md:px-10 md:py-56">
+    <section className="relative overflow-hidden bg-bone px-6 py-40 text-ink md:px-10 md:py-56">
       <div className="aurora absolute inset-0 opacity-40" />
       <div className="relative mx-auto max-w-[1500px]">
         <SceneSlate act="II" title="The Crew" runtime="02:41" dark />
@@ -205,23 +194,22 @@ function ActII() {
               whileInView={{ opacity: 1, y: 0, rotate: 0 }}
               viewport={{ once: true, margin: "-15% 0px" }}
               transition={{ duration: 1, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative overflow-hidden border-2 border-bone bg-ink p-8 md:p-10"
+              className="relative overflow-hidden border-2 border-ink bg-bone p-8 md:p-10"
               style={{ boxShadow: `10px 10px 0 0 ${c.accent}` }}
             >
               <div className="flex items-start justify-between">
                 <p className="mono text-[10px] uppercase tracking-[0.3em]" style={{ color: c.accent }}>
                   [ Cast · {String(i + 1).padStart(2, "0")} ]
                 </p>
-                <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">{c.role}</p>
+                <p className="mono text-[10px] uppercase tracking-[0.3em] text-ink/40">{c.role}</p>
               </div>
               <h3
-                className="display mt-10 text-bone"
+                className="display mt-10 text-ink"
                 style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", lineHeight: 0.9, letterSpacing: "-0.04em" }}
               >
                 {c.name}
               </h3>
-              <p className="mt-4 text-bone/60">{c.line}</p>
-              {/* silhouette */}
+              <p className="mt-4 text-ink/60">{c.line}</p>
               <div
                 className="pointer-events-none absolute -bottom-6 -right-6 h-32 w-32 rounded-full opacity-80"
                 style={{ background: `radial-gradient(circle, ${c.accent}, transparent 70%)`, filter: "blur(20px)" }}
@@ -234,7 +222,7 @@ function ActII() {
   );
 }
 
-/* ---------------- ACT III — Filmstrip (horizontal scrub) ---------------- */
+/* ---------------- ACT III — Filmstrip on light ---------------- */
 function ActIII() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
@@ -249,21 +237,20 @@ function ActIII() {
   ];
 
   return (
-    <section ref={ref} className="relative h-[420vh] bg-bone text-ink">
+    <section ref={ref} className="relative h-[420vh] bg-ink text-bone">
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
         <div className="absolute left-6 top-[16vh] z-10 md:left-10">
           <SceneSlate act="III" title="The Craft" runtime="07:12" />
         </div>
 
-        {/* film sprocket holes */}
-        <div className="pointer-events-none absolute inset-x-0 top-[24vh] flex justify-between px-6 md:px-10">
+        <div className="pointer-events-none absolute inset-x-0 top-[22vh] flex justify-between px-6 md:px-10">
           {Array.from({ length: 24 }).map((_, i) => (
-            <span key={i} className="block h-3 w-3 rounded-sm border border-ink/60 bg-ink/10" />
+            <span key={i} className="block h-3 w-3 rounded-sm border border-bone/60 bg-bone/10" />
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-[24vh] flex justify-between px-6 md:px-10">
+        <div className="pointer-events-none absolute inset-x-0 bottom-[22vh] flex justify-between px-6 md:px-10">
           {Array.from({ length: 24 }).map((_, i) => (
-            <span key={i} className="block h-3 w-3 rounded-sm border border-ink/60 bg-ink/10" />
+            <span key={i} className="block h-3 w-3 rounded-sm border border-bone/60 bg-bone/10" />
           ))}
         </div>
 
@@ -271,10 +258,9 @@ function ActIII() {
           {scenes.map((s, i) => (
             <article
               key={s.n}
-              className="relative flex h-[58vh] w-[80vw] shrink-0 flex-col justify-between overflow-hidden border-2 border-ink bg-ink text-bone md:w-[55vw]"
+              className="relative flex h-[58vh] w-[80vw] shrink-0 flex-col justify-between overflow-hidden border-2 border-bone bg-bone text-ink md:w-[55vw]"
               style={{ boxShadow: "12px 12px 0 0 #ff4a1c" }}
             >
-              {/* photo frame */}
               <div className="absolute inset-0 opacity-90">
                 <div
                   className="absolute inset-0"
@@ -292,17 +278,17 @@ function ActIII() {
 
               <div className="relative flex items-baseline justify-between p-6">
                 <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">SCENE {s.n}</span>
-                <span className="mono text-[10px] uppercase tracking-[0.3em] text-bone/50">TAKE 0{i + 1}</span>
+                <span className="mono text-[10px] uppercase tracking-[0.3em] text-ink/50">TAKE 0{i + 1}</span>
               </div>
 
               <div className="relative p-8 md:p-12">
                 <h3
-                  className="display text-bone"
+                  className="display text-ink"
                   style={{ fontSize: "clamp(3rem, 10vw, 10rem)", lineHeight: 0.85, letterSpacing: "-0.05em" }}
                 >
                   {s.k}.
                 </h3>
-                <p className="mt-6 max-w-md text-bone/70">{s.d}</p>
+                <p className="mt-6 max-w-md text-ink/70">{s.d}</p>
               </div>
             </article>
           ))}
@@ -312,23 +298,23 @@ function ActIII() {
   );
 }
 
-/* ---------------- ACT IV — Intermission ---------------- */
+/* ---------------- ACT IV — Intermission (ember bath) ---------------- */
 function ActIV() {
   return (
-    <section className="relative overflow-hidden bg-ember px-6 py-40 text-ink md:px-10 md:py-56">
+    <section className="relative overflow-hidden bg-ember px-6 py-40 text-bone md:px-10 md:py-56">
       <div className="mx-auto max-w-[1500px] text-center">
-        <p className="mono text-[10px] uppercase tracking-[0.4em] text-ink/70">◉ Intermission</p>
+        <p className="mono text-[10px] uppercase tracking-[0.4em] text-bone/70">◉ Intermission</p>
         <motion.h2
           initial={{ opacity: 0, letterSpacing: "0.2em" }}
           whileInView={{ opacity: 1, letterSpacing: "-0.05em" }}
           viewport={{ once: true }}
           transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-          className="display mt-8 text-ink"
+          className="display mt-8 text-bone"
           style={{ fontSize: "clamp(4rem, 18vw, 20rem)", lineHeight: 0.85 }}
         >
           END OF <br />ACT III.
         </motion.h2>
-        <p className="mono mt-10 text-[10px] uppercase tracking-[0.3em] text-ink/70">
+        <p className="mono mt-10 text-[10px] uppercase tracking-[0.3em] text-bone/70">
           Reload your popcorn. The picture continues below.
         </p>
       </div>
@@ -336,7 +322,7 @@ function ActIV() {
   );
 }
 
-/* ---------------- Rolling Credits ---------------- */
+/* ---------------- ACT V — Rolling Credits (dark) ---------------- */
 function Credits() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
@@ -358,7 +344,7 @@ function Credits() {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-[140vh] overflow-hidden bg-ink text-bone">
+    <section ref={ref} className="relative min-h-[140vh] overflow-hidden bg-bone text-ink">
       <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
         <p className="mono absolute top-24 text-[10px] uppercase tracking-[0.4em] text-ember">
           ◉ ACT V · Roll credits
@@ -366,26 +352,26 @@ function Credits() {
 
         <motion.div style={{ y }} className="w-full max-w-3xl px-6 text-center">
           <h2
-            className="display text-bone"
+            className="display text-ink"
             style={{ fontSize: "clamp(3rem, 10vw, 10rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
           >
             The Making <br />of <span className="text-gradient">WeDo</span>
           </h2>
-          <p className="mono mt-8 text-[10px] uppercase tracking-[0.3em] text-bone/50">
+          <p className="mono mt-8 text-[10px] uppercase tracking-[0.3em] text-ink/50">
             A picture in perpetual production
           </p>
           <div className="mt-16 space-y-8">
             {roles.map(([k, v]) => (
               <div key={k} className="grid grid-cols-2 items-baseline gap-6">
-                <p className="mono text-right text-[11px] uppercase tracking-[0.25em] text-bone/50">{k}</p>
-                <p className="text-left text-lg text-bone md:text-2xl">{v}</p>
+                <p className="mono text-right text-[11px] uppercase tracking-[0.25em] text-ink/50">{k}</p>
+                <p className="text-left text-lg text-ink md:text-2xl">{v}</p>
               </div>
             ))}
             <div className="pt-12">
-              <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/40">[ End card ]</p>
+              <p className="mono text-[10px] uppercase tracking-[0.3em] text-ink/40">[ End card ]</p>
               <Link
                 to="/contact"
-                className="display mt-6 inline-block text-bone hover:text-gradient"
+                className="display mt-6 inline-block text-ink hover:text-gradient"
                 style={{ fontSize: "clamp(2.5rem, 8vw, 7rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
               >
                 Roll credits →
@@ -398,14 +384,13 @@ function Credits() {
   );
 }
 
-/* ---------------- Scene Slate ---------------- */
 function SceneSlate({ act, title, runtime, dark = false }: { act: string; title: string; runtime: string; dark?: boolean }) {
   return (
-    <div className={`inline-flex items-center gap-3 border-2 px-4 py-2 ${dark ? "border-bone text-bone" : "border-ink text-ink"}`}>
+    <div className={`inline-flex items-center gap-3 border-2 px-4 py-2 ${dark ? "border-ink text-ink" : "border-bone text-bone"}`}>
       <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">ACT {act}</span>
-      <span className={`h-3 w-px ${dark ? "bg-bone/40" : "bg-ink/40"}`} />
+      <span className={`h-3 w-px ${dark ? "bg-ink/40" : "bg-bone/40"}`} />
       <span className="mono text-[10px] uppercase tracking-[0.3em]">{title}</span>
-      <span className={`h-3 w-px ${dark ? "bg-bone/40" : "bg-ink/40"}`} />
+      <span className={`h-3 w-px ${dark ? "bg-ink/40" : "bg-bone/40"}`} />
       <span className="mono text-[10px] uppercase tracking-[0.3em] opacity-60">RT {runtime}</span>
     </div>
   );
