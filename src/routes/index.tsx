@@ -212,28 +212,53 @@ function Wireframes() {
 
 function KeyFacts() {
   const stats = [
-    { k: "48", l: "Products shipped" },
-    { k: "12", l: "Countries served" },
-    { k: "7yr", l: "Median client tenure" },
-    { k: "100%", l: "Independent &amp; founder-owned" },
+    { k: "48", suffix: "", l: "Products shipped", note: "since 2019" },
+    { k: "12", suffix: "", l: "Countries served", note: "4 continents" },
+    { k: "7", suffix: "yr", l: "Median client tenure", note: "we stick around" },
+    { k: "100", suffix: "%", l: "Founder-owned", note: "independent" },
   ];
   return (
-    <section className="border-y border-bone/10 px-6 py-20 md:px-10 md:py-28">
-      <div className="mx-auto max-w-7xl">
-        <SectionLabel index="02" label="Key facts" />
-        <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
+    <section className="relative border-y border-bone/10 bg-ink px-6 py-24 md:px-10 md:py-32">
+      {/* ambient ember wash */}
+      <div
+        className="pointer-events-none absolute -top-32 right-[-10%] h-[420px] w-[420px] rounded-full opacity-30 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.5), transparent 70%)" }}
+      />
+      <div className="relative mx-auto max-w-7xl">
+        <div className="flex items-end justify-between gap-6">
+          <SectionLabel index="02" label="Key facts" />
+          <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-bone/40 md:flex md:items-center md:gap-2">
+            <span className="block h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 2s ease-in-out infinite" }} />
+            Live · updated {new Date().getFullYear()}
+          </p>
+        </div>
+
+        <div className="mt-14 grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-4 md:gap-x-10">
           {stats.map((s, i) => (
-            <Reveal key={s.k} delay={i * 0.06}>
-              <p
-                className="display text-6xl text-bone md:text-7xl"
-                style={{ letterSpacing: "-0.05em" }}
-              >
-                {s.k}
-              </p>
-              <p
-                className="mono mt-3 text-[10px] uppercase tracking-[0.25em] text-bone/50"
-                dangerouslySetInnerHTML={{ __html: s.l }}
-              />
+            <Reveal key={s.l} delay={i * 0.08}>
+              <div className="group/stat relative">
+                <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember/80">
+                  {String(i + 1).padStart(2, "0")} /
+                </p>
+                <p
+                  className="display mt-3 flex items-baseline text-6xl text-bone md:text-7xl lg:text-8xl"
+                  style={{ letterSpacing: "-0.06em" }}
+                >
+                  <span className="transition-transform duration-500 group-hover/stat:-translate-y-1">
+                    {s.k}
+                  </span>
+                  {s.suffix && (
+                    <span className="ml-0.5 text-3xl text-ember md:text-4xl">{s.suffix}</span>
+                  )}
+                </p>
+                <div className="mt-4 h-px w-10 bg-bone/25 transition-all duration-500 group-hover/stat:w-24 group-hover/stat:bg-ember" />
+                <p className="mono mt-3 text-[10px] uppercase tracking-[0.25em] text-bone/60">
+                  {s.l}
+                </p>
+                <p className="mono mt-1 text-[10px] uppercase tracking-[0.25em] text-bone/30">
+                  ({s.note})
+                </p>
+              </div>
             </Reveal>
           ))}
         </div>
@@ -261,16 +286,30 @@ function Manifest() {
 
       <div className="mt-16 grid gap-8 border-t border-bone/10 pt-10 md:grid-cols-3">
         {[
-          { k: "Clarity first", v: "Tight scopes. Plain language. No deck-ware." },
-          { k: "Craft always", v: "Type, motion and code held to the same bar." },
-          { k: "Built to scale", v: "Lean stacks that survive the second team." },
+          { k: "Clarity first", v: "Tight scopes. Plain language. No deck-ware.", icon: "◐" },
+          { k: "Craft always", v: "Type, motion and code held to the same bar.", icon: "✦" },
+          { k: "Built to scale", v: "Lean stacks that survive the second team.", icon: "◆" },
         ].map((b, i) => (
           <Reveal key={b.k} delay={i * 0.08}>
-            <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">
-              0{i + 1}
-            </p>
-            <h3 className="mt-3 text-xl text-bone">{b.k}.</h3>
-            <p className="mt-2 max-w-xs text-sm leading-relaxed text-bone/55">{b.v}</p>
+            <div className="group/tenet relative overflow-hidden rounded-2xl border border-bone/10 bg-bone/[0.02] p-7 transition-all duration-500 hover:-translate-y-1 hover:border-ember/40 hover:bg-bone/[0.04]">
+              {/* hover glow */}
+              <div
+                className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover/tenet:opacity-100"
+                style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.5), transparent 70%)" }}
+              />
+              <div className="flex items-center justify-between">
+                <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">
+                  0{i + 1} / Tenet
+                </p>
+                <span className="text-ember/60 transition-transform duration-700 group-hover/tenet:rotate-180">
+                  {b.icon}
+                </span>
+              </div>
+              <h3 className="display mt-6 text-2xl text-bone md:text-3xl" style={{ letterSpacing: "-0.035em" }}>
+                {b.k}.
+              </h3>
+              <p className="mt-3 max-w-xs text-sm leading-relaxed text-bone/55">{b.v}</p>
+            </div>
           </Reveal>
         ))}
       </div>
