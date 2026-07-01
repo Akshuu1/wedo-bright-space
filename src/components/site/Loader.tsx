@@ -1,120 +1,32 @@
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { MeshDistortMaterial, Environment } from "@react-three/drei";
-import * as THREE from "three";
 
 /* -------------------------------------------------------------------------- */
-/*  3D loading centerpiece — morphing chrome sphere with an inner ember core  */
+/*  Editorial split-column loader — no 3D, pure typographic drama             */
 /* -------------------------------------------------------------------------- */
 
-function LoaderScene({ progress, isMobile }: { progress: number; isMobile: boolean }) {
-  const outer = useRef<THREE.Mesh>(null!);
-  const inner = useRef<THREE.Mesh>(null!);
-  const ring = useRef<THREE.Mesh>(null!);
-
-  useFrame((state, delta) => {
-    const t = state.clock.getElapsedTime();
-    if (outer.current) {
-      outer.current.rotation.y += delta * 0.35;
-      outer.current.rotation.x = Math.sin(t * 0.4) * 0.25;
-      const s = 1 + Math.sin(t * 1.6) * 0.02 + progress * 0.15;
-      outer.current.scale.setScalar(s);
-    }
-    if (inner.current) {
-      inner.current.rotation.y -= delta * 0.6;
-      inner.current.rotation.z += delta * 0.2;
-      const s = 0.55 + progress * 0.35;
-      inner.current.scale.setScalar(s);
-    }
-    if (ring.current) {
-      ring.current.rotation.z = t * 0.4;
-      ring.current.rotation.x = Math.PI / 2 + Math.sin(t * 0.5) * 0.3;
-    }
-  });
-
-  // Lower subdivisions & distort speed on mobile — visually identical, ~half the shader work
-  const outerDetail = isMobile ? 4 : 6;
-  const innerDetail = isMobile ? 3 : 4;
-  const ringSegments = isMobile ? 120 : 220;
-  const distortSpeed = isMobile ? 1.6 : 2.4;
-  const innerSpeed = isMobile ? 2.4 : 3.6;
-
-  return (
-    <group>
-      <mesh ref={outer}>
-        <icosahedronGeometry args={[1.35, outerDetail]} />
-        <MeshDistortMaterial
-          color="#0a0a0a"
-          emissive="#ff5722"
-          emissiveIntensity={0.15 + progress * 0.5}
-          roughness={0.15}
-          metalness={0.95}
-          distort={0.35 + progress * 0.25}
-          speed={distortSpeed}
-        />
-      </mesh>
-
-      <mesh ref={inner}>
-        <icosahedronGeometry args={[0.55, innerDetail]} />
-        <MeshDistortMaterial
-          color="#ff5722"
-          emissive="#ff8a3c"
-          emissiveIntensity={1.4}
-          roughness={0.3}
-          metalness={0.2}
-          distort={0.55}
-          speed={innerSpeed}
-          transparent
-          opacity={0.9}
-        />
-      </mesh>
-
-      <mesh ref={ring}>
-        <torusGeometry args={[1.9, 0.006, 12, ringSegments]} />
-        <meshBasicMaterial color="#ff5722" transparent opacity={0.5} />
-      </mesh>
-    </group>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
-/*  Boot loader                                                                */
-/* -------------------------------------------------------------------------- */
+const WORDS = ["DESIGN", "DEVELOP", "AUTOMATE"];
 
 export function Loader() {
   const [pct, setPct] = useState(0);
   const [done, setDone] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [lowPower, setLowPower] = useState(false);
+  const [wordIdx, setWordIdx] = useState(0);
 
   useEffect(() => {
-    setMounted(true);
     if (typeof window === "undefined") return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const mobile = window.matchMedia("(max-width: 768px)").matches;
-    setIsMobile(mobile);
-
-    // Low-power heuristic: few cores, low memory, or save-data
-    const nav = navigator as Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
-    const weak =
-      (nav.hardwareConcurrency ?? 8) <= 4 ||
-      (nav.deviceMemory ?? 8) <= 4 ||
-      nav.connection?.saveData === true;
-    setLowPower(weak);
 
     if (reduced) {
       setPct(100);
       setDone(true);
-      const id = window.setTimeout(() => setHidden(true), 300);
+      const id = window.setTimeout(() => setHidden(true), 200);
       return () => window.clearTimeout(id);
     }
 
     let raf = 0;
     const start = performance.now();
-    const DURATION = mobile ? 1200 : 1400;
+    const DURATION = 1600;
     const ease = (p: number) => (p === 1 ? 1 : 1 - Math.pow(2, -10 * p));
 
     const tick = (t: number) => {
@@ -122,12 +34,20 @@ export function Loader() {
       setPct(ease(p) * 100);
       if (p < 1) raf = requestAnimationFrame(tick);
       else {
-        window.setTimeout(() => setDone(true), 180);
-        window.setTimeout(() => setHidden(true), 1100);
+        window.setTimeout(() => setDone(true), 160);
+        window.setTimeout(() => setHidden(true), 1200);
       }
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+
+    const wordTimer = window.setInterval(() => {
+      setWordIdx((i) => (i + 1) % WORDS.length);
+    }, 420);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearInterval(wordTimer);
+    };
   }, []);
 
   if (hidden) return null;
@@ -140,118 +60,145 @@ export function Loader() {
         <motion.div
           key="loader"
           className="fixed inset-0 z-[120] overflow-hidden bg-ink text-bone"
-          initial={{ clipPath: "inset(0% 0% 0% 0%)" }}
-          exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
-          transition={{ duration: 1.15, ease: [0.76, 0, 0.24, 1] }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
           aria-hidden
         >
-          {/* radial ember ambient */}
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(55% 45% at 50% 55%, rgba(255,87,34,0.18), transparent 70%)",
-            }}
+          {/* Two curtain panels that split apart on exit */}
+          <motion.div
+            className="absolute inset-y-0 left-0 w-1/2 bg-ink"
+            exit={{ x: "-100%" }}
+            transition={{ duration: 1.05, ease: [0.76, 0, 0.24, 1], delay: 0.05 }}
           />
-          {/* grain */}
+          <motion.div
+            className="absolute inset-y-0 right-0 w-1/2 bg-ink"
+            exit={{ x: "100%" }}
+            transition={{ duration: 1.05, ease: [0.76, 0, 0.24, 1], delay: 0.05 }}
+          />
+
+          {/* Grain */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-overlay"
+            className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-overlay"
             style={{
               backgroundImage:
                 "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.7'/></svg>\")",
             }}
           />
 
-          {/* 3D canvas */}
-          {mounted && (
-            <div className="absolute inset-0">
-              <Canvas
-                dpr={isMobile ? [1, 1.5] : [1, 2]}
-                camera={{ position: [0, 0, 4.2], fov: 42 }}
-                gl={{
-                  antialias: !isMobile,
-                  alpha: true,
-                  powerPreference: "high-performance",
-                }}
-                performance={{ min: 0.5 }}
-              >
-                <ambientLight intensity={0.5} />
-                <pointLight position={[4, 3, 3]} intensity={2.2} color="#ff8a3c" />
-                <pointLight position={[-4, -2, 2]} intensity={1.4} color="#4f8cff" />
-                <Suspense fallback={null}>
-                  <LoaderScene progress={progress} isMobile={isMobile} />
-                  {/* Skip HDR environment on mobile / low-power — biggest win */}
-                  {!isMobile && !lowPower && <Environment preset="night" />}
-                </Suspense>
-              </Canvas>
-            </div>
-          )}
-
-
-          {/* Vignette on top of canvas */}
+          {/* Ember ambient wash */}
           <div
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(120% 90% at 50% 50%, transparent 40%, rgba(10,10,10,0.65) 100%)",
+                "radial-gradient(60% 50% at 50% 50%, rgba(255,87,34,0.14), transparent 70%)",
             }}
           />
 
-          {/* Top meta */}
+          {/* Faint grid lines */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.06]"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, #f4f1ea 1px, transparent 1px), linear-gradient(to bottom, #f4f1ea 1px, transparent 1px)",
+              backgroundSize: "80px 80px",
+            }}
+          />
+
+          {/* Top row — brand + status */}
           <motion.div
-            className="absolute inset-x-0 top-0 flex items-start justify-between px-6 pt-6 md:px-10 md:pt-8"
-            initial={{ opacity: 0, y: -8 }}
+            className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-6 pt-6 md:px-12 md:pt-10"
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="mono flex items-center gap-2 text-[10px] uppercase tracking-[0.34em] text-bone/60">
+            <span className="mono text-[10px] uppercase tracking-[0.34em] text-bone/60">
+              W<span className="text-ember">e</span>Do ® Studio
+            </span>
+            <span className="mono flex items-center gap-2 text-[10px] uppercase tracking-[0.34em] text-bone/50">
               <span className="relative inline-flex h-1.5 w-1.5">
                 <span className="absolute inset-0 animate-ping rounded-full bg-ember/70" />
                 <span className="relative h-1.5 w-1.5 rounded-full bg-ember" />
               </span>
-              WeDo® — Index MMXXVI
-            </span>
-            <span className="mono text-[10px] uppercase tracking-[0.34em] text-bone/45">
-              {shown < 33 ? "Compiling" : shown < 66 ? "Assembling" : shown < 99 ? "Rendering" : "Ready"}
+              Booting Session — MMXXVI
             </span>
           </motion.div>
 
-          {/* Bottom bay — counter + wordmark + hairline */}
+          {/* Center — enormous kinetic word */}
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6">
+            <div className="mono mb-6 text-[10px] uppercase tracking-[0.4em] text-bone/40">
+              Now Loading
+            </div>
+
+            <div className="relative flex h-[1.1em] items-center justify-center overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.h1
+                  key={WORDS[wordIdx]}
+                  className="display text-bone"
+                  initial={{ y: "110%", opacity: 0, filter: "blur(12px)" }}
+                  animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
+                  exit={{ y: "-110%", opacity: 0, filter: "blur(12px)" }}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    fontSize: "clamp(3.5rem, 14vw, 12rem)",
+                    letterSpacing: "-0.06em",
+                    lineHeight: 1,
+                    textAlign: "center",
+                  }}
+                >
+                  {WORDS[wordIdx].split("").map((ch, i) => (
+                    <span
+                      key={i}
+                      className={i === WORDS[wordIdx].length - 1 ? "text-ember" : ""}
+                    >
+                      {ch}
+                    </span>
+                  ))}
+                </motion.h1>
+              </AnimatePresence>
+            </div>
+
+            {/* under-caption */}
+            <motion.div
+              className="mono mt-8 flex items-center gap-3 text-[10px] uppercase tracking-[0.34em] text-bone/50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <span>Studio · Est. 2024</span>
+              <span className="h-px w-8 bg-bone/25" />
+              <span>Bengaluru → Everywhere</span>
+            </motion.div>
+          </div>
+
+          {/* Bottom — counter + progress */}
           <motion.div
-            className="absolute inset-x-0 bottom-0 px-6 pb-6 md:px-10 md:pb-10"
-            initial={{ opacity: 0, y: 14 }}
+            className="absolute inset-x-0 bottom-0 z-10 px-6 pb-6 md:px-12 md:pb-10"
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           >
             <div className="flex items-end justify-between gap-6">
-              <p
-                className="display text-bone"
-                style={{
-                  fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)",
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1,
-                }}
-              >
-                W<span className="text-ember">e</span>Do
-              </p>
+              <span className="mono text-[10px] uppercase tracking-[0.34em] text-bone/50">
+                {shown < 30
+                  ? "Compiling assets"
+                  : shown < 60
+                    ? "Assembling scenes"
+                    : shown < 95
+                      ? "Rendering surface"
+                      : "Ready"}
+              </span>
 
               <p
-                className="display tabular-nums text-bone leading-none"
+                className="display tabular-nums leading-none text-bone"
                 style={{
-                  fontSize: "clamp(3.5rem, 11vw, 10rem)",
-                  letterSpacing: "-0.07em",
+                  fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+                  letterSpacing: "-0.05em",
                 }}
               >
-                {String(shown).padStart(2, "0")}
-                <span className="text-ember">.</span>
-              </p>
-
-              <p className="mono tabular-nums text-[10px] uppercase tracking-[0.32em] text-bone/50">
-                <span className="text-bone">{String(shown).padStart(3, "0")}</span>
-                <span className="mx-1 text-bone/25">/</span>
-                <span>100</span>
+                {String(shown).padStart(3, "0")}
+                <span className="text-ember">%</span>
               </p>
             </div>
 
@@ -264,6 +211,13 @@ export function Loader() {
                   boxShadow: "0 0 14px rgba(255,87,34,0.7)",
                 }}
               />
+            </div>
+
+            {/* corner ticks */}
+            <div className="mono mt-3 flex items-center justify-between text-[9px] uppercase tracking-[0.32em] text-bone/30">
+              <span>◍ 00</span>
+              <span>Frame · {String(Math.floor(progress * 240)).padStart(3, "0")}</span>
+              <span>100 ◍</span>
             </div>
           </motion.div>
         </motion.div>
