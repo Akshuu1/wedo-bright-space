@@ -49,10 +49,11 @@ function Hero() {
       </div>
 
       <motion.div style={{ y }}>
-        <h1 className="display leading-[0.82] tracking-[-0.06em]" style={{ fontSize: "clamp(4rem, 16vw, 20rem)" }}>
+        <h1 className="display leading-[0.85] tracking-[-0.05em]" style={{ fontSize: "clamp(3rem, 11vw, 12rem)" }}>
           Let&rsquo;s make
           <br />
           <span className="text-gradient">something.</span>
+
         </h1>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3 md:gap-10">
