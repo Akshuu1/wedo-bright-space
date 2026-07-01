@@ -81,7 +81,7 @@ function Hero() {
       </div>
 
       <motion.div style={{ y, opacity: o }}>
-        <h1 className="display leading-[0.82] tracking-[-0.06em]" style={{ fontSize: "clamp(4rem, 16vw, 20rem)" }}>
+        <h1 className="display leading-[0.85] tracking-[-0.05em]" style={{ fontSize: "clamp(3rem, 12vw, 14rem)" }}>
           A small studio<br />
           <span className="text-bone/40">with a </span>
           <span className="text-gradient">long memory.</span>

@@ -38,7 +38,7 @@ function Work() {
         <motion.div style={{ y: titleY, opacity: titleO }} className="relative">
           <h1
             className="display leading-[0.82] tracking-[-0.06em]"
-            style={{ fontSize: "clamp(4.5rem, 18vw, 22rem)" }}
+            style={{ fontSize: "clamp(3rem, 13vw, 16rem)" }}
           >
             Work
             <span className="align-super text-ember" style={{ fontSize: "0.18em" }}>

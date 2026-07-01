@@ -96,7 +96,7 @@ function ColdOpen() {
         <p className="mono text-[10px] uppercase tracking-[0.4em] text-ember">◉ A WeDo Studio Feature — MMXXVI</p>
         <h1
           className="display mt-8 text-ink"
-          style={{ fontSize: "clamp(3.5rem, 15vw, 15rem)", lineHeight: 0.82, letterSpacing: "-0.06em" }}
+          style={{ fontSize: "clamp(2.75rem, 12vw, 12rem)", lineHeight: 0.85, letterSpacing: "-0.05em" }}
         >
           THE <span className="text-outline" style={{ WebkitTextStrokeColor: "#f4f1ea" }}>MAKING</span>
           <br />
