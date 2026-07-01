@@ -8,7 +8,7 @@ import * as THREE from "three";
 /*  3D loading centerpiece — morphing chrome sphere with an inner ember core  */
 /* -------------------------------------------------------------------------- */
 
-function LoaderScene({ progress }: { progress: number }) {
+function LoaderScene({ progress, isMobile }: { progress: number; isMobile: boolean }) {
   const outer = useRef<THREE.Mesh>(null!);
   const inner = useRef<THREE.Mesh>(null!);
   const ring = useRef<THREE.Mesh>(null!);
@@ -33,11 +33,17 @@ function LoaderScene({ progress }: { progress: number }) {
     }
   });
 
+  // Lower subdivisions & distort speed on mobile — visually identical, ~half the shader work
+  const outerDetail = isMobile ? 4 : 6;
+  const innerDetail = isMobile ? 3 : 4;
+  const ringSegments = isMobile ? 120 : 220;
+  const distortSpeed = isMobile ? 1.6 : 2.4;
+  const innerSpeed = isMobile ? 2.4 : 3.6;
+
   return (
     <group>
-      {/* Outer chrome distorted sphere */}
       <mesh ref={outer}>
-        <icosahedronGeometry args={[1.35, 6]} />
+        <icosahedronGeometry args={[1.35, outerDetail]} />
         <MeshDistortMaterial
           color="#0a0a0a"
           emissive="#ff5722"
@@ -45,13 +51,12 @@ function LoaderScene({ progress }: { progress: number }) {
           roughness={0.15}
           metalness={0.95}
           distort={0.35 + progress * 0.25}
-          speed={2.4}
+          speed={distortSpeed}
         />
       </mesh>
 
-      {/* Inner ember core — grows with progress */}
       <mesh ref={inner}>
-        <icosahedronGeometry args={[0.55, 4]} />
+        <icosahedronGeometry args={[0.55, innerDetail]} />
         <MeshDistortMaterial
           color="#ff5722"
           emissive="#ff8a3c"
@@ -59,15 +64,14 @@ function LoaderScene({ progress }: { progress: number }) {
           roughness={0.3}
           metalness={0.2}
           distort={0.55}
-          speed={3.6}
+          speed={innerSpeed}
           transparent
           opacity={0.9}
         />
       </mesh>
 
-      {/* Orbiting hairline ring */}
       <mesh ref={ring}>
-        <torusGeometry args={[1.9, 0.006, 16, 220]} />
+        <torusGeometry args={[1.9, 0.006, 12, ringSegments]} />
         <meshBasicMaterial color="#ff5722" transparent opacity={0.5} />
       </mesh>
     </group>
