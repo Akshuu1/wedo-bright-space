@@ -30,11 +30,12 @@ export function PageTransition({ children }: { children: ReactNode }) {
         <motion.div
           key={path + "-curtain"}
           className="pointer-events-none fixed inset-0 z-[95]"
-          initial={{ x: "-100%" }}
-          animate={{ x: "100%" }}
+          initial={{ x: "-101%" }}
+          animate={{ x: "101%" }}
+          exit={{ x: "101%" }}
           transition={{ duration: 1.05, ease: [0.85, 0, 0.15, 1] }}
         >
-          <div className="absolute inset-0 bg-ember" style={{ transform: "translateX(-6%)" }} />
+          <div className="absolute inset-y-0 -left-[6%] w-[12%] bg-ember" />
           <div className="absolute inset-0 flex items-center justify-center bg-ink">
             <div className="flex items-baseline gap-6 px-6 text-center">
               <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">◉ Loading</span>
@@ -49,6 +50,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
           </div>
         </motion.div>
       </AnimatePresence>
+
     </>
   );
 }
