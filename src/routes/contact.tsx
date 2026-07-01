@@ -23,10 +23,11 @@ function Contact() {
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="05" label="contact.html" />
         <h1 className="serif mt-10 text-5xl leading-[0.95] text-bone md:text-[12rem]">
-          <RevealText text="Let's" />
+          Let&apos;s
           <br />
-          <span className="text-ember"><RevealText text="make something." /></span>
+          <span className="text-ember">make something.</span>
         </h1>
+
 
         <div className="mt-24 grid gap-16 md:grid-cols-12">
           <div className="md:col-span-5 space-y-12">
