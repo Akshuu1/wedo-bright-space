@@ -51,6 +51,7 @@ function About() {
       <TickerStrip />
       <Manifesto />
       <Capabilities />
+      <Founders />
       <StatsStrip />
       <Principles />
       <TailCTA />
@@ -127,23 +128,13 @@ function Hero() {
         className="pointer-events-none absolute right-[-6rem] top-24 hidden h-[420px] w-[420px] opacity-[0.08] md:block"
       />
 
-      {/* top HUD */}
+      {/* top HUD — minimal */}
       <div className="relative z-10 flex items-start justify-between">
-        <div className="flex items-center gap-3">
-          <span className="pill">
-            <span className="h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.6s infinite" }} />
-            Studio 01 · Live
-          </span>
-          <span className="mono hidden text-[10px] uppercase tracking-[0.28em] text-bone/45 md:inline">
-            ⏵ chapter · about
-          </span>
-        </div>
-        <div className="flex flex-col items-end gap-2">
-          <Timecode />
-          <span className="mono text-[10px] uppercase tracking-[0.28em] text-bone/45">
-            EST 2022 · Remote · GMT ± 6
-          </span>
-        </div>
+        <span className="pill">
+          <span className="h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.6s infinite" }} />
+          Studio · Live
+        </span>
+        <Timecode />
       </div>
 
       {/* headline */}
@@ -154,11 +145,11 @@ function Hero() {
           <br />
           <span className="text-outline">and code —</span>
           <br />
-          <span className="text-gradient">one seamless studio.</span>
+          <span className="text-gradient">one seamless studio</span>
         </h1>
         <p className="mono mt-6 max-w-md text-[11px] uppercase tracking-[0.24em] text-bone/55">
-          No unnecessary complexity. No bloated solutions.
-          <span className="text-bone"> Thoughtful digital products built for real people.</span>
+          No unnecessary complexity — no bloated solutions
+          <span className="text-bone"> · thoughtful digital products built for real people</span>
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2">
@@ -168,10 +159,10 @@ function Hero() {
         </div>
       </motion.div>
 
-      {/* bottom rail */}
-      <div className="relative z-10 flex items-end justify-between border-t-2 border-bone pt-5">
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/60">↓ scroll · manifesto</p>
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/60">wedo · studio ® mmxxvi</p>
+      {/* centered scroll cue */}
+      <div className="relative z-10 flex flex-col items-center gap-2 border-t-2 border-bone pt-5">
+        <p className="mono text-[10px] uppercase tracking-[0.4em] text-bone/60">Scroll</p>
+        <span className="text-bone/40" style={{ animation: "blink 1.8s ease-in-out infinite" }}>↓</span>
       </div>
     </section>
   );
@@ -240,9 +231,9 @@ function Capabilities() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex items-end justify-between">
           <div>
-            <span className="pill mb-4">[ 02 / our values ]</span>
+            <span className="pill mb-4">Our values</span>
             <h2 className="display mt-4" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>
-              What we <span className="text-outline">stand for.</span>
+              What we <span className="text-outline">stand for</span>
             </h2>
           </div>
           <p className="mono hidden max-w-[22ch] text-right text-[10px] uppercase tracking-[0.28em] text-bone/55 md:block">
@@ -280,7 +271,7 @@ function CapCard({ c, i }: { c: (typeof capabilities)[number]; i: number }) {
       }`}
     >
       <div className="mono flex items-baseline justify-between text-[10px] uppercase tracking-[0.32em] text-bone/60">
-        <span>[ {c.n} / 04 ]</span>
+        <span>· {c.n} / 04</span>
         <span className={isAccent ? "text-ember" : ""}>◐ discipline</span>
       </div>
       <h3
@@ -313,7 +304,7 @@ function StatsStrip() {
     <section className="border-b-2 border-bone bg-bone px-6 py-16 text-ink md:px-12 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 flex items-center justify-between">
-          <span className="mono text-[10px] uppercase tracking-[0.32em] text-ember">[ 03 / receipts ]</span>
+          <span className="mono text-[10px] uppercase tracking-[0.32em] text-ember">Receipts</span>
           <span className="mono text-[10px] uppercase tracking-[0.28em] text-ink/45">2022 → today</span>
         </div>
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
@@ -343,9 +334,9 @@ function Principles() {
   return (
     <section className="relative px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-7xl">
-        <span className="pill mb-4">[ 04 / what makes us different ]</span>
+        <span className="pill mb-4">What makes us different</span>
         <h2 className="display mt-4" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>
-          We don&rsquo;t chase <span className="text-outline">trends.</span>
+          We don&rsquo;t chase <span className="text-outline">trends</span>
         </h2>
 
         <ul className="mt-14 border-t-2 border-bone">
@@ -359,7 +350,7 @@ function Principles() {
                 className="group grid items-baseline gap-6 py-8 transition-colors hover:bg-ember/5 md:grid-cols-12 md:py-12"
               >
                 <span className="mono col-span-2 text-[10px] uppercase tracking-widest text-ember">
-                  [ {String(i).padStart(2, "0")} ]
+                  · {String(i).padStart(2, "0")}
                 </span>
                 <h3
                   className="display col-span-5 transition-transform group-hover:translate-x-3"
@@ -386,7 +377,7 @@ function TailCTA() {
         style={{ background: "radial-gradient(closest-side, #ff4a1c, transparent 70%)" }}
       />
       <div className="relative">
-        <span className="pill mb-6">[ next chapter ]</span>
+        <span className="pill mb-6">Next chapter</span>
         <Link
           to="/work"
           className="display mt-6 block hover:text-ember"
@@ -395,6 +386,155 @@ function TailCTA() {
         >
           Let&rsquo;s create something <span className="text-gradient">extraordinary →</span>
         </Link>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------------------- FOUNDERS ---------------------------- */
+const founders = [
+  {
+    name: "Akshat",
+    role: "Co-founder · Product & Engineering",
+    tag: "@akshat",
+    line: "Turns messy briefs into shippable systems — obsessed with speed, structure and the last 1%.",
+    stack: ["Product", "Engineering", "AI"],
+    palette: ["#ff4a1c", "#f6ea3a"] as [string, string],
+    emoji: "⚡",
+    now: "shipping the next release",
+  },
+  {
+    name: "Sneha",
+    role: "Co-founder · Design & Brand",
+    tag: "@sneha",
+    line: "Draws the vibe, holds the taste — every pixel, motion curve and word gets her signature.",
+    stack: ["Design", "Brand", "Motion"],
+    palette: ["#f6ea3a", "#ff4a1c"] as [string, string],
+    emoji: "✦",
+    now: "sketching act two",
+  },
+];
+
+function Founders() {
+  return (
+    <section className="relative overflow-hidden border-b-2 border-bone bg-ink px-6 py-24 text-bone md:px-12 md:py-32">
+      <div
+        className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, #ff4a1c, transparent 70%)" }}
+      />
+
+      <div className="relative mx-auto max-w-7xl">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <span className="pill mb-4">The duo</span>
+            <h2
+              className="display mt-4"
+              style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
+            >
+              Two founders <span className="text-outline">one studio</span>
+            </h2>
+            <p className="mt-5 max-w-xl text-bone/60 md:text-lg">
+              WeDo is Akshat &amp; Sneha — a two-person control room where design and engineering
+              sit at the same desk, sketch on the same board and ship the same day.
+            </p>
+          </div>
+          <span className="mono hidden text-[10px] uppercase tracking-[0.28em] text-bone/45 md:block">
+            est · WeDo /02
+          </span>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          {founders.map((f, i) => (
+            <motion.article
+              key={f.name}
+              initial={{ opacity: 0, y: 60, rotate: i % 2 ? 1.5 : -1.5 }}
+              whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.9, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative overflow-hidden border-2 border-bone bg-chalk p-6 text-bone transition hover:-translate-y-1 md:p-8"
+              style={{ boxShadow: `12px 12px 0 0 ${f.palette[0]}` }}
+            >
+              {/* poster / gradient portrait */}
+              <div
+                className="relative aspect-[4/5] w-full overflow-hidden border-2 border-bone md:aspect-[5/6]"
+                style={{
+                  background: `linear-gradient(135deg, ${f.palette[0]} 0%, #0a0a0a 60%, ${f.palette[1]} 140%)`,
+                }}
+              >
+                {/* noise */}
+                <div
+                  className="absolute inset-0 opacity-30 mix-blend-overlay"
+                  style={{
+                    backgroundImage:
+                      "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+                  }}
+                />
+                {/* massive initial */}
+                <span
+                  className="display absolute inset-0 flex items-center justify-center text-bone transition-transform duration-700 group-hover:scale-105"
+                  style={{
+                    fontSize: "clamp(9rem, 22vw, 20rem)",
+                    letterSpacing: "-0.08em",
+                    lineHeight: 1,
+                    WebkitTextStroke: "2px #f4f1ea",
+                    color: "transparent",
+                  }}
+                  aria-hidden
+                >
+                  {f.name[0]}
+                </span>
+                {/* live pill */}
+                <span className="absolute left-3 top-3 flex items-center gap-2 border-2 border-bone bg-ink px-2 py-1">
+                  <span
+                    className="block h-1.5 w-1.5 rounded-full bg-ember"
+                    style={{ animation: "blink 1.4s infinite" }}
+                  />
+                  <span className="mono text-[9px] uppercase tracking-[0.28em] text-bone">now · {f.now}</span>
+                </span>
+                <span
+                  className="absolute right-3 top-3 flex h-10 w-10 rotate-6 items-center justify-center rounded-full border-2 border-bone bg-bone text-xl text-ink"
+                >
+                  {f.emoji}
+                </span>
+                {/* handle */}
+                <span className="mono absolute bottom-3 left-3 border border-bone/70 bg-ink/70 px-2 py-1 text-[10px] uppercase tracking-[0.28em] text-bone backdrop-blur">
+                  {f.tag}
+                </span>
+              </div>
+
+              <div className="mt-6 flex items-start justify-between gap-4">
+                <div>
+                  <h3
+                    className="display transition-colors group-hover:text-ember"
+                    style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
+                  >
+                    {f.name}
+                  </h3>
+                  <p className="mono mt-2 text-[10px] uppercase tracking-[0.28em] text-bone/55">{f.role}</p>
+                </div>
+                <span className="mono shrink-0 rounded-full border-2 border-bone bg-ink px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-bone">
+                  0{i + 1} / 02
+                </span>
+              </div>
+
+              <p className="mt-4 text-bone/70 md:text-lg">{f.line}</p>
+
+              <div className="mono mt-6 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.24em]">
+                {f.stack.map((t) => (
+                  <span key={t} className="border-2 border-bone bg-ink px-3 py-1 text-bone">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        {/* tape strip footer */}
+        <div className="mono mt-10 flex flex-wrap items-center justify-between gap-4 border-t-2 border-bone pt-6 text-[10px] uppercase tracking-[0.28em] text-bone/55">
+          <span>Akshat × Sneha · WeDo Studio</span>
+          <span>Same desk · same day · same standard of craft</span>
+        </div>
       </div>
     </section>
   );
