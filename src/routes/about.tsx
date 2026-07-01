@@ -7,9 +7,17 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — WeDo Studio" },
-      { name: "description", content: "A small, opinionated digital studio. We design, build and automate." },
+      { name: "description", content: "A small, opinionated digital studio. We design, build and automate for founders and modern brands." },
       { property: "og:title", content: "About — WeDo Studio" },
       { property: "og:description", content: "A small, opinionated digital studio." },
+      { property: "og:url", content: "/about" },
+    ],
+    links: [{ rel: "canonical", href: "/about" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({ "@context": "https://schema.org", "@type": "AboutPage", name: "About — WeDo Studio", url: "/about" }),
+      },
     ],
   }),
   component: About,

@@ -9,7 +9,10 @@ export const Route = createFileRoute("/story")({
       { name: "description", content: "The WeDo story, told as a five-act feature. Scroll to play." },
       { property: "og:title", content: "Story — A WeDo Feature" },
       { property: "og:description", content: "Five acts. One studio. Scroll to play." },
+      { property: "og:url", content: "/story" },
+      { property: "og:type", content: "article" },
     ],
+    links: [{ rel: "canonical", href: "/story" }],
   }),
   component: Story,
 });

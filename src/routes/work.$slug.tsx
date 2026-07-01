@@ -10,13 +10,34 @@ export const Route = createFileRoute("/work/$slug")({
     if (!project) throw notFound();
     return { project };
   },
-  head: ({ loaderData }) => ({
-    meta: loaderData ? [
-      { title: `${loaderData.project.title} — WeDo` },
-      { name: "description", content: loaderData.project.brief },
-      { property: "og:title", content: `${loaderData.project.title} — WeDo` },
-      { property: "og:description", content: loaderData.project.brief },
-    ] : [],
+  head: ({ loaderData, params }) => ({
+    meta: loaderData
+      ? [
+          { title: `${loaderData.project.title} — WeDo` },
+          { name: "description", content: loaderData.project.brief },
+          { property: "og:title", content: `${loaderData.project.title} — WeDo` },
+          { property: "og:description", content: loaderData.project.brief },
+          { property: "og:url", content: `/work/${params.slug}` },
+          { property: "og:type", content: "article" },
+        ]
+      : [],
+    links: loaderData ? [{ rel: "canonical", href: `/work/${params.slug}` }] : [],
+    scripts: loaderData
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CreativeWork",
+              name: loaderData.project.title,
+              description: loaderData.project.brief,
+              creator: { "@type": "Organization", name: "WeDo Studio" },
+              dateCreated: loaderData.project.year,
+              url: `/work/${params.slug}`,
+            }),
+          },
+        ]
+      : [],
   }),
   component: Case,
   notFoundComponent: () => (

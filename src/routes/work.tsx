@@ -8,9 +8,17 @@ export const Route = createFileRoute("/work")({
   head: () => ({
     meta: [
       { title: "Work — WeDo Studio" },
-      { name: "description", content: "Selected projects: websites, apps and automations built for founders and modern brands." },
+      { name: "description", content: "Selected projects: websites, mobile apps and automations built for founders and modern brands, 2024 — 2026." },
       { property: "og:title", content: "Work — WeDo Studio" },
       { property: "og:description", content: "Selected projects, 2024 — 2026." },
+      { property: "og:url", content: "/work" },
+    ],
+    links: [{ rel: "canonical", href: "/work" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", name: "Work — WeDo Studio", url: "/work" }),
+      },
     ],
   }),
   component: Work,
