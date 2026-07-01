@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionLabel } from "@/components/site/SectionLabel";
-import { Reveal } from "@/components/site/Reveal";
+
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/contact")({
