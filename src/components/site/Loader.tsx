@@ -122,8 +122,8 @@ export function Loader() {
       setPct(ease(p) * 100);
       if (p < 1) raf = requestAnimationFrame(tick);
       else {
-        window.setTimeout(() => setDone(true), 320);
-        window.setTimeout(() => setHidden(true), 1800);
+        window.setTimeout(() => setDone(true), 180);
+        window.setTimeout(() => setHidden(true), 1100);
       }
     };
     raf = requestAnimationFrame(tick);
