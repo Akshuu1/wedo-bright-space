@@ -7,9 +7,17 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — WeDo Studio" },
-      { name: "description", content: "Start a project with WeDo. Email, phone, and a brief inquiry form." },
+      { name: "description", content: "Start a project with WeDo. Tell us about your idea and we'll reply within one working day." },
       { property: "og:title", content: "Contact — WeDo Studio" },
       { property: "og:description", content: "Start a project with WeDo." },
+      { property: "og:url", content: "/contact" },
+    ],
+    links: [{ rel: "canonical", href: "/contact" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({ "@context": "https://schema.org", "@type": "ContactPage", name: "Contact — WeDo Studio", url: "/contact" }),
+      },
     ],
   }),
   component: Contact,

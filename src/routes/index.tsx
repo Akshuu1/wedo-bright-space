@@ -13,9 +13,13 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "WeDo Studio — Designed to ship, built to last." },
       { name: "description", content: "WeDo is an independent digital studio building websites, mobile apps and intelligent automations for teams that ship." },
-      { property: "og:title", content: "WeDo Studio" },
+      { property: "og:title", content: "WeDo Studio — Designed to ship, built to last." },
       { property: "og:description", content: "Websites, products and automations designed to mean something." },
+      { property: "og:url", content: "/" },
+      { name: "twitter:title", content: "WeDo Studio" },
+      { name: "twitter:description", content: "Websites, products and automations designed to mean something." },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Home,
 });
