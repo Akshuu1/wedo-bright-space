@@ -222,7 +222,6 @@ export function Footer() {
             {clock || "— — : — — : — —"}
           </span>
         </div>
-        <div className="flex flex-wrap items-center gap-4"></div>
       </div>
     </footer>
   );
