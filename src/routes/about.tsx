@@ -404,6 +404,7 @@ const founders = [
     palette: ["#ff4a1c", "#f6ea3a"] as [string, string],
     emoji: "⚡",
     now: "shipping the next release",
+    photo: akshatPhoto.url,
   },
   {
     name: "Sneha",
@@ -414,6 +415,7 @@ const founders = [
     palette: ["#f6ea3a", "#ff4a1c"] as [string, string],
     emoji: "✦",
     now: "sketching act two",
+    photo: snehaPhoto.url,
   },
 ];
 
