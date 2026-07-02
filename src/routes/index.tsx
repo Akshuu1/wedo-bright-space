@@ -79,7 +79,7 @@ function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[100svh] w-full overflow-hidden pt-24 md:pt-28"
+      className="relative flex min-h-[72svh] w-full flex-col overflow-hidden pt-12 md:min-h-[100svh] md:pt-24"
       style={{ background: "#0a0a0a", color: "#f4f1ea" }}
     >
       {/* faint geometric wireframes */}
@@ -100,12 +100,10 @@ function Hero() {
       {/* lens cursor light */}
       <motion.div className="pointer-events-none absolute inset-0 z-[1]" style={{ background: lensBg }} />
 
-      {/* HUD removed for a cleaner hero */}
-
-      {/* central content */}
+      {/* central content — tighter on mobile */}
       <motion.div
         style={{ y: yShift, opacity }}
-        className="relative z-[2] mx-auto flex max-w-[1500px] flex-col px-6 pb-40 pt-[14vh] md:px-10 md:pb-24 md:pt-[18vh]"
+        className="relative z-[2] mx-auto flex w-full max-w-[1500px] flex-1 flex-col px-5 pb-10 pt-3 md:px-10 md:pb-24 md:pt-[16vh]"
       >
         <h1
           className="display max-w-[14ch] text-[13vw] md:text-[9.2vw] lg:text-[8.2rem]"
@@ -526,7 +524,7 @@ function ContactStrip() {
               className="group inline-flex items-center gap-4 rounded-full border border-bone/25 bg-bone/[0.03] px-6 py-4 text-bone backdrop-blur transition hover:border-ember hover:bg-ember hover:text-ink md:px-8 md:py-5"
               data-cursor="view"
             >
-              <span className="mono text-[10px] uppercase tracking-[0.3em]">team.wedo06@gmail.com"</span>
+              <span className="mono text-[10px] uppercase tracking-[0.3em]">team.wedo06@gmail.com</span>
               <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-current transition group-hover:rotate-45">
                 →
               </span>

@@ -17,52 +17,47 @@ function useClock() {
   return now;
 }
 
+const socials = [
+  ["Instagram", "https://instagram.com", "IG"],
+  ["LinkedIn", "https://linkedin.com", "IN"],
+  ["Dribbble", "https://dribbble.com", "DR"],
+  ["Read.cv", "https://read.cv", "CV"],
+] as const;
+
 const stickers = [
-  { label: "★ Booking Q3 ’26", rot: -6, bg: "bg-ember", fg: "text-ink" },
-  { label: "no bloat", rot: 4, bg: "bg-bone", fg: "text-ink" },
-  { label: "ship fast ✦", rot: -3, bg: "bg-yellow-300", fg: "text-ink" },
-  { label: "remote · worldwide", rot: 5, bg: "bg-bone/10 border border-bone/30", fg: "text-bone" },
+  { label: "★ Booking Q3 ’26", rot: -6, bg: "bg-ember", fg: "text-bone" },
+  { label: "no bloat", rot: 4, bg: "bg-zap", fg: "text-bone" },
+  { label: "ship fast ✦", rot: -3, bg: "bg-bone", fg: "text-ink" },
+  { label: "remote · worldwide", rot: 5, bg: "bg-bone/10 border border-ink/30", fg: "text-ink" },
   { label: "made with intent", rot: -4, bg: "bg-bone", fg: "text-ink" },
-  { label: "vibes: high", rot: 7, bg: "bg-ember", fg: "text-ink" },
+  { label: "vibes: high", rot: 7, bg: "bg-ember", fg: "text-bone" },
 ];
 
 export function Footer() {
   const clock = useClock();
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="relative mt-32 overflow-hidden bg-ink text-bone">
-      {/* Grain + glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-40 h-96 bg-[radial-gradient(50%_60%_at_50%_100%,rgba(255,107,0,0.28),transparent_70%)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
-        }}
-      />
-
-      {/* Marquee ticker */}
-      <div className="relative border-b border-bone/10 bg-ember py-3 text-ink">
+    <footer className="relative overflow-hidden bg-bone text-ink">
+      {/* ember ticker */}
+      <div className="relative border-y border-ink/10 bg-ember py-2 text-bone">
         <motion.div
-          className="flex whitespace-nowrap mono text-[11px] font-bold uppercase tracking-[0.25em]"
+          className="mono flex whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.25em]"
           animate={{ x: ["0%", "-50%"] }}
           transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
         >
           {Array.from({ length: 2 }).map((_, i) => (
-            <span key={i} className="flex shrink-0 items-center gap-6 pr-6">
+            <span key={i} className="flex shrink-0 items-center gap-5 pr-5">
               {[
-                "★ open for Q3 · 2026",
+                "open for Q3 · 2026",
+                "★",
                 "websites",
                 "★",
                 "apps",
                 "★",
                 "automations",
                 "★",
-                "ship in weeks not quarters",
+                "ship in weeks",
                 "★",
                 "say hi → team.wedo06@gmail.com",
                 "★",
@@ -74,37 +69,57 @@ export function Footer() {
         </motion.div>
       </div>
 
-      {/* CTA hero */}
-      <div className="relative mx-auto max-w-7xl px-6 pt-20 md:px-10">
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="mono rounded-full border border-bone/20 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-bone/70">
-            ▸ let's talk
-          </span>
-          <span className="mono inline-flex items-center gap-2 rounded-full bg-bone/5 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-bone/60">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ember" />
-            replies in &lt; 24h
-          </span>
+      <div className="relative mx-auto max-w-7xl px-5 md:px-10">
+        {/* CTA — extra top padding so the fixed header never overlaps the heading */}
+        <div className="pt-14 pb-10 md:pt-20 md:pb-14">
+          <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">// start a project</span>
+          <div className="mt-4 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+            <h2
+              className="display text-[13vw] leading-[0.85] tracking-tight text-ink md:text-[6.5vw]"
+              style={{ letterSpacing: "-0.05em" }}
+            >
+              Let&rsquo;s build the
+              <br />
+              <span className="text-ember">next big thing</span>
+            </h2>
+            <a
+              href="mailto:team.wedo06@gmail.com"
+              className="pill group inline-flex shrink-0 items-center gap-2"
+            >
+              <span className="h-2 w-2 rounded-full bg-ember transition-transform group-hover:scale-150" />
+              team.wedo06@gmail.com
+            </a>
+          </div>
         </div>
 
-        <Link to="/contact" className="serif group mt-6 block leading-[0.85] tracking-tight">
-          <span className="block text-[18vw] md:text-[14vw] italic text-bone transition-colors group-hover:text-ember">
-            say
-            <span className="mx-4 inline-block -translate-y-2 rotate-[-6deg] rounded-2xl bg-ember px-6 py-2 text-[0.55em] not-italic text-ink shadow-[6px_6px_0_0_#F5F1E8]">
-              hi
-            </span>
-            <span aria-hidden>👋</span>
-          </span>
-          <span className="mono mt-4 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-bone/70 group-hover:text-ember">
-            <span className="h-px w-8 bg-current" />
-            start a project
-            <motion.span animate={{ x: [0, 6, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}>
-              →
-            </motion.span>
-          </span>
-        </Link>
+        {/* Social cards */}
+        <div className="border-t border-ink/10 py-6">
+          <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">Elsewhere</p>
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {socials.map(([label, href, tag]) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center justify-between rounded-xl border border-ink/15 bg-ink/5 px-3 py-2.5 text-sm text-ink transition hover:-translate-y-0.5 hover:border-ember hover:bg-ember hover:text-bone"
+              >
+                <span className="flex items-center gap-2">
+                  <span className="mono text-[9px] font-bold tracking-widest text-ink/40 group-hover:text-bone/60">
+                    {tag}
+                  </span>
+                  {label}
+                </span>
+                <span className="mono text-[10px] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                  ↗
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
 
         {/* Sticker row */}
-        <div className="mt-10 flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2 border-t border-ink/10 py-6">
           {stickers.map((s) => (
             <motion.span
               key={s.label}
@@ -117,110 +132,29 @@ export function Footer() {
             </motion.span>
           ))}
         </div>
-      </div>
 
-      {/* Columns */}
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-20 md:grid-cols-12 md:px-10">
-        <div className="md:col-span-5">
-          <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">// the studio</p>
-          <p className="serif mt-4 text-2xl leading-[1.15] text-bone md:text-3xl">
-            we build <span className="italic">sites</span>, <span className="italic">apps</span> &{" "}
-            <span className="italic">automations</span> for teams that actually care about the details.
-          </p>
-          <a
-            href="mailto:team.wedo06@gmail.com"
-            className="group mt-6 inline-flex items-center gap-3 rounded-full border border-bone/20 bg-bone/5 px-4 py-2 text-sm text-bone backdrop-blur transition hover:border-ember hover:bg-ember hover:text-ink"
-          >
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-ember text-ink group-hover:bg-ink group-hover:text-ember">
-              ✉
+        {/* Bottom bar */}
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-ink/10 px-1 py-5 md:flex-row">
+          <div className="flex items-center gap-3">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-ink">
+              <path d="M3 18 L12 4 L21 18 L17 18 L12 10 L7 18 Z" fill="currentColor" />
+              <path d="M9 18 L12 13 L15 18 Z" fill="currentColor" className="text-ember" />
+            </svg>
+            <span className="mono text-[10px] uppercase tracking-[0.3em] text-ink/50">© 2026 WeDo</span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <span className="mono inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-ink/50">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ember" />
+              {clock || "— — : — — : — —"}
             </span>
-            team.wedo06@gmail.com
-          </a>
-        </div>
-
-        <div className="md:col-span-3">
-          <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">// index</p>
-          <ul className="mt-4 space-y-1.5">
-            {[
-              ["/", "Home"],
-              ["/about", "About"],
-              ["/work", "Work"],
-              ["/story", "Story"],
-              ["/contact", "Contact"],
-            ].map(([to, label]) => (
-              <li key={to}>
-                <Link
-                  to={to}
-                  className="group relative inline-flex items-center gap-2 serif text-2xl italic text-bone/90 hover:text-ember"
-                >
-                  <span className="text-[10px] not-italic mono text-bone/30 group-hover:text-ember">↳</span>
-                  <span className="relative">
-                    {label}
-                    <span className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-ember transition-all duration-300 group-hover:w-full" />
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="md:col-span-4">
-          <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">// elsewhere</p>
-          <ul className="mt-4 grid grid-cols-2 gap-2">
-            {[
-              ["Instagram", "https://instagram.com", "IG"],
-              ["LinkedIn", "https://linkedin.com", "IN"],
-              ["Dribbble", "https://dribbble.com", "DR"],
-              ["Read.cv", "https://read.cv", "CV"],
-            ].map(([label, href, tag]) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex items-center justify-between rounded-xl border border-bone/15 bg-bone/[0.03] px-3 py-2.5 text-sm text-bone transition hover:-translate-y-0.5 hover:border-ember hover:bg-ember hover:text-ink"
-                >
-                  <span className="flex items-center gap-2">
-                    <span className="mono text-[9px] font-bold tracking-widest text-bone/40 group-hover:text-ink/60">
-                      {tag}
-                    </span>
-                    {label}
-                  </span>
-                  <span className="mono text-[10px] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                    ↗
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      {/* Giant outline wordmark */}
-      <div className="relative -mb-6 select-none px-4">
-        <p
-          className="serif text-center italic leading-[0.8] tracking-tight text-transparent"
-          style={{
-            fontSize: "clamp(6rem, 26vw, 22rem)",
-            WebkitTextStroke: "1.5px rgba(245,241,232,0.35)",
-          }}
-        >
-          wedo
-          <span className="text-ember" style={{ WebkitTextStroke: "0" }}>
-            .
-          </span>
-        </p>
-      </div>
-
-      {/* Meta bar */}
-      <div className="relative mx-auto flex max-w-7xl flex-col gap-3 border-t border-bone/10 px-6 py-6 mono text-[10px] uppercase tracking-[0.3em] text-bone/50 md:flex-row md:items-center md:justify-between md:px-10">
-        <div className="flex flex-wrap items-center gap-4">
-          <span>© 2026 Wedo</span>
-          <span className="hidden h-3 w-px bg-bone/15 md:inline-block" />
-          <span className="inline-flex items-center gap-2">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ember" />
-            {clock || "— — : — — : — —"}
-          </span>
+            <button
+              onClick={scrollTop}
+              className="mono inline-flex items-center gap-2 rounded-full border border-ink/15 px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] text-ink/70 transition hover:border-ember hover:text-ember"
+            >
+              Top ↑
+            </button>
+          </div>
         </div>
       </div>
     </footer>
