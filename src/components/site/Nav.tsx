@@ -75,7 +75,7 @@ export function Nav() {
         style={{ background: "#0a0a0a", color: "#f4f1ea" }}
       >
         <nav className="mx-auto flex h-full max-w-7xl flex-col justify-center px-6 md:px-10">
-          <p className="mono mb-10 text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/50">[ Index · 06 ]</p>
+          <p className="mono mb-10 text-[10px] uppercase tracking-[0.3em] text-[#f4f1ea]/50">Index · 06</p>
           <ul className="space-y-1">
             {items.map((it, i) => {
               const active = path === it.to;
