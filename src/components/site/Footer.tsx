@@ -70,8 +70,8 @@ export function Footer() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-5 md:px-10">
-        {/* CTA */}
-        <div className="py-10 md:py-14">
+        {/* CTA — extra top padding so the fixed header never overlaps the heading */}
+        <div className="pt-14 pb-10 md:pt-20 md:pb-14">
           <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">// start a project</span>
           <div className="mt-4 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
             <h2
