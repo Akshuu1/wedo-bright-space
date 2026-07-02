@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "motion/react";
 import wedoLogo from "@/assets/wedo-logo.png.asset.json";
+import akshatPhoto from "@/assets/akshat.jpg.asset.json";
+import snehaPhoto from "@/assets/sneha.jpg.asset.json";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
