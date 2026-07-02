@@ -222,12 +222,7 @@ export function Footer() {
             {clock || "— — : — — : — —"}
           </span>
         </div>
-        <div className="flex flex-wrap items-center gap-4">
-          <a
-            href="#top"
-            className="group inline-flex items-center gap-2 rounded-full border border-bone/20 px-3 py-1 hover:border-ember hover:text-ember"
-          ></a>
-        </div>
+        <div className="flex flex-wrap items-center gap-4"></div>
       </div>
     </footer>
   );
