@@ -86,10 +86,7 @@ export function Footer() {
           </span>
         </div>
 
-        <Link
-          to="/contact"
-          className="serif group mt-6 block leading-[0.85] tracking-tight"
-        >
+        <Link to="/contact" className="serif group mt-6 block leading-[0.85] tracking-tight">
           <span className="block text-[18vw] md:text-[14vw] italic text-bone transition-colors group-hover:text-ember">
             say
             <span className="mx-4 inline-block -translate-y-2 rotate-[-6deg] rounded-2xl bg-ember px-6 py-2 text-[0.55em] not-italic text-ink shadow-[6px_6px_0_0_#F5F1E8]">
@@ -100,10 +97,7 @@ export function Footer() {
           <span className="mono mt-4 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-bone/70 group-hover:text-ember">
             <span className="h-px w-8 bg-current" />
             start a project
-            <motion.span
-              animate={{ x: [0, 6, 0] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            >
+            <motion.span animate={{ x: [0, 6, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}>
               →
             </motion.span>
           </span>
@@ -131,8 +125,7 @@ export function Footer() {
           <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">// the studio</p>
           <p className="serif mt-4 text-2xl leading-[1.15] text-bone md:text-3xl">
             we build <span className="italic">sites</span>, <span className="italic">apps</span> &{" "}
-            <span className="italic">automations</span> for teams that actually care about the
-            details.
+            <span className="italic">automations</span> for teams that actually care about the details.
           </p>
           <a
             href="mailto:team.wedo06@gmail.com"
@@ -160,9 +153,7 @@ export function Footer() {
                   to={to}
                   className="group relative inline-flex items-center gap-2 serif text-2xl italic text-bone/90 hover:text-ember"
                 >
-                  <span className="text-[10px] not-italic mono text-bone/30 group-hover:text-ember">
-                    ↳
-                  </span>
+                  <span className="text-[10px] not-italic mono text-bone/30 group-hover:text-ember">↳</span>
                   <span className="relative">
                     {label}
                     <span className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-ember transition-all duration-300 group-hover:w-full" />
@@ -214,7 +205,10 @@ export function Footer() {
             WebkitTextStroke: "1.5px rgba(245,241,232,0.35)",
           }}
         >
-          wedo<span className="text-ember" style={{ WebkitTextStroke: "0" }}>.</span>
+          wedo
+          <span className="text-ember" style={{ WebkitTextStroke: "0" }}>
+            .
+          </span>
         </p>
       </div>
 
@@ -229,14 +223,10 @@ export function Footer() {
           </span>
         </div>
         <div className="flex flex-wrap items-center gap-4">
-          <span>v1.0 · built with intent</span>
           <a
             href="#top"
             className="group inline-flex items-center gap-2 rounded-full border border-bone/20 px-3 py-1 hover:border-ember hover:text-ember"
-          >
-            back to top
-            <span className="transition-transform group-hover:-translate-y-0.5">↑</span>
-          </a>
+          ></a>
         </div>
       </div>
     </footer>
