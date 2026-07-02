@@ -215,7 +215,7 @@ export function Footer() {
       {/* Meta bar */}
       <div className="relative mx-auto flex max-w-7xl flex-col gap-3 border-t border-bone/10 px-6 py-6 mono text-[10px] uppercase tracking-[0.3em] text-bone/50 md:flex-row md:items-center md:justify-between md:px-10">
         <div className="flex flex-wrap items-center gap-4">
-          <span>© 2026 wedo studio</span>
+          <span>© 2026 Wedo</span>
           <span className="hidden h-3 w-px bg-bone/15 md:inline-block" />
           <span className="inline-flex items-center gap-2">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ember" />
