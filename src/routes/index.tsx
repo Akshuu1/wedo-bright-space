@@ -105,10 +105,10 @@ function Hero() {
       {/* central content */}
       <motion.div
         style={{ y: yShift, opacity }}
-        className="relative z-[2] mx-auto flex max-w-[1500px] flex-col px-6 pt-[18vh] md:px-10"
+        className="relative z-[2] mx-auto flex max-w-[1500px] flex-col px-6 pb-40 pt-[14vh] md:px-10 md:pb-24 md:pt-[18vh]"
       >
         <h1
-          className="display max-w-[14ch] text-[14vw] md:text-[9.2vw] lg:text-[8.2rem]"
+          className="display max-w-[14ch] text-[13vw] md:text-[9.2vw] lg:text-[8.2rem]"
           style={{ letterSpacing: "-0.055em", lineHeight: "0.9", color: "#f4f1ea" }}
         >
           We don&rsquo;t build
@@ -118,7 +118,7 @@ function Hero() {
           <span className="text-gradient">we build memory</span>
         </h1>
 
-        <div className="mt-10 flex flex-col items-start gap-8 md:mt-14 md:flex-row md:items-end md:justify-between">
+        <div className="mt-10 flex flex-col items-start gap-6 md:mt-14 md:flex-row md:items-end md:justify-between md:gap-8">
           <Magnetic strength={0.25}>
             <Link
               to="/contact"
@@ -137,8 +137,8 @@ function Hero() {
         </div>
       </motion.div>
 
-      {/* centered scroll cue */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-[2] flex flex-col items-center gap-2 md:bottom-8">
+      {/* centered scroll cue — desktop only to avoid mobile overlap */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-[2] hidden flex-col items-center gap-2 md:bottom-8 md:flex">
         <span className="mono text-[10px] uppercase tracking-[0.4em] text-[#f4f1ea]/50">Scroll</span>
         <span className="text-[#f4f1ea]/40" style={{ animation: "blink 1.8s ease-in-out infinite" }}>
           ↓

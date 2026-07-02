@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "motion/react";
 import wedoLogo from "@/assets/wedo-logo.png.asset.json";
+import akshatPhoto from "@/assets/akshat.jpg.asset.json";
+import snehaPhoto from "@/assets/sneha.jpg.asset.json";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -402,6 +404,7 @@ const founders = [
     palette: ["#ff4a1c", "#f6ea3a"] as [string, string],
     emoji: "⚡",
     now: "shipping the next release",
+    photo: akshatPhoto.url,
   },
   {
     name: "Sneha",
@@ -412,6 +415,7 @@ const founders = [
     palette: ["#f6ea3a", "#ff4a1c"] as [string, string],
     emoji: "✦",
     now: "sketching act two",
+    photo: snehaPhoto.url,
   },
 ];
 
@@ -454,35 +458,26 @@ function Founders() {
               className="group relative overflow-hidden border-2 border-bone bg-chalk p-6 text-bone transition hover:-translate-y-1 md:p-8"
               style={{ boxShadow: `12px 12px 0 0 ${f.palette[0]}` }}
             >
-              {/* poster / gradient portrait */}
+              {/* portrait */}
               <div
                 className="relative aspect-[4/5] w-full overflow-hidden border-2 border-bone md:aspect-[5/6]"
-                style={{
-                  background: `linear-gradient(135deg, ${f.palette[0]} 0%, #0a0a0a 60%, ${f.palette[1]} 140%)`,
-                }}
+                style={{ background: "#0a0a0a" }}
               >
-                {/* noise */}
+                <img
+                  src={f.photo}
+                  alt={`${f.name} — ${f.role}`}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                />
+                {/* duotone tint */}
                 <div
-                  className="absolute inset-0 opacity-30 mix-blend-overlay"
+                  className="pointer-events-none absolute inset-0 mix-blend-color opacity-40"
                   style={{
-                    backgroundImage:
-                      "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+                    background: `linear-gradient(135deg, ${f.palette[0]} 0%, transparent 60%, ${f.palette[1]} 140%)`,
                   }}
                 />
-                {/* massive initial */}
-                <span
-                  className="display absolute inset-0 flex items-center justify-center text-bone transition-transform duration-700 group-hover:scale-105"
-                  style={{
-                    fontSize: "clamp(9rem, 22vw, 20rem)",
-                    letterSpacing: "-0.08em",
-                    lineHeight: 1,
-                    WebkitTextStroke: "2px #f4f1ea",
-                    color: "transparent",
-                  }}
-                  aria-hidden
-                >
-                  {f.name[0]}
-                </span>
+                {/* bottom fade for legibility */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink/80 to-transparent" />
                 {/* live pill */}
                 <span className="absolute left-3 top-3 flex items-center gap-2 border-2 border-bone bg-ink px-2 py-1">
                   <span
