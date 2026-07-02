@@ -11,13 +11,15 @@ export function SmoothScroll() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({
-      duration: 1.25,
-      // expo-out style — slow start, soft settle (matches Trionn feel)
+      duration: 1.1,
+      // expo-out — soft settle
       easing: (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 1.2,
-      lerp: 0.1,
+      touchMultiplier: 1.6,
+      syncTouch: true,
+      syncTouchLerp: 0.075,
+      lerp: 0.09,
     });
 
     let raf = 0;

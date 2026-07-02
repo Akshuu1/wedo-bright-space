@@ -78,15 +78,31 @@
 
 @layer base {
   * { border-color: var(--color-border); }
+  html {
+    scroll-behavior: auto; /* Lenis handles smoothing */
+    -webkit-text-size-adjust: 100%;
+  }
   html, body { background: #f4f1ea; color: #0a0a0a; }
   body {
     font-family: var(--font-sans);
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    overscroll-behavior-y: none;
   }
+  section { scroll-margin-top: 96px; }
   ::selection { background-color: #f6ea3a !important; color: #0a0a0a !important; text-shadow: none !important; -webkit-text-fill-color: #0a0a0a !important; -webkit-background-clip: initial !important; background-image: none !important; }
   ::-moz-selection { background-color: #f6ea3a !important; color: #0a0a0a !important; text-shadow: none !important; }
+}
+
+/* Consistent section rhythm — tighter on mobile, roomy on desktop */
+@utility section-y { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+@media (min-width: 768px) {
+  .section-y { padding-top: 8rem; padding-bottom: 8rem; }
+}
+@utility section-y-lg { padding-top: 5.5rem; padding-bottom: 5.5rem; }
+@media (min-width: 768px) {
+  .section-y-lg { padding-top: 10rem; padding-bottom: 10rem; }
 }
 
 @utility serif { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.03em; line-height: 0.88; text-transform: uppercase; }
