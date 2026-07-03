@@ -33,7 +33,7 @@ function Story() {
       <div
         className="pointer-events-none fixed inset-0 z-[45] mix-blend-screen"
         style={{
-          background: "radial-gradient(60% 40% at 50% 30%, rgba(255,74,28,0.14), transparent 70%)",
+          background: "radial-gradient(60% 40% at 50% 30%, rgba(181,86,107,0.14), transparent 70%)",
           animation: "projector-flicker 4s infinite",
         }}
       />
@@ -112,7 +112,7 @@ function ColdOpen() {
       </motion.div>
 
       <div className="absolute bottom-[10vh] left-6 z-10 md:left-10">
-        <div className="border-2 border-ink bg-bone p-3 text-ink" style={{ boxShadow: "8px 8px 0 0 #ff4a1c" }}>
+        <div className="border-2 border-ink bg-bone p-3 text-ink" style={{ boxShadow: "8px 8px 0 0 #B5566B" }}>
           <p className="mono text-[9px] uppercase tracking-[0.3em] text-ink/60">SCENE 01 · TAKE 01</p>
           <p className="mono text-[9px] uppercase tracking-[0.3em] text-ember">ROLL A · DIR. WEDO</p>
         </div>
@@ -177,9 +177,9 @@ function ActI() {
 /* ---------------- ACT II — Dark cast ---------------- */
 function ActII() {
   const crew = [
-    { role: "Attention", name: "Good design attracts.", line: "First impressions decide whether people stay.", accent: "#ff4a1c" },
+    { role: "Attention", name: "Good design attracts.", line: "First impressions decide whether people stay.", accent: "#B5566B" },
     { role: "Trust", name: "Great design builds.", line: "Trust is earned in typography, motion and pace.", accent: "#f6ea3a" },
-    { role: "Growth", name: "Experiences convert.", line: "Exceptional experiences turn visitors into customers.", accent: "#ff4a1c" },
+    { role: "Growth", name: "Experiences convert.", line: "Exceptional experiences turn visitors into customers.", accent: "#B5566B" },
     { role: "Legacy", name: "Businesses remember.", line: "The best work outlasts the launch date.", accent: "#f6ea3a" },
   ];
   return (
@@ -260,14 +260,14 @@ function ActIII() {
             <article
               key={s.n}
               className="relative flex h-[58vh] w-[80vw] shrink-0 flex-col justify-between overflow-hidden border-2 border-bone bg-bone text-ink md:w-[55vw]"
-              style={{ boxShadow: "12px 12px 0 0 #ff4a1c" }}
+              style={{ boxShadow: "12px 12px 0 0 #B5566B" }}
             >
               <div className="absolute inset-0 opacity-90">
                 <div
                   className="absolute inset-0"
                   style={{
                     background: i % 2
-                      ? "linear-gradient(135deg, #050505 0%, #1a0a05 60%, #ff4a1c 130%)"
+                      ? "linear-gradient(135deg, #050505 0%, #1a0a05 60%, #B5566B 130%)"
                       : "linear-gradient(135deg, #050505 0%, #201a05 60%, #f6ea3a 140%)",
                   }}
                 />

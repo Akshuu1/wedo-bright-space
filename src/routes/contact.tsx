@@ -71,7 +71,7 @@ function Hero() {
     >
       <div
         className="pointer-events-none absolute -top-40 left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, #ff4a1c, transparent 70%)" }}
+        style={{ background: "radial-gradient(closest-side, #B5566B, transparent 70%)" }}
       />
       <div
         className="pointer-events-none absolute bottom-0 right-[-10%] h-[520px] w-[520px] rounded-full opacity-25 blur-3xl"
@@ -144,7 +144,7 @@ function ContactLine({
     </>
   );
   const cls = `group block border-2 border-bone bg-ink p-5 transition hover:-translate-y-1 md:p-6 ${
-    accent ? "hover:shadow-[8px_8px_0_0_#ff4a1c]" : "hover:shadow-[8px_8px_0_0_#f6ea3a]"
+    accent ? "hover:shadow-[8px_8px_0_0_#B5566B]" : "hover:shadow-[8px_8px_0_0_#f6ea3a]"
   }`;
   return href ? (
     <a href={href} className={cls}>
@@ -283,7 +283,7 @@ function FormSection() {
             name="message"
             rows={5}
             placeholder="What are we building — and why now?"
-            className="mt-4 w-full resize-none border-2 border-bone bg-ink p-4 text-lg text-bone outline-none transition placeholder:text-bone/30 focus:shadow-[6px_6px_0_0_#ff4a1c] md:text-xl"
+            className="mt-4 w-full resize-none border-2 border-bone bg-ink p-4 text-lg text-bone outline-none transition placeholder:text-bone/30 focus:shadow-[6px_6px_0_0_#B5566B] md:text-xl"
           />
 
           <input type="hidden" name="service" value={svc ?? ""} />
@@ -335,7 +335,7 @@ function TextField({
         name={name}
         type={type}
         placeholder={placeholder}
-        className="mt-3 w-full border-2 border-bone bg-ink px-4 py-3 text-lg text-bone outline-none transition placeholder:text-bone/30 focus:shadow-[6px_6px_0_0_#ff4a1c] md:text-xl"
+        className="mt-3 w-full border-2 border-bone bg-ink px-4 py-3 text-lg text-bone outline-none transition placeholder:text-bone/30 focus:shadow-[6px_6px_0_0_#B5566B] md:text-xl"
       />
     </label>
   );

@@ -130,7 +130,7 @@ function Case() {
       {/* ================= COVER ================= */}
       <section className="px-6 md:px-12">
         <Reveal>
-          <div className="mx-auto max-w-[1600px] overflow-hidden border-2 border-bone shadow-[16px_16px_0_0_#ff4a1c]">
+          <div className="mx-auto max-w-[1600px] overflow-hidden border-2 border-bone shadow-[16px_16px_0_0_#B5566B]">
             <ProjectArt index={idx} title={project.title} palette={project.palette} className="aspect-video w-full" />
           </div>
         </Reveal>

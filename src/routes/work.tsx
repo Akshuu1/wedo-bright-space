@@ -43,7 +43,7 @@ function Work() {
         {/* aurora */}
         <div
           className="pointer-events-none absolute -left-40 top-20 h-[600px] w-[600px] rounded-full opacity-40 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, #ff4a1c, transparent 70%)" }}
+          style={{ background: "radial-gradient(closest-side, #B5566B, transparent 70%)" }}
         />
         <div
           className="pointer-events-none absolute right-[-15%] bottom-10 h-[520px] w-[520px] rounded-full opacity-25 blur-3xl"
@@ -153,7 +153,7 @@ function Work() {
       <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden px-6 py-24 text-center">
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, #ff4a1c, transparent 70%)" }}
+          style={{ background: "radial-gradient(closest-side, #B5566B, transparent 70%)" }}
         />
         <div className="relative">
           <span className="pill mb-6">[ end of archive ]</span>
@@ -278,7 +278,7 @@ function ProjectIndex({ filter }: { filter: string }) {
             animate={{ opacity: 1, scale: 1, y: 0, rotate: -2 }}
             exit={{ opacity: 0, scale: 0.9, y: 20, rotate: -3 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="pointer-events-none absolute z-10 hidden h-[340px] w-[440px] -translate-x-1/2 -translate-y-1/2 overflow-hidden border-2 border-bone shadow-[10px_10px_0_0_#ff4a1c] md:block"
+            className="pointer-events-none absolute z-10 hidden h-[340px] w-[440px] -translate-x-1/2 -translate-y-1/2 overflow-hidden border-2 border-bone shadow-[10px_10px_0_0_#B5566B] md:block"
             style={{ left: pos.x, top: pos.y }}
           >
             <ProjectArt

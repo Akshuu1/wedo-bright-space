@@ -33,15 +33,15 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brutalist Pop, retuned. Off-white canvas + true ink + hot ember + zap yellow. */
+  /* Brutalist Pop, retuned. Off-white canvas + true ink + dusty rose ember + zap yellow. */
   --color-ink: #f4f1ea;           /* warm bone canvas */
   --color-bone: #0a0a0a;          /* near-black text */
-  --color-ember: #ff4a1c;         /* deeper hotter orange */
+  --color-ember: #B5566B;         /* dusty rose accent */
   --color-zap: #f6ea3a;           /* electric yellow */
   --color-amber-soft: #ffd166;
   --color-gunmetal: #050505;
   --color-chalk: #efece4;         /* subtle inversion bg */
-  --color-violet: #ff4a1c;
+  --color-violet: #B5566B;
   --color-azure: #f6ea3a;
 
   --font-sans: "Inter Tight Variable", system-ui, sans-serif;
@@ -65,13 +65,13 @@
   --secondary-foreground: #0a0a0a;
   --muted: #efece4;
   --muted-foreground: #525252;
-  --accent: #ff4a1c;
+  --accent: #B5566B;
   --accent-foreground: #f4f1ea;
-  --destructive: #ff4a1c;
+  --destructive: #B5566B;
   --destructive-foreground: #f4f1ea;
   --border: #0a0a0a;
   --input: #0a0a0a;
-  --ring: #ff4a1c;
+  --ring: #B5566B;
 }
 
 .dark { color-scheme: light; }
@@ -111,7 +111,7 @@
 @utility body-tight { font-family: var(--font-sans); font-weight: 500; letter-spacing: -0.01em; }
 
 @utility brut-box { border: 2px solid #0a0a0a; box-shadow: 6px 6px 0 0 #0a0a0a; background: #f4f1ea; }
-@utility brut-box-accent { border: 2px solid #0a0a0a; box-shadow: 8px 8px 0 0 #ff4a1c; background: #f4f1ea; }
+@utility brut-box-accent { border: 2px solid #0a0a0a; box-shadow: 8px 8px 0 0 #B5566B; background: #f4f1ea; }
 @utility brut-box-zap { border: 2px solid #0a0a0a; box-shadow: 8px 8px 0 0 #f6ea3a; background: #f4f1ea; }
 
 @utility hairline { border-top: 2px solid #0a0a0a; }
@@ -146,7 +146,7 @@
 }
 
 @utility text-gradient {
-  background: linear-gradient(95deg, #ff4a1c 0%, #ff4a1c 55%, #f6ea3a 100%);
+  background: linear-gradient(95deg, #B5566B 0%, #B5566B 55%, #f6ea3a 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
@@ -156,7 +156,7 @@
 }
 
 @utility ember-streak {
-  background: linear-gradient(95deg, transparent 0%, #ff4a1c 30%, #f6ea3a 50%, #ff4a1c 70%, transparent 100%);
+  background: linear-gradient(95deg, transparent 0%, #B5566B 30%, #f6ea3a 50%, #B5566B 70%, transparent 100%);
 }
 
 /* Aurora blob background — 2026 trend */
@@ -173,12 +173,12 @@
     z-index: 0;
   }
   &::before {
-    background: radial-gradient(40% 40% at 30% 40%, #ff4a1c 0%, transparent 65%),
+    background: radial-gradient(40% 40% at 30% 40%, #B5566B 0%, transparent 65%),
                 radial-gradient(30% 30% at 70% 60%, #f6ea3a 0%, transparent 60%);
     animation: aurora-a 18s ease-in-out infinite alternate;
   }
   &::after {
-    background: radial-gradient(35% 35% at 80% 20%, #ff4a1c 0%, transparent 60%),
+    background: radial-gradient(35% 35% at 80% 20%, #B5566B 0%, transparent 60%),
                 radial-gradient(30% 30% at 20% 80%, #f6ea3a 0%, transparent 60%);
     animation: aurora-b 22s ease-in-out infinite alternate;
     mix-blend-mode: screen;
@@ -192,7 +192,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(600px 400px at var(--mx, 50%) var(--my, 50%), rgba(255,74,28,0.18), transparent 60%);
+    background: radial-gradient(600px 400px at var(--mx, 50%) var(--my, 50%), rgba(181,86,107,0.18), transparent 60%);
     transition: background 200ms ease;
   }
 }
@@ -216,7 +216,7 @@
   background: #0a0a0a; color: #f4f1ea;
   transition: transform 200ms cubic-bezier(0.22,1,0.36,1), background 150ms;
 }
-.pill-solid:hover { transform: translateY(-1px); background: #ff4a1c; }
+.pill-solid:hover { transform: translateY(-1px); background: #B5566B; }
 
 @utility marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
 @utility marquee-slow { animation: marquee 60s linear infinite; }
@@ -224,7 +224,7 @@
 @utility ticker-strip {
   border-top: 2px solid #0a0a0a;
   border-bottom: 2px solid #0a0a0a;
-  background: #ff4a1c;
+  background: #B5566B;
   color: #0a0a0a;
   overflow: hidden;
 }

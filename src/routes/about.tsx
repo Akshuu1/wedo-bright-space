@@ -107,7 +107,7 @@ function Hero() {
         style={{
           left: useTransform(sx, (v) => `calc(${v}% - 360px)`),
           top: useTransform(sy, (v) => `calc(${v}% - 360px)`),
-          background: "radial-gradient(closest-side, #ff4a1c 0%, transparent 70%)",
+          background: "radial-gradient(closest-side, #B5566B 0%, transparent 70%)",
         }}
       />
       <div
@@ -269,7 +269,7 @@ function CapCard({ c, i }: { c: (typeof capabilities)[number]; i: number }) {
         e.currentTarget.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
       }}
       className={`spotlight group relative overflow-hidden border-2 border-bone bg-ink p-8 transition hover:-translate-y-1 md:p-10 ${
-        isAccent ? "hover:shadow-[10px_10px_0_0_#ff4a1c]" : "hover:shadow-[10px_10px_0_0_#f6ea3a]"
+        isAccent ? "hover:shadow-[10px_10px_0_0_#B5566B]" : "hover:shadow-[10px_10px_0_0_#f6ea3a]"
       }`}
     >
       <div className="mono flex items-baseline justify-between text-[10px] uppercase tracking-[0.32em] text-bone/60">
@@ -376,7 +376,7 @@ function TailCTA() {
     <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden border-t-2 border-bone px-6 py-24 text-center">
       <div
         className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, #ff4a1c, transparent 70%)" }}
+        style={{ background: "radial-gradient(closest-side, #B5566B, transparent 70%)" }}
       />
       <div className="relative">
         <span className="pill mb-6">Next chapter</span>
@@ -401,7 +401,7 @@ const founders = [
     tag: "@akshat",
     line: "Turns messy briefs into shippable systems — obsessed with speed, structure and the last 1%.",
     stack: ["Product", "Engineering", "AI"],
-    palette: ["#ff4a1c", "#f6ea3a"] as [string, string],
+    palette: ["#B5566B", "#f6ea3a"] as [string, string],
     emoji: "⚡",
     now: "shipping the next release",
     photo: akshatPhoto.url,
@@ -412,7 +412,7 @@ const founders = [
     tag: "@sneha",
     line: "Draws the vibe, holds the taste — every pixel, motion curve and word gets her signature.",
     stack: ["Design", "Brand", "Motion"],
-    palette: ["#f6ea3a", "#ff4a1c"] as [string, string],
+    palette: ["#f6ea3a", "#B5566B"] as [string, string],
     emoji: "✦",
     now: "sketching act two",
     photo: snehaPhoto.url,
@@ -424,7 +424,7 @@ function Founders() {
     <section className="relative overflow-hidden border-b-2 border-bone bg-ink px-6 py-24 text-bone md:px-12 md:py-32">
       <div
         className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, #ff4a1c, transparent 70%)" }}
+        style={{ background: "radial-gradient(closest-side, #B5566B, transparent 70%)" }}
       />
 
       <div className="relative mx-auto max-w-7xl">
