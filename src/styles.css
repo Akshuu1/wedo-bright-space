@@ -33,16 +33,19 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brutalist Pop, retuned. Off-white canvas + true ink + dusty rose ember + zap yellow. */
+  /* GenZ 2026: warm bone + ink + dusty rose ember + zap yellow + lime + electric blue. */
   --color-ink: #f4f1ea;           /* warm bone canvas */
   --color-bone: #0a0a0a;          /* near-black text */
   --color-ember: #B5566B;         /* dusty rose accent */
   --color-zap: #f6ea3a;           /* electric yellow */
+  --color-lime: #c6ff3d;          /* acid lime */
+  --color-electric: #4d9dff;      /* electric blue */
+  --color-lilac: #d4b8ff;         /* soft lilac */
   --color-amber-soft: #ffd166;
   --color-gunmetal: #050505;
   --color-chalk: #efece4;         /* subtle inversion bg */
-  --color-violet: #B5566B;
-  --color-azure: #f6ea3a;
+  --color-violet: #d4b8ff;
+  --color-azure: #4d9dff;
 
   --font-sans: "Inter Tight Variable", system-ui, sans-serif;
   --font-serif: "Hind", system-ui, sans-serif;
