@@ -106,8 +106,8 @@ function Hero() {
         className="relative z-[2] mx-auto flex w-full max-w-[1500px] flex-1 flex-col px-5 pb-10 pt-3 md:px-10 md:pb-24 md:pt-[16vh]"
       >
         <h1
-          className="display max-w-[14ch] text-[13vw] md:text-[9.2vw] lg:text-[8.2rem]"
-          style={{ letterSpacing: "-0.055em", lineHeight: "0.9", color: "#f4f1ea" }}
+          className="display max-w-[14ch] text-[15vw] md:text-[9.2vw] lg:text-[8.2rem]"
+          style={{ letterSpacing: "-0.045em", lineHeight: "0.92", color: "#f4f1ea" }}
         >
           We don&rsquo;t build
           <br />
