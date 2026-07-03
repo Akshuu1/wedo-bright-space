@@ -385,7 +385,7 @@ function CasesScroll() {
           {projects.map((p, i) => (
             <article
               key={p.slug}
-              className="relative h-[62vh] w-[80vw] shrink-0 overflow-hidden rounded-3xl border border-bone/10 md:w-[46vw]"
+              className="relative h-[62vh] w-[80vw] shrink-0 overflow-hidden rounded-3xl border border-ink/10 md:w-[46vw]"
             >
               <Link to="/work/$slug" params={{ slug: p.slug }} className="block h-full">
                 <ProjectArt index={i} title={p.title} palette={p.palette} className="h-full w-full" />
