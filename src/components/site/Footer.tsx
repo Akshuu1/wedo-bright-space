@@ -129,18 +129,41 @@ export function Footer() {
         </div>
 
         {/* Sticker row */}
-        <div className="flex flex-wrap gap-2 border-t border-ink/10 py-6">
-          {stickers.map((s) => (
-            <motion.span
-              key={s.label}
-              initial={{ rotate: s.rot }}
-              whileHover={{ rotate: 0, scale: 1.06 }}
-              transition={{ type: "spring", stiffness: 220, damping: 14 }}
-              className={`mono cursor-default rounded-xl px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] shadow-[3px_3px_0_0_rgba(0,0,0,0.4)] ${s.bg} ${s.fg}`}
-            >
-              {s.label}
-            </motion.span>
-          ))}
+        <div className="flex flex-wrap items-center gap-3 border-t border-ink/10 py-6">
+          {stickers.map((s) => {
+            const shapeClass =
+              s.shape === "pill"
+                ? "rounded-full"
+                : s.shape === "circle"
+                  ? "rounded-full aspect-square"
+                  : s.shape === "cut"
+                    ? "rounded-none [clip-path:polygon(6%_0,100%_0,94%_100%,0_100%)]"
+                    : s.shape === "tag"
+                      ? "rounded-md border-2 border-dashed"
+                      : "rounded-[6px]";
+            return (
+              <motion.span
+                key={s.label}
+                initial={{ rotate: s.rot }}
+                whileHover={{ rotate: 0, scale: 1.08 }}
+                transition={{ type: "spring", stiffness: 220, damping: 14 }}
+                className={`mono relative inline-flex cursor-default items-center gap-2 px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] shadow-[3px_3px_0_0_rgba(0,0,0,0.35)] ${shapeClass}`}
+                style={{
+                  background: s.bg,
+                  color: s.fg,
+                  borderColor: s.shape === "tag" ? "rgba(10,10,10,0.4)" : undefined,
+                }}
+              >
+                {s.accent && (
+                  <span
+                    className="inline-block h-1.5 w-1.5 rounded-full"
+                    style={{ background: s.accent }}
+                  />
+                )}
+                {s.label}
+              </motion.span>
+            );
+          })}
         </div>
 
         {/* Bottom bar */}
