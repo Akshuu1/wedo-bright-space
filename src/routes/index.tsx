@@ -513,8 +513,8 @@ function LightInversion() {
                     {s.n} · {s.short}
                   </span>
                   <span
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 text-sm transition-transform duration-500 group-hover/card:rotate-45"
-                    style={{ borderColor: s.fg }}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border text-sm transition-transform duration-500 group-hover/card:rotate-45"
+                    style={{ borderColor: `${s.fg}40`, color: s.fg }}
                   >
                     →
                   </span>
