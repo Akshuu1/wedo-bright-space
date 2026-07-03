@@ -93,7 +93,6 @@ function Hero() {
       </div>
 
       <motion.div style={{ y }} className="relative z-10">
-        <span className="pill mb-6 border-ember bg-ember/10 text-ember">✦ Now booking · Q3 — Q4 2026</span>
         <h1 className="display leading-[0.82] tracking-[-0.055em]" style={{ fontSize: "clamp(3rem, 11vw, 12rem)" }}>
           Let&rsquo;s create
           <br />
