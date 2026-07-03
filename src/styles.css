@@ -149,12 +149,7 @@
 }
 
 @utility text-gradient {
-  background: linear-gradient(95deg, #B5566B 0%, #d4b8ff 45%, #4d9dff 75%, #f6ea3a 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-
-@utility text-gradient-lime {
-  background: linear-gradient(95deg, #c6ff3d 0%, #4d9dff 60%, #d4b8ff 100%);
+  background: linear-gradient(95deg, #B5566B 0%, #d68a5e 55%, #f6ea3a 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
@@ -164,7 +159,7 @@
 }
 
 @utility ember-streak {
-  background: linear-gradient(95deg, transparent 0%, #B5566B 20%, #d4b8ff 40%, #f6ea3a 55%, #4d9dff 75%, transparent 100%);
+  background: linear-gradient(95deg, transparent 0%, #B5566B 35%, #f6ea3a 55%, #B5566B 70%, transparent 100%);
 }
 
 /* Aurora blob background — 2026 trend */
