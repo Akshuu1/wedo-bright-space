@@ -80,7 +80,7 @@ export const projects: Project[] = [
     tags: ["Web", "Motion", "3D"],
     brief:
       "An immersive personal portfolio combining smooth animations, storytelling and premium interactions",
-    palette: ["#8b5cf6", "#22d3ee"],
+    palette: ["#B5566B", "#0a0a0a"],
     role: "Art Direction, Motion, Build",
     problem:
       "A senior creative was losing pitches to studios with far weaker work — because the portfolio itself felt like a template and never showed the craft behind the case studies",
