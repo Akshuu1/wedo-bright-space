@@ -501,8 +501,8 @@ function LightInversion() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className={`group/card relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-[28px] border-2 border-bone p-6 transition-transform duration-500 hover:-translate-y-1 md:min-h-[320px] md:p-8 ${span}`}
-                style={{ background: s.bg, color: s.fg, boxShadow: "6px 6px 0 0 #0a0a0a" }}
+                className={`group/card relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-[28px] p-6 transition-transform duration-500 hover:-translate-y-1 md:min-h-[320px] md:p-8 ${span}`}
+                style={{ background: s.bg, color: s.fg, boxShadow: "0 30px 80px -40px rgba(0,0,0,0.5)" }}
               >
                 <div
                   className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full opacity-60 blur-3xl transition-transform duration-700 group-hover/card:scale-125"
