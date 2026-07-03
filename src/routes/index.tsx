@@ -527,10 +527,10 @@ function LightInversion() {
                     →
                   </span>
                 </div>
-                <div className="relative mt-10">
+                <div className="relative mt-10 min-w-0">
                   <h3
-                    className="display text-[8vw] leading-[0.95] md:text-4xl lg:text-5xl"
-                    style={{ letterSpacing: "-0.045em", color: s.fg }}
+                    className="display text-3xl leading-[0.95] sm:text-4xl md:text-3xl lg:text-[2.5rem] xl:text-5xl"
+                    style={{ letterSpacing: "-0.04em", color: s.fg, overflowWrap: "break-word" }}
                   >
                     {s.k}.
                   </h3>
