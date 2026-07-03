@@ -243,7 +243,6 @@ function StripRibbon({ word, reverse, fg }: { word: string; reverse: boolean; fg
             style={{
               fontSize: "clamp(2.4rem, 8vw, 6rem)",
               letterSpacing: "-0.04em",
-              color: fg,
               WebkitTextStroke: i % 3 === 1 ? `1px ${fg}` : undefined,
               color: i % 3 === 1 ? "transparent" : fg,
             }}
