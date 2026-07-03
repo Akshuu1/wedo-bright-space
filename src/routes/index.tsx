@@ -79,7 +79,7 @@ function Hero() {
   return (
     <section
       ref={ref}
-      className="relative flex min-h-[72svh] w-full flex-col overflow-hidden pt-12 md:min-h-[100svh] md:pt-24"
+      className="relative flex min-h-[100svh] w-full flex-col overflow-hidden pt-20 md:pt-24"
       style={{ background: "#0a0a0a", color: "#f4f1ea" }}
     >
       {/* faint geometric wireframes */}
