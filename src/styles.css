@@ -33,16 +33,19 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brutalist Pop, retuned. Off-white canvas + true ink + dusty rose ember + zap yellow. */
+  /* GenZ 2026: warm bone + ink + dusty rose ember + zap yellow + lime + electric blue. */
   --color-ink: #f4f1ea;           /* warm bone canvas */
   --color-bone: #0a0a0a;          /* near-black text */
   --color-ember: #B5566B;         /* dusty rose accent */
   --color-zap: #f6ea3a;           /* electric yellow */
+  --color-lime: #c6ff3d;          /* acid lime */
+  --color-electric: #4d9dff;      /* electric blue */
+  --color-lilac: #d4b8ff;         /* soft lilac */
   --color-amber-soft: #ffd166;
   --color-gunmetal: #050505;
   --color-chalk: #efece4;         /* subtle inversion bg */
-  --color-violet: #B5566B;
-  --color-azure: #f6ea3a;
+  --color-violet: #d4b8ff;
+  --color-azure: #4d9dff;
 
   --font-sans: "Inter Tight Variable", system-ui, sans-serif;
   --font-serif: "Hind", system-ui, sans-serif;
@@ -146,7 +149,12 @@
 }
 
 @utility text-gradient {
-  background: linear-gradient(95deg, #B5566B 0%, #B5566B 55%, #f6ea3a 100%);
+  background: linear-gradient(95deg, #B5566B 0%, #d4b8ff 45%, #4d9dff 75%, #f6ea3a 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+@utility text-gradient-lime {
+  background: linear-gradient(95deg, #c6ff3d 0%, #4d9dff 60%, #d4b8ff 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
@@ -156,7 +164,7 @@
 }
 
 @utility ember-streak {
-  background: linear-gradient(95deg, transparent 0%, #B5566B 30%, #f6ea3a 50%, #B5566B 70%, transparent 100%);
+  background: linear-gradient(95deg, transparent 0%, #B5566B 20%, #d4b8ff 40%, #f6ea3a 55%, #4d9dff 75%, transparent 100%);
 }
 
 /* Aurora blob background — 2026 trend */

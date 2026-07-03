@@ -79,7 +79,7 @@ function Hero() {
   return (
     <section
       ref={ref}
-      className="relative flex min-h-[72svh] w-full flex-col overflow-hidden pt-12 md:min-h-[100svh] md:pt-24"
+      className="relative flex min-h-[100svh] w-full flex-col overflow-hidden pt-20 md:pt-24"
       style={{ background: "#0a0a0a", color: "#f4f1ea" }}
     >
       {/* faint geometric wireframes */}
@@ -106,8 +106,8 @@ function Hero() {
         className="relative z-[2] mx-auto flex w-full max-w-[1500px] flex-1 flex-col px-5 pb-10 pt-3 md:px-10 md:pb-24 md:pt-[16vh]"
       >
         <h1
-          className="display max-w-[14ch] text-[13vw] md:text-[9.2vw] lg:text-[8.2rem]"
-          style={{ letterSpacing: "-0.055em", lineHeight: "0.9", color: "#f4f1ea" }}
+          className="display max-w-[14ch] text-[15vw] md:text-[9.2vw] lg:text-[8.2rem]"
+          style={{ letterSpacing: "-0.045em", lineHeight: "0.92", color: "#f4f1ea" }}
         >
           We don&rsquo;t build
           <br />
@@ -261,12 +261,39 @@ function KeyFacts() {
 /* ------------------------------- MANIFEST ------------------------------- */
 
 function Manifest() {
+  const tenets = [
+    {
+      k: "Strategy first",
+      v: "Every decision starts with a real business problem.",
+      icon: "◐",
+      bg: "#B5566B",
+      fg: "#f4f1ea",
+      accent: "#f6ea3a",
+    },
+    {
+      k: "Craft always",
+      v: "Type, motion and code held to the same bar.",
+      icon: "✦",
+      bg: "#c6ff3d",
+      fg: "#0a0a0a",
+      accent: "#B5566B",
+    },
+    {
+      k: "Built for growth",
+      v: "Performance, clarity and results — not just pretty screens.",
+      icon: "◆",
+      bg: "#4d9dff",
+      fg: "#0a0a0a",
+      accent: "#f6ea3a",
+    },
+  ];
+
   return (
-    <section className="relative mx-auto max-w-7xl px-6 py-32 md:px-10 md:py-40">
+    <section className="relative mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-40">
       <SectionLabel index="03" label="Approach" />
       <Reveal>
         <p
-          className="display mt-10 max-w-[20ch] text-5xl text-bone md:text-[5.5rem]"
+          className="display mt-8 max-w-[20ch] text-[10vw] text-bone md:mt-10 md:text-[5.5rem]"
           style={{ letterSpacing: "-0.045em", lineHeight: "1.02" }}
         >
           Designed with purpose&nbsp;
@@ -274,28 +301,46 @@ function Manifest() {
         </p>
       </Reveal>
 
-      <div className="mt-16 grid gap-8 border-t border-bone/10 pt-10 md:grid-cols-3">
-        {[
-          { k: "Strategy first", v: "Every decision starts with a real business problem.", icon: "◐" },
-          { k: "Craft always", v: "Type, motion and code held to the same bar.", icon: "✦" },
-          { k: "Built for growth", v: "Performance, clarity and results — not just pretty screens.", icon: "◆" },
-        ].map((b, i) => (
+      <div className="mt-12 grid gap-5 md:mt-16 md:grid-cols-3 md:gap-6">
+        {tenets.map((b, i) => (
           <Reveal key={b.k} delay={i * 0.08}>
-            <div className="group/tenet relative overflow-hidden rounded-2xl border border-bone/10 bg-bone/[0.02] p-7 transition-all duration-500 hover:-translate-y-1 hover:border-ember/40 hover:bg-bone/[0.04]">
+            <div
+              className="group/tenet relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-[28px] border-2 border-bone p-6 transition-all duration-500 hover:-translate-y-1 md:min-h-[340px] md:p-8"
+              style={{ background: b.bg, color: b.fg, boxShadow: "6px 6px 0 0 #0a0a0a" }}
+            >
+              {/* blob accent */}
               <div
-                className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover/tenet:opacity-100"
-                style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.5), transparent 70%)" }}
+                className="pointer-events-none absolute -right-16 -bottom-20 h-56 w-56 rounded-full opacity-70 blur-2xl transition-transform duration-700 group-hover/tenet:scale-125"
+                style={{ background: b.accent }}
               />
-              <div className="flex items-center justify-between">
-                <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">0{i + 1} / Tenet</p>
-                <span className="text-ember/60 transition-transform duration-700 group-hover/tenet:rotate-180">
+              <div className="relative flex items-center justify-between">
+                <p
+                  className="mono text-[10px] uppercase tracking-[0.3em]"
+                  style={{ color: b.fg, opacity: 0.75 }}
+                >
+                  0{i + 1} / Tenet
+                </p>
+                <span
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 text-sm transition-transform duration-700 group-hover/tenet:rotate-180"
+                  style={{ borderColor: b.fg, color: b.fg }}
+                >
                   {b.icon}
                 </span>
               </div>
-              <h3 className="display mt-6 text-2xl text-bone md:text-3xl" style={{ letterSpacing: "-0.035em" }}>
-                {b.k}.
-              </h3>
-              <p className="mt-3 max-w-xs text-sm leading-relaxed text-bone/55">{b.v}</p>
+              <div className="relative mt-10">
+                <h3
+                  className="display text-3xl md:text-4xl lg:text-5xl"
+                  style={{ letterSpacing: "-0.045em", color: b.fg, lineHeight: 0.95 }}
+                >
+                  {b.k}.
+                </h3>
+                <p
+                  className="mt-4 max-w-xs text-sm leading-relaxed"
+                  style={{ color: b.fg, opacity: 0.8 }}
+                >
+                  {b.v}
+                </p>
+              </div>
             </div>
           </Reveal>
         ))}
@@ -370,39 +415,55 @@ function LightInversion() {
     {
       n: "01",
       k: "Website design & development",
+      short: "Web build",
       v: "Beautiful, responsive, scalable — built with modern stacks for performance and reliability.",
       tags: ["Design", "Build", "Next"],
+      bg: "#0a0a0a",
+      fg: "#f4f1ea",
+      accent: "#c6ff3d",
     },
     {
       n: "02",
       k: "Branding & identity",
+      short: "Brand",
       v: "Logos, colour, typography and visual systems that make brands instantly recognisable.",
       tags: ["Identity", "Type", "System"],
+      bg: "#f6ea3a",
+      fg: "#0a0a0a",
+      accent: "#B5566B",
     },
     {
       n: "03",
       k: "AI solutions & automation",
+      short: "AI + Ops",
       v: "Chatbots, workflow automation and intelligent systems that quietly retire manual work.",
       tags: ["LLM", "Ops", "Agents"],
+      bg: "#d4b8ff",
+      fg: "#0a0a0a",
+      accent: "#4d9dff",
     },
     {
       n: "04",
       k: "UI/UX & digital growth",
+      short: "UX + Growth",
       v: "Interfaces people enjoy — with SEO, analytics and optimisation that keep growing.",
       tags: ["UX", "SEO", "Analytics"],
+      bg: "#4d9dff",
+      fg: "#0a0a0a",
+      accent: "#f6ea3a",
     },
   ];
 
   return (
-    <section className="relative overflow-hidden bg-chalk px-6 py-32 text-bone md:px-10 md:py-40">
+    <section className="relative overflow-hidden bg-chalk px-5 py-24 text-bone md:px-10 md:py-40">
       {/* aurora blobs */}
       <div
-        className="pointer-events-none absolute -left-40 top-40 h-[520px] w-[520px] rounded-full opacity-20 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.7), transparent 70%)" }}
+        className="pointer-events-none absolute -left-40 top-40 h-[520px] w-[520px] rounded-full opacity-40 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, #B5566B, transparent 70%)" }}
       />
       <div
-        className="pointer-events-none absolute -right-40 bottom-20 h-[420px] w-[420px] rounded-full opacity-15 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, oklch(0.95 0.12 85 / 0.6), transparent 70%)" }}
+        className="pointer-events-none absolute -right-40 bottom-20 h-[420px] w-[420px] rounded-full opacity-30 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, #4d9dff, transparent 70%)" }}
       />
 
       <div className="relative mx-auto max-w-7xl">
@@ -414,73 +475,77 @@ function LightInversion() {
         </div>
 
         <h2
-          className="display mt-8 max-w-[16ch] text-5xl text-bone md:text-[6rem]"
-          style={{ letterSpacing: "-0.05em", lineHeight: "1" }}
+          className="display mt-6 max-w-[16ch] text-[11vw] text-bone md:mt-8 md:text-[6rem]"
+          style={{ letterSpacing: "-0.045em", lineHeight: "1" }}
         >
           One studio
           <br />
-          <span
-            style={{
-              background: "linear-gradient(95deg, oklch(0.55 0.18 35), oklch(0.74 0.17 55))",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            Four disciplines
-          </span>
+          <span className="text-gradient">Four disciplines</span>
         </h2>
 
-        <ul className="mt-16 border-y border-bone/10">
-          {disciplines.map((s, i) => (
-            <motion.li
-              key={s.n}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -60 : 60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.9, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="group/row relative grid grid-cols-12 items-center gap-4 border-b border-bone/10 py-8 last:border-b-0 md:py-10"
-            >
-              {/* ember wash on hover */}
-              <div
-                className="pointer-events-none absolute inset-0 origin-left scale-x-0 bg-ink transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/row:scale-x-100"
-                aria-hidden
-              />
-              <span className="mono relative col-span-2 text-[10px] uppercase tracking-[0.25em] text-bone/50 transition-colors duration-500 group-hover/row:text-ember md:col-span-1">
-                {s.n}
-              </span>
-              <h3
-                className="display relative col-span-10 text-3xl text-bone transition-colors duration-500 group-hover/row:text-chalk md:col-span-6 md:text-5xl lg:text-6xl"
-                style={{ letterSpacing: "-0.045em" }}
+        {/* Bento grid — 2026 GenZ, mobile-first */}
+        <div className="mt-10 grid grid-cols-1 gap-4 md:mt-16 md:grid-cols-6 md:gap-5">
+          {disciplines.map((s, i) => {
+            // sizing: 01 big, 02 small, 03 small, 04 big  (on md)
+            const span =
+              i === 0
+                ? "md:col-span-4"
+                : i === 1
+                  ? "md:col-span-2"
+                  : i === 2
+                    ? "md:col-span-2"
+                    : "md:col-span-4";
+            return (
+              <motion.article
+                key={s.n}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className={`group/card relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-[28px] border-2 border-bone p-6 transition-transform duration-500 hover:-translate-y-1 md:min-h-[320px] md:p-8 ${span}`}
+                style={{ background: s.bg, color: s.fg, boxShadow: "6px 6px 0 0 #0a0a0a" }}
               >
-                <span className="inline-block transition-transform duration-500 group-hover/row:translate-x-2">
-                  {s.k}
-                </span>
-              </h3>
-              <div className="relative col-span-12 flex flex-wrap gap-2 md:col-span-4 md:justify-end">
-                {s.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="mono rounded-full border border-bone/15 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-bone/55 transition-colors duration-500 group-hover/row:border-chalk/25 group-hover/row:text-chalk/70"
-                  >
-                    {t}
+                <div
+                  className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full opacity-60 blur-3xl transition-transform duration-700 group-hover/card:scale-125"
+                  style={{ background: s.accent }}
+                />
+                <div className="relative flex items-start justify-between">
+                  <span className="mono text-[10px] uppercase tracking-[0.3em]" style={{ opacity: 0.7 }}>
+                    {s.n} · {s.short}
                   </span>
-                ))}
-              </div>
-              <span className="mono relative col-span-12 flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-bone/40 transition-colors duration-500 group-hover/row:text-ember md:col-span-1 md:justify-end">
-                <span className="inline-block transition-transform duration-500 group-hover/row:translate-x-1">→</span>
-              </span>
-
-              {/* corner index sticker (2026 filmstrip vibe) */}
-              <span
-                className="mono pointer-events-none absolute right-0 top-2 hidden text-[9px] uppercase tracking-[0.3em] text-bone/25 transition-colors duration-500 group-hover/row:text-chalk/40 md:block"
-                aria-hidden
-              >
-                · {String(i + 1).padStart(2, "0")} of 04
-              </span>
-            </motion.li>
-          ))}
-        </ul>
+                  <span
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 text-sm transition-transform duration-500 group-hover/card:rotate-45"
+                    style={{ borderColor: s.fg }}
+                  >
+                    →
+                  </span>
+                </div>
+                <div className="relative mt-10">
+                  <h3
+                    className="display text-[8vw] leading-[0.95] md:text-4xl lg:text-5xl"
+                    style={{ letterSpacing: "-0.045em", color: s.fg }}
+                  >
+                    {s.k}.
+                  </h3>
+                  <p className="mt-4 max-w-md text-sm leading-relaxed" style={{ opacity: 0.85 }}>
+                    {s.v}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {s.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="mono rounded-full border-2 px-3 py-1 text-[10px] uppercase tracking-[0.2em]"
+                        style={{ borderColor: s.fg, color: s.fg }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
