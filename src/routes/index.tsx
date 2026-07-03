@@ -455,14 +455,14 @@ function LightInversion() {
 
   return (
     <section className="relative overflow-hidden bg-chalk px-5 py-24 text-bone md:px-10 md:py-40">
-      {/* aurora blobs */}
+      {/* soft ember wash */}
       <div
-        className="pointer-events-none absolute -left-40 top-40 h-[520px] w-[520px] rounded-full opacity-40 blur-3xl"
+        className="pointer-events-none absolute -left-40 top-40 h-[520px] w-[520px] rounded-full opacity-25 blur-3xl"
         style={{ background: "radial-gradient(closest-side, #B5566B, transparent 70%)" }}
       />
       <div
-        className="pointer-events-none absolute -right-40 bottom-20 h-[420px] w-[420px] rounded-full opacity-30 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, #4d9dff, transparent 70%)" }}
+        className="pointer-events-none absolute -right-40 bottom-20 h-[420px] w-[420px] rounded-full opacity-20 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, #f6ea3a, transparent 70%)" }}
       />
 
       <div className="relative mx-auto max-w-7xl">
