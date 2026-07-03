@@ -356,19 +356,27 @@ function CasesScroll() {
   const x = useTransform(scrollYProgress, [0, 1], ["6%", "-72%"]);
 
   return (
-    <section ref={ref} className="relative h-[360vh] bg-ink">
+    <section ref={ref} className="relative h-[360vh]" style={{ background: "#0a0a0a", color: "#f4f1ea" }}>
+      {/* soft ember ambient */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/4 h-[600px] w-[600px] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, #B5566B, transparent 70%)" }}
+      />
       <div className="sticky top-0 flex h-screen flex-col overflow-hidden pt-24 md:pt-28">
-        <div className="px-6 md:px-10">
+        <div className="relative px-5 md:px-10">
           <div className="mx-auto flex max-w-7xl items-end justify-between">
             <SectionLabel index="04" label="Selected work" />
             <Link
               to="/work"
-              className="mono hidden border-b border-bone/40 pb-1 text-[10px] uppercase tracking-[0.3em] hover:border-ember md:inline-block"
+              className="mono hidden border-b border-ink/40 pb-1 text-[10px] uppercase tracking-[0.3em] text-ink hover:border-ember md:inline-block"
             >
               All cases →
             </Link>
           </div>
-          <h2 className="display mt-6 text-5xl text-bone md:text-[6rem]" style={{ letterSpacing: "-0.05em" }}>
+          <h2
+            className="display mt-6 text-[13vw] text-ink md:text-[6rem]"
+            style={{ letterSpacing: "-0.045em", lineHeight: 0.95 }}
+          >
             A selection <span className="text-gradient">in motion</span>
           </h2>
         </div>
