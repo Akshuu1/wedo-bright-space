@@ -65,7 +65,7 @@ export function Marquee({
                   : "text-[11vw] md:text-[7.5rem]",
                 isOutline ? "text-transparent" : "",
                 isEmber ? "text-ink" : "text-bone",
-                "group-hover/marquee:[text-shadow:0_0_40px_rgba(255,74,28,0.35)]",
+                "group-hover/marquee:[text-shadow:0_0_40px_rgba(181,86,107,0.35)]",
               ].join(" ")}
               style={{
                 letterSpacing: "-0.055em",

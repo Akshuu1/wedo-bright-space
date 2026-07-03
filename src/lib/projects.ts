@@ -26,7 +26,7 @@ export const projects: Project[] = [
     tags: ["Web", "Product", "Commerce"],
     brief:
       "An industrial equipment ordering platform designed to simplify product discovery and purchasing at scale",
-    palette: ["#ff5722", "#ffb020"],
+    palette: ["#B5566B", "#ffb020"],
     role: "Strategy, Design, Build",
     problem:
       "Buyers were lost in a 4,000-SKU catalog spread across PDFs and spreadsheets Sales spent hours quoting parts that customers should have been able to configure themselves",
@@ -39,9 +39,9 @@ export const projects: Project[] = [
       { k: "8 wks", l: "From kickoff to launch" },
     ],
     gallery: [
-      { palette: ["#ff5722", "#ffb020"], caption: "Catalog · faceted discovery" },
+      { palette: ["#B5566B", "#ffb020"], caption: "Catalog · faceted discovery" },
       { palette: ["#ffb020", "#0a0a0a"], caption: "Product · live specifications" },
-      { palette: ["#0a0a0a", "#ff5722"], caption: "Checkout · quote to order" },
+      { palette: ["#0a0a0a", "#B5566B"], caption: "Checkout · quote to order" },
     ],
     stack: ["Next", "Sanity", "Stripe", "Algolia"],
   },
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     tags: ["Web", "Mobile", "AI"],
     brief:
       "A modern QR-powered menu experience for restaurants and cafés with interactive browsing, live feedback and analytics",
-    palette: ["#f6ea3a", "#ff4a1c"],
+    palette: ["#f6ea3a", "#B5566B"],
     role: "Product, Design, Build",
     problem:
       "Paper menus were reprinted weekly, feedback lived in scattered Google reviews and owners had no idea which dishes actually drove revenue",
@@ -66,8 +66,8 @@ export const projects: Project[] = [
       { k: "9 sites", l: "Rolled out in Q1" },
     ],
     gallery: [
-      { palette: ["#f6ea3a", "#ff4a1c"], caption: "Guest · QR menu" },
-      { palette: ["#ff4a1c", "#0a0a0a"], caption: "Feedback · one tap" },
+      { palette: ["#f6ea3a", "#B5566B"], caption: "Guest · QR menu" },
+      { palette: ["#B5566B", "#0a0a0a"], caption: "Feedback · one tap" },
       { palette: ["#0a0a0a", "#f6ea3a"], caption: "Owner · live analytics" },
     ],
     stack: ["React", "TanStack", "Supabase", "AI"],

@@ -85,7 +85,7 @@ export function Loader() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(60% 50% at 50% 50%, rgba(255,87,34,0.12), transparent 70%)",
+                "radial-gradient(60% 50% at 50% 50%, rgba(181,86,107,0.12), transparent 70%)",
             }}
           />
 
@@ -145,12 +145,12 @@ export function Loader() {
                   cy="100"
                   r="88"
                   fill="none"
-                  stroke="#ff5722"
+                  stroke="#B5566B"
                   strokeWidth="0.8"
                   strokeLinecap="round"
                   strokeDasharray={`${(progress * 2 * Math.PI * 88).toFixed(2)} 1000`}
                   transform="rotate(-90 100 100)"
-                  style={{ filter: "drop-shadow(0 0 4px rgba(255,87,34,0.7))" }}
+                  style={{ filter: "drop-shadow(0 0 4px rgba(181,86,107,0.7))" }}
                 />
                 {/* crosshair */}
                 <line x1="100" y1="0" x2="100" y2="20" stroke="rgba(244,241,234,0.35)" strokeWidth="0.4" />
@@ -178,11 +178,11 @@ export function Loader() {
                 })}
                 {/* sweep hand */}
                 <g transform={`rotate(${sweep} 100 100)`} style={{ transition: "transform 120ms linear" }}>
-                  <line x1="100" y1="100" x2="100" y2="14" stroke="#ff5722" strokeWidth="0.8" strokeLinecap="round" />
-                  <circle cx="100" cy="14" r="2" fill="#ff5722" />
+                  <line x1="100" y1="100" x2="100" y2="14" stroke="#B5566B" strokeWidth="0.8" strokeLinecap="round" />
+                  <circle cx="100" cy="14" r="2" fill="#B5566B" />
                 </g>
                 {/* center dot */}
-                <circle cx="100" cy="100" r="1.5" fill="#ff5722" />
+                <circle cx="100" cy="100" r="1.5" fill="#B5566B" />
               </svg>
 
               {/* Giant countdown number */}
@@ -197,7 +197,7 @@ export function Loader() {
                   style={{
                     fontSize: "clamp(6rem, 22vw, 18rem)",
                     letterSpacing: "-0.08em",
-                    textShadow: "0 0 40px rgba(255,87,34,0.25)",
+                    textShadow: "0 0 40px rgba(181,86,107,0.25)",
                   }}
                 >
                   {String(shown).padStart(2, "0")}
@@ -245,7 +245,7 @@ export function Loader() {
                 style={{
                   transform: `scaleX(${progress})`,
                   transition: "transform 120ms cubic-bezier(0.22,1,0.36,1)",
-                  boxShadow: "0 0 14px rgba(255,87,34,0.7)",
+                  boxShadow: "0 0 14px rgba(181,86,107,0.7)",
                 }}
               />
             </div>
@@ -306,7 +306,7 @@ export function RouteProgress({ active }: { active: boolean }) {
           transform: `scaleX(${pct})`,
           opacity: visible ? 1 : 0,
           transition: "transform 140ms linear, opacity 280ms ease-out",
-          boxShadow: "0 0 12px rgba(255,87,34,0.7)",
+          boxShadow: "0 0 12px rgba(181,86,107,0.7)",
         }}
       />
     </div>
