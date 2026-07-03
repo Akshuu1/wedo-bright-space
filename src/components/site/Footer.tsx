@@ -24,13 +24,23 @@ const socials = [
   ["Read.cv", "https://read.cv", "CV"],
 ] as const;
 
-const stickers = [
-  { label: "★ Booking Q3 ’26", rot: -6, bg: "bg-ember", fg: "text-bone" },
-  { label: "no bloat", rot: 4, bg: "bg-zap", fg: "text-bone" },
-  { label: "ship fast ✦", rot: -3, bg: "bg-bone", fg: "text-ink" },
-  { label: "remote · worldwide", rot: 5, bg: "bg-bone/10 border border-ink/30", fg: "text-ink" },
-  { label: "made with intent", rot: -4, bg: "bg-bone", fg: "text-ink" },
-  { label: "vibes: high", rot: 7, bg: "bg-ember", fg: "text-bone" },
+// Each sticker has its own personality: colour, shape, motion.
+type Sticker = {
+  label: string;
+  rot: number;
+  shape: "pill" | "rect" | "cut" | "circle" | "tag";
+  bg: string;
+  fg: string;
+  accent?: string;
+};
+
+const stickers: Sticker[] = [
+  { label: "★ Booking Q3 '26", rot: -6, shape: "rect", bg: "#B5566B", fg: "#f4f1ea", accent: "#f6ea3a" },
+  { label: "no bloat", rot: 4, shape: "cut", bg: "#f6ea3a", fg: "#0a0a0a" },
+  { label: "ship fast ✦", rot: -3, shape: "pill", bg: "#0a0a0a", fg: "#f4f1ea", accent: "#B5566B" },
+  { label: "remote · worldwide", rot: 5, shape: "tag", bg: "transparent", fg: "#0a0a0a" },
+  { label: "made with intent", rot: -4, shape: "pill", bg: "#f4f1ea", fg: "#0a0a0a", accent: "#0a0a0a" },
+  { label: "vibes: high", rot: 7, shape: "circle", bg: "#B5566B", fg: "#f4f1ea" },
 ];
 
 export function Footer() {
@@ -119,18 +129,41 @@ export function Footer() {
         </div>
 
         {/* Sticker row */}
-        <div className="flex flex-wrap gap-2 border-t border-ink/10 py-6">
-          {stickers.map((s) => (
-            <motion.span
-              key={s.label}
-              initial={{ rotate: s.rot }}
-              whileHover={{ rotate: 0, scale: 1.06 }}
-              transition={{ type: "spring", stiffness: 220, damping: 14 }}
-              className={`mono cursor-default rounded-xl px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] shadow-[3px_3px_0_0_rgba(0,0,0,0.4)] ${s.bg} ${s.fg}`}
-            >
-              {s.label}
-            </motion.span>
-          ))}
+        <div className="flex flex-wrap items-center gap-3 border-t border-ink/10 py-6">
+          {stickers.map((s) => {
+            const shapeClass =
+              s.shape === "pill"
+                ? "rounded-full"
+                : s.shape === "circle"
+                  ? "rounded-full aspect-square"
+                  : s.shape === "cut"
+                    ? "rounded-none [clip-path:polygon(6%_0,100%_0,94%_100%,0_100%)]"
+                    : s.shape === "tag"
+                      ? "rounded-md border-2 border-dashed"
+                      : "rounded-[6px]";
+            return (
+              <motion.span
+                key={s.label}
+                initial={{ rotate: s.rot }}
+                whileHover={{ rotate: 0, scale: 1.08 }}
+                transition={{ type: "spring", stiffness: 220, damping: 14 }}
+                className={`mono relative inline-flex cursor-default items-center gap-2 px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] shadow-[3px_3px_0_0_rgba(0,0,0,0.35)] ${shapeClass}`}
+                style={{
+                  background: s.bg,
+                  color: s.fg,
+                  borderColor: s.shape === "tag" ? "rgba(10,10,10,0.4)" : undefined,
+                }}
+              >
+                {s.accent && (
+                  <span
+                    className="inline-block h-1.5 w-1.5 rounded-full"
+                    style={{ background: s.accent }}
+                  />
+                )}
+                {s.label}
+              </motion.span>
+            );
+          })}
         </div>
 
         {/* Bottom bar */}

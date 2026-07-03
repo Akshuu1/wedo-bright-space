@@ -58,26 +58,45 @@ export function Marquee({
           style={{ x: drift, animationDuration: `${(isMono ? 55 : 40) / speed}s` }}
           className="marquee-track items-center"
         >
-          {row.map((t, i) => (
-            <span key={i} className="flex items-center gap-6 pr-6 md:gap-10 md:pr-10">
-              <span
-                className={[
-                  "whitespace-nowrap uppercase leading-none",
-                  isMono
-                    ? "mono text-[3.2vw] font-medium tracking-[0.14em] md:text-[15px]"
-                    : "display text-[10vw] md:text-[6.5rem] lg:text-[8rem]",
-                ].join(" ")}
-                style={{
-                  letterSpacing: isMono ? undefined : "-0.05em",
-                  color: isOutline ? "transparent" : surface.fg,
-                  WebkitTextStroke: isOutline ? `1.2px ${surface.fg}` : undefined,
-                }}
-              >
-                {t}
+          {row.map((t, i) => {
+            // In mono variant, cycle each item through a distinct chip style
+            // so "Available", "Booking", "Remote", "GMT" each look different.
+            const monoStyles = [
+              { bg: "#0a0a0a", fg: "#f4f1ea", border: "#0a0a0a", dot: "#B5566B" }, // solid ink
+              { bg: "transparent", fg: "#0a0a0a", border: "#0a0a0a", dot: "#B5566B" }, // outline
+              { bg: "#B5566B", fg: "#f4f1ea", border: "#B5566B", dot: "#f6ea3a" }, // ember solid
+              { bg: "#f6ea3a", fg: "#0a0a0a", border: "#0a0a0a", dot: "#B5566B" }, // zap
+            ];
+            const chip = monoStyles[i % monoStyles.length];
+            return (
+              <span key={i} className="flex items-center gap-4 pr-4 md:gap-6 md:pr-6">
+                {isMono ? (
+                  <span
+                    className="mono inline-flex items-center gap-2 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] md:text-[12px]"
+                    style={{ background: chip.bg, color: chip.fg, borderColor: chip.border }}
+                  >
+                    <span
+                      className="inline-block h-1.5 w-1.5 rounded-full"
+                      style={{ background: chip.dot, animation: "blink 2s ease-in-out infinite" }}
+                    />
+                    {t}
+                  </span>
+                ) : (
+                  <span
+                    className="display whitespace-nowrap uppercase leading-none text-[10vw] md:text-[6.5rem] lg:text-[8rem]"
+                    style={{
+                      letterSpacing: "-0.05em",
+                      color: isOutline ? "transparent" : surface.fg,
+                      WebkitTextStroke: isOutline ? `1.2px ${surface.fg}` : undefined,
+                    }}
+                  >
+                    {t}
+                  </span>
+                )}
+                {!isMono && <Sep fg={surface.fg} accent={surface.accent} idx={i} small={false} />}
               </span>
-              <Sep fg={surface.fg} accent={surface.accent} idx={i} small={isMono} />
-            </span>
-          ))}
+            );
+          })}
         </motion.div>
       </div>
 
