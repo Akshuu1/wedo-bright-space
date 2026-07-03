@@ -533,8 +533,8 @@ function LightInversion() {
                     {s.tags.map((t) => (
                       <span
                         key={t}
-                        className="mono rounded-full border-2 px-3 py-1 text-[10px] uppercase tracking-[0.2em]"
-                        style={{ borderColor: s.fg, color: s.fg }}
+                        className="mono rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.2em]"
+                        style={{ borderColor: `${s.fg}30`, color: s.fg }}
                       >
                         {t}
                       </span>
