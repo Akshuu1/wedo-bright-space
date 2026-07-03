@@ -107,7 +107,7 @@ export const projects: Project[] = [
     tags: ["AI", "Automation"],
     brief:
       "Replaced eleven manual workflows with one intelligent pipeline that runs the back office overnight",
-    palette: ["#6366f1", "#8b5cf6"],
+    palette: ["#0a0a0a", "#f6ea3a"],
     role: "Systems, AI, Ops",
     problem:
       "The ops team was drowning in copy-paste — invoices, CRM updates, inventory sync and reporting all happening by hand across five tools every single day",
