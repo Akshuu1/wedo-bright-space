@@ -287,8 +287,8 @@ function Manifest() {
       <SectionLabel index="03" label="Approach" />
       <Reveal>
         <p
-          className="display mt-8 max-w-[20ch] text-[10vw] text-bone md:mt-10 md:text-[5.5rem]"
-          style={{ letterSpacing: "-0.045em", lineHeight: "1.02" }}
+          className="display mt-8 max-w-[18ch] text-[9vw] text-bone sm:text-6xl md:mt-10 md:text-[4.5rem] lg:text-[5.5rem]"
+          style={{ letterSpacing: "-0.04em", lineHeight: "1.02", overflowWrap: "break-word" }}
         >
           Designed with purpose&nbsp;
           <span className="text-gradient">built for growth</span>
