@@ -266,25 +266,19 @@ function Manifest() {
       k: "Strategy first",
       v: "Every decision starts with a real business problem.",
       icon: "◐",
-      bg: "#B5566B",
-      fg: "#f4f1ea",
-      accent: "#f6ea3a",
+      variant: "ink" as const,
     },
     {
       k: "Craft always",
       v: "Type, motion and code held to the same bar.",
       icon: "✦",
-      bg: "#c6ff3d",
-      fg: "#0a0a0a",
-      accent: "#B5566B",
+      variant: "ember" as const,
     },
     {
       k: "Built for growth",
       v: "Performance, clarity and results — not just pretty screens.",
       icon: "◆",
-      bg: "#4d9dff",
-      fg: "#0a0a0a",
-      accent: "#f6ea3a",
+      variant: "ink" as const,
     },
   ];
 
@@ -302,48 +296,53 @@ function Manifest() {
       </Reveal>
 
       <div className="mt-12 grid gap-5 md:mt-16 md:grid-cols-3 md:gap-6">
-        {tenets.map((b, i) => (
-          <Reveal key={b.k} delay={i * 0.08}>
-            <div
-              className="group/tenet relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-[28px] border-2 border-bone p-6 transition-all duration-500 hover:-translate-y-1 md:min-h-[340px] md:p-8"
-              style={{ background: b.bg, color: b.fg, boxShadow: "6px 6px 0 0 #0a0a0a" }}
-            >
-              {/* blob accent */}
+        {tenets.map((b, i) => {
+          const isEmber = b.variant === "ember";
+          const bg = isEmber ? "#B5566B" : "#0a0a0a";
+          const fg = "#f4f1ea";
+          const accent = isEmber ? "#f6ea3a" : "#B5566B";
+          return (
+            <Reveal key={b.k} delay={i * 0.08}>
               <div
-                className="pointer-events-none absolute -right-16 -bottom-20 h-56 w-56 rounded-full opacity-70 blur-2xl transition-transform duration-700 group-hover/tenet:scale-125"
-                style={{ background: b.accent }}
-              />
-              <div className="relative flex items-center justify-between">
-                <p
-                  className="mono text-[10px] uppercase tracking-[0.3em]"
-                  style={{ color: b.fg, opacity: 0.75 }}
-                >
-                  0{i + 1} / Tenet
-                </p>
-                <span
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 text-sm transition-transform duration-700 group-hover/tenet:rotate-180"
-                  style={{ borderColor: b.fg, color: b.fg }}
-                >
-                  {b.icon}
-                </span>
+                className="group/tenet relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-[28px] p-6 transition-all duration-500 hover:-translate-y-1 md:min-h-[340px] md:p-8"
+                style={{ background: bg, color: fg, boxShadow: "0 20px 60px -30px rgba(0,0,0,0.4)" }}
+              >
+                {/* soft gradient blob accent */}
+                <div
+                  className="pointer-events-none absolute -right-24 -bottom-24 h-64 w-64 rounded-full opacity-40 blur-3xl transition-transform duration-700 group-hover/tenet:scale-125"
+                  style={{ background: accent }}
+                />
+                {/* thin top hairline */}
+                <div
+                  className="pointer-events-none absolute inset-x-6 top-0 h-px opacity-30 md:inset-x-8"
+                  style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }}
+                />
+                <div className="relative flex items-center justify-between">
+                  <p className="mono text-[10px] uppercase tracking-[0.3em]" style={{ color: accent }}>
+                    0{i + 1} / Tenet
+                  </p>
+                  <span
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border text-sm transition-transform duration-700 group-hover/tenet:rotate-180"
+                    style={{ borderColor: `${fg}40`, color: fg }}
+                  >
+                    {b.icon}
+                  </span>
+                </div>
+                <div className="relative mt-10">
+                  <h3
+                    className="display text-3xl md:text-4xl lg:text-5xl"
+                    style={{ letterSpacing: "-0.045em", color: fg, lineHeight: 0.95 }}
+                  >
+                    {b.k}.
+                  </h3>
+                  <p className="mt-4 max-w-xs text-sm leading-relaxed" style={{ color: fg, opacity: 0.65 }}>
+                    {b.v}
+                  </p>
+                </div>
               </div>
-              <div className="relative mt-10">
-                <h3
-                  className="display text-3xl md:text-4xl lg:text-5xl"
-                  style={{ letterSpacing: "-0.045em", color: b.fg, lineHeight: 0.95 }}
-                >
-                  {b.k}.
-                </h3>
-                <p
-                  className="mt-4 max-w-xs text-sm leading-relaxed"
-                  style={{ color: b.fg, opacity: 0.8 }}
-                >
-                  {b.v}
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        ))}
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );
@@ -357,19 +356,27 @@ function CasesScroll() {
   const x = useTransform(scrollYProgress, [0, 1], ["6%", "-72%"]);
 
   return (
-    <section ref={ref} className="relative h-[360vh] bg-ink">
+    <section ref={ref} className="relative h-[360vh]" style={{ background: "#0a0a0a", color: "#f4f1ea" }}>
+      {/* soft ember ambient */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/4 h-[600px] w-[600px] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, #B5566B, transparent 70%)" }}
+      />
       <div className="sticky top-0 flex h-screen flex-col overflow-hidden pt-24 md:pt-28">
-        <div className="px-6 md:px-10">
+        <div className="relative px-5 md:px-10">
           <div className="mx-auto flex max-w-7xl items-end justify-between">
             <SectionLabel index="04" label="Selected work" />
             <Link
               to="/work"
-              className="mono hidden border-b border-bone/40 pb-1 text-[10px] uppercase tracking-[0.3em] hover:border-ember md:inline-block"
+              className="mono hidden border-b border-ink/40 pb-1 text-[10px] uppercase tracking-[0.3em] text-ink hover:border-ember md:inline-block"
             >
               All cases →
             </Link>
           </div>
-          <h2 className="display mt-6 text-5xl text-bone md:text-[6rem]" style={{ letterSpacing: "-0.05em" }}>
+          <h2
+            className="display mt-6 text-[13vw] text-ink md:text-[6rem]"
+            style={{ letterSpacing: "-0.045em", lineHeight: 0.95 }}
+          >
             A selection <span className="text-gradient">in motion</span>
           </h2>
         </div>
@@ -378,7 +385,7 @@ function CasesScroll() {
           {projects.map((p, i) => (
             <article
               key={p.slug}
-              className="relative h-[62vh] w-[80vw] shrink-0 overflow-hidden rounded-3xl border border-bone/10 md:w-[46vw]"
+              className="relative h-[62vh] w-[80vw] shrink-0 overflow-hidden rounded-3xl border border-ink/10 md:w-[46vw]"
             >
               <Link to="/work/$slug" params={{ slug: p.slug }} className="block h-full">
                 <ProjectArt index={i} title={p.title} palette={p.palette} className="h-full w-full" />
@@ -420,7 +427,7 @@ function LightInversion() {
       tags: ["Design", "Build", "Next"],
       bg: "#0a0a0a",
       fg: "#f4f1ea",
-      accent: "#c6ff3d",
+      accent: "#B5566B",
     },
     {
       n: "02",
@@ -428,9 +435,9 @@ function LightInversion() {
       short: "Brand",
       v: "Logos, colour, typography and visual systems that make brands instantly recognisable.",
       tags: ["Identity", "Type", "System"],
-      bg: "#f6ea3a",
-      fg: "#0a0a0a",
-      accent: "#B5566B",
+      bg: "#B5566B",
+      fg: "#f4f1ea",
+      accent: "#f6ea3a",
     },
     {
       n: "03",
@@ -438,9 +445,9 @@ function LightInversion() {
       short: "AI + Ops",
       v: "Chatbots, workflow automation and intelligent systems that quietly retire manual work.",
       tags: ["LLM", "Ops", "Agents"],
-      bg: "#d4b8ff",
+      bg: "#f4f1ea",
       fg: "#0a0a0a",
-      accent: "#4d9dff",
+      accent: "#B5566B",
     },
     {
       n: "04",
@@ -448,22 +455,22 @@ function LightInversion() {
       short: "UX + Growth",
       v: "Interfaces people enjoy — with SEO, analytics and optimisation that keep growing.",
       tags: ["UX", "SEO", "Analytics"],
-      bg: "#4d9dff",
-      fg: "#0a0a0a",
+      bg: "#0a0a0a",
+      fg: "#f4f1ea",
       accent: "#f6ea3a",
     },
   ];
 
   return (
     <section className="relative overflow-hidden bg-chalk px-5 py-24 text-bone md:px-10 md:py-40">
-      {/* aurora blobs */}
+      {/* soft ember wash */}
       <div
-        className="pointer-events-none absolute -left-40 top-40 h-[520px] w-[520px] rounded-full opacity-40 blur-3xl"
+        className="pointer-events-none absolute -left-40 top-40 h-[520px] w-[520px] rounded-full opacity-25 blur-3xl"
         style={{ background: "radial-gradient(closest-side, #B5566B, transparent 70%)" }}
       />
       <div
-        className="pointer-events-none absolute -right-40 bottom-20 h-[420px] w-[420px] rounded-full opacity-30 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, #4d9dff, transparent 70%)" }}
+        className="pointer-events-none absolute -right-40 bottom-20 h-[420px] w-[420px] rounded-full opacity-20 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, #f6ea3a, transparent 70%)" }}
       />
 
       <div className="relative mx-auto max-w-7xl">
@@ -502,8 +509,8 @@ function LightInversion() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className={`group/card relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-[28px] border-2 border-bone p-6 transition-transform duration-500 hover:-translate-y-1 md:min-h-[320px] md:p-8 ${span}`}
-                style={{ background: s.bg, color: s.fg, boxShadow: "6px 6px 0 0 #0a0a0a" }}
+                className={`group/card relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-[28px] p-6 transition-transform duration-500 hover:-translate-y-1 md:min-h-[320px] md:p-8 ${span}`}
+                style={{ background: s.bg, color: s.fg, boxShadow: "0 30px 80px -40px rgba(0,0,0,0.5)" }}
               >
                 <div
                   className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full opacity-60 blur-3xl transition-transform duration-700 group-hover/card:scale-125"
@@ -514,8 +521,8 @@ function LightInversion() {
                     {s.n} · {s.short}
                   </span>
                   <span
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 text-sm transition-transform duration-500 group-hover/card:rotate-45"
-                    style={{ borderColor: s.fg }}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border text-sm transition-transform duration-500 group-hover/card:rotate-45"
+                    style={{ borderColor: `${s.fg}40`, color: s.fg }}
                   >
                     →
                   </span>
@@ -534,8 +541,8 @@ function LightInversion() {
                     {s.tags.map((t) => (
                       <span
                         key={t}
-                        className="mono rounded-full border-2 px-3 py-1 text-[10px] uppercase tracking-[0.2em]"
-                        style={{ borderColor: s.fg, color: s.fg }}
+                        className="mono rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.2em]"
+                        style={{ borderColor: `${s.fg}30`, color: s.fg }}
                       >
                         {t}
                       </span>
