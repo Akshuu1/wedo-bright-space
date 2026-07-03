@@ -261,12 +261,39 @@ function KeyFacts() {
 /* ------------------------------- MANIFEST ------------------------------- */
 
 function Manifest() {
+  const tenets = [
+    {
+      k: "Strategy first",
+      v: "Every decision starts with a real business problem.",
+      icon: "◐",
+      bg: "#B5566B",
+      fg: "#f4f1ea",
+      accent: "#f6ea3a",
+    },
+    {
+      k: "Craft always",
+      v: "Type, motion and code held to the same bar.",
+      icon: "✦",
+      bg: "#c6ff3d",
+      fg: "#0a0a0a",
+      accent: "#B5566B",
+    },
+    {
+      k: "Built for growth",
+      v: "Performance, clarity and results — not just pretty screens.",
+      icon: "◆",
+      bg: "#4d9dff",
+      fg: "#0a0a0a",
+      accent: "#f6ea3a",
+    },
+  ];
+
   return (
-    <section className="relative mx-auto max-w-7xl px-6 py-32 md:px-10 md:py-40">
+    <section className="relative mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-40">
       <SectionLabel index="03" label="Approach" />
       <Reveal>
         <p
-          className="display mt-10 max-w-[20ch] text-5xl text-bone md:text-[5.5rem]"
+          className="display mt-8 max-w-[20ch] text-[10vw] text-bone md:mt-10 md:text-[5.5rem]"
           style={{ letterSpacing: "-0.045em", lineHeight: "1.02" }}
         >
           Designed with purpose&nbsp;
@@ -274,28 +301,46 @@ function Manifest() {
         </p>
       </Reveal>
 
-      <div className="mt-16 grid gap-8 border-t border-bone/10 pt-10 md:grid-cols-3">
-        {[
-          { k: "Strategy first", v: "Every decision starts with a real business problem.", icon: "◐" },
-          { k: "Craft always", v: "Type, motion and code held to the same bar.", icon: "✦" },
-          { k: "Built for growth", v: "Performance, clarity and results — not just pretty screens.", icon: "◆" },
-        ].map((b, i) => (
+      <div className="mt-12 grid gap-5 md:mt-16 md:grid-cols-3 md:gap-6">
+        {tenets.map((b, i) => (
           <Reveal key={b.k} delay={i * 0.08}>
-            <div className="group/tenet relative overflow-hidden rounded-2xl border border-bone/10 bg-bone/[0.02] p-7 transition-all duration-500 hover:-translate-y-1 hover:border-ember/40 hover:bg-bone/[0.04]">
+            <div
+              className="group/tenet relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-[28px] border-2 border-bone p-6 transition-all duration-500 hover:-translate-y-1 md:min-h-[340px] md:p-8"
+              style={{ background: b.bg, color: b.fg, boxShadow: "6px 6px 0 0 #0a0a0a" }}
+            >
+              {/* blob accent */}
               <div
-                className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover/tenet:opacity-100"
-                style={{ background: "radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.5), transparent 70%)" }}
+                className="pointer-events-none absolute -right-16 -bottom-20 h-56 w-56 rounded-full opacity-70 blur-2xl transition-transform duration-700 group-hover/tenet:scale-125"
+                style={{ background: b.accent }}
               />
-              <div className="flex items-center justify-between">
-                <p className="mono text-[10px] uppercase tracking-[0.3em] text-ember">0{i + 1} / Tenet</p>
-                <span className="text-ember/60 transition-transform duration-700 group-hover/tenet:rotate-180">
+              <div className="relative flex items-center justify-between">
+                <p
+                  className="mono text-[10px] uppercase tracking-[0.3em]"
+                  style={{ color: b.fg, opacity: 0.75 }}
+                >
+                  0{i + 1} / Tenet
+                </p>
+                <span
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 text-sm transition-transform duration-700 group-hover/tenet:rotate-180"
+                  style={{ borderColor: b.fg, color: b.fg }}
+                >
                   {b.icon}
                 </span>
               </div>
-              <h3 className="display mt-6 text-2xl text-bone md:text-3xl" style={{ letterSpacing: "-0.035em" }}>
-                {b.k}.
-              </h3>
-              <p className="mt-3 max-w-xs text-sm leading-relaxed text-bone/55">{b.v}</p>
+              <div className="relative mt-10">
+                <h3
+                  className="display text-3xl md:text-4xl lg:text-5xl"
+                  style={{ letterSpacing: "-0.045em", color: b.fg, lineHeight: 0.95 }}
+                >
+                  {b.k}.
+                </h3>
+                <p
+                  className="mt-4 max-w-xs text-sm leading-relaxed"
+                  style={{ color: b.fg, opacity: 0.8 }}
+                >
+                  {b.v}
+                </p>
+              </div>
             </div>
           </Reveal>
         ))}
