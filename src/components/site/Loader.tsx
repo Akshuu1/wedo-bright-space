@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 /* -------------------------------------------------------------------------- */
-/*  Cinema-leader loader — film countdown reticle, sweep hand, iris exit      */
+/*  Kinetic Type Loader — stacked color strips, marquee word, clip reveal     */
 /* -------------------------------------------------------------------------- */
+
+const WORDS = ["THINK", "DRAFT", "SHIP", "WEDO"];
 
 export function Loader() {
   const [pct, setPct] = useState(0);
   const [done, setDone] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [frame, setFrame] = useState(0);
+  const [wordIdx, setWordIdx] = useState(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -24,146 +26,109 @@ export function Loader() {
 
     let raf = 0;
     const start = performance.now();
-    const DURATION = 1900;
+    const DURATION = 2100;
     const ease = (p: number) => (p === 1 ? 1 : 1 - Math.pow(2, -10 * p));
 
     const tick = (t: number) => {
       const elapsed = t - start;
       const p = Math.min(1, elapsed / DURATION);
       setPct(ease(p) * 100);
-      setFrame(Math.floor(elapsed / 41.66)); // ~24fps counter
       if (p < 1) raf = requestAnimationFrame(tick);
       else {
-        window.setTimeout(() => setDone(true), 180);
-        window.setTimeout(() => setHidden(true), 1400);
+        window.setTimeout(() => setDone(true), 220);
+        window.setTimeout(() => setHidden(true), 1500);
       }
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+
+    const wordTimer = window.setInterval(() => {
+      setWordIdx((i) => (i + 1) % WORDS.length);
+    }, 480);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearInterval(wordTimer);
+    };
   }, []);
 
   if (hidden) return null;
   const shown = Math.min(100, Math.floor(pct));
   const progress = pct / 100;
-  const sweep = progress * 360;
+
+  // 5 horizontal strips forming the stage
+  const strips = [
+    { bg: "#f4f1ea", fg: "#0a0a0a" }, // bone
+    { bg: "#B5566B", fg: "#f4f1ea" }, // ember
+    { bg: "#0a0a0a", fg: "#f6ea3a" }, // ink / zap text
+    { bg: "#f6ea3a", fg: "#0a0a0a" }, // zap
+    { bg: "#0a0a0a", fg: "#f4f1ea" }, // ink
+  ];
 
   return (
     <AnimatePresence>
       {!done && (
         <motion.div
           key="loader"
-          className="fixed inset-0 z-[120] overflow-hidden bg-ink text-bone"
+          className="fixed inset-0 z-[120] overflow-hidden bg-ink"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
           aria-hidden
         >
-          {/* iris exit — 8 sliding blades close in from edges */}
-          {[
-            { s: { top: 0, left: 0, right: 0, height: "50%" }, e: { y: "-100%" } },
-            { s: { bottom: 0, left: 0, right: 0, height: "50%" }, e: { y: "100%" } },
-          ].map((b, i) => (
-            <motion.div
-              key={i}
-              className="absolute bg-ink"
-              style={b.s}
-              exit={b.e}
-              transition={{ duration: 1.15, ease: [0.83, 0, 0.17, 1], delay: 0.1 }}
-            />
-          ))}
-
-          {/* grain */}
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.09] mix-blend-overlay"
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.75'/></svg>\")",
-            }}
-          />
-
-          {/* soft ember vignette */}
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(60% 50% at 50% 50%, rgba(181,86,107,0.12), transparent 70%)",
-            }}
-          />
-
-          {/* film sprocket rails */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex flex-col justify-around py-4">
-            {Array.from({ length: 14 }).map((_, i) => (
-              <div
+          {/* Stacked color strips — slide in from alternating sides, then wipe up on exit */}
+          <div className="absolute inset-0 flex flex-col">
+            {strips.map((s, i) => (
+              <motion.div
                 key={i}
-                className="ml-3 h-6 w-4 rounded-sm bg-bone/10"
-                style={{ opacity: (i + frame) % 3 === 0 ? 0.35 : 0.1 }}
-              />
-            ))}
-          </div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex flex-col justify-around py-4">
-            {Array.from({ length: 14 }).map((_, i) => (
-              <div
-                key={i}
-                className="mr-3 h-6 w-4 rounded-sm bg-bone/10"
-                style={{ opacity: (i + frame) % 3 === 0 ? 0.35 : 0.1 }}
-              />
-            ))}
-          </div>
-
-          {/* Top meta */}
-          <motion.div
-            className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-6 pt-6 md:px-14 md:pt-8"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="mono flex items-center gap-2 text-[10px] uppercase tracking-[0.34em] text-bone/60">
-              <span className="relative inline-flex h-1.5 w-1.5">
-                <span className="absolute inset-0 animate-ping rounded-full bg-ember/70" />
-                <span className="relative h-1.5 w-1.5 rounded-full bg-ember" />
-              </span>
-              REC · Reel 01
-            </span>
-            <span className="mono text-[10px] uppercase tracking-[0.34em] text-bone/50">
-              W<span className="text-ember">e</span>Do — Academy Leader
-            </span>
-            <span className="mono tabular-nums text-[10px] uppercase tracking-[0.34em] text-bone/50">
-              F {String(frame).padStart(4, "0")}
-            </span>
-          </motion.div>
-
-          {/* Center reticle */}
-          <div className="absolute inset-0 z-10 flex items-center justify-center">
-            <div className="relative flex h-[min(78vw,32rem)] w-[min(78vw,32rem)] items-center justify-center">
-              {/* outer ring */}
-              <svg className="absolute inset-0" viewBox="0 0 200 200">
-                <circle cx="100" cy="100" r="96" fill="none" stroke="rgba(244,241,234,0.14)" strokeWidth="0.4" />
-                <circle cx="100" cy="100" r="72" fill="none" stroke="rgba(244,241,234,0.10)" strokeWidth="0.3" strokeDasharray="1 3" />
-                {/* progress arc */}
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="88"
-                  fill="none"
-                  stroke="#B5566B"
-                  strokeWidth="0.8"
-                  strokeLinecap="round"
-                  strokeDasharray={`${(progress * 2 * Math.PI * 88).toFixed(2)} 1000`}
-                  transform="rotate(-90 100 100)"
-                  style={{ filter: "drop-shadow(0 0 4px rgba(181,86,107,0.7))" }}
+                className="relative flex-1 overflow-hidden"
+                style={{ background: s.bg, color: s.fg }}
+                initial={{ x: i % 2 === 0 ? "-100%" : "100%" }}
+                animate={{ x: 0 }}
+                exit={{ y: "-100%" }}
+                transition={{
+                  duration: 0.9,
+                  ease: [0.76, 0, 0.24, 1],
+                  delay: i * 0.06,
+                }}
+              >
+                {/* moving word ribbon per strip */}
+                <StripRibbon
+                  word={WORDS[(wordIdx + i) % WORDS.length]}
+                  reverse={i % 2 === 1}
+                  fg={s.fg}
                 />
-                {/* crosshair */}
-                <line x1="100" y1="0" x2="100" y2="20" stroke="rgba(244,241,234,0.35)" strokeWidth="0.4" />
-                <line x1="100" y1="180" x2="100" y2="200" stroke="rgba(244,241,234,0.35)" strokeWidth="0.4" />
-                <line x1="0" y1="100" x2="20" y2="100" stroke="rgba(244,241,234,0.35)" strokeWidth="0.4" />
-                <line x1="180" y1="100" x2="200" y2="100" stroke="rgba(244,241,234,0.35)" strokeWidth="0.4" />
-                {/* tick marks */}
-                {Array.from({ length: 60 }).map((_, i) => {
-                  const a = (i / 60) * Math.PI * 2 - Math.PI / 2;
-                  const x1 = 100 + Math.cos(a) * 92;
-                  const y1 = 100 + Math.sin(a) * 92;
-                  const x2 = 100 + Math.cos(a) * (i % 5 === 0 ? 86 : 89);
-                  const y2 = 100 + Math.sin(a) * (i % 5 === 0 ? 86 : 89);
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Center emblem: giant W with clip-path progress fill */}
+          <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.15 }}
+              transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="relative flex h-[min(60vw,22rem)] w-[min(60vw,22rem)] items-center justify-center rounded-full border border-bone/20 bg-ink/60 backdrop-blur-xl"
+              style={{
+                boxShadow:
+                  "0 30px 80px -20px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(244,241,234,0.06)",
+              }}
+            >
+              {/* rotating ring of ticks */}
+              <svg
+                className="absolute inset-0"
+                viewBox="0 0 200 200"
+                style={{
+                  animation: "loaderSpin 22s linear infinite",
+                }}
+              >
+                {Array.from({ length: 48 }).map((_, i) => {
+                  const a = (i / 48) * Math.PI * 2 - Math.PI / 2;
+                  const inner = i % 4 === 0 ? 88 : 92;
+                  const outer = 96;
+                  const x1 = 100 + Math.cos(a) * inner;
+                  const y1 = 100 + Math.sin(a) * inner;
+                  const x2 = 100 + Math.cos(a) * outer;
+                  const y2 = 100 + Math.sin(a) * outer;
                   return (
                     <line
                       key={i}
@@ -171,94 +136,122 @@ export function Loader() {
                       y1={y1}
                       x2={x2}
                       y2={y2}
-                      stroke={i % 5 === 0 ? "rgba(244,241,234,0.5)" : "rgba(244,241,234,0.2)"}
-                      strokeWidth="0.4"
+                      stroke={i % 4 === 0 ? "#B5566B" : "rgba(244,241,234,0.3)"}
+                      strokeWidth={i % 4 === 0 ? 0.9 : 0.5}
                     />
                   );
                 })}
-                {/* sweep hand */}
-                <g transform={`rotate(${sweep} 100 100)`} style={{ transition: "transform 120ms linear" }}>
-                  <line x1="100" y1="100" x2="100" y2="14" stroke="#B5566B" strokeWidth="0.8" strokeLinecap="round" />
-                  <circle cx="100" cy="14" r="2" fill="#B5566B" />
-                </g>
-                {/* center dot */}
-                <circle cx="100" cy="100" r="1.5" fill="#B5566B" />
               </svg>
 
-              {/* Giant countdown number */}
-              <AnimatePresence mode="popLayout">
-                <motion.div
-                  key={shown}
-                  initial={{ opacity: 0, scale: 1.4, filter: "blur(10px)" }}
-                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, scale: 0.8, filter: "blur(8px)" }}
-                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  className="display leading-none tabular-nums text-bone"
-                  style={{
-                    fontSize: "clamp(6rem, 22vw, 18rem)",
-                    letterSpacing: "-0.08em",
-                    textShadow: "0 0 40px rgba(181,86,107,0.25)",
-                  }}
-                >
-                  {String(shown).padStart(2, "0")}
-                </motion.div>
-              </AnimatePresence>
-            </div>
+              {/* progress arc */}
+              <svg className="absolute inset-0" viewBox="0 0 200 200">
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="82"
+                  fill="none"
+                  stroke="#f6ea3a"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeDasharray={`${(progress * 2 * Math.PI * 82).toFixed(2)} 1000`}
+                  transform="rotate(-90 100 100)"
+                  style={{ filter: "drop-shadow(0 0 6px rgba(246,234,58,0.7))" }}
+                />
+              </svg>
+
+              {/* Big W mark with vertical clip-path fill */}
+              <div className="relative flex flex-col items-center gap-2">
+                <div className="relative">
+                  <span
+                    className="display block text-bone/20 leading-none"
+                    style={{ fontSize: "clamp(6rem, 18vw, 12rem)", letterSpacing: "-0.08em" }}
+                  >
+                    W
+                  </span>
+                  <span
+                    className="display absolute inset-0 leading-none"
+                    style={{
+                      fontSize: "clamp(6rem, 18vw, 12rem)",
+                      letterSpacing: "-0.08em",
+                      color: "#f6ea3a",
+                      clipPath: `inset(${100 - shown}% 0 0 0)`,
+                      transition: "clip-path 120ms linear",
+                      textShadow: "0 0 30px rgba(246,234,58,0.35)",
+                    }}
+                  >
+                    W
+                  </span>
+                </div>
+
+                <div className="mono tabular-nums text-[11px] uppercase tracking-[0.4em] text-bone/70">
+                  {String(shown).padStart(3, "0")}%
+                </div>
+              </div>
+            </motion.div>
           </div>
 
-          {/* Bottom bay */}
-          <motion.div
-            className="absolute inset-x-0 bottom-0 z-10 px-6 pb-6 md:px-14 md:pb-8"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <div className="flex items-end justify-between gap-4 md:gap-8">
-              <div>
-                <div className="mono text-[9px] uppercase tracking-[0.34em] text-bone/40">Scene</div>
-                <div className="display text-bone" style={{ fontSize: "clamp(1.1rem, 2vw, 1.6rem)", letterSpacing: "-0.02em" }}>
-                  Boot / Take 01
-                </div>
-              </div>
+          {/* Corner meta */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between px-5 pt-5 md:px-10 md:pt-8">
+            <span className="mono flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-bone mix-blend-difference">
+              <span className="relative inline-flex h-1.5 w-1.5">
+                <span className="absolute inset-0 animate-ping rounded-full bg-ember/70" />
+                <span className="relative h-1.5 w-1.5 rounded-full bg-ember" />
+              </span>
+              Booting studio
+            </span>
+            <span className="mono text-[10px] uppercase tracking-[0.32em] text-bone mix-blend-difference">
+              WeDo® / MMXXVI
+            </span>
+          </div>
 
-              <div className="hidden md:block">
-                <div className="mono text-center text-[9px] uppercase tracking-[0.34em] text-bone/40">Status</div>
-                <div className="mono text-center text-[11px] uppercase tracking-[0.28em] text-ember">
-                  {shown < 30 ? "· Threading" : shown < 65 ? "· Composing" : shown < 95 ? "· Color grading" : "· Cue"}
-                </div>
-              </div>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex items-end justify-between px-5 pb-5 md:px-10 md:pb-8">
+            <span className="mono text-[10px] uppercase tracking-[0.32em] text-bone mix-blend-difference">
+              {shown < 33 ? "◐ Warming press" : shown < 66 ? "◑ Inking blocks" : shown < 95 ? "◒ Aligning grid" : "◓ Ready"}
+            </span>
+            <span className="mono tabular-nums text-[10px] uppercase tracking-[0.32em] text-bone mix-blend-difference">
+              R01 · TAKE {String(wordIdx + 1).padStart(2, "0")}
+            </span>
+          </div>
 
-              <div className="text-right">
-                <div className="mono text-[9px] uppercase tracking-[0.34em] text-bone/40">Timecode</div>
-                <div className="display tabular-nums text-bone" style={{ fontSize: "clamp(1.1rem, 2vw, 1.6rem)", letterSpacing: "-0.02em" }}>
-                  00:00:{String(Math.floor(progress * 19)).padStart(2, "0")}
-                  <span className="text-ember">:</span>
-                  {String(frame % 24).padStart(2, "0")}
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-4 h-px w-full overflow-hidden bg-bone/12">
-              <div
-                className="h-full origin-left bg-ember"
-                style={{
-                  transform: `scaleX(${progress})`,
-                  transition: "transform 120ms cubic-bezier(0.22,1,0.36,1)",
-                  boxShadow: "0 0 14px rgba(181,86,107,0.7)",
-                }}
-              />
-            </div>
-
-            <div className="mono mt-2 flex items-center justify-between text-[9px] uppercase tracking-[0.32em] text-bone/30">
-              <span>◍ Reel Start</span>
-              <span>WeDo® Studio · MMXXVI</span>
-              <span>End Cue ◍</span>
-            </div>
-          </motion.div>
+          <style>{`
+            @keyframes loaderSpin { to { transform: rotate(360deg); } }
+            @keyframes ribbon { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+            @keyframes ribbonReverse { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+          `}</style>
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+function StripRibbon({ word, reverse, fg }: { word: string; reverse: boolean; fg: string }) {
+  // duplicate the word to make a seamless loop
+  const items = Array.from({ length: 14 }, () => word);
+  return (
+    <div className="flex h-full items-center whitespace-nowrap">
+      <div
+        className="flex shrink-0 items-center gap-8 pr-8"
+        style={{
+          animation: `${reverse ? "ribbonReverse" : "ribbon"} 18s linear infinite`,
+          willChange: "transform",
+        }}
+      >
+        {[...items, ...items].map((w, i) => (
+          <span
+            key={i}
+            className="display leading-none"
+            style={{
+              fontSize: "clamp(2.4rem, 8vw, 6rem)",
+              letterSpacing: "-0.04em",
+              WebkitTextStroke: i % 3 === 1 ? `1px ${fg}` : undefined,
+              color: i % 3 === 1 ? "transparent" : fg,
+            }}
+          >
+            {w} <span style={{ opacity: 0.4 }}>✦</span>
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }
 
