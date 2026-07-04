@@ -32,12 +32,13 @@ const capabilities = [
   { n: "04", t: "Partnership", d: "Transparent timelines, honest scopes, no surprises. Your success becomes ours.", tags: ["Trust", "Long-term", "Care"], accent: "zap" },
 ];
 
-const principles = [
-  ["Strategy before design.", "Understand the business first, then draw a single pixel."],
-  ["Performance before animation.", "Beautiful is worthless if it doesn't load."],
-  ["Business goals before trends.", "We build timeless experiences, not seasonal ones."],
-  ["Partnership over projects.", "Long-term relationships over one-time deliveries."],
+const promisePoints = [
+  "If you're not satisfied with the website, we'll redesign it at no extra cost.",
+  "Free updates, additions, and modifications for the first 3 months after delivery.",
+  "Free domain for the first year (renewal charges apply from the second year).",
+  "Every website is designed uniquely to match your brand, business goals, and target audience—no generic templates.",
 ];
+
 
 const stats = [
   { k: "20+", u: "projects delivered" },
@@ -336,39 +337,53 @@ function Principles() {
   return (
     <section className="relative px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-7xl">
-        <span className="pill mb-4">What makes us different</span>
-        <h2 className="display mt-4" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>
-          We don&rsquo;t chase <span className="text-outline">trends</span>
-        </h2>
+        <div className="relative border-2 border-bone bg-bone p-8 text-ink shadow-[10px_10px_0_0_#f6ea3a] md:p-14">
+          <span className="pill mb-8 inline-flex">Our promise</span>
+          <h2
+            className="display normal-case"
+            style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
+          >
+            Hello,
+          </h2>
 
-        <ul className="mt-14 border-t-2 border-bone">
-          {principles.map(([t, d], i) => (
-            <li key={t} className="border-b-2 border-bone">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
+          <p className="body-tight mt-6 max-w-3xl text-lg leading-relaxed text-ink/90 md:text-2xl">
+            At Team WeDo, we create fully customized, unique websites tailored to your business needs at affordable pricing.
+          </p>
+
+          <ul className="mt-12 space-y-6">
+            {promisePoints.map((p, i) => (
+              <motion.li
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                className="group grid items-baseline gap-6 py-8 transition-colors hover:bg-ember/5 md:grid-cols-12 md:py-12"
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="flex items-start gap-4 border-b border-ink/20 pb-6"
               >
-                <span className="mono col-span-2 text-[10px] uppercase tracking-widest text-ember">
-                  · {String(i).padStart(2, "0")}
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-zap text-sm font-bold text-bone">
+                  ✓
                 </span>
-                <h3
-                  className="display col-span-5 transition-transform group-hover:translate-x-3"
-                  style={{ fontSize: "clamp(1.8rem, 4vw, 3.5rem)", lineHeight: 0.95, letterSpacing: "-0.03em" }}
-                >
-                  {t}
-                </h3>
-                <p className="col-span-5 text-bone/60 md:text-lg">{d}</p>
-              </motion.div>
-            </li>
-          ))}
-        </ul>
+                <span className="text-base md:text-lg text-ink/90">{p}</span>
+              </motion.li>
+            ))}
+          </ul>
+
+          <div className="mt-12 border-l-2 border-ember pl-5">
+            <p className="body-tight text-lg leading-relaxed text-ink/90 md:text-xl">
+              We focus on creating a strong online presence that helps your business stand out and grow.
+            </p>
+            <p className="mono mt-4 text-[10px] uppercase tracking-[0.28em] text-ink/55">
+              Regards,
+              <br />
+              Team WeDo
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+
 
 /* ---------------------------- TAIL CTA ---------------------------- */
 function TailCTA() {
