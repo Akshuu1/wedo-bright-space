@@ -6,7 +6,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { Marquee } from "@/components/site/Marquee";
 import { ProjectArt } from "@/components/site/ProjectArt";
 import { Magnetic } from "@/components/site/Magnetic";
-import { projects } from "@/lib/projects";
+import { projects, projectShots } from "@/lib/projects";
 
 export const Route = createFileRoute("/")({
   head: () => ({
