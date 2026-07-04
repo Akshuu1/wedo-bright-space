@@ -36,7 +36,7 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
-const services = ["Website", "Mobile App", "Automation", "Product", "Brand system", "Not sure yet"];
+const services = ["Website", "Mobile App", "Automation", "UI/UX Design", "Social Media Management"];
 const budgets = ["< ₹10k", "₹10 — 30k", "₹30 — 80k", "₹80k+"];
 
 function Contact() {
