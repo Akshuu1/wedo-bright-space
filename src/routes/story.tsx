@@ -275,11 +275,12 @@ function ActIII() {
   const x = useTransform(scrollYProgress, [0, 1], ["5%", "-82%"]);
 
   const scenes = [
-    { n: "01", k: "Discover", d: "Understanding your business, audience and goals." },
-    { n: "02", k: "Design", d: "Wireframes, visual identity and user experience." },
-    { n: "03", k: "Develop", d: "Responsive, scalable and optimised products." },
-    { n: "04", k: "Launch", d: "Testing, deploying and helping the business grow." },
-    { n: "05", k: "Evolve", d: "Measure, sharpen, iterate — long after go-live." },
+    { n: "01", k: "Discover", d: "Understanding your business, audience and goals" },
+    { n: "02", k: "Design", d: "Wireframes, visual identity and user experience" },
+    { n: "03", k: "Develop", d: "Responsive, scalable and optimised products" },
+    { n: "04", k: "Launch", d: "Testing, deploying and helping the business grow" },
+    { n: "05", k: "Evolve", d: "Measure, sharpen, iterate — long after go-live" },
+
   ];
 
   return (
