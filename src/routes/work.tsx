@@ -33,14 +33,14 @@ export const Route = createFileRoute("/work")({
   component: Work,
 });
 
-const disciplines = ["All", "Web", "Mobile", "AI", "Motion"];
+
 
 function Work() {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const titleY = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
   const titleO = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const [filter, setFilter] = useState("All");
+  
 
   return (
     <main className="bg-ink text-bone">
@@ -121,30 +121,9 @@ function Work() {
         </div>
       </div>
 
-      {/* ============== FILTER RAIL ============== */}
-      <section className="border-b-2 border-bone bg-chalk px-6 py-6 md:px-12">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap gap-2">
-            {disciplines.map((d) => (
-              <button
-                key={d}
-                onClick={() => setFilter(d)}
-                className={`mono border-2 border-bone px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition ${
-                  filter === d ? "bg-bone text-ink" : "bg-ink text-bone hover:bg-zap"
-                }`}
-              >
-                {d}
-              </button>
-            ))}
-          </div>
-          <span className="mono text-[10px] uppercase tracking-[0.28em] text-bone/60">
-            filter · showing {filter.toLowerCase()}
-          </span>
-        </div>
-      </section>
-
       {/* ============== HOVER-PREVIEW INDEX ============== */}
-      <ProjectIndex filter={filter} />
+      <ProjectIndex />
+
 
       {/* ============== MARQUEE ============== */}
       <div className="border-y-2 border-bone bg-bone py-10 text-ink">
@@ -188,7 +167,7 @@ function Work() {
 
 /* ---------------- Hover-preview index ---------------- */
 
-function ProjectIndex({ filter }: { filter: string }) {
+function ProjectIndex() {
   const [active, setActive] = useState<number | null>(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [clock, setClock] = useState("");
@@ -203,9 +182,8 @@ function ProjectIndex({ filter }: { filter: string }) {
     return () => clearInterval(id);
   }, []);
 
-  const filtered = projects.filter(
-    (p) => filter === "All" || p.tags.some((t) => t.toLowerCase().includes(filter.toLowerCase())),
-  );
+  const filtered = projects;
+
 
   return (
     <section
@@ -324,7 +302,7 @@ function ProjectIndex({ filter }: { filter: string }) {
                   <img
                     src={projectShots[filtered[active].slug]}
                     alt=""
-                    className="h-full w-full object-cover object-top"
+                    className="h-full w-full bg-ink object-contain"
                   />
                 </div>
               </div>

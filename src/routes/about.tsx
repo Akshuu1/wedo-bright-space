@@ -37,39 +37,40 @@ const capabilities = [
   {
     n: "01",
     t: "Purpose First",
-    d: "Every decision begins with solving a real business problem — not chasing a trend.",
+    d: "Every decision begins with solving a real business problem — not chasing a trend",
     tags: ["Strategy", "Clarity", "Intent"],
     accent: "ember",
   },
   {
     n: "02",
     t: "Craftsmanship",
-    d: "Attention to detail is what separates ordinary work from unforgettable experiences.",
+    d: "Attention to detail is what separates ordinary work from unforgettable experiences",
     tags: ["Type", "Motion", "Code"],
     accent: "zap",
   },
   {
     n: "03",
     t: "Innovation",
-    d: "We embrace AI, modern tooling and creative thinking to stay ahead of the curve.",
+    d: "We embrace AI, modern tooling and creative thinking to stay ahead of the curve",
     tags: ["AI", "3D", "Modern"],
     accent: "ember",
   },
   {
     n: "04",
     t: "Partnership",
-    d: "Transparent timelines, honest scopes, no surprises. Your success becomes ours.",
+    d: "Transparent timelines, honest scopes, no surprises — your success becomes ours",
     tags: ["Trust", "Long-term", "Care"],
     accent: "zap",
   },
 ];
 
 const promisePoints = [
-  "If you're not satisfied with the website, we'll redesign it at no extra cost.",
-  "Free updates, additions, and modifications for the first 3 months after delivery.",
-  "Free domain for the first year (renewal charges apply from the second year).",
-  "Every website is designed uniquely to match your brand, business goals, and target audience—no generic templates.",
+  "If you're not satisfied with the website, we'll redesign it at no extra cost",
+  "Free updates, additions, and modifications for the first 3 months after delivery",
+  "Free domain for the first year (renewal charges apply from the second year)",
+  "Every website is designed uniquely to match your brand, business goals, and target audience — no generic templates",
 ];
+
 
 const stats = [
   { k: "20+", u: "projects delivered" },
@@ -243,7 +244,7 @@ function Manifesto() {
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-12">
         <div className="md:col-span-3">
           <span className="pill-solid mb-4">✎ Manifesto</span>
-          <p className="mono mt-3 text-[10px] uppercase tracking-[0.28em] text-bone/50">— read slowly.</p>
+          <p className="mono mt-3 text-[10px] uppercase tracking-[0.28em] text-bone/50">— read slowly</p>
           <div className="mt-8 hidden h-32 w-32 rotate-[-8deg] md:block">
             <div className="brut-box-accent flex h-full w-full items-center justify-center">
               <span className="display text-6xl text-ember">01</span>

@@ -399,7 +399,7 @@ function CasesScroll() {
                             src={shot}
                             alt={`${p.title} website preview`}
                             loading="lazy"
-                            className="h-full w-full object-cover object-top transition duration-700 group-hover/card:scale-[1.03]"
+                            className="h-full w-full bg-ink object-contain transition duration-700 group-hover/card:scale-[1.03]"
                           />
                         </div>
                       </div>
@@ -427,7 +427,7 @@ function CasesScroll() {
                           className="display mt-2 text-4xl text-bone md:text-5xl"
                           style={{ letterSpacing: "-0.04em", textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}
                         >
-                          {p.title}.
+                          {p.title}
                         </h3>
                       </div>
                       <span className="mono inline-flex items-center gap-2 rounded-full border border-bone/50 bg-black/40 px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] text-bone backdrop-blur-sm transition group-hover/card:border-ember group-hover/card:bg-ember group-hover/card:text-ink">

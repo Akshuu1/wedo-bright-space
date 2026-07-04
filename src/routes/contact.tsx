@@ -97,7 +97,7 @@ function Hero() {
           Let&rsquo;s create
           <br />
           <span className="text-outline">something </span>
-          <span className="text-gradient">extraordinary.</span>
+          <span className="text-gradient">extraordinary</span>
         </h1>
         <p className="mono mt-6 max-w-md text-[11px] uppercase tracking-[0.24em] text-bone/55">
           Launching a startup, growing a business or reimagining your digital presence —
@@ -196,7 +196,7 @@ function FormSection() {
           >
             Tell us about
             <br />
-            <span className="text-gradient">the project.</span>
+            <span className="text-gradient">the project</span>
           </h2>
           <p className="mt-6 text-bone/70">
             The more you share, the sharper our first reply. We read every brief personally — usually the same day.
