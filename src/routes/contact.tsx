@@ -106,7 +106,7 @@ function Hero() {
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           <ContactLine label="Email" href="mailto:team.wedo06@gmail.com" value="team.wedo06@gmail.com" accent />
-          <ContactLine label="Phone" href="tel:+10000000000" value="9518238401" />
+          <ContactLine label="Phone" href="tel:+91 9518238401" value="+91 9518238401" />
           <ContactLine label="Studio" value="· Worldwide ·" sub="Mon — Fri · 9 to 7 GMT" />
         </div>
       </motion.div>
