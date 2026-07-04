@@ -33,12 +33,12 @@ type Sticker = {
 };
 
 const stickers: Sticker[] = [
-  { label: "★ Booking Q3 '26", rot: -6, shape: "rect", bg: "#B5566B", fg: "#f4f1ea", accent: "#f6ea3a" },
-  { label: "no bloat", rot: 4, shape: "cut", bg: "#f6ea3a", fg: "#0a0a0a" },
-  { label: "ship fast ✦", rot: -3, shape: "pill", bg: "#0a0a0a", fg: "#f4f1ea", accent: "#B5566B" },
-  { label: "remote · worldwide", rot: 5, shape: "tag", bg: "transparent", fg: "#0a0a0a" },
-  { label: "made with intent", rot: -4, shape: "pill", bg: "#f4f1ea", fg: "#0a0a0a", accent: "#0a0a0a" },
-  { label: "vibes: high", rot: 7, shape: "circle", bg: "#B5566B", fg: "#f4f1ea" },
+  { label: "★ Best", rot: -6, shape: "rect", bg: "#B5566B", fg: "#f4f1ea", accent: "#f6ea3a" },
+  { label: "Reliable", rot: 4, shape: "cut", bg: "#f6ea3a", fg: "#0a0a0a" },
+  { label: "Fast ✦", rot: -3, shape: "pill", bg: "#0a0a0a", fg: "#f4f1ea", accent: "#B5566B" },
+  { label: "worldwide", rot: 5, shape: "tag", bg: "transparent", fg: "#0a0a0a" },
+  { label: "Made with intent", rot: -4, shape: "pill", bg: "#f4f1ea", fg: "#0a0a0a", accent: "#0a0a0a" },
+  { label: "Vibes: high", rot: 7, shape: "circle", bg: "#B5566B", fg: "#f4f1ea" },
 ];
 
 export function Footer() {
