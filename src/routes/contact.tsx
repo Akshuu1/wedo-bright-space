@@ -106,8 +106,8 @@ function Hero() {
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           <ContactLine label="Email" href="mailto:team.wedo06@gmail.com" value="team.wedo06@gmail.com" accent />
-          <ContactLine label="Phone" href="tel:+10000000000" value="+1 000 000 0000" />
-          <ContactLine label="Studio" value="Remote · Worldwide" sub="Mon — Fri · 9 to 7 GMT" />
+          <ContactLine label="Phone" href="tel:+10000000000" value="9518238401" />
+          <ContactLine label="Studio" value="· Worldwide ·" sub="Mon — Fri · 9 to 7 GMT" />
         </div>
       </motion.div>
 
@@ -203,7 +203,7 @@ function FormSection() {
           </p>
           <ul className="mono mt-10 space-y-3 border-t-2 border-bone pt-6 text-[10px] uppercase tracking-[0.28em] text-bone/60">
             <li className="flex items-center gap-3">
-              <span className="text-ember">✦</span> new projects · Q3 — Q4 2026
+              <span className="text-ember">✦</span> new projects ·
             </li>
             <li className="flex items-center gap-3">
               <span className="text-ember">✦</span> average kickoff · 8 days
