@@ -58,7 +58,6 @@ function Letterbox() {
   return null;
 }
 
-
 function TimecodeHUD({ progress }: { progress: MotionValue<number> }) {
   const min = useTransform(progress, (v: number) => String(Math.floor(v * 8)).padStart(2, "0"));
   const sec = useTransform(progress, (v: number) => String(Math.floor((v * 480) % 60)).padStart(2, "0"));
@@ -67,7 +66,10 @@ function TimecodeHUD({ progress }: { progress: MotionValue<number> }) {
   return (
     <div className="pointer-events-none fixed inset-x-0 top-0 z-[49] flex items-center justify-between px-6 pt-3 md:px-10">
       <div className="mono flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-ink">
-        <span className="block h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.4s ease-in-out infinite" }} />
+        <span
+          className="block h-1.5 w-1.5 rounded-full bg-ember"
+          style={{ animation: "blink 1.4s ease-in-out infinite" }}
+        />
         REC · WeDo/Feature/01
       </div>
       <div className="mono flex items-baseline gap-1 text-[10px] uppercase tracking-[0.3em] text-ink">
@@ -87,7 +89,10 @@ function ColdOpen() {
   const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
 
   return (
-    <section ref={ref} className="relative flex min-h-[110svh] w-full items-center justify-center overflow-hidden bg-bone text-ink">
+    <section
+      ref={ref}
+      className="relative flex min-h-[110svh] w-full items-center justify-center overflow-hidden bg-bone text-ink"
+    >
       <div className="aurora absolute inset-0" />
       <svg className="absolute inset-0 h-full w-full opacity-[0.08]" viewBox="0 0 100 100" preserveAspectRatio="none">
         {Array.from({ length: 20 }).map((_, i) => (
@@ -95,19 +100,25 @@ function ColdOpen() {
         ))}
       </svg>
 
-      <motion.div style={{ y, scale, opacity }} className="relative z-10 mx-auto max-w-[1600px] px-6 text-center md:px-10">
+      <motion.div
+        style={{ y, scale, opacity }}
+        className="relative z-10 mx-auto max-w-[1600px] px-6 text-center md:px-10"
+      >
         <p className="mono text-[10px] uppercase tracking-[0.4em] text-ember">◉ A WeDo Studio Feature — MMXXVI</p>
         <h1
           className="display mt-8 text-ink"
           style={{ fontSize: "clamp(2.75rem, 12vw, 12rem)", lineHeight: 0.85, letterSpacing: "-0.05em" }}
         >
-          EVERY GREAT <span className="text-outline" style={{ WebkitTextStrokeColor: "#f4f1ea" }}>PRODUCT</span>
+          EVERY GREAT{" "}
+          <span className="text-outline" style={{ WebkitTextStrokeColor: "#f4f1ea" }}>
+            PRODUCT
+          </span>
           <br />
           STARTS WITH A <span className="text-gradient">CONVERSATION</span>
         </h1>
         <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-ink/60 md:text-base">
-          WeDo wasn&rsquo;t created to become another web agency. It started with one belief —
-          businesses deserve digital experiences that actually help them grow. Scroll to play.
+          WeDo wasn&rsquo;t created to become another web agency. It started with one belief — businesses deserve
+          digital experiences that actually help them grow. Scroll to play.
         </p>
       </motion.div>
 
@@ -126,14 +137,25 @@ function ColdOpen() {
 }
 
 function TickerBar() {
-  const items = ["The Making of WeDo", "◉", "Directed by the studio", "◉", "Original score by the ship log", "◉", "Cast: designers, engineers, automators", "◉"];
+  const items = [
+    "The Making of WeDo",
+    "◉",
+    "Directed by the studio",
+    "◉",
+    "Original score by the ship log",
+    "◉",
+    "Cast: designers, engineers, automators",
+    "◉",
+  ];
   return (
     <div className="ticker-strip relative py-4">
       <div className="marquee-track">
         {[0, 1].map((k) => (
           <div key={k} className="flex shrink-0 items-center gap-8 px-8">
             {items.map((t, i) => (
-              <span key={i} className="display whitespace-nowrap text-2xl uppercase text-bone md:text-4xl">{t}</span>
+              <span key={i} className="display whitespace-nowrap text-2xl uppercase text-bone md:text-4xl">
+                {t}
+              </span>
             ))}
           </div>
         ))}
@@ -156,7 +178,8 @@ function ActI() {
           className="display mt-16 max-w-[18ch] text-bone"
           style={{ fontSize: "clamp(2.5rem, 8vw, 8rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
         >
-          Too many websites looked identical. <span className="text-gradient">So we decided to do things differently.</span>
+          Too many websites looked identical.{" "}
+          <span className="text-gradient">So we decided to do things differently.</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -165,9 +188,9 @@ function ActI() {
           transition={{ duration: 1, delay: 0.4 }}
           className="mt-16 max-w-xl border-l-2 border-bone pl-6 text-lg leading-relaxed text-bone/70"
         >
-          Too many brands were invisible. Too many businesses invested money without seeing results.
-          Every project starts by understanding people <em>before</em> writing code — because
-          technology alone doesn&rsquo;t create impact. Understanding does.
+          Too many brands were invisible. Too many businesses invested money without seeing results. Every project
+          starts by understanding people <em>before</em> writing code — because technology alone doesn&rsquo;t create
+          impact. Understanding does.
         </motion.p>
       </div>
     </section>
@@ -177,10 +200,30 @@ function ActI() {
 /* ---------------- ACT II — Dark cast ---------------- */
 function ActII() {
   const crew = [
-    { role: "Attention", name: "Good design attracts.", line: "First impressions decide whether people stay.", accent: "#B5566B" },
-    { role: "Trust", name: "Great design builds.", line: "Trust is earned in typography, motion and pace.", accent: "#f6ea3a" },
-    { role: "Growth", name: "Experiences convert.", line: "Exceptional experiences turn visitors into customers.", accent: "#B5566B" },
-    { role: "Legacy", name: "Businesses remember.", line: "The best work outlasts the launch date.", accent: "#f6ea3a" },
+    {
+      role: "Attention",
+      name: "Good design attracts.",
+      line: "First impressions decide whether people stay.",
+      accent: "#B5566B",
+    },
+    {
+      role: "Trust",
+      name: "Great design builds.",
+      line: "Trust is earned in typography, motion and pace.",
+      accent: "#f6ea3a",
+    },
+    {
+      role: "Growth",
+      name: "Experiences convert.",
+      line: "Exceptional experiences turn visitors into customers.",
+      accent: "#B5566B",
+    },
+    {
+      role: "Legacy",
+      name: "Businesses remember.",
+      line: "The best work outlasts the launch date.",
+      accent: "#f6ea3a",
+    },
   ];
   return (
     <section className="relative overflow-hidden bg-bone px-6 py-40 text-ink md:px-10 md:py-56">
@@ -266,14 +309,18 @@ function ActIII() {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: i % 2
-                      ? "linear-gradient(135deg, #050505 0%, #1a0a05 60%, #B5566B 130%)"
-                      : "linear-gradient(135deg, #050505 0%, #201a05 60%, #f6ea3a 140%)",
+                    background:
+                      i % 2
+                        ? "linear-gradient(135deg, #050505 0%, #1a0a05 60%, #B5566B 130%)"
+                        : "linear-gradient(135deg, #050505 0%, #201a05 60%, #f6ea3a 140%)",
                   }}
                 />
                 <div
                   className="absolute inset-0 opacity-30 mix-blend-overlay"
-                  style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }}
+                  style={{
+                    backgroundImage:
+                      "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+                  }}
                 />
               </div>
 
@@ -313,11 +360,13 @@ function ActIV() {
           className="display mt-8 text-bone"
           style={{ fontSize: "clamp(3rem, 10vw, 9rem)", lineHeight: 0.9 }}
         >
-          MORE THAN <br />WEBSITES.
+          MORE THAN <br />
+          WEBSITES.
         </motion.h2>
 
         <p className="mono mt-10 max-w-xl mx-auto text-[10px] uppercase tracking-[0.3em] text-bone/70">
-          We&rsquo;re building intelligent digital products powered by AI, automation and thoughtful design. The future belongs to businesses that move fast — we&rsquo;re here to help them get there.
+          We&rsquo;re building intelligent digital products powered by AI, automation and thoughtful design. The future
+          belongs to businesses that move fast — we&rsquo;re here to help them get there.
         </p>
       </div>
     </section>
@@ -331,7 +380,7 @@ function Credits() {
   const y = useTransform(scrollYProgress, [0, 1], ["25%", "-45%"]);
 
   const roles = [
-    ["Directed by", "The WeDo Studio"],
+    ["Directed by", "The WeDo"],
     ["Written by", "Clients who ship"],
     ["Design", "Type · Colour · Motion"],
     ["Engineering", "Web · Mobile · Edge"],
@@ -342,22 +391,21 @@ function Credits() {
     ["Maintenance", "SLA · Perf · Security"],
     ["Craft services", "Coffee, mostly"],
     ["Original score", "The hum of the ship log"],
-    ["Made in", "MMXXVI · Remote · GMT ± 6"],
+    ["Made in", "MMXXVI ·"],
   ];
 
   return (
     <section ref={ref} className="relative min-h-[140vh] overflow-hidden bg-bone text-ink">
       <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
-        <p className="mono absolute top-24 text-[10px] uppercase tracking-[0.4em] text-ember">
-          ◉ ACT V · Roll credits
-        </p>
+        <p className="mono absolute top-24 text-[10px] uppercase tracking-[0.4em] text-ember">◉ ACT V · Roll credits</p>
 
         <motion.div style={{ y }} className="w-full max-w-3xl px-6 text-center">
           <h2
             className="display text-ink"
             style={{ fontSize: "clamp(3rem, 10vw, 10rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
           >
-            The Making <br />of <span className="text-gradient">WeDo</span>
+            The Making <br />
+            of <span className="text-gradient">WeDo</span>
           </h2>
           <p className="mono mt-8 text-[10px] uppercase tracking-[0.3em] text-ink/50">
             A picture in perpetual production
@@ -386,9 +434,21 @@ function Credits() {
   );
 }
 
-function SceneSlate({ act, title, runtime, dark = false }: { act: string; title: string; runtime: string; dark?: boolean }) {
+function SceneSlate({
+  act,
+  title,
+  runtime,
+  dark = false,
+}: {
+  act: string;
+  title: string;
+  runtime: string;
+  dark?: boolean;
+}) {
   return (
-    <div className={`inline-flex items-center gap-3 border-2 px-4 py-2 ${dark ? "border-ink text-ink" : "border-bone text-bone"}`}>
+    <div
+      className={`inline-flex items-center gap-3 border-2 px-4 py-2 ${dark ? "border-ink text-ink" : "border-bone text-bone"}`}
+    >
       <span className="mono text-[10px] uppercase tracking-[0.3em] text-ember">ACT {act}</span>
       <span className={`h-3 w-px ${dark ? "bg-ink/40" : "bg-bone/40"}`} />
       <span className="mono text-[10px] uppercase tracking-[0.3em]">{title}</span>

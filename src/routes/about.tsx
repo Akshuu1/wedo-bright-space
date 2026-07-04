@@ -8,9 +8,12 @@ import snehaPhoto from "@/assets/sneha.jpg.asset.json";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — WeDo Studio" },
-      { name: "description", content: "A small, opinionated digital studio. We design, build and automate for founders and modern brands." },
-      { property: "og:title", content: "About — WeDo Studio" },
+      { title: "About — WeDo" },
+      {
+        name: "description",
+        content: "A small, opinionated digital studio. We design, build and automate for founders and modern brands.",
+      },
+      { property: "og:title", content: "About — WeDo" },
       { property: "og:description", content: "A small, opinionated digital studio." },
       { property: "og:url", content: "/about" },
     ],
@@ -18,7 +21,12 @@ export const Route = createFileRoute("/about")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({ "@context": "https://schema.org", "@type": "AboutPage", name: "About — WeDo Studio", url: "/about" }),
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          name: "About — WeDo Studio",
+          url: "/about",
+        }),
       },
     ],
   }),
@@ -26,10 +34,34 @@ export const Route = createFileRoute("/about")({
 });
 
 const capabilities = [
-  { n: "01", t: "Purpose First", d: "Every decision begins with solving a real business problem — not chasing a trend.", tags: ["Strategy", "Clarity", "Intent"], accent: "ember" },
-  { n: "02", t: "Craftsmanship", d: "Attention to detail is what separates ordinary work from unforgettable experiences.", tags: ["Type", "Motion", "Code"], accent: "zap" },
-  { n: "03", t: "Innovation", d: "We embrace AI, modern tooling and creative thinking to stay ahead of the curve.", tags: ["AI", "3D", "Modern"], accent: "ember" },
-  { n: "04", t: "Partnership", d: "Transparent timelines, honest scopes, no surprises. Your success becomes ours.", tags: ["Trust", "Long-term", "Care"], accent: "zap" },
+  {
+    n: "01",
+    t: "Purpose First",
+    d: "Every decision begins with solving a real business problem — not chasing a trend.",
+    tags: ["Strategy", "Clarity", "Intent"],
+    accent: "ember",
+  },
+  {
+    n: "02",
+    t: "Craftsmanship",
+    d: "Attention to detail is what separates ordinary work from unforgettable experiences.",
+    tags: ["Type", "Motion", "Code"],
+    accent: "zap",
+  },
+  {
+    n: "03",
+    t: "Innovation",
+    d: "We embrace AI, modern tooling and creative thinking to stay ahead of the curve.",
+    tags: ["AI", "3D", "Modern"],
+    accent: "ember",
+  },
+  {
+    n: "04",
+    t: "Partnership",
+    d: "Transparent timelines, honest scopes, no surprises. Your success becomes ours.",
+    tags: ["Trust", "Long-term", "Care"],
+    accent: "zap",
+  },
 ];
 
 const promisePoints = [
@@ -38,7 +70,6 @@ const promisePoints = [
   "Free domain for the first year (renewal charges apply from the second year).",
   "Every website is designed uniquely to match your brand, business goals, and target audience—no generic templates.",
 ];
-
 
 const stats = [
   { k: "20+", u: "projects delivered" },
@@ -135,7 +166,6 @@ function Hero() {
       <div className="relative z-10 flex items-start justify-between">
         <span className="pill">
           <span className="h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.6s infinite" }} />
-          Studio · Live
         </span>
         <Timecode />
       </div>
@@ -157,7 +187,9 @@ function Hero() {
 
         <div className="mt-8 flex flex-wrap gap-2">
           {["✧ design", "✦ build", "◐ automate", "◇ grow"].map((t) => (
-            <span key={t} className="pill">{t}</span>
+            <span key={t} className="pill">
+              {t}
+            </span>
           ))}
         </div>
       </motion.div>
@@ -165,7 +197,9 @@ function Hero() {
       {/* centered scroll cue */}
       <div className="relative z-10 flex flex-col items-center gap-2 border-t-2 border-bone pt-5">
         <p className="mono text-[10px] uppercase tracking-[0.4em] text-bone/60">Scroll</p>
-        <span className="text-bone/40" style={{ animation: "blink 1.8s ease-in-out infinite" }}>↓</span>
+        <span className="text-bone/40" style={{ animation: "blink 1.8s ease-in-out infinite" }}>
+          ↓
+        </span>
       </div>
     </section>
   );
@@ -173,7 +207,14 @@ function Hero() {
 
 /* ------------------------------ TICKER ------------------------------ */
 function TickerStrip() {
-  const items = ["◐ Design that ships", "✦ Motion with intent", "✧ AI in the seams", "★ Built to last", "✦ Founder-first", "◇ Boringly reliable"];
+  const items = [
+    "◐ Design that ships",
+    "✦ Motion with intent",
+    "✧ AI in the seams",
+    "★ Built to last",
+    "✦ Founder-first",
+    "◇ Boringly reliable",
+  ];
   const doubled = [...items, ...items];
   return (
     <div className="ticker-strip">
@@ -191,7 +232,10 @@ function TickerStrip() {
 
 /* --------------------------- MANIFESTO ---------------------------- */
 function Manifesto() {
-  const words = "Our mission is to help businesses grow through meaningful digital experiences that inspire trust, increase conversions and create lasting impressions — combining strategy, design and technology into one seamless process.".split(" ");
+  const words =
+    "Our mission is to help businesses grow through meaningful digital experiences that inspire trust, increase conversions and create lasting impressions — combining strategy, design and technology into one seamless process.".split(
+      " ",
+    );
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.4"] });
 
@@ -207,7 +251,15 @@ function Manifesto() {
             </div>
           </div>
         </div>
-        <p className="display md:col-span-9" style={{ fontSize: "clamp(1.8rem, 4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.03em", textTransform: "none" }}>
+        <p
+          className="display md:col-span-9"
+          style={{
+            fontSize: "clamp(1.8rem, 4vw, 3.6rem)",
+            lineHeight: 1.05,
+            letterSpacing: "-0.03em",
+            textTransform: "none",
+          }}
+        >
           {words.map((w, i) => {
             const start = i / words.length;
             const end = start + 1 / words.length;
@@ -235,7 +287,10 @@ function Capabilities() {
         <div className="mb-12 flex items-end justify-between">
           <div>
             <span className="pill mb-4">Our values</span>
-            <h2 className="display mt-4" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>
+            <h2
+              className="display mt-4"
+              style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.9 }}
+            >
               What we <span className="text-outline">stand for</span>
             </h2>
           </div>
@@ -286,7 +341,9 @@ function CapCard({ c, i }: { c: (typeof capabilities)[number]; i: number }) {
       <p className="mt-4 max-w-md text-bone/70">{c.d}</p>
       <div className="mono mt-8 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.24em]">
         {c.tags.map((t) => (
-          <span key={t} className="border-2 border-bone bg-chalk px-3 py-1 text-bone">{t}</span>
+          <span key={t} className="border-2 border-bone bg-chalk px-3 py-1 text-bone">
+            {t}
+          </span>
         ))}
       </div>
       {/* corner sticker */}
@@ -320,7 +377,10 @@ function StatsStrip() {
               transition={{ duration: 0.7, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
               className="border-l-2 border-ink/20 pl-4"
             >
-              <p className="display text-gradient" style={{ fontSize: "clamp(3rem, 8vw, 7rem)", letterSpacing: "-0.06em", lineHeight: 1 }}>
+              <p
+                className="display text-gradient"
+                style={{ fontSize: "clamp(3rem, 8vw, 7rem)", letterSpacing: "-0.06em", lineHeight: 1 }}
+              >
                 {s.k}
               </p>
               <p className="mono mt-2 text-[10px] uppercase tracking-[0.28em] text-ink/55">{s.u}</p>
@@ -347,7 +407,8 @@ function Principles() {
           </h2>
 
           <p className="body-tight mt-6 max-w-3xl text-lg leading-relaxed text-ink/90 md:text-2xl">
-            At Team WeDo, we create fully customized, unique websites tailored to your business needs at affordable pricing.
+            At Team WeDo, we create fully customized, unique websites tailored to your business needs at affordable
+            pricing.
           </p>
 
           <ul className="mt-12 space-y-6">
@@ -383,7 +444,6 @@ function Principles() {
     </section>
   );
 }
-
 
 /* ---------------------------- TAIL CTA ---------------------------- */
 function TailCTA() {
@@ -453,8 +513,8 @@ function Founders() {
               Two founders <span className="text-outline">one studio</span>
             </h2>
             <p className="mt-5 max-w-xl text-bone/60 md:text-lg">
-              WeDo is Akshat &amp; Sneha — a two-person control room where design and engineering
-              sit at the same desk, sketch on the same board and ship the same day.
+              WeDo is Akshat &amp; Sneha — a two-person control room where design and engineering sit at the same desk,
+              sketch on the same board and ship the same day.
             </p>
           </div>
           <span className="mono hidden text-[10px] uppercase tracking-[0.28em] text-bone/45 md:block">
@@ -501,9 +561,7 @@ function Founders() {
                   />
                   <span className="mono text-[9px] uppercase tracking-[0.28em] text-bone">now · {f.now}</span>
                 </span>
-                <span
-                  className="absolute right-3 top-3 flex h-10 w-10 rotate-6 items-center justify-center rounded-full border-2 border-bone bg-bone text-xl text-ink"
-                >
+                <span className="absolute right-3 top-3 flex h-10 w-10 rotate-6 items-center justify-center rounded-full border-2 border-bone bg-bone text-xl text-ink">
                   {f.emoji}
                 </span>
                 {/* handle */}
@@ -542,7 +600,7 @@ function Founders() {
 
         {/* tape strip footer */}
         <div className="mono mt-10 flex flex-wrap items-center justify-between gap-4 border-t-2 border-bone pt-6 text-[10px] uppercase tracking-[0.28em] text-bone/55">
-          <span>Akshat × Sneha · WeDo Studio</span>
+          <span>Akshat × Sneha · WeDo</span>
           <span>Same desk · same day · same standard of craft</span>
         </div>
       </div>

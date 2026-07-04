@@ -7,9 +7,13 @@ import { projects } from "@/lib/projects";
 export const Route = createFileRoute("/work")({
   head: () => ({
     meta: [
-      { title: "Work — WeDo Studio" },
-      { name: "description", content: "Selected projects: websites, mobile apps and automations built for founders and modern brands, 2024 — 2026." },
-      { property: "og:title", content: "Work — WeDo Studio" },
+      { title: "Work — WeDo" },
+      {
+        name: "description",
+        content:
+          "Selected projects: websites, mobile apps and automations built for founders and modern brands, 2024 — 2026.",
+      },
+      { property: "og:title", content: "Work — WeDo" },
       { property: "og:description", content: "Selected projects, 2024 — 2026." },
       { property: "og:url", content: "/work" },
     ],
@@ -17,7 +21,12 @@ export const Route = createFileRoute("/work")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", name: "Work — WeDo Studio", url: "/work" }),
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Work — WeDo",
+          url: "/work",
+        }),
       },
     ],
   }),
@@ -71,12 +80,11 @@ function Work() {
 
         <motion.div style={{ y: titleY, opacity: titleO }} className="relative z-10">
           <span className="pill mb-6 border-ember bg-ember/10 text-ember">◐ Selected projects · 2024 — 2026</span>
-          <h1
-            className="display leading-[0.8] tracking-[-0.06em]"
-            style={{ fontSize: "clamp(3rem, 13vw, 16rem)" }}
-          >
+          <h1 className="display leading-[0.8] tracking-[-0.06em]" style={{ fontSize: "clamp(3rem, 13vw, 16rem)" }}>
             Selected
-            <span className="align-super text-ember" style={{ fontSize: "0.18em" }}>®</span>
+            <span className="align-super text-ember" style={{ fontSize: "0.18em" }}>
+              ®
+            </span>
             <br />
             <span className="text-outline">Projects</span>
           </h1>
@@ -88,7 +96,9 @@ function Work() {
 
         <div className="relative z-10 flex flex-col items-center gap-2 border-t-2 border-bone pt-5">
           <p className="mono text-[10px] uppercase tracking-[0.4em] text-bone/60">Scroll</p>
-          <span className="text-bone/40" style={{ animation: "blink 1.8s ease-in-out infinite" }}>↓</span>
+          <span className="text-bone/40" style={{ animation: "blink 1.8s ease-in-out infinite" }}>
+            ↓
+          </span>
         </div>
       </section>
 
@@ -97,13 +107,16 @@ function Work() {
         <div className="marquee-track py-4">
           {[...Array(2)].flatMap((_, r) =>
             projects.map((p, i) => (
-              <span key={`${r}-${i}`} className="mono flex items-center gap-8 px-8 text-[13px] font-bold uppercase tracking-[0.22em]">
+              <span
+                key={`${r}-${i}`}
+                className="mono flex items-center gap-8 px-8 text-[13px] font-bold uppercase tracking-[0.22em]"
+              >
                 ★ {p.client}
                 <span className="opacity-40">·</span>
                 <span className="opacity-80">{p.year}</span>
                 <span className="opacity-40">/</span>
               </span>
-            ))
+            )),
           )}
         </div>
       </div>
@@ -183,12 +196,16 @@ function ProjectIndex({ filter }: { filter: string }) {
   useEffect(() => {
     const id = setInterval(() => {
       const d = new Date();
-      setClock(`${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}:${String(d.getSeconds()).padStart(2, "0")}`);
+      setClock(
+        `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}:${String(d.getSeconds()).padStart(2, "0")}`,
+      );
     }, 1000);
     return () => clearInterval(id);
   }, []);
 
-  const filtered = projects.filter((p) => filter === "All" || p.tags.some((t) => t.toLowerCase().includes(filter.toLowerCase())));
+  const filtered = projects.filter(
+    (p) => filter === "All" || p.tags.some((t) => t.toLowerCase().includes(filter.toLowerCase())),
+  );
 
   return (
     <section
@@ -239,18 +256,23 @@ function ProjectIndex({ filter }: { filter: string }) {
                       <div>{p.client}</div>
                       <div className="mt-1 flex flex-wrap gap-1">
                         {p.tags.map((t) => (
-                          <span key={t} className="border border-bone/40 px-2 py-0.5 text-[10px]">{t}</span>
+                          <span key={t} className="border border-bone/40 px-2 py-0.5 text-[10px]">
+                            {t}
+                          </span>
                         ))}
                       </div>
                     </div>
 
                     <span className="mono text-right text-[10px] uppercase tracking-[0.3em] text-bone/50 group-hover:text-ember">
                       {p.year}
-                      <span className="ml-3 inline-block transition group-hover:translate-x-1">{p.url ? "↗" : "→"}</span>
+                      <span className="ml-3 inline-block transition group-hover:translate-x-1">
+                        {p.url ? "↗" : "→"}
+                      </span>
                     </span>
                   </>
                 );
-                const cls = "grid grid-cols-[2.5rem_minmax(0,1fr)_auto] items-center gap-4 py-6 transition md:grid-cols-[3.5rem_minmax(0,3fr)_minmax(0,2fr)_auto] md:gap-8 md:py-10";
+                const cls =
+                  "grid grid-cols-[2.5rem_minmax(0,1fr)_auto] items-center gap-4 py-6 transition md:grid-cols-[3.5rem_minmax(0,3fr)_minmax(0,2fr)_auto] md:gap-8 md:py-10";
                 return p.url ? (
                   <a href={p.url} target="_blank" rel="noreferrer noopener" data-cursor="view" className={cls}>
                     {inner}
@@ -297,7 +319,9 @@ function ProjectIndex({ filter }: { filter: string }) {
               className="h-full w-full"
             />
             <div className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t-2 border-bone bg-ink/95 px-3 py-2">
-              <span className="mono text-[9px] uppercase tracking-[0.28em] text-bone">▶ preview · {filtered[active].client}</span>
+              <span className="mono text-[9px] uppercase tracking-[0.28em] text-bone">
+                ▶ preview · {filtered[active].client}
+              </span>
               <span className="mono text-[9px] uppercase tracking-[0.28em] text-ember">open →</span>
             </div>
           </motion.div>

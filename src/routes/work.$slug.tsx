@@ -32,7 +32,7 @@ export const Route = createFileRoute("/work/$slug")({
               "@type": "CreativeWork",
               name: loaderData.project.title,
               description: loaderData.project.brief,
-              creator: { "@type": "Organization", name: "WeDo Studio" },
+              creator: { "@type": "Organization", name: "WeDo" },
               dateCreated: loaderData.project.year,
               url: `/work/${params.slug}`,
             }),
@@ -103,10 +103,7 @@ function Case() {
 
         <motion.div style={{ y, opacity: o }} className="relative z-10">
           <span className="pill mb-6 border-ember bg-ember/10 text-ember">◐ {project.tags.join(" · ")}</span>
-          <h1
-            className="display leading-[0.82] tracking-[-0.055em]"
-            style={{ fontSize: "clamp(3rem, 12vw, 13rem)" }}
-          >
+          <h1 className="display leading-[0.82] tracking-[-0.055em]" style={{ fontSize: "clamp(3rem, 12vw, 13rem)" }}>
             {project.title}
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-bone/70 md:text-2xl">{project.brief}</p>
@@ -140,14 +137,17 @@ function Case() {
       <section className="mx-auto mt-32 grid max-w-7xl gap-10 px-6 md:grid-cols-12 md:px-12">
         <div className="md:col-span-4">
           <span className="pill">01 · Problem</span>
-          <p className="mono mt-6 text-[10px] uppercase tracking-[0.3em] text-bone/45">
-            Where we started
-          </p>
+          <p className="mono mt-6 text-[10px] uppercase tracking-[0.3em] text-bone/45">Where we started</p>
         </div>
         <Reveal className="md:col-span-8">
           <p
             className="display text-bone"
-            style={{ fontSize: "clamp(1.75rem, 4vw, 3.25rem)", lineHeight: 1.1, letterSpacing: "-0.03em", textTransform: "none" }}
+            style={{
+              fontSize: "clamp(1.75rem, 4vw, 3.25rem)",
+              lineHeight: 1.1,
+              letterSpacing: "-0.03em",
+              textTransform: "none",
+            }}
           >
             {project.problem}
           </p>
@@ -159,12 +159,13 @@ function Case() {
         <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-12">
           <div className="md:col-span-4">
             <span className="pill-solid">02 · Solution</span>
-            <p className="mono mt-6 text-[10px] uppercase tracking-[0.3em] text-bone/50">
-              What we built
-            </p>
+            <p className="mono mt-6 text-[10px] uppercase tracking-[0.3em] text-bone/50">What we built</p>
             <div className="mt-8 flex flex-wrap gap-2">
               {project.stack.map((s: string) => (
-                <span key={s} className="mono border-2 border-bone bg-ink px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-bone">
+                <span
+                  key={s}
+                  className="mono border-2 border-bone bg-ink px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-bone"
+                >
                   {s}
                 </span>
               ))}
@@ -173,7 +174,12 @@ function Case() {
           <Reveal className="md:col-span-8">
             <p
               className="display text-bone"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 3.25rem)", lineHeight: 1.1, letterSpacing: "-0.03em", textTransform: "none" }}
+              style={{
+                fontSize: "clamp(1.75rem, 4vw, 3.25rem)",
+                lineHeight: 1.1,
+                letterSpacing: "-0.03em",
+                textTransform: "none",
+              }}
             >
               {project.solution}
             </p>
@@ -191,7 +197,10 @@ function Case() {
                 className="display mt-4"
                 style={{ fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
               >
-                Receipts, not <span className="text-outline" style={{ WebkitTextStrokeColor: "#0a0a0a" }}>promises</span>
+                Receipts, not{" "}
+                <span className="text-outline" style={{ WebkitTextStrokeColor: "#0a0a0a" }}>
+                  promises
+                </span>
               </h2>
             </div>
             <p className="mono hidden text-[10px] uppercase tracking-[0.28em] text-ink/50 md:block">
@@ -241,11 +250,7 @@ function Case() {
 
           <div className="grid gap-6 md:grid-cols-6">
             {project.gallery.map((g: Gallery, i: number) => (
-              <Reveal
-                key={i}
-                delay={i * 0.08}
-                className={i === 0 ? "md:col-span-6" : "md:col-span-3"}
-              >
+              <Reveal key={i} delay={i * 0.08} className={i === 0 ? "md:col-span-6" : "md:col-span-3"}>
                 <figure className="group relative overflow-hidden border-2 border-bone">
                   <ProjectArt
                     index={idx + i}
@@ -278,7 +283,9 @@ function Case() {
         >
           <div className="mono flex items-center justify-between text-[10px] uppercase tracking-[0.3em] text-bone/50">
             <span>[ Next case → ]</span>
-            <span>{next.year} · {next.client}</span>
+            <span>
+              {next.year} · {next.client}
+            </span>
           </div>
           <h2
             className="display mt-6 text-bone transition-colors group-hover:text-ember"

@@ -502,9 +502,6 @@ function LightInversion() {
       <div className="relative mx-auto max-w-7xl">
         <div className="flex items-end justify-between gap-6">
           <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/50">Capabilities</p>
-          <p className="mono hidden text-[10px] uppercase tracking-[0.3em] text-bone/40 md:block">
-            04 disciplines · 01 studio
-          </p>
         </div>
 
         <h2
@@ -521,13 +518,7 @@ function LightInversion() {
           {disciplines.map((s, i) => {
             // sizing: 01 big, 02 small, 03 small, 04 big  (on md)
             const span =
-              i === 0
-                ? "md:col-span-4"
-                : i === 1
-                  ? "md:col-span-2"
-                  : i === 2
-                    ? "md:col-span-2"
-                    : "md:col-span-4";
+              i === 0 ? "md:col-span-4" : i === 1 ? "md:col-span-2" : i === 2 ? "md:col-span-2" : "md:col-span-4";
             return (
               <motion.article
                 key={s.n}

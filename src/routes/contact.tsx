@@ -11,7 +11,7 @@ export const Route = createFileRoute("/contact")({
         name: "description",
         content: "Start a project with WeDo. Tell us about your idea and we'll reply within one working day.",
       },
-      { property: "og:title", content: "Contact — WeDo Studio" },
+      { property: "og:title", content: "Contact — WeDo" },
       { property: "og:description", content: "Start a project with WeDo." },
       { property: "og:url", content: "/contact" },
     ],
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/contact")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ContactPage",
-          name: "Contact — WeDo Studio",
+          name: "Contact — WeDo ",
           url: "/contact",
         }),
       },
