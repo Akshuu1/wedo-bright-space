@@ -172,7 +172,6 @@ function Hero() {
 
       {/* headline */}
       <motion.div style={{ y, opacity: o }} className="relative z-10">
-        <span className="pill mb-6 border-ember bg-ember/10 text-ember">✦ Independent digital studio</span>
         <h1 className="display leading-[0.82] tracking-[-0.055em]" style={{ fontSize: "clamp(3rem, 12vw, 14rem)" }}>
           Strategy, design
           <br />
