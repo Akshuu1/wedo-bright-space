@@ -387,40 +387,52 @@ function CasesScroll() {
               key={p.slug}
               className="relative h-[62vh] w-[80vw] shrink-0 overflow-hidden rounded-3xl border border-ink/15 md:w-[46vw]"
             >
-              <Link to="/work/$slug" params={{ slug: p.slug }} className="group/card block h-full">
-                <ProjectArt index={i} title={p.title} palette={p.palette} className="h-full w-full" />
-                {/* readability scrims */}
-                <div
-                  className="pointer-events-none absolute inset-x-0 top-0 h-32"
-                  style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.55), transparent)" }}
-                />
-                <div
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-56"
-                  style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.75), transparent)" }}
-                />
-                <div className="absolute inset-x-0 top-0 flex items-start justify-between p-5">
-                  <p className="mono text-[10px] uppercase tracking-[0.25em] text-ink/85">
-                    {String(i + 1).padStart(2, "0")} · {p.year}
-                  </p>
-                  <p className="mono text-right text-[10px] uppercase tracking-[0.25em] text-ink/85">
-                    {p.tags.join(" / ")}
-                  </p>
-                </div>
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6">
-                  <div>
-                    <p className="mono text-[10px] uppercase tracking-[0.25em] text-ember">{p.client}</p>
-                    <h3
-                      className="display mt-2 text-4xl text-ink md:text-5xl"
-                      style={{ letterSpacing: "-0.04em", textShadow: "0 2px 20px rgba(0,0,0,0.35)" }}
-                    >
-                      {p.title}.
-                    </h3>
-                  </div>
-                  <span className="mono inline-flex items-center gap-2 rounded-full border border-ink/40 bg-black/30 px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] text-ink backdrop-blur-sm transition group-hover/card:border-ember group-hover/card:bg-ember group-hover/card:text-bone">
-                    View →
-                  </span>
-                </div>
-              </Link>
+              {(() => {
+                const inner = (
+                  <>
+                    <ProjectArt index={i} title={p.title} palette={p.palette} className="h-full w-full" />
+                    <div
+                      className="pointer-events-none absolute inset-x-0 top-0 h-32"
+                      style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.55), transparent)" }}
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-56"
+                      style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.75), transparent)" }}
+                    />
+                    <div className="absolute inset-x-0 top-0 flex items-start justify-between p-5">
+                      <p className="mono text-[10px] uppercase tracking-[0.25em] text-ink/85">
+                        {String(i + 1).padStart(2, "0")} · {p.year}
+                      </p>
+                      <p className="mono text-right text-[10px] uppercase tracking-[0.25em] text-ink/85">
+                        {p.tags.join(" / ")}
+                      </p>
+                    </div>
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6">
+                      <div>
+                        <p className="mono text-[10px] uppercase tracking-[0.25em] text-ember">{p.client}</p>
+                        <h3
+                          className="display mt-2 text-4xl text-ink md:text-5xl"
+                          style={{ letterSpacing: "-0.04em", textShadow: "0 2px 20px rgba(0,0,0,0.35)" }}
+                        >
+                          {p.title}.
+                        </h3>
+                      </div>
+                      <span className="mono inline-flex items-center gap-2 rounded-full border border-ink/40 bg-black/30 px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] text-ink backdrop-blur-sm transition group-hover/card:border-ember group-hover/card:bg-ember group-hover/card:text-bone">
+                        {p.url ? "Visit ↗" : "View →"}
+                      </span>
+                    </div>
+                  </>
+                );
+                return p.url ? (
+                  <a href={p.url} target="_blank" rel="noreferrer noopener" className="group/card block h-full">
+                    {inner}
+                  </a>
+                ) : (
+                  <Link to="/work/$slug" params={{ slug: p.slug }} className="group/card block h-full">
+                    {inner}
+                  </Link>
+                );
+              })()}
             </article>
           ))}
         </motion.div>
