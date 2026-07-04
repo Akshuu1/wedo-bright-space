@@ -180,7 +180,6 @@ function ActI() {
         >
           Too many websites looked identical —{" "}
           <span className="text-gradient">so we decided to do things differently</span>
-
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -280,7 +279,6 @@ function ActIII() {
     { n: "03", k: "Develop", d: "Responsive, scalable and optimised products" },
     { n: "04", k: "Launch", d: "Testing, deploying and helping the business grow" },
     { n: "05", k: "Evolve", d: "Measure, sharpen, iterate — long after go-live" },
-
   ];
 
   return (
@@ -335,9 +333,9 @@ function ActIII() {
               <div className="relative p-8 md:p-12">
                 <h3
                   className="display text-ink"
-                  style={{ fontSize: "clamp(3rem, 10vw, 10rem)", lineHeight: 0.85, letterSpacing: "-0.05em" }}
+                  style={{ fontSize: "clamp(2.9rem, 10vw, 10rem)", lineHeight: 0.85, letterSpacing: "-0.05em" }}
                 >
-                  {s.k}.
+                  {s.k}
                 </h3>
                 <p className="mt-6 max-w-md text-ink/70">{s.d}</p>
               </div>
