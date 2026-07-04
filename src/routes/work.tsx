@@ -167,7 +167,7 @@ function Work() {
 
 /* ---------------- Hover-preview index ---------------- */
 
-function ProjectIndex({ filter }: { filter: string }) {
+function ProjectIndex() {
   const [active, setActive] = useState<number | null>(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [clock, setClock] = useState("");
@@ -182,9 +182,8 @@ function ProjectIndex({ filter }: { filter: string }) {
     return () => clearInterval(id);
   }, []);
 
-  const filtered = projects.filter(
-    (p) => filter === "All" || p.tags.some((t) => t.toLowerCase().includes(filter.toLowerCase())),
-  );
+  const filtered = projects;
+
 
   return (
     <section
