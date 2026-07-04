@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "motion/react";
-import wedoLogo from "@/assets/wedo-logo.png.asset.json";
-import akshatPhoto from "@/assets/akshat.jpg.asset.json";
-import snehaPhoto from "@/assets/sneha.jpg.asset.json";
+
+const wedoLogo = "/assets/brand/wedo-logo.png";
+const akshatPhoto = "/assets/team/akshat.jpg";
+const snehaPhoto = "/assets/team/sneha.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -156,7 +157,7 @@ function Hero() {
 
       {/* orbiting logo */}
       <motion.img
-        src={wedoLogo.url}
+        src={wedoLogo}
         alt=""
         aria-hidden
         style={{ rotate: logoRot }}
@@ -478,7 +479,7 @@ const founders = [
     stack: ["Product", "Engineering", "AI"],
     palette: ["#B5566B", "#f6ea3a"] as [string, string],
     now: "shipping the next release",
-    photo: akshatPhoto.url,
+    photo: akshatPhoto,
   },
   {
     name: "Sneha",
@@ -488,7 +489,7 @@ const founders = [
     stack: ["Design", "Brand", "Motion"],
     palette: ["#f6ea3a", "#B5566B"] as [string, string],
     now: "sketching act two",
-    photo: snehaPhoto.url,
+    photo: snehaPhoto,
   },
 ];
 
