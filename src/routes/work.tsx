@@ -219,39 +219,48 @@ function ProjectIndex({ filter }: { filter: string }) {
               onMouseLeave={() => setActive((v) => (v === i ? null : v))}
               className="group relative border-b-2 border-bone transition-colors hover:bg-ember/5"
             >
-              <Link
-                to="/work/$slug"
-                params={{ slug: p.slug }}
-                data-cursor="view"
-                className="grid grid-cols-[2.5rem_minmax(0,1fr)_auto] items-center gap-4 py-6 transition md:grid-cols-[3.5rem_minmax(0,3fr)_minmax(0,2fr)_auto] md:gap-8 md:py-10"
-              >
-                <span className="mono text-[11px] uppercase tracking-[0.3em] text-bone/50 transition group-hover:text-ember">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+              {(() => {
+                const inner = (
+                  <>
+                    <span className="mono text-[11px] uppercase tracking-[0.3em] text-bone/50 transition group-hover:text-ember">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
 
-                <motion.h3
-                  className="display truncate text-bone transition"
-                  style={{ fontSize: "clamp(2rem, 6.5vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
-                  whileHover={{ x: 14 }}
-                  transition={{ type: "spring", stiffness: 220, damping: 22 }}
-                >
-                  <span className="transition group-hover:text-ember">{p.title}</span>
-                </motion.h3>
+                    <motion.h3
+                      className="display truncate text-bone transition"
+                      style={{ fontSize: "clamp(2rem, 6.5vw, 6rem)", letterSpacing: "-0.04em", lineHeight: 0.95 }}
+                      whileHover={{ x: 14 }}
+                      transition={{ type: "spring", stiffness: 220, damping: 22 }}
+                    >
+                      <span className="transition group-hover:text-ember">{p.title}</span>
+                    </motion.h3>
 
-                <div className="mono hidden text-[11px] uppercase tracking-[0.28em] text-bone/60 md:block">
-                  <div>{p.client}</div>
-                  <div className="mt-1 flex flex-wrap gap-1">
-                    {p.tags.map((t) => (
-                      <span key={t} className="border border-bone/40 px-2 py-0.5 text-[10px]">{t}</span>
-                    ))}
-                  </div>
-                </div>
+                    <div className="mono hidden text-[11px] uppercase tracking-[0.28em] text-bone/60 md:block">
+                      <div>{p.client}</div>
+                      <div className="mt-1 flex flex-wrap gap-1">
+                        {p.tags.map((t) => (
+                          <span key={t} className="border border-bone/40 px-2 py-0.5 text-[10px]">{t}</span>
+                        ))}
+                      </div>
+                    </div>
 
-                <span className="mono text-right text-[10px] uppercase tracking-[0.3em] text-bone/50 group-hover:text-ember">
-                  {p.year}
-                  <span className="ml-3 inline-block transition group-hover:translate-x-1">→</span>
-                </span>
-              </Link>
+                    <span className="mono text-right text-[10px] uppercase tracking-[0.3em] text-bone/50 group-hover:text-ember">
+                      {p.year}
+                      <span className="ml-3 inline-block transition group-hover:translate-x-1">{p.url ? "↗" : "→"}</span>
+                    </span>
+                  </>
+                );
+                const cls = "grid grid-cols-[2.5rem_minmax(0,1fr)_auto] items-center gap-4 py-6 transition md:grid-cols-[3.5rem_minmax(0,3fr)_minmax(0,2fr)_auto] md:gap-8 md:py-10";
+                return p.url ? (
+                  <a href={p.url} target="_blank" rel="noreferrer noopener" data-cursor="view" className={cls}>
+                    {inner}
+                  </a>
+                ) : (
+                  <Link to="/work/$slug" params={{ slug: p.slug }} data-cursor="view" className={cls}>
+                    {inner}
+                  </Link>
+                );
+              })()}
 
               {/* mobile meta */}
               <div className="mono flex justify-between pb-4 text-[10px] uppercase tracking-[0.28em] text-bone/50 md:hidden">
