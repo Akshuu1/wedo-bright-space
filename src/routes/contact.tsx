@@ -37,7 +37,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 const services = ["Website", "Mobile App", "Automation", "Product", "Brand system", "Not sure yet"];
-const budgets = ["< $10k", "$10 — 30k", "$30 — 80k", "$80k+"];
+const budgets = ["< ₹10k", "₹10 — 30k", "₹30 — 80k", "₹80k+"];
 
 function Contact() {
   return (
