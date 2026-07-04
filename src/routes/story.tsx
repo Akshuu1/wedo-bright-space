@@ -178,8 +178,9 @@ function ActI() {
           className="display mt-16 max-w-[18ch] text-bone"
           style={{ fontSize: "clamp(2.5rem, 8vw, 8rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
         >
-          Too many websites looked identical.{" "}
-          <span className="text-gradient">So we decided to do things differently.</span>
+          Too many websites looked identical —{" "}
+          <span className="text-gradient">so we decided to do things differently</span>
+
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -202,26 +203,27 @@ function ActII() {
   const crew = [
     {
       role: "Attention",
-      name: "Good design attracts.",
-      line: "First impressions decide whether people stay.",
+      name: "Good design attracts",
+      line: "First impressions decide whether people stay",
       accent: "#B5566B",
     },
     {
       role: "Trust",
-      name: "Great design builds.",
-      line: "Trust is earned in typography, motion and pace.",
+      name: "Great design builds",
+      line: "Trust is earned in typography, motion and pace",
       accent: "#f6ea3a",
     },
     {
       role: "Growth",
-      name: "Experiences convert.",
-      line: "Exceptional experiences turn visitors into customers.",
+      name: "Experiences convert",
+      line: "Exceptional experiences turn visitors into customers",
       accent: "#B5566B",
     },
     {
       role: "Legacy",
-      name: "Businesses remember.",
-      line: "The best work outlasts the launch date.",
+      name: "Businesses remember",
+      line: "The best work outlasts the launch date",
+
       accent: "#f6ea3a",
     },
   ];
