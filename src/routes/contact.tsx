@@ -6,7 +6,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — WeDo Studio" },
+      { title: "Contact — WeDo" },
       {
         name: "description",
         content: "Start a project with WeDo. Tell us about your idea and we'll reply within one working day.",
