@@ -70,7 +70,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e3862051-8fa3-4354-a67b-e57a9ad08038/id-preview-e301f4a9--5a1ee377-3cf7-48f4-8511-10e7564c5747.lovable.app-1782894505285.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e3862051-8fa3-4354-a67b-e57a9ad08038/id-preview-e301f4a9--5a1ee377-3cf7-48f4-8511-10e7564c5747.lovable.app-1782894505285.png" },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "apple-touch-icon", href: "/assets/brand/wedo-mark.png" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
