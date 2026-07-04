@@ -18,8 +18,8 @@ function useClock() {
 }
 
 const socials = [
-  ["Instagram", "https://instagram.com", "IG"],
-  ["LinkedIn", "https://linkedin.com", "IN"],
+  ["Instagram", "https://www.instagram.com/team.we_do/", "IG"],
+  ["LinkedIn", "https://www.linkedin.com/in/team-wedo-576965402/, "IN"],
 ] as const;
 
 // Each sticker has its own personality: colour, shape, motion.
