@@ -21,16 +21,13 @@ export function Nav() {
     <>
       <header className="fixed inset-x-0 top-0 z-[80] flex items-center justify-between px-5 pt-5 md:px-8 md:pt-6">
         <Link to="/" className="group flex items-center gap-2">
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="transition-transform duration-500 group-hover:rotate-180"
-          >
-            <path d="M3 18 L12 4 L21 18 L17 18 L12 10 L7 18 Z" fill="currentColor" className="text-bone" />
-            <path d="M9 18 L12 13 L15 18 Z" fill="currentColor" className="text-ember" />
-          </svg>
+          <img
+            src="/assets/brand/wedo-mark.png"
+            alt="WeDo"
+            width={28}
+            height={28}
+            className="transition-transform duration-500 group-hover:rotate-12"
+          />
           <span className="mono text-[11px] font-medium uppercase tracking-[0.22em] text-bone">
             WeDo<sup className="ml-0.5 text-[7px] text-bone/50">®</sup>
           </span>

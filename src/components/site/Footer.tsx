@@ -161,10 +161,12 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-4 border-t border-ink/10 px-1 py-5 md:flex-row">
           <div className="flex items-center gap-3">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-ink">
-              <path d="M3 18 L12 4 L21 18 L17 18 L12 10 L7 18 Z" fill="currentColor" />
-              <path d="M9 18 L12 13 L15 18 Z" fill="currentColor" className="text-ember" />
-            </svg>
+            <img
+              src="/assets/brand/wedo-mark.png"
+              alt="WeDo"
+              width={20}
+              height={20}
+            />
             <span className="mono text-[10px] uppercase tracking-[0.3em] text-ink/50">© 2026 WeDo</span>
           </div>
 
