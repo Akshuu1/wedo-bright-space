@@ -558,9 +558,10 @@ function Founders() {
                   />
                   <span className="mono text-[9px] uppercase tracking-[0.28em] text-bone">now · {f.now}</span>
                 </span>
-                <span className="absolute right-3 top-3 flex h-10 w-10 rotate-6 items-center justify-center rounded-full border-2 border-bone bg-bone text-xl text-ink">
-                  {f.emoji}
+                <span className="absolute right-3 top-3 flex h-10 w-10 rotate-6 items-center justify-center rounded-full border-2 border-bone bg-bone text-[10px] font-bold uppercase text-ink">
+                  {f.name.charAt(0)}
                 </span>
+
                 {/* handle */}
                 <span className="mono absolute bottom-3 left-3 border border-bone/70 bg-ink/70 px-2 py-1 text-[10px] uppercase tracking-[0.28em] text-bone backdrop-blur">
                   {f.tag}
