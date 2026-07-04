@@ -103,7 +103,7 @@ function Case() {
 
         <motion.div style={{ y, opacity: o }} className="relative z-10">
           <span className="pill mb-6 border-ember bg-ember/10 text-ember">◐ {project.tags.join(" · ")}</span>
-          <h1 className="display leading-[0.82] tracking-[-0.055em]" style={{ fontSize: "clamp(3rem, 12vw, 13rem)" }}>
+          <h1 className="display leading-[0.82] tracking-[-0.055em]" style={{ fontSize: "clamp(2.9rem, 12vw, 13rem)" }}>
             {project.title}
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-bone/70 md:text-2xl">{project.brief}</p>
@@ -289,7 +289,7 @@ function Case() {
           </div>
           <h2
             className="display mt-6 text-bone transition-colors group-hover:text-ember"
-            style={{ fontSize: "clamp(3rem, 12vw, 12rem)", letterSpacing: "-0.055em", lineHeight: 0.9 }}
+            style={{ fontSize: "clamp(2.9rem, 12vw, 12rem)", letterSpacing: "-0.055em", lineHeight: 0.9 }}
           >
             {next.title} <span className="text-gradient">→</span>
           </h2>

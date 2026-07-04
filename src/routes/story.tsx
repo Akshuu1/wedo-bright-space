@@ -359,10 +359,10 @@ function ActIV() {
           viewport={{ once: true }}
           transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
           className="display mt-8 text-bone"
-          style={{ fontSize: "clamp(3rem, 10vw, 9rem)", lineHeight: 0.9 }}
+          style={{ fontSize: "clamp(2.9rem, 10vw, 9rem)", lineHeight: 0.9 }}
         >
           MORE THAN <br />
-          WEBSITES.
+          WEBSITES
         </motion.h2>
 
         <p className="mono mt-10 max-w-xl mx-auto text-[10px] uppercase tracking-[0.3em] text-bone/70">
@@ -403,7 +403,7 @@ function Credits() {
         <motion.div style={{ y }} className="w-full max-w-3xl px-6 text-center">
           <h2
             className="display text-ink"
-            style={{ fontSize: "clamp(3rem, 10vw, 10rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
+            style={{ fontSize: "clamp(2.9rem, 10vw, 10rem)", lineHeight: 0.9, letterSpacing: "-0.05em" }}
           >
             The Making <br />
             of <span className="text-gradient">WeDo</span>

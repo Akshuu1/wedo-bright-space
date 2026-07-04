@@ -33,14 +33,11 @@ export const Route = createFileRoute("/work")({
   component: Work,
 });
 
-
-
 function Work() {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const titleY = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
   const titleO = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  
 
   return (
     <main className="bg-ink text-bone">
@@ -70,7 +67,6 @@ function Work() {
           <div className="flex items-center gap-3">
             <span className="pill">
               <span className="h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.6s infinite" }} />
-              Selected work
             </span>
           </div>
           <span className="mono text-right text-[10px] uppercase tracking-[0.28em] text-bone/50">
@@ -80,7 +76,7 @@ function Work() {
 
         <motion.div style={{ y: titleY, opacity: titleO }} className="relative z-10">
           <span className="pill mb-6 border-ember bg-ember/10 text-ember">◐ Selected projects · 2024 — 2026</span>
-          <h1 className="display leading-[0.8] tracking-[-0.06em]" style={{ fontSize: "clamp(3rem, 13vw, 16rem)" }}>
+          <h1 className="display leading-[0.8] tracking-[-0.06em]" style={{ fontSize: "clamp(2.9rem, 13vw, 16rem)" }}>
             Selected
             <span className="align-super text-ember" style={{ fontSize: "0.18em" }}>
               ®
@@ -124,7 +120,6 @@ function Work() {
       {/* ============== HOVER-PREVIEW INDEX ============== */}
       <ProjectIndex />
 
-
       {/* ============== MARQUEE ============== */}
       <div className="border-y-2 border-bone bg-bone py-10 text-ink">
         <div className="marquee-track">
@@ -132,7 +127,7 @@ function Work() {
             <span
               key={i}
               className="display flex items-center gap-16 pr-16 text-ink"
-              style={{ fontSize: "clamp(3rem, 9vw, 8rem)", letterSpacing: "-0.05em", lineHeight: 1 }}
+              style={{ fontSize: "clamp(2.9rem, 9vw, 8rem)", letterSpacing: "-0.05em", lineHeight: 1 }}
             >
               {p.title}
               <span className="text-ember">✦</span>
@@ -152,7 +147,7 @@ function Work() {
           <Link
             to="/contact"
             className="display mt-6 block hover:text-ember"
-            style={{ fontSize: "clamp(3rem, 10vw, 10rem)", letterSpacing: "-0.05em", lineHeight: 0.9 }}
+            style={{ fontSize: "clamp(2.9rem, 10vw, 10rem)", letterSpacing: "-0.05em", lineHeight: 0.9 }}
             data-cursor="view"
           >
             Have an idea?
@@ -183,7 +178,6 @@ function ProjectIndex() {
   }, []);
 
   const filtered = projects;
-
 
   return (
     <section

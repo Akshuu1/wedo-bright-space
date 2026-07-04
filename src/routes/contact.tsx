@@ -98,7 +98,7 @@ function Hero() {
       </div>
 
       <motion.div style={{ y }} className="relative z-10">
-        <h1 className="display leading-[0.82] tracking-[-0.055em]" style={{ fontSize: "clamp(3rem, 11vw, 12rem)" }}>
+        <h1 className="display leading-[0.82] tracking-[-0.055em]" style={{ fontSize: "clamp(2.9rem, 11vw, 12rem)" }}>
           Let&rsquo;s create
           <br />
           <span className="text-outline">something </span>
@@ -362,7 +362,7 @@ function FooterBand() {
           <span
             key={i}
             className="display flex items-center gap-16 pr-16 text-ink"
-            style={{ fontSize: "clamp(3rem, 8vw, 7rem)", letterSpacing: "-0.05em", lineHeight: 1 }}
+            style={{ fontSize: "clamp(2.9rem, 8vw, 7rem)", letterSpacing: "-0.05em", lineHeight: 1 }}
           >
             Let&rsquo;s make something <span className="text-ember">✦</span>
           </span>

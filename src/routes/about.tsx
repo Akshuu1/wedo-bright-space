@@ -72,7 +72,6 @@ const promisePoints = [
   "Every website is designed uniquely to match your brand, business goals, and target audience — no generic templates",
 ];
 
-
 const stats = [
   { k: "20+", u: "projects delivered" },
   { k: "100%", u: "fully responsive" },
@@ -380,7 +379,7 @@ function StatsStrip() {
             >
               <p
                 className="display text-gradient"
-                style={{ fontSize: "clamp(3rem, 8vw, 7rem)", letterSpacing: "-0.06em", lineHeight: 1 }}
+                style={{ fontSize: "clamp(2.9rem, 7vw, 7rem)", letterSpacing: "-0.06em", lineHeight: 1 }}
               >
                 {s.k}
               </p>

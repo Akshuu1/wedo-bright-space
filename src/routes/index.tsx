@@ -563,7 +563,7 @@ function LightInversion() {
                     className="display text-3xl leading-[0.95] sm:text-4xl md:text-3xl lg:text-[2.5rem] xl:text-5xl"
                     style={{ letterSpacing: "-0.04em", color: s.fg, overflowWrap: "break-word" }}
                   >
-                    {s.k}.
+                    {s.k}
                   </h3>
                   <p className="mt-4 max-w-md text-sm leading-relaxed" style={{ opacity: 0.85 }}>
                     {s.v}
@@ -611,7 +611,7 @@ function ContactStrip() {
       <div className="relative mx-auto mt-10 max-w-7xl">
         <h2
           className="display text-bone"
-          style={{ fontSize: "clamp(3rem, 12vw, 12rem)", letterSpacing: "-0.06em", lineHeight: 0.88 }}
+          style={{ fontSize: "clamp(2.9rem, 12vw, 12rem)", letterSpacing: "-0.06em", lineHeight: 0.88 }}
         >
           Ready to build
           <br />
