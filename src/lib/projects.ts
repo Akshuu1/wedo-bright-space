@@ -1,10 +1,3 @@
-import epicShot from "@/assets/shots/epic.png.asset.json";
-import tekzarShot from "@/assets/shots/tekzar.png.asset.json";
-import styleeShot from "@/assets/shots/stylee.png.asset.json";
-import galleriaShot from "@/assets/shots/galleria.png.asset.json";
-import lumiereShot from "@/assets/shots/lumiere.png.asset.json";
-import noboutShot from "@/assets/shots/nobout.png.asset.json";
-
 export type Metric = { k: string; l: string };
 export type Gallery = { palette: [string, string]; caption: string };
 
@@ -27,12 +20,12 @@ export type Project = {
 };
 
 export const projectShots: Record<string, string> = {
-  "epic-events": epicShot.url,
-  tekzar: tekzarShot.url,
-  stylee: styleeShot.url,
-  galleria: galleriaShot.url,
-  lumiere: lumiereShot.url,
-  "nobout-cafe": noboutShot.url,
+  "epic-events": "/assets/shots/epic.png",
+  tekzar: "/assets/shots/tekzar.png",
+  stylee: "/assets/shots/stylee.png",
+  galleria: "/assets/shots/galleria.png",
+  lumiere: "/assets/shots/lumiere.png",
+  "nobout-cafe": "/assets/shots/nobout.png",
 };
 
 
