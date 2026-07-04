@@ -43,7 +43,6 @@ export function Nav() {
               <span className="absolute inset-0 animate-ping rounded-full bg-ember/70" />
               <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-ember" />
             </span>
-            available · 2026
           </span>
         </div>
       </header>
