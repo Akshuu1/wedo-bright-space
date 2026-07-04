@@ -399,7 +399,7 @@ function CasesScroll() {
                             src={shot}
                             alt={`${p.title} website preview`}
                             loading="lazy"
-                            className="h-full w-full object-cover object-top transition duration-700 group-hover/card:scale-[1.03]"
+                            className="h-full w-full bg-ink object-contain transition duration-700 group-hover/card:scale-[1.03]"
                           />
                         </div>
                       </div>

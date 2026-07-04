@@ -302,7 +302,7 @@ function ProjectIndex() {
                   <img
                     src={projectShots[filtered[active].slug]}
                     alt=""
-                    className="h-full w-full object-cover object-top"
+                    className="h-full w-full bg-ink object-contain"
                   />
                 </div>
               </div>
