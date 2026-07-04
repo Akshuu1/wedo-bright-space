@@ -83,7 +83,7 @@ function Hero() {
         <div className="flex items-center gap-3">
           <span className="pill">
             <span className="h-1.5 w-1.5 rounded-full bg-ember" style={{ animation: "blink 1.6s infinite" }} />
-            Chapter 05 · Contact
+            Contact
           </span>
           <span className="mono hidden text-[10px] uppercase tracking-[0.28em] text-bone/50 md:inline">
             ⏵ inbox open · replies &lt; 24h
@@ -113,7 +113,7 @@ function Hero() {
 
       <div className="relative z-10 flex items-end justify-between border-t-2 border-bone pt-5">
         <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/60">↓ scroll · the brief</p>
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/60">wedo · studio ® 2026</p>
+        <p className="mono text-[10px] uppercase tracking-[0.3em] text-bone/60">wedo · ® 2026</p>
       </div>
     </section>
   );
