@@ -7,7 +7,7 @@ import { useRouterState } from "@tanstack/react-router";
 /* -------------------------------------------------------------------------- */
 
 const WORDS = ["THINK", "DRAFT", "SHIP", "WEDO"];
-const MIN_VISIBLE_MS = 420; // avoid flicker on instant routes
+const MIN_VISIBLE_MS = 660; // avoid flicker on instant routes
 const INITIAL_BOOT_MS = 1400; // first paint boot on cold load
 
 const STRIPS = [
@@ -198,9 +198,7 @@ export function Loader() {
               </span>
               Loading route
             </span>
-            <span className="mono text-[10px] uppercase tracking-[0.32em] text-bone">
-              WeDo® / MMXXVI
-            </span>
+            <span className="mono text-[10px] uppercase tracking-[0.32em] text-bone">WeDo® / MMXXVI</span>
           </div>
 
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex items-end justify-between px-5 pb-5 md:px-10 md:pb-8">
