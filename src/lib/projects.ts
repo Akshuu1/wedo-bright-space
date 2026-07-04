@@ -26,7 +26,7 @@ export type Project = {
   shot?: string;
 };
 
-const shots: Record<string, string> = {
+export const projectShots: Record<string, string> = {
   "epic-events": epicShot.url,
   tekzar: tekzarShot.url,
   stylee: styleeShot.url,
@@ -34,6 +34,7 @@ const shots: Record<string, string> = {
   lumiere: lumiereShot.url,
   "nobout-cafe": noboutShot.url,
 };
+
 
 
 export const projects: Project[] = [
