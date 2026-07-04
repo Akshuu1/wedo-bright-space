@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 import { ProjectArt } from "@/components/site/ProjectArt";
-import { projects } from "@/lib/projects";
+import { projects, projectShots } from "@/lib/projects";
 
 export const Route = createFileRoute("/work")({
   head: () => ({
@@ -318,6 +318,18 @@ function ProjectIndex({ filter }: { filter: string }) {
               palette={filtered[active].palette}
               className="h-full w-full"
             />
+            {projectShots[filtered[active].slug] && (
+              <div className="absolute inset-0 flex items-center justify-center p-4 pb-12">
+                <div className="relative h-full w-full overflow-hidden rounded-md border-2 border-bone/80 shadow-[6px_6px_0_0_rgba(0,0,0,0.5)]">
+                  <img
+                    src={projectShots[filtered[active].slug]}
+                    alt=""
+                    className="h-full w-full object-cover object-top"
+                  />
+                </div>
+              </div>
+            )}
+
             <div className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t-2 border-bone bg-ink/95 px-3 py-2">
               <span className="mono text-[9px] uppercase tracking-[0.28em] text-bone">
                 ▶ preview · {filtered[active].client}
