@@ -2,6 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
+
+const EMAILJS_SERVICE_ID = "service_phlyiin";
+const EMAILJS_TEMPLATE_ID = "template_y46feg3";
+const EMAILJS_PUBLIC_KEY = "CYLB3BxV3dOfyNzgp";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -222,16 +227,24 @@ function FormSection() {
 
         <form
           className="md:col-span-8"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
+            const form = e.currentTarget;
             setSending(true);
-            setTimeout(() => {
-              setSending(false);
+            try {
+              await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form, {
+                publicKey: EMAILJS_PUBLIC_KEY,
+              });
               toast.success("Brief received. We'll be in touch within 24 hours.");
-              (e.target as HTMLFormElement).reset();
+              form.reset();
               setSvc(null);
               setBud(null);
-            }, 800);
+            } catch (err) {
+              console.error("EmailJS error:", err);
+              toast.error("Something went wrong. Please email us directly at team.wedo06@gmail.com");
+            } finally {
+              setSending(false);
+            }
           }}
         >
           {/* service chips */}
