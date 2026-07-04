@@ -20,8 +20,6 @@ function useClock() {
 const socials = [
   ["Instagram", "https://instagram.com", "IG"],
   ["LinkedIn", "https://linkedin.com", "IN"],
-  ["Dribbble", "https://dribbble.com", "DR"],
-  ["Read.cv", "https://read.cv", "CV"],
 ] as const;
 
 // Each sticker has its own personality: colour, shape, motion.
@@ -92,10 +90,7 @@ export function Footer() {
               <br />
               <span className="text-ember">next big thing</span>
             </h2>
-            <a
-              href="mailto:team.wedo06@gmail.com"
-              className="pill group inline-flex shrink-0 items-center gap-2"
-            >
+            <a href="mailto:team.wedo06@gmail.com" className="pill group inline-flex shrink-0 items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-ember transition-transform group-hover:scale-150" />
               team.wedo06@gmail.com
             </a>
@@ -155,10 +150,7 @@ export function Footer() {
                 }}
               >
                 {s.accent && (
-                  <span
-                    className="inline-block h-1.5 w-1.5 rounded-full"
-                    style={{ background: s.accent }}
-                  />
+                  <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: s.accent }} />
                 )}
                 {s.label}
               </motion.span>
